@@ -1029,7 +1029,7 @@ export interface CreateOrUpdateBankConnectionRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateBankConnectionRequestDto
      */
-    'connectorId': string;
+    'providerConnectorId': string;
 }
 /**
  *
