@@ -860,6 +860,43 @@ export interface BankTransactionsControllerGetBankTransactionsNotConfirmed200Res
 /**
  *
  * @export
+ * @interface BankTransactionsPageEntity
+ */
+export interface BankTransactionsPageEntity {
+    /**
+     *
+     * @type {number}
+     * @memberof BankTransactionsPageEntity
+     */
+    'pageIndex': number;
+    /**
+     *
+     * @type {number}
+     * @memberof BankTransactionsPageEntity
+     */
+    'pageSize': number;
+    /**
+     *
+     * @type {number}
+     * @memberof BankTransactionsPageEntity
+     */
+    'totalItems': number;
+    /**
+     *
+     * @type {number}
+     * @memberof BankTransactionsPageEntity
+     */
+    'totalPages': number;
+    /**
+     *
+     * @type {Array<BankTransactionEntity>}
+     * @memberof BankTransactionsPageEntity
+     */
+    'items': Array<BankTransactionEntity>;
+}
+/**
+ *
+ * @export
  * @interface CategoryGuessDto
  */
 export interface CategoryGuessDto {
@@ -2881,7 +2918,7 @@ export declare const BankTransactionsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsControllerGetBankTransactionsNotConfirmed200Response>>;
+    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
     /**
      *
      * @param {string} workspaceId
@@ -2942,7 +2979,7 @@ export declare const BankTransactionsApiFactory: (configuration?: Configuration,
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsControllerGetBankTransactionsNotConfirmed200Response>;
+    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -3007,7 +3044,7 @@ export declare class BankTransactionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsControllerGetBankTransactionsNotConfirmed200Response, any>>;
+    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
     /**
      *
      * @param {string} workspaceId

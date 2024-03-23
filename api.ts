@@ -875,6 +875,43 @@ export interface BankTransactionsControllerGetBankTransactionsNotConfirmed200Res
 /**
  * 
  * @export
+ * @interface BankTransactionsPageEntity
+ */
+export interface BankTransactionsPageEntity {
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionsPageEntity
+     */
+    'pageIndex': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionsPageEntity
+     */
+    'pageSize': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionsPageEntity
+     */
+    'totalItems': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionsPageEntity
+     */
+    'totalPages': number;
+    /**
+     * 
+     * @type {Array<BankTransactionEntity>}
+     * @memberof BankTransactionsPageEntity
+     */
+    'items': Array<BankTransactionEntity>;
+}
+/**
+ * 
+ * @export
  * @interface CategoryGuessDto
  */
 export interface CategoryGuessDto {
@@ -3828,7 +3865,7 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsControllerGetBankTransactionsNotConfirmed200Response>> {
+        async bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactions']?.[localVarOperationServerIndex]?.url;
@@ -3920,7 +3957,7 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsControllerGetBankTransactionsNotConfirmed200Response> {
+        bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
             return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then((request) => request(axios, basePath));
         },
         /**
