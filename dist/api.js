@@ -75,7 +75,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.WorkspaceSubscriptionsApi = exports.WorkspaceSubscriptionsApiFactory = exports.WorkspaceSubscriptionsApiFp = exports.WorkspaceSubscriptionsApiAxiosParamCreator = exports.WorkspaceJoinRequestsApi = exports.WorkspaceJoinRequestsApiFactory = exports.WorkspaceJoinRequestsApiFp = exports.WorkspaceJoinRequestsApiAxiosParamCreator = exports.SubscriptionProductsApi = exports.SubscriptionProductsApiFactory = exports.SubscriptionProductsApiFp = exports.SubscriptionProductsApiAxiosParamCreator = exports.StripeApi = exports.StripeApiFactory = exports.StripeApiFp = exports.StripeApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.AuthApi = exports.AuthApiFactory = exports.AuthApiFp = exports.AuthApiAxiosParamCreator = exports.WorkspaceSubscriptionEntityPaymentSystemEnum = exports.WorkspaceSubscriptionEntityStatusEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
+exports.WorkspacesApiAxiosParamCreator = exports.WorkspaceSubscriptionsApi = exports.WorkspaceSubscriptionsApiFactory = exports.WorkspaceSubscriptionsApiFp = exports.WorkspaceSubscriptionsApiAxiosParamCreator = exports.WorkspaceJoinRequestsApi = exports.WorkspaceJoinRequestsApiFactory = exports.WorkspaceJoinRequestsApiFp = exports.WorkspaceJoinRequestsApiAxiosParamCreator = exports.SubscriptionProductsApi = exports.SubscriptionProductsApiFactory = exports.SubscriptionProductsApiFp = exports.SubscriptionProductsApiAxiosParamCreator = exports.StripeApi = exports.StripeApiFactory = exports.StripeApiFp = exports.StripeApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.AuthApi = exports.AuthApiFactory = exports.AuthApiFp = exports.AuthApiAxiosParamCreator = exports.WorkspaceSubscriptionEntityPaymentSystemEnum = exports.WorkspaceSubscriptionEntityStatusEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
+exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = void 0;
 var axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -1573,6 +1574,133 @@ var BankConnectionsApi = /** @class */ (function (_super) {
     return BankConnectionsApi;
 }(base_1.BaseAPI));
 exports.BankConnectionsApi = BankConnectionsApi;
+/**
+ * BankTransactionCategoriesApi - axios parameter creator
+ * @export
+ */
+var BankTransactionCategoriesApiAxiosParamCreator = function (configuration) {
+    var _this = this;
+    return {
+        /**
+         *
+         * @param {boolean} onlyLeafs
+         * @param {string} workspaceId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionCategoriesControllerGetBankTransactionCategories: function (onlyLeafs, workspaceId, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'onlyLeafs' is not null or undefined
+                    (0, common_1.assertParamExists)('bankTransactionCategoriesControllerGetBankTransactionCategories', 'onlyLeafs', onlyLeafs);
+                    // verify required parameter 'workspaceId' is not null or undefined
+                    (0, common_1.assertParamExists)('bankTransactionCategoriesControllerGetBankTransactionCategories', 'workspaceId', workspaceId);
+                    localVarPath = "/workspaces/{workspaceId}/bank/transactions/categories"
+                        .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    if (onlyLeafs !== undefined) {
+                        localVarQueryParameter['onlyLeafs'] = onlyLeafs;
+                    }
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+    };
+};
+exports.BankTransactionCategoriesApiAxiosParamCreator = BankTransactionCategoriesApiAxiosParamCreator;
+/**
+ * BankTransactionCategoriesApi - functional programming interface
+ * @export
+ */
+var BankTransactionCategoriesApiFp = function (configuration) {
+    var localVarAxiosParamCreator = (0, exports.BankTransactionCategoriesApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @param {boolean} onlyLeafs
+         * @param {string} workspaceId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionCategoriesControllerGetBankTransactionCategories: function (onlyLeafs, workspaceId, options) {
+            var _a, _b, _c;
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs, workspaceId, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['BankTransactionCategoriesApi.bankTransactionCategoriesControllerGetBankTransactionCategories']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+    };
+};
+exports.BankTransactionCategoriesApiFp = BankTransactionCategoriesApiFp;
+/**
+ * BankTransactionCategoriesApi - factory interface
+ * @export
+ */
+var BankTransactionCategoriesApiFactory = function (configuration, basePath, axios) {
+    var localVarFp = (0, exports.BankTransactionCategoriesApiFp)(configuration);
+    return {
+        /**
+         *
+         * @param {boolean} onlyLeafs
+         * @param {string} workspaceId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionCategoriesControllerGetBankTransactionCategories: function (onlyLeafs, workspaceId, options) {
+            return localVarFp.bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs, workspaceId, options).then(function (request) { return request(axios, basePath); });
+        },
+    };
+};
+exports.BankTransactionCategoriesApiFactory = BankTransactionCategoriesApiFactory;
+/**
+ * BankTransactionCategoriesApi - object-oriented interface
+ * @export
+ * @class BankTransactionCategoriesApi
+ * @extends {BaseAPI}
+ */
+var BankTransactionCategoriesApi = /** @class */ (function (_super) {
+    __extends(BankTransactionCategoriesApi, _super);
+    function BankTransactionCategoriesApi() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     *
+     * @param {boolean} onlyLeafs
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionCategoriesApi
+     */
+    BankTransactionCategoriesApi.prototype.bankTransactionCategoriesControllerGetBankTransactionCategories = function (onlyLeafs, workspaceId, options) {
+        var _this = this;
+        return (0, exports.BankTransactionCategoriesApiFp)(this.configuration).bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs, workspaceId, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    return BankTransactionCategoriesApi;
+}(base_1.BaseAPI));
+exports.BankTransactionCategoriesApi = BankTransactionCategoriesApi;
 /**
  * BankTransactionsApi - axios parameter creator
  * @export

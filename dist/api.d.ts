@@ -2115,6 +2115,12 @@ export interface WorkspaceEntity {
      * @memberof WorkspaceEntity
      */
     'createdAt': string;
+    /**
+     *
+     * @type {string}
+     * @memberof WorkspaceEntity
+     */
+    'selectedTreeId': string;
 }
 /**
  *
@@ -2828,6 +2834,65 @@ export declare class BankConnectionsApi extends BaseAPI {
      * @memberof BankConnectionsApi
      */
     bankConnectionsControllerGetBankConnectionDetails(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionWithAccountsEntity, any>>;
+}
+/**
+ * BankTransactionCategoriesApi - axios parameter creator
+ * @export
+ */
+export declare const BankTransactionCategoriesApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {boolean} onlyLeafs
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCategoriesControllerGetBankTransactionCategories: (onlyLeafs: boolean, workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BankTransactionCategoriesApi - functional programming interface
+ * @export
+ */
+export declare const BankTransactionCategoriesApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {boolean} onlyLeafs
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs: boolean, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+};
+/**
+ * BankTransactionCategoriesApi - factory interface
+ * @export
+ */
+export declare const BankTransactionCategoriesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {boolean} onlyLeafs
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs: boolean, workspaceId: string, options?: any): AxiosPromise<object>;
+};
+/**
+ * BankTransactionCategoriesApi - object-oriented interface
+ * @export
+ * @class BankTransactionCategoriesApi
+ * @extends {BaseAPI}
+ */
+export declare class BankTransactionCategoriesApi extends BaseAPI {
+    /**
+     *
+     * @param {boolean} onlyLeafs
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionCategoriesApi
+     */
+    bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs: boolean, workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
 }
 /**
  * BankTransactionsApi - axios parameter creator
