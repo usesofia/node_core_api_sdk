@@ -381,21 +381,27 @@ export interface BankConnectorEntity {
 /**
  * 
  * @export
- * @interface BankTransactionCategoryNodeEntity
+ * @interface BankTransactionCategoryPlainEntity
  */
-export interface BankTransactionCategoryNodeEntity {
+export interface BankTransactionCategoryPlainEntity {
     /**
      * 
      * @type {string}
-     * @memberof BankTransactionCategoryNodeEntity
+     * @memberof BankTransactionCategoryPlainEntity
      */
     'id': string;
     /**
      * 
      * @type {string}
-     * @memberof BankTransactionCategoryNodeEntity
+     * @memberof BankTransactionCategoryPlainEntity
      */
     'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionCategoryPlainEntity
+     */
+    'parentId'?: string;
 }
 /**
  * 
@@ -599,10 +605,10 @@ export interface BankTransactionEntity {
     'categoryId'?: string;
     /**
      * 
-     * @type {BankTransactionCategoryNodeEntity}
+     * @type {BankTransactionCategoryPlainEntity}
      * @memberof BankTransactionEntity
      */
-    'category'?: BankTransactionCategoryNodeEntity;
+    'category'?: BankTransactionCategoryPlainEntity;
     /**
      * 
      * @type {string}
@@ -647,10 +653,10 @@ export interface BankTransactionEntity {
     'bestGuessCategoryId'?: string;
     /**
      * 
-     * @type {BankTransactionCategoryNodeEntity}
+     * @type {BankTransactionCategoryPlainEntity}
      * @memberof BankTransactionEntity
      */
-    'bestGuessCategory'?: BankTransactionCategoryNodeEntity;
+    'bestGuessCategory'?: BankTransactionCategoryPlainEntity;
     /**
      * 
      * @type {string}
