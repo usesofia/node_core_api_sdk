@@ -985,6 +985,19 @@ export interface ConnectionFeatureSpecificationEntity {
 /**
  *
  * @export
+ * @interface CreateBankTransactionCostCenterRequestDto
+ */
+export interface CreateBankTransactionCostCenterRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof CreateBankTransactionCostCenterRequestDto
+     */
+    'name': string;
+}
+/**
+ *
+ * @export
  * @interface CreateOrUpdateBankAccountRequestDto
  */
 export interface CreateOrUpdateBankAccountRequestDto {
@@ -2893,6 +2906,94 @@ export declare class BankTransactionCategoriesApi extends BaseAPI {
      * @memberof BankTransactionCategoriesApi
      */
     bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs: boolean, workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+}
+/**
+ * BankTransactionCostCentersApi - axios parameter creator
+ * @export
+ */
+export declare const BankTransactionCostCentersApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCostCentersControllerCreateCostCenter: (workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCostCentersControllerListCostCenters: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BankTransactionCostCentersApi - functional programming interface
+ * @export
+ */
+export declare const BankTransactionCostCentersApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCostCentersControllerCreateCostCenter(workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionCostCenterEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCostCentersControllerListCostCenters(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCostCenterEntity>>>;
+};
+/**
+ * BankTransactionCostCentersApi - factory interface
+ * @export
+ */
+export declare const BankTransactionCostCentersApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCostCentersControllerCreateCostCenter(workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: any): AxiosPromise<BankTransactionCostCenterEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCostCentersControllerListCostCenters(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionCostCenterEntity>>;
+};
+/**
+ * BankTransactionCostCentersApi - object-oriented interface
+ * @export
+ * @class BankTransactionCostCentersApi
+ * @extends {BaseAPI}
+ */
+export declare class BankTransactionCostCentersApi extends BaseAPI {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionCostCentersApi
+     */
+    bankTransactionCostCentersControllerCreateCostCenter(workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCostCenterEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionCostCentersApi
+     */
+    bankTransactionCostCentersControllerListCostCenters(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCostCenterEntity[], any>>;
 }
 /**
  * BankTransactionsApi - axios parameter creator
