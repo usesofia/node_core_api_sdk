@@ -2917,7 +2917,7 @@ export declare const BankTransactionCategoriesApiFp: (configuration?: Configurat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionCategoryEntity>>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCategoryEntity>>>;
 };
 /**
  * BankTransactionCategoriesApi - factory interface
@@ -2931,7 +2931,7 @@ export declare const BankTransactionCategoriesApiFactory: (configuration?: Confi
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: any): AxiosPromise<BankTransactionCategoryEntity>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: any): AxiosPromise<Array<BankTransactionCategoryEntity>>;
 };
 /**
  * BankTransactionCategoriesApi - object-oriented interface
@@ -2948,7 +2948,7 @@ export declare class BankTransactionCategoriesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BankTransactionCategoriesApi
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCategoryEntity, any>>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCategoryEntity[], any>>;
 }
 /**
  * BankTransactionCostCentersApi - axios parameter creator
