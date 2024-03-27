@@ -1583,18 +1583,16 @@ var BankTransactionCategoriesApiAxiosParamCreator = function (configuration) {
     return {
         /**
          *
-         * @param {boolean} onlyLeafs
          * @param {string} workspaceId
+         * @param {boolean} [onlyLeafs]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCategoriesControllerGetBankTransactionCategories: function (onlyLeafs, workspaceId, options) {
+        bankTransactionCategoriesControllerGetBankTransactionCategories: function (workspaceId, onlyLeafs, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 return __generator(this, function (_a) {
-                    // verify required parameter 'onlyLeafs' is not null or undefined
-                    (0, common_1.assertParamExists)('bankTransactionCategoriesControllerGetBankTransactionCategories', 'onlyLeafs', onlyLeafs);
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankTransactionCategoriesControllerGetBankTransactionCategories', 'workspaceId', workspaceId);
                     localVarPath = "/workspaces/{workspaceId}/bank/transactions/categories"
@@ -1631,18 +1629,18 @@ var BankTransactionCategoriesApiFp = function (configuration) {
     return {
         /**
          *
-         * @param {boolean} onlyLeafs
          * @param {string} workspaceId
+         * @param {boolean} [onlyLeafs]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCategoriesControllerGetBankTransactionCategories: function (onlyLeafs, workspaceId, options) {
+        bankTransactionCategoriesControllerGetBankTransactionCategories: function (workspaceId, onlyLeafs, options) {
             var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs, workspaceId, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -1664,13 +1662,13 @@ var BankTransactionCategoriesApiFactory = function (configuration, basePath, axi
     return {
         /**
          *
-         * @param {boolean} onlyLeafs
          * @param {string} workspaceId
+         * @param {boolean} [onlyLeafs]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCategoriesControllerGetBankTransactionCategories: function (onlyLeafs, workspaceId, options) {
-            return localVarFp.bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs, workspaceId, options).then(function (request) { return request(axios, basePath); });
+        bankTransactionCategoriesControllerGetBankTransactionCategories: function (workspaceId, onlyLeafs, options) {
+            return localVarFp.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, options).then(function (request) { return request(axios, basePath); });
         },
     };
 };
@@ -1688,15 +1686,15 @@ var BankTransactionCategoriesApi = /** @class */ (function (_super) {
     }
     /**
      *
-     * @param {boolean} onlyLeafs
      * @param {string} workspaceId
+     * @param {boolean} [onlyLeafs]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionCategoriesApi
      */
-    BankTransactionCategoriesApi.prototype.bankTransactionCategoriesControllerGetBankTransactionCategories = function (onlyLeafs, workspaceId, options) {
+    BankTransactionCategoriesApi.prototype.bankTransactionCategoriesControllerGetBankTransactionCategories = function (workspaceId, onlyLeafs, options) {
         var _this = this;
-        return (0, exports.BankTransactionCategoriesApiFp)(this.configuration).bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs, workspaceId, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.BankTransactionCategoriesApiFp)(this.configuration).bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     return BankTransactionCategoriesApi;
 }(base_1.BaseAPI));

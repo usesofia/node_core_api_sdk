@@ -2861,12 +2861,12 @@ export declare class BankConnectionsApi extends BaseAPI {
 export declare const BankTransactionCategoriesApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
      *
-     * @param {boolean} onlyLeafs
      * @param {string} workspaceId
+     * @param {boolean} [onlyLeafs]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories: (onlyLeafs: boolean, workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories: (workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * BankTransactionCategoriesApi - functional programming interface
@@ -2875,12 +2875,12 @@ export declare const BankTransactionCategoriesApiAxiosParamCreator: (configurati
 export declare const BankTransactionCategoriesApiFp: (configuration?: Configuration) => {
     /**
      *
-     * @param {boolean} onlyLeafs
      * @param {string} workspaceId
+     * @param {boolean} [onlyLeafs]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs: boolean, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
 };
 /**
  * BankTransactionCategoriesApi - factory interface
@@ -2889,12 +2889,12 @@ export declare const BankTransactionCategoriesApiFp: (configuration?: Configurat
 export declare const BankTransactionCategoriesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
      *
-     * @param {boolean} onlyLeafs
      * @param {string} workspaceId
+     * @param {boolean} [onlyLeafs]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs: boolean, workspaceId: string, options?: any): AxiosPromise<object>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: any): AxiosPromise<object>;
 };
 /**
  * BankTransactionCategoriesApi - object-oriented interface
@@ -2905,13 +2905,13 @@ export declare const BankTransactionCategoriesApiFactory: (configuration?: Confi
 export declare class BankTransactionCategoriesApi extends BaseAPI {
     /**
      *
-     * @param {boolean} onlyLeafs
      * @param {string} workspaceId
+     * @param {boolean} [onlyLeafs]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionCategoriesApi
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs: boolean, workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
 }
 /**
  * BankTransactionCostCentersApi - axios parameter creator

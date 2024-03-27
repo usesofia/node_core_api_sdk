@@ -3588,14 +3588,12 @@ export const BankTransactionCategoriesApiAxiosParamCreator = function (configura
     return {
         /**
          * 
-         * @param {boolean} onlyLeafs 
          * @param {string} workspaceId 
+         * @param {boolean} [onlyLeafs] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCategoriesControllerGetBankTransactionCategories: async (onlyLeafs: boolean, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'onlyLeafs' is not null or undefined
-            assertParamExists('bankTransactionCategoriesControllerGetBankTransactionCategories', 'onlyLeafs', onlyLeafs)
+        bankTransactionCategoriesControllerGetBankTransactionCategories: async (workspaceId: string, onlyLeafs?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('bankTransactionCategoriesControllerGetBankTransactionCategories', 'workspaceId', workspaceId)
             const localVarPath = `/workspaces/{workspaceId}/bank/transactions/categories`
@@ -3638,13 +3636,13 @@ export const BankTransactionCategoriesApiFp = function(configuration?: Configura
     return {
         /**
          * 
-         * @param {boolean} onlyLeafs 
          * @param {string} workspaceId 
+         * @param {boolean} [onlyLeafs] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs: boolean, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs, workspaceId, options);
+        async bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionCategoriesApi.bankTransactionCategoriesControllerGetBankTransactionCategories']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3661,13 +3659,13 @@ export const BankTransactionCategoriesApiFactory = function (configuration?: Con
     return {
         /**
          * 
-         * @param {boolean} onlyLeafs 
          * @param {string} workspaceId 
+         * @param {boolean} [onlyLeafs] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs: boolean, workspaceId: string, options?: any): AxiosPromise<object> {
-            return localVarFp.bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs, workspaceId, options).then((request) => request(axios, basePath));
+        bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: any): AxiosPromise<object> {
+            return localVarFp.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3681,14 +3679,14 @@ export const BankTransactionCategoriesApiFactory = function (configuration?: Con
 export class BankTransactionCategoriesApi extends BaseAPI {
     /**
      * 
-     * @param {boolean} onlyLeafs 
      * @param {string} workspaceId 
+     * @param {boolean} [onlyLeafs] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionCategoriesApi
      */
-    public bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs: boolean, workspaceId: string, options?: RawAxiosRequestConfig) {
-        return BankTransactionCategoriesApiFp(this.configuration).bankTransactionCategoriesControllerGetBankTransactionCategories(onlyLeafs, workspaceId, options).then((request) => request(this.axios, this.basePath));
+    public bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig) {
+        return BankTransactionCategoriesApiFp(this.configuration).bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
