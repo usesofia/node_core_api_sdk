@@ -381,6 +381,43 @@ export interface BankConnectorEntity {
 /**
  * 
  * @export
+ * @interface BankTransactionCategoryEntity
+ */
+export interface BankTransactionCategoryEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionCategoryEntity
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionCategoryEntity
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionCategoryEntity
+     */
+    'parentId': string;
+    /**
+     * 
+     * @type {Array<BankTransactionCategoryPlainEntity>}
+     * @memberof BankTransactionCategoryEntity
+     */
+    'path': Array<BankTransactionCategoryPlainEntity>;
+    /**
+     * 
+     * @type {Array<BankTransactionCategoryPlainEntity>}
+     * @memberof BankTransactionCategoryEntity
+     */
+    'children': Array<BankTransactionCategoryPlainEntity>;
+}
+/**
+ * 
+ * @export
  * @interface BankTransactionCategoryPlainEntity
  */
 export interface BankTransactionCategoryPlainEntity {
@@ -3641,7 +3678,7 @@ export const BankTransactionCategoriesApiFp = function(configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionCategoryEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionCategoriesApi.bankTransactionCategoriesControllerGetBankTransactionCategories']?.[localVarOperationServerIndex]?.url;
@@ -3664,7 +3701,7 @@ export const BankTransactionCategoriesApiFactory = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: any): AxiosPromise<object> {
+        bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: any): AxiosPromise<BankTransactionCategoryEntity> {
             return localVarFp.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, options).then((request) => request(axios, basePath));
         },
     };

@@ -371,6 +371,43 @@ export interface BankConnectorEntity {
 /**
  *
  * @export
+ * @interface BankTransactionCategoryEntity
+ */
+export interface BankTransactionCategoryEntity {
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionCategoryEntity
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionCategoryEntity
+     */
+    'name': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionCategoryEntity
+     */
+    'parentId': string;
+    /**
+     *
+     * @type {Array<BankTransactionCategoryPlainEntity>}
+     * @memberof BankTransactionCategoryEntity
+     */
+    'path': Array<BankTransactionCategoryPlainEntity>;
+    /**
+     *
+     * @type {Array<BankTransactionCategoryPlainEntity>}
+     * @memberof BankTransactionCategoryEntity
+     */
+    'children': Array<BankTransactionCategoryPlainEntity>;
+}
+/**
+ *
+ * @export
  * @interface BankTransactionCategoryPlainEntity
  */
 export interface BankTransactionCategoryPlainEntity {
@@ -2880,7 +2917,7 @@ export declare const BankTransactionCategoriesApiFp: (configuration?: Configurat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionCategoryEntity>>;
 };
 /**
  * BankTransactionCategoriesApi - factory interface
@@ -2894,7 +2931,7 @@ export declare const BankTransactionCategoriesApiFactory: (configuration?: Confi
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: any): AxiosPromise<object>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: any): AxiosPromise<BankTransactionCategoryEntity>;
 };
 /**
  * BankTransactionCategoriesApi - object-oriented interface
@@ -2911,7 +2948,7 @@ export declare class BankTransactionCategoriesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BankTransactionCategoriesApi
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCategoryEntity, any>>;
 }
 /**
  * BankTransactionCostCentersApi - axios parameter creator
