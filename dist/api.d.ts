@@ -391,7 +391,7 @@ export interface BankTransactionCategoryEntity {
      * @type {string}
      * @memberof BankTransactionCategoryEntity
      */
-    'parentId': string;
+    'parentId'?: string;
     /**
      *
      * @type {Array<BankTransactionCategoryPlainEntity>}
