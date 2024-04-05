@@ -2017,37 +2017,37 @@ export interface UpdateBankTransactionRequestDto {
      * @type {string}
      * @memberof UpdateBankTransactionRequestDto
      */
-    'description': string;
+    'description'?: string;
     /**
      *
      * @type {string}
      * @memberof UpdateBankTransactionRequestDto
      */
-    'categoryId': string;
+    'categoryId'?: string;
     /**
      *
      * @type {string}
      * @memberof UpdateBankTransactionRequestDto
      */
-    'costCenterId': string;
+    'costCenterId'?: string;
     /**
      *
      * @type {string}
      * @memberof UpdateBankTransactionRequestDto
      */
-    'competencyDate': string;
+    'competencyDate'?: string;
     /**
      *
      * @type {boolean}
      * @memberof UpdateBankTransactionRequestDto
      */
-    'ignore': boolean;
+    'ignore'?: boolean;
     /**
      *
      * @type {boolean}
      * @memberof UpdateBankTransactionRequestDto
      */
-    'confirm': boolean;
+    'confirm'?: boolean;
 }
 /**
  *
