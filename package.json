@@ -1,7 +1,7 @@
 {
-  "name": "node_api_sdk",
+  "name": "node_core_api_sdk",
   "version": "0.0.2",
-  "description": "OpenAPI client for node_api_sdk",
+  "description": "OpenAPI client for node_core_api_sdk",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
     "typescript",
     "openapi-client",
     "openapi-generator",
-    "node_api_sdk"
+    "node_core_api_sdk"
   ],
   "license": "Unlicense",
   "main": "./dist/index.js",
