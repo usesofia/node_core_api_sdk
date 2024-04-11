@@ -4484,6 +4484,35 @@ export const PluggyApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluggyControllerWebhook: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/pluggy/webhook`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -4506,6 +4535,17 @@ export const PluggyApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['PluggyApi.pluggyControllerCreate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluggyControllerWebhook(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluggyControllerWebhook(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluggyApi.pluggyControllerWebhook']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -4524,6 +4564,14 @@ export const PluggyApiFactory = function (configuration?: Configuration, basePat
          */
         pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: any): AxiosPromise<PluggyConnectTokenEntity> {
             return localVarFp.pluggyControllerCreate(createPluggyConnectTokenRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluggyControllerWebhook(options?: any): AxiosPromise<void> {
+            return localVarFp.pluggyControllerWebhook(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4544,6 +4592,16 @@ export class PluggyApi extends BaseAPI {
      */
     public pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig) {
         return PluggyApiFp(this.configuration).pluggyControllerCreate(createPluggyConnectTokenRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PluggyApi
+     */
+    public pluggyControllerWebhook(options?: RawAxiosRequestConfig) {
+        return PluggyApiFp(this.configuration).pluggyControllerWebhook(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -2520,6 +2520,34 @@ var PluggyApiAxiosParamCreator = function (configuration) {
                 });
             });
         },
+        /**
+         *
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluggyControllerWebhook: function (options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                return __generator(this, function (_a) {
+                    localVarPath = "/pluggy/webhook";
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
     };
 };
 exports.PluggyApiAxiosParamCreator = PluggyApiAxiosParamCreator;
@@ -2552,6 +2580,27 @@ var PluggyApiFp = function (configuration) {
                 });
             });
         },
+        /**
+         *
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluggyControllerWebhook: function (options) {
+            var _a, _b, _c;
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.pluggyControllerWebhook(options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['PluggyApi.pluggyControllerWebhook']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
     };
 };
 exports.PluggyApiFp = PluggyApiFp;
@@ -2570,6 +2619,14 @@ var PluggyApiFactory = function (configuration, basePath, axios) {
          */
         pluggyControllerCreate: function (createPluggyConnectTokenRequestDto, options) {
             return localVarFp.pluggyControllerCreate(createPluggyConnectTokenRequestDto, options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluggyControllerWebhook: function (options) {
+            return localVarFp.pluggyControllerWebhook(options).then(function (request) { return request(axios, basePath); });
         },
     };
 };
@@ -2595,6 +2652,16 @@ var PluggyApi = /** @class */ (function (_super) {
     PluggyApi.prototype.pluggyControllerCreate = function (createPluggyConnectTokenRequestDto, options) {
         var _this = this;
         return (0, exports.PluggyApiFp)(this.configuration).pluggyControllerCreate(createPluggyConnectTokenRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PluggyApi
+     */
+    PluggyApi.prototype.pluggyControllerWebhook = function (options) {
+        var _this = this;
+        return (0, exports.PluggyApiFp)(this.configuration).pluggyControllerWebhook(options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     return PluggyApi;
 }(base_1.BaseAPI));

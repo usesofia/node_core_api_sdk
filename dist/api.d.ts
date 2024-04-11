@@ -3302,6 +3302,12 @@ export declare const PluggyApiAxiosParamCreator: (configuration?: Configuration)
      * @throws {RequiredError}
      */
     pluggyControllerCreate: (createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pluggyControllerWebhook: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * PluggyApi - functional programming interface
@@ -3315,6 +3321,12 @@ export declare const PluggyApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PluggyConnectTokenEntity>>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pluggyControllerWebhook(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
 };
 /**
  * PluggyApi - factory interface
@@ -3328,6 +3340,12 @@ export declare const PluggyApiFactory: (configuration?: Configuration, basePath?
      * @throws {RequiredError}
      */
     pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: any): AxiosPromise<PluggyConnectTokenEntity>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pluggyControllerWebhook(options?: any): AxiosPromise<void>;
 };
 /**
  * PluggyApi - object-oriented interface
@@ -3344,6 +3362,13 @@ export declare class PluggyApi extends BaseAPI {
      * @memberof PluggyApi
      */
     pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PluggyConnectTokenEntity, any>>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PluggyApi
+     */
+    pluggyControllerWebhook(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
  * ProfilesApi - axios parameter creator
