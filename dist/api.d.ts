@@ -3451,6 +3451,77 @@ export declare class ProfilesApi extends BaseAPI {
     profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
 }
 /**
+ * ReportsApi - axios parameter creator
+ * @export
+ */
+export declare const ReportsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetCashFlowReport: (workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * ReportsApi - functional programming interface
+ * @export
+ */
+export declare const ReportsApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+};
+/**
+ * ReportsApi - factory interface
+ * @export
+ */
+export declare const ReportsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: any): AxiosPromise<object>;
+};
+/**
+ * ReportsApi - object-oriented interface
+ * @export
+ * @class ReportsApi
+ * @extends {BaseAPI}
+ */
+export declare class ReportsApi extends BaseAPI {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+}
+/**
  * StripeApi - axios parameter creator
  * @export
  */

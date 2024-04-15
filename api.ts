@@ -4772,6 +4772,142 @@ export class ProfilesApi extends BaseAPI {
 
 
 /**
+ * ReportsApi - axios parameter creator
+ * @export
+ */
+export const ReportsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
+         * @param {string} [categoryIds] 
+         * @param {string} [costCenterIds] 
+         * @param {boolean} [considerIgnored] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetCashFlowReport: async (workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('reportsControllerGetCashFlowReport', 'workspaceId', workspaceId)
+            const localVarPath = `/workspaces/{workspaceId}/reports/cash-flow`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (accountIds !== undefined) {
+                localVarQueryParameter['accountIds'] = accountIds;
+            }
+
+            if (categoryIds !== undefined) {
+                localVarQueryParameter['categoryIds'] = categoryIds;
+            }
+
+            if (costCenterIds !== undefined) {
+                localVarQueryParameter['costCenterIds'] = costCenterIds;
+            }
+
+            if (considerIgnored !== undefined) {
+                localVarQueryParameter['considerIgnored'] = considerIgnored;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ReportsApi - functional programming interface
+ * @export
+ */
+export const ReportsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ReportsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
+         * @param {string} [categoryIds] 
+         * @param {string} [costCenterIds] 
+         * @param {boolean} [considerIgnored] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportsApi.reportsControllerGetCashFlowReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ReportsApi - factory interface
+ * @export
+ */
+export const ReportsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ReportsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
+         * @param {string} [categoryIds] 
+         * @param {string} [costCenterIds] 
+         * @param {boolean} [considerIgnored] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: any): AxiosPromise<object> {
+            return localVarFp.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ReportsApi - object-oriented interface
+ * @export
+ * @class ReportsApi
+ * @extends {BaseAPI}
+ */
+export class ReportsApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {string} [accountIds] 
+     * @param {string} [categoryIds] 
+     * @param {string} [costCenterIds] 
+     * @param {boolean} [considerIgnored] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    public reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: RawAxiosRequestConfig) {
+        return ReportsApiFp(this.configuration).reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * StripeApi - axios parameter creator
  * @export
  */

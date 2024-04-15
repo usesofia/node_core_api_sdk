@@ -75,8 +75,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WorkspaceSubscriptionsApiAxiosParamCreator = exports.WorkspaceJoinRequestsApi = exports.WorkspaceJoinRequestsApiFactory = exports.WorkspaceJoinRequestsApiFp = exports.WorkspaceJoinRequestsApiAxiosParamCreator = exports.SubscriptionProductsApi = exports.SubscriptionProductsApiFactory = exports.SubscriptionProductsApiFp = exports.SubscriptionProductsApiAxiosParamCreator = exports.StripeApi = exports.StripeApiFactory = exports.StripeApiFp = exports.StripeApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionCostCentersApi = exports.BankTransactionCostCentersApiFactory = exports.BankTransactionCostCentersApiFp = exports.BankTransactionCostCentersApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.AuthApi = exports.AuthApiFactory = exports.AuthApiFp = exports.AuthApiAxiosParamCreator = exports.WorkspaceSubscriptionEntityPaymentSystemEnum = exports.WorkspaceSubscriptionEntityStatusEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
-exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.WorkspaceSubscriptionsApi = exports.WorkspaceSubscriptionsApiFactory = exports.WorkspaceSubscriptionsApiFp = void 0;
+exports.WorkspaceJoinRequestsApiAxiosParamCreator = exports.SubscriptionProductsApi = exports.SubscriptionProductsApiFactory = exports.SubscriptionProductsApiFp = exports.SubscriptionProductsApiAxiosParamCreator = exports.StripeApi = exports.StripeApiFactory = exports.StripeApiFp = exports.StripeApiAxiosParamCreator = exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionCostCentersApi = exports.BankTransactionCostCentersApiFactory = exports.BankTransactionCostCentersApiFp = exports.BankTransactionCostCentersApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.AuthApi = exports.AuthApiFactory = exports.AuthApiFp = exports.AuthApiAxiosParamCreator = exports.WorkspaceSubscriptionEntityPaymentSystemEnum = exports.WorkspaceSubscriptionEntityStatusEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
+exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.WorkspaceSubscriptionsApi = exports.WorkspaceSubscriptionsApiFactory = exports.WorkspaceSubscriptionsApiFp = exports.WorkspaceSubscriptionsApiAxiosParamCreator = exports.WorkspaceJoinRequestsApi = exports.WorkspaceJoinRequestsApiFactory = exports.WorkspaceJoinRequestsApiFp = void 0;
 var axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -2852,6 +2852,152 @@ var ProfilesApi = /** @class */ (function (_super) {
     return ProfilesApi;
 }(base_1.BaseAPI));
 exports.ProfilesApi = ProfilesApi;
+/**
+ * ReportsApi - axios parameter creator
+ * @export
+ */
+var ReportsApiAxiosParamCreator = function (configuration) {
+    var _this = this;
+    return {
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {string} [accountIds]
+         * @param {string} [categoryIds]
+         * @param {string} [costCenterIds]
+         * @param {boolean} [considerIgnored]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'workspaceId' is not null or undefined
+                    (0, common_1.assertParamExists)('reportsControllerGetCashFlowReport', 'workspaceId', workspaceId);
+                    localVarPath = "/workspaces/{workspaceId}/reports/cash-flow"
+                        .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    if (accountIds !== undefined) {
+                        localVarQueryParameter['accountIds'] = accountIds;
+                    }
+                    if (categoryIds !== undefined) {
+                        localVarQueryParameter['categoryIds'] = categoryIds;
+                    }
+                    if (costCenterIds !== undefined) {
+                        localVarQueryParameter['costCenterIds'] = costCenterIds;
+                    }
+                    if (considerIgnored !== undefined) {
+                        localVarQueryParameter['considerIgnored'] = considerIgnored;
+                    }
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+    };
+};
+exports.ReportsApiAxiosParamCreator = ReportsApiAxiosParamCreator;
+/**
+ * ReportsApi - functional programming interface
+ * @export
+ */
+var ReportsApiFp = function (configuration) {
+    var localVarAxiosParamCreator = (0, exports.ReportsApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {string} [accountIds]
+         * @param {string} [categoryIds]
+         * @param {string} [costCenterIds]
+         * @param {boolean} [considerIgnored]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
+            var _a, _b, _c;
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['ReportsApi.reportsControllerGetCashFlowReport']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+    };
+};
+exports.ReportsApiFp = ReportsApiFp;
+/**
+ * ReportsApi - factory interface
+ * @export
+ */
+var ReportsApiFactory = function (configuration, basePath, axios) {
+    var localVarFp = (0, exports.ReportsApiFp)(configuration);
+    return {
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {string} [accountIds]
+         * @param {string} [categoryIds]
+         * @param {string} [costCenterIds]
+         * @param {boolean} [considerIgnored]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
+            return localVarFp.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options).then(function (request) { return request(axios, basePath); });
+        },
+    };
+};
+exports.ReportsApiFactory = ReportsApiFactory;
+/**
+ * ReportsApi - object-oriented interface
+ * @export
+ * @class ReportsApi
+ * @extends {BaseAPI}
+ */
+var ReportsApi = /** @class */ (function (_super) {
+    __extends(ReportsApi, _super);
+    function ReportsApi() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    ReportsApi.prototype.reportsControllerGetCashFlowReport = function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
+        var _this = this;
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    return ReportsApi;
+}(base_1.BaseAPI));
+exports.ReportsApi = ReportsApi;
 /**
  * StripeApi - axios parameter creator
  * @export
