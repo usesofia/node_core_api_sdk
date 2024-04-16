@@ -2862,6 +2862,7 @@ var ReportsApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @param {string} workspaceId
+         * @param {boolean} ignoreInternalTransfers
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
          * @param {string} [costCenterIds]
@@ -2869,13 +2870,15 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
+        reportsControllerGetCashFlowReport: function (workspaceId, ignoreInternalTransfers, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('reportsControllerGetCashFlowReport', 'workspaceId', workspaceId);
+                    // verify required parameter 'ignoreInternalTransfers' is not null or undefined
+                    (0, common_1.assertParamExists)('reportsControllerGetCashFlowReport', 'ignoreInternalTransfers', ignoreInternalTransfers);
                     localVarPath = "/workspaces/{workspaceId}/reports/accounts/cash-flow"
                         .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
                     localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -2896,6 +2899,9 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                     }
                     if (considerIgnored !== undefined) {
                         localVarQueryParameter['considerIgnored'] = considerIgnored;
+                    }
+                    if (ignoreInternalTransfers !== undefined) {
+                        localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
                     }
                     (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
                     headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -2920,6 +2926,7 @@ var ReportsApiFp = function (configuration) {
         /**
          *
          * @param {string} workspaceId
+         * @param {boolean} ignoreInternalTransfers
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
          * @param {string} [costCenterIds]
@@ -2927,13 +2934,13 @@ var ReportsApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
+        reportsControllerGetCashFlowReport: function (workspaceId, ignoreInternalTransfers, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
             var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, ignoreInternalTransfers, accountIds, categoryIds, costCenterIds, considerIgnored, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -2956,6 +2963,7 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
         /**
          *
          * @param {string} workspaceId
+         * @param {boolean} ignoreInternalTransfers
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
          * @param {string} [costCenterIds]
@@ -2963,8 +2971,8 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
-            return localVarFp.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options).then(function (request) { return request(axios, basePath); });
+        reportsControllerGetCashFlowReport: function (workspaceId, ignoreInternalTransfers, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
+            return localVarFp.reportsControllerGetCashFlowReport(workspaceId, ignoreInternalTransfers, accountIds, categoryIds, costCenterIds, considerIgnored, options).then(function (request) { return request(axios, basePath); });
         },
     };
 };
@@ -2983,6 +2991,7 @@ var ReportsApi = /** @class */ (function (_super) {
     /**
      *
      * @param {string} workspaceId
+     * @param {boolean} ignoreInternalTransfers
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
      * @param {string} [costCenterIds]
@@ -2991,9 +3000,9 @@ var ReportsApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    ReportsApi.prototype.reportsControllerGetCashFlowReport = function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
+    ReportsApi.prototype.reportsControllerGetCashFlowReport = function (workspaceId, ignoreInternalTransfers, accountIds, categoryIds, costCenterIds, considerIgnored, options) {
         var _this = this;
-        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCashFlowReport(workspaceId, ignoreInternalTransfers, accountIds, categoryIds, costCenterIds, considerIgnored, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     return ReportsApi;
 }(base_1.BaseAPI));
