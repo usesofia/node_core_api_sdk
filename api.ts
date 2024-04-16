@@ -4790,7 +4790,7 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
         reportsControllerGetCashFlowReport: async (workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('reportsControllerGetCashFlowReport', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/reports/cash-flow`
+            const localVarPath = `/workspaces/{workspaceId}/reports/accounts/cash-flow`
                 .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

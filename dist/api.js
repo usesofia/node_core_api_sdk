@@ -2876,7 +2876,7 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('reportsControllerGetCashFlowReport', 'workspaceId', workspaceId);
-                    localVarPath = "/workspaces/{workspaceId}/reports/cash-flow"
+                    localVarPath = "/workspaces/{workspaceId}/reports/accounts/cash-flow"
                         .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
                     localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
                     if (configuration) {
