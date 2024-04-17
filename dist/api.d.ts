@@ -3458,15 +3458,30 @@ export declare const ReportsApiAxiosParamCreator: (configuration?: Configuration
     /**
      *
      * @param {string} workspaceId
-     * @param {boolean} ignoreInternalTransfers
+     * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [ignoreInternalTransfers]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetAccountsEntriesByCategoryReport: (workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
      * @param {string} [costCenterIds]
      * @param {boolean} [considerIgnored]
+     * @param {boolean} [ignoreInternalTransfers]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetCashFlowReport: (workspaceId: string, ignoreInternalTransfers: boolean, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    reportsControllerGetCashFlowReport: (workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * ReportsApi - functional programming interface
@@ -3476,15 +3491,30 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
     /**
      *
      * @param {string} workspaceId
-     * @param {boolean} ignoreInternalTransfers
+     * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [ignoreInternalTransfers]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    /**
+     *
+     * @param {string} workspaceId
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
      * @param {string} [costCenterIds]
      * @param {boolean} [considerIgnored]
+     * @param {boolean} [ignoreInternalTransfers]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetCashFlowReport(workspaceId: string, ignoreInternalTransfers: boolean, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
 };
 /**
  * ReportsApi - factory interface
@@ -3494,15 +3524,30 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
     /**
      *
      * @param {string} workspaceId
-     * @param {boolean} ignoreInternalTransfers
+     * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [ignoreInternalTransfers]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<object>;
+    /**
+     *
+     * @param {string} workspaceId
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
      * @param {string} [costCenterIds]
      * @param {boolean} [considerIgnored]
+     * @param {boolean} [ignoreInternalTransfers]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetCashFlowReport(workspaceId: string, ignoreInternalTransfers: boolean, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: any): AxiosPromise<object>;
+    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: any): AxiosPromise<object>;
 };
 /**
  * ReportsApi - object-oriented interface
@@ -3514,16 +3559,32 @@ export declare class ReportsApi extends BaseAPI {
     /**
      *
      * @param {string} workspaceId
-     * @param {boolean} ignoreInternalTransfers
      * @param {string} [accountIds]
-     * @param {string} [categoryIds]
      * @param {string} [costCenterIds]
      * @param {boolean} [considerIgnored]
+     * @param {boolean} [ignoreInternalTransfers]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    reportsControllerGetCashFlowReport(workspaceId: string, ignoreInternalTransfers: boolean, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [ignoreInternalTransfers]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
 }
 /**
  * StripeApi - axios parameter creator
