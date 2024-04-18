@@ -3501,6 +3501,21 @@ export declare const ReportsApiAxiosParamCreator: (configuration?: Configuration
      *
      * @param {string} workspaceId
      * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {boolean} [ignoreInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetCardsOutputsByCategoryReport: (workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
      * @param {string} [categoryIds]
      * @param {string} [costCenterIds]
      * @param {boolean} [considerIgnored]
@@ -3561,6 +3576,21 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
      *
      * @param {string} workspaceId
      * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {boolean} [ignoreInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetCardsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
      * @param {string} [categoryIds]
      * @param {string} [costCenterIds]
      * @param {boolean} [considerIgnored]
@@ -3617,6 +3647,21 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
      * @throws {RequiredError}
      */
     reportsControllerGetCardsCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInvoiceRelated?: boolean, options?: any): AxiosPromise<object>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {boolean} [ignoreInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetCardsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, ignoreInvoiceRelated?: boolean, options?: any): AxiosPromise<object>;
     /**
      *
      * @param {string} workspaceId
@@ -3682,6 +3727,22 @@ export declare class ReportsApi extends BaseAPI {
      * @memberof ReportsApi
      */
     reportsControllerGetCardsCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {boolean} [ignoreInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    reportsControllerGetCardsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
      *
      * @param {string} workspaceId

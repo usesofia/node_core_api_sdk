@@ -3043,6 +3043,70 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
+         * @param {string} [costCenterIds]
+         * @param {boolean} [considerIgnored]
+         * @param {string} [minPostedDate]
+         * @param {string} [maxPostedDate]
+         * @param {string} [minCompetencyDate]
+         * @param {string} [maxCompetencyDate]
+         * @param {boolean} [ignoreInvoiceRelated]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'workspaceId' is not null or undefined
+                    (0, common_1.assertParamExists)('reportsControllerGetCardsOutputsByCategoryReport', 'workspaceId', workspaceId);
+                    localVarPath = "/workspaces/{workspaceId}/reports/cards/outputs-by-category"
+                        .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    if (accountIds !== undefined) {
+                        localVarQueryParameter['accountIds'] = accountIds;
+                    }
+                    if (costCenterIds !== undefined) {
+                        localVarQueryParameter['costCenterIds'] = costCenterIds;
+                    }
+                    if (considerIgnored !== undefined) {
+                        localVarQueryParameter['considerIgnored'] = considerIgnored;
+                    }
+                    if (minPostedDate !== undefined) {
+                        localVarQueryParameter['minPostedDate'] = minPostedDate;
+                    }
+                    if (maxPostedDate !== undefined) {
+                        localVarQueryParameter['maxPostedDate'] = maxPostedDate;
+                    }
+                    if (minCompetencyDate !== undefined) {
+                        localVarQueryParameter['minCompetencyDate'] = minCompetencyDate;
+                    }
+                    if (maxCompetencyDate !== undefined) {
+                        localVarQueryParameter['maxCompetencyDate'] = maxCompetencyDate;
+                    }
+                    if (ignoreInvoiceRelated !== undefined) {
+                        localVarQueryParameter['ignoreInvoiceRelated'] = ignoreInvoiceRelated;
+                    }
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {string} [accountIds]
          * @param {string} [categoryIds]
          * @param {string} [costCenterIds]
          * @param {boolean} [considerIgnored]
@@ -3192,6 +3256,36 @@ var ReportsApiFp = function (configuration) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
+         * @param {string} [costCenterIds]
+         * @param {boolean} [considerIgnored]
+         * @param {string} [minPostedDate]
+         * @param {string} [maxPostedDate]
+         * @param {string} [minCompetencyDate]
+         * @param {string} [maxCompetencyDate]
+         * @param {boolean} [ignoreInvoiceRelated]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
+            var _a, _b, _c;
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCardsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['ReportsApi.reportsControllerGetCardsOutputsByCategoryReport']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {string} [accountIds]
          * @param {string} [categoryIds]
          * @param {string} [costCenterIds]
          * @param {boolean} [considerIgnored]
@@ -3277,6 +3371,23 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
+         * @param {string} [costCenterIds]
+         * @param {boolean} [considerIgnored]
+         * @param {string} [minPostedDate]
+         * @param {string} [maxPostedDate]
+         * @param {string} [minCompetencyDate]
+         * @param {string} [maxCompetencyDate]
+         * @param {boolean} [ignoreInvoiceRelated]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
+            return localVarFp.reportsControllerGetCardsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {string} [accountIds]
          * @param {string} [categoryIds]
          * @param {string} [costCenterIds]
          * @param {boolean} [considerIgnored]
@@ -3354,6 +3465,25 @@ var ReportsApi = /** @class */ (function (_super) {
     ReportsApi.prototype.reportsControllerGetCardsCashFlowReport = function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options) {
         var _this = this;
         return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCardsCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {boolean} [ignoreInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    ReportsApi.prototype.reportsControllerGetCardsOutputsByCategoryReport = function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
+        var _this = this;
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCardsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
