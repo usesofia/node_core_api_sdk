@@ -940,6 +940,250 @@ export interface BankTransactionsPageEntity {
 /**
  *
  * @export
+ * @interface CashFlowReportDailyItemEntity
+ */
+export interface CashFlowReportDailyItemEntity {
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowReportDailyItemEntity
+     */
+    'index': number;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportDailyItemEntity
+     */
+    'date': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowReportDailyItemEntity
+     */
+    'dayOfYear': number;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportDailyItemEntity
+     */
+    'label': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportDailyItemEntity
+     */
+    'minDate': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportDailyItemEntity
+     */
+    'maxDate': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowReportDailyItemEntity
+     */
+    'value'?: number;
+}
+/**
+ *
+ * @export
+ * @interface CashFlowReportEntity
+ */
+export interface CashFlowReportEntity {
+    /**
+     *
+     * @type {Array<CashFlowReportDailyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'dailyBalanceItems': Array<CashFlowReportDailyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportDailyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'dailyPostedIncomeItems': Array<CashFlowReportDailyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportDailyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'dailyCompetencyIncomeItems': Array<CashFlowReportDailyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportDailyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'dailyPostedOutcomeItems': Array<CashFlowReportDailyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportDailyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'dailyCompetencyOutcomeItems': Array<CashFlowReportDailyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportWeeklyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'weeklyBalanceItems': Array<CashFlowReportWeeklyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportWeeklyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'weeklyPostedIncomeItems': Array<CashFlowReportWeeklyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportWeeklyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'weeklyCompetencyIncomeItems': Array<CashFlowReportWeeklyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportWeeklyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'weeklyPostedOutcomeItems': Array<CashFlowReportWeeklyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportWeeklyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'weeklyCompetencyOutcomeItems': Array<CashFlowReportWeeklyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportMonthlyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'monthlyBalanceItems': Array<CashFlowReportMonthlyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportMonthlyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'monthlyPostedIncomeItems': Array<CashFlowReportMonthlyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportMonthlyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'monthlyCompetencyIncomeItems': Array<CashFlowReportMonthlyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportMonthlyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'monthlyPostedOutcomeItems': Array<CashFlowReportMonthlyItemEntity>;
+    /**
+     *
+     * @type {Array<CashFlowReportMonthlyItemEntity>}
+     * @memberof CashFlowReportEntity
+     */
+    'monthlyCompetencyOutcomeItems': Array<CashFlowReportMonthlyItemEntity>;
+}
+/**
+ *
+ * @export
+ * @interface CashFlowReportMonthlyItemEntity
+ */
+export interface CashFlowReportMonthlyItemEntity {
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowReportMonthlyItemEntity
+     */
+    'index': number;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportMonthlyItemEntity
+     */
+    'date': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowReportMonthlyItemEntity
+     */
+    'month': number;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportMonthlyItemEntity
+     */
+    'label': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportMonthlyItemEntity
+     */
+    'minDate': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportMonthlyItemEntity
+     */
+    'maxDate': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowReportMonthlyItemEntity
+     */
+    'value'?: number;
+}
+/**
+ *
+ * @export
+ * @interface CashFlowReportWeeklyItemEntity
+ */
+export interface CashFlowReportWeeklyItemEntity {
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowReportWeeklyItemEntity
+     */
+    'index': number;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportWeeklyItemEntity
+     */
+    'date': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowReportWeeklyItemEntity
+     */
+    'week': number;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportWeeklyItemEntity
+     */
+    'label': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportWeeklyItemEntity
+     */
+    'minDate': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowReportWeeklyItemEntity
+     */
+    'maxDate': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowReportWeeklyItemEntity
+     */
+    'value'?: number;
+}
+/**
+ *
+ * @export
  * @interface CategoryGuessDto
  */
 export interface CategoryGuessDto {
@@ -3544,7 +3788,7 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>>;
     /**
      *
      * @param {string} workspaceId
@@ -3559,7 +3803,7 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>>;
     /**
      *
      * @param {string} workspaceId
@@ -3571,7 +3815,7 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetCardsCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    reportsControllerGetCardsCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>>;
     /**
      *
      * @param {string} workspaceId
@@ -3586,7 +3830,7 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetCardsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    reportsControllerGetCardsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>>;
     /**
      *
      * @param {string} workspaceId
@@ -3598,7 +3842,7 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>>;
 };
 /**
  * ReportsApi - factory interface
@@ -3619,7 +3863,7 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<object>;
+    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowReportEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -3634,7 +3878,7 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<object>;
+    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowReportEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -3646,7 +3890,7 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetCardsCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInvoiceRelated?: boolean, options?: any): AxiosPromise<object>;
+    reportsControllerGetCardsCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInvoiceRelated?: boolean, options?: any): AxiosPromise<CashFlowReportEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -3661,7 +3905,7 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetCardsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, ignoreInvoiceRelated?: boolean, options?: any): AxiosPromise<object>;
+    reportsControllerGetCardsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, ignoreInvoiceRelated?: boolean, options?: any): AxiosPromise<CashFlowReportEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -3673,7 +3917,7 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: any): AxiosPromise<object>;
+    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: any): AxiosPromise<CashFlowReportEntity>;
 };
 /**
  * ReportsApi - object-oriented interface
@@ -3697,7 +3941,7 @@ export declare class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowReportEntity, any>>;
     /**
      *
      * @param {string} workspaceId
@@ -3713,7 +3957,7 @@ export declare class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowReportEntity, any>>;
     /**
      *
      * @param {string} workspaceId
@@ -3726,7 +3970,7 @@ export declare class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    reportsControllerGetCardsCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    reportsControllerGetCardsCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowReportEntity, any>>;
     /**
      *
      * @param {string} workspaceId
@@ -3742,7 +3986,7 @@ export declare class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    reportsControllerGetCardsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    reportsControllerGetCardsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowReportEntity, any>>;
     /**
      *
      * @param {string} workspaceId
@@ -3755,7 +3999,7 @@ export declare class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowReportEntity, any>>;
 }
 /**
  * StripeApi - axios parameter creator
