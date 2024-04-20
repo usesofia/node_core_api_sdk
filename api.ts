@@ -955,6 +955,50 @@ export interface BankTransactionsPageEntity {
 /**
  * 
  * @export
+ * @interface CashFlowByCategoryReportEntity
+ */
+export interface CashFlowByCategoryReportEntity {
+    /**
+     * 
+     * @type {Array<CashFlowByCategoryReportItemEntity>}
+     * @memberof CashFlowByCategoryReportEntity
+     */
+    'items': Array<CashFlowByCategoryReportItemEntity>;
+}
+/**
+ * 
+ * @export
+ * @interface CashFlowByCategoryReportItemEntity
+ */
+export interface CashFlowByCategoryReportItemEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof CashFlowByCategoryReportItemEntity
+     */
+    'categoryId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CashFlowByCategoryReportItemEntity
+     */
+    'categoryName': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CashFlowByCategoryReportItemEntity
+     */
+    'absoluteValue': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CashFlowByCategoryReportItemEntity
+     */
+    'percentage': number;
+}
+/**
+ * 
+ * @export
  * @interface CashFlowReportDailyItemEntity
  */
 export interface CashFlowReportDailyItemEntity {
@@ -5356,6 +5400,74 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
+         * @param {string} [costCenterIds] 
+         * @param {boolean} [considerIgnored] 
+         * @param {string} [minPostedDate] 
+         * @param {string} [maxPostedDate] 
+         * @param {string} [minCompetencyDate] 
+         * @param {string} [maxCompetencyDate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetFinancialStatementReport: async (workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('reportsControllerGetFinancialStatementReport', 'workspaceId', workspaceId)
+            const localVarPath = `/workspaces/{workspaceId}/reports/financial-statement`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (accountIds !== undefined) {
+                localVarQueryParameter['accountIds'] = accountIds;
+            }
+
+            if (costCenterIds !== undefined) {
+                localVarQueryParameter['costCenterIds'] = costCenterIds;
+            }
+
+            if (considerIgnored !== undefined) {
+                localVarQueryParameter['considerIgnored'] = considerIgnored;
+            }
+
+            if (minPostedDate !== undefined) {
+                localVarQueryParameter['minPostedDate'] = minPostedDate;
+            }
+
+            if (maxPostedDate !== undefined) {
+                localVarQueryParameter['maxPostedDate'] = maxPostedDate;
+            }
+
+            if (minCompetencyDate !== undefined) {
+                localVarQueryParameter['minCompetencyDate'] = minCompetencyDate;
+            }
+
+            if (maxCompetencyDate !== undefined) {
+                localVarQueryParameter['maxCompetencyDate'] = maxCompetencyDate;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -5380,7 +5492,7 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>> {
+        async reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowByCategoryReportEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReportsApi.reportsControllerGetAccountsEntriesByCategoryReport']?.[localVarOperationServerIndex]?.url;
@@ -5400,7 +5512,7 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>> {
+        async reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowByCategoryReportEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReportsApi.reportsControllerGetAccountsOutputsByCategoryReport']?.[localVarOperationServerIndex]?.url;
@@ -5460,6 +5572,25 @@ export const ReportsApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['ReportsApi.reportsControllerGetCashFlowReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
+         * @param {string} [costCenterIds] 
+         * @param {boolean} [considerIgnored] 
+         * @param {string} [minPostedDate] 
+         * @param {string} [maxPostedDate] 
+         * @param {string} [minCompetencyDate] 
+         * @param {string} [maxCompetencyDate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetFinancialStatementReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportsApi.reportsControllerGetFinancialStatementReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -5484,7 +5615,7 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowReportEntity> {
+        reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowByCategoryReportEntity> {
             return localVarFp.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5501,7 +5632,7 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowReportEntity> {
+        reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowByCategoryReportEntity> {
             return localVarFp.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5548,6 +5679,22 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          */
         reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: any): AxiosPromise<CashFlowReportEntity> {
             return localVarFp.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
+         * @param {string} [costCenterIds] 
+         * @param {boolean} [considerIgnored] 
+         * @param {string} [minPostedDate] 
+         * @param {string} [maxPostedDate] 
+         * @param {string} [minCompetencyDate] 
+         * @param {string} [maxCompetencyDate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowReportEntity> {
+            return localVarFp.reportsControllerGetFinancialStatementReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5646,6 +5793,24 @@ export class ReportsApi extends BaseAPI {
      */
     public reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig) {
         return ReportsApiFp(this.configuration).reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {string} [accountIds] 
+     * @param {string} [costCenterIds] 
+     * @param {boolean} [considerIgnored] 
+     * @param {string} [minPostedDate] 
+     * @param {string} [maxPostedDate] 
+     * @param {string} [minCompetencyDate] 
+     * @param {string} [maxCompetencyDate] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    public reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) {
+        return ReportsApiFp(this.configuration).reportsControllerGetFinancialStatementReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

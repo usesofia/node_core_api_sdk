@@ -940,6 +940,50 @@ export interface BankTransactionsPageEntity {
 /**
  *
  * @export
+ * @interface CashFlowByCategoryReportEntity
+ */
+export interface CashFlowByCategoryReportEntity {
+    /**
+     *
+     * @type {Array<CashFlowByCategoryReportItemEntity>}
+     * @memberof CashFlowByCategoryReportEntity
+     */
+    'items': Array<CashFlowByCategoryReportItemEntity>;
+}
+/**
+ *
+ * @export
+ * @interface CashFlowByCategoryReportItemEntity
+ */
+export interface CashFlowByCategoryReportItemEntity {
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowByCategoryReportItemEntity
+     */
+    'categoryId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CashFlowByCategoryReportItemEntity
+     */
+    'categoryName': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowByCategoryReportItemEntity
+     */
+    'absoluteValue': number;
+    /**
+     *
+     * @type {number}
+     * @memberof CashFlowByCategoryReportItemEntity
+     */
+    'percentage': number;
+}
+/**
+ *
+ * @export
  * @interface CashFlowReportDailyItemEntity
  */
 export interface CashFlowReportDailyItemEntity {
@@ -3768,6 +3812,20 @@ export declare const ReportsApiAxiosParamCreator: (configuration?: Configuration
      * @throws {RequiredError}
      */
     reportsControllerGetCashFlowReport: (workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetFinancialStatementReport: (workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * ReportsApi - functional programming interface
@@ -3788,7 +3846,7 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>>;
+    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowByCategoryReportEntity>>;
     /**
      *
      * @param {string} workspaceId
@@ -3803,7 +3861,7 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>>;
+    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowByCategoryReportEntity>>;
     /**
      *
      * @param {string} workspaceId
@@ -3843,6 +3901,20 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>>;
 };
 /**
  * ReportsApi - factory interface
@@ -3863,7 +3935,7 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowReportEntity>;
+    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowByCategoryReportEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -3878,7 +3950,7 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowReportEntity>;
+    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowByCategoryReportEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -3918,6 +3990,20 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
      * @throws {RequiredError}
      */
     reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: any): AxiosPromise<CashFlowReportEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowReportEntity>;
 };
 /**
  * ReportsApi - object-oriented interface
@@ -3941,7 +4027,7 @@ export declare class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowReportEntity, any>>;
+    reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowByCategoryReportEntity, any>>;
     /**
      *
      * @param {string} workspaceId
@@ -3957,7 +4043,7 @@ export declare class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowReportEntity, any>>;
+    reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowByCategoryReportEntity, any>>;
     /**
      *
      * @param {string} workspaceId
@@ -4000,6 +4086,21 @@ export declare class ReportsApi extends BaseAPI {
      * @memberof ReportsApi
      */
     reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, costCenterIds?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowReportEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [costCenterIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowReportEntity, any>>;
 }
 /**
  * StripeApi - axios parameter creator
