@@ -881,43 +881,6 @@ export interface BankTransactionPaymentDataEntity {
 /**
  * 
  * @export
- * @interface BankTransactionsControllerGetBankTransactionsNotConfirmed200Response
- */
-export interface BankTransactionsControllerGetBankTransactionsNotConfirmed200Response {
-    /**
-     * 
-     * @type {number}
-     * @memberof BankTransactionsControllerGetBankTransactionsNotConfirmed200Response
-     */
-    'pageIndex': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BankTransactionsControllerGetBankTransactionsNotConfirmed200Response
-     */
-    'pageSize': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BankTransactionsControllerGetBankTransactionsNotConfirmed200Response
-     */
-    'totalItems': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BankTransactionsControllerGetBankTransactionsNotConfirmed200Response
-     */
-    'totalPages': number;
-    /**
-     * 
-     * @type {Array<BankTransactionEntity>}
-     * @memberof BankTransactionsControllerGetBankTransactionsNotConfirmed200Response
-     */
-    'items': Array<BankTransactionEntity>;
-}
-/**
- * 
- * @export
  * @interface BankTransactionsPageEntity
  */
 export interface BankTransactionsPageEntity {
@@ -1810,43 +1773,6 @@ export interface FinancialTransactionsFeatureSpecificationEntity {
      * @memberof FinancialTransactionsFeatureSpecificationEntity
      */
     'subscriptionProductId': string;
-}
-/**
- * 
- * @export
- * @interface PageResponseEntity
- */
-export interface PageResponseEntity {
-    /**
-     * 
-     * @type {number}
-     * @memberof PageResponseEntity
-     */
-    'pageIndex': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PageResponseEntity
-     */
-    'pageSize': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PageResponseEntity
-     */
-    'totalItems': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PageResponseEntity
-     */
-    'totalPages': number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PageResponseEntity
-     */
-    'items': Array<string>;
 }
 /**
  * 
@@ -4519,7 +4445,7 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsControllerGetBankTransactionsNotConfirmed200Response>> {
+        async bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionsNotConfirmed']?.[localVarOperationServerIndex]?.url;
@@ -4608,7 +4534,7 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, options?: any): AxiosPromise<BankTransactionsControllerGetBankTransactionsNotConfirmed200Response> {
+        bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, options?: any): AxiosPromise<BankTransactionsPageEntity> {
             return localVarFp.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, options).then((request) => request(axios, basePath));
         },
         /**
