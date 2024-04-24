@@ -4329,6 +4329,13 @@ export declare const WorkspacesApiAxiosParamCreator: (configuration?: Configurat
     /**
      *
      * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerGet: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
      * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4356,6 +4363,13 @@ export declare const WorkspacesApiFp: (configuration?: Configuration) => {
     /**
      *
      * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerGet(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
      * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4380,6 +4394,13 @@ export declare const WorkspacesApiFactory: (configuration?: Configuration, baseP
      * @throws {RequiredError}
      */
     workspacesControllerFetchUserRelatedWorkspaces(options?: any): AxiosPromise<Array<UserRelatedWorkspaceEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerGet(workspaceId: string, options?: any): AxiosPromise<WorkspaceEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -4411,6 +4432,14 @@ export declare class WorkspacesApi extends BaseAPI {
      * @memberof WorkspacesApi
      */
     workspacesControllerFetchUserRelatedWorkspaces(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserRelatedWorkspaceEntity[], any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    workspacesControllerGet(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<WorkspaceEntity, any>>;
     /**
      *
      * @param {string} workspaceId
