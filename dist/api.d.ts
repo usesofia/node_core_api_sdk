@@ -1762,6 +1762,25 @@ export interface FinancialTransactionsFeatureSpecificationEntity {
 /**
  *
  * @export
+ * @interface ParcialUpdateWorkspaceRequestDto
+ */
+export interface ParcialUpdateWorkspaceRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof ParcialUpdateWorkspaceRequestDto
+     */
+    'name': string;
+    /**
+     *
+     * @type {string}
+     * @memberof ParcialUpdateWorkspaceRequestDto
+     */
+    'unverifiedBankTransactionHistory': string;
+}
+/**
+ *
+ * @export
  * @interface PaymentDataDto
  */
 export interface PaymentDataDto {
@@ -2342,6 +2361,12 @@ export interface UserRelatedWorkspaceEntity {
      * @memberof UserRelatedWorkspaceEntity
      */
     'relationType': string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserRelatedWorkspaceEntity
+     */
+    'unverifiedBankTransactionHistory'?: string;
 }
 /**
  *
@@ -2391,6 +2416,12 @@ export interface WorkspaceEntity {
      * @memberof WorkspaceEntity
      */
     'selectedTreeId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof WorkspaceEntity
+     */
+    'unverifiedBankTransactionHistory'?: string;
 }
 /**
  *
@@ -4295,6 +4326,14 @@ export declare const WorkspacesApiAxiosParamCreator: (configuration?: Configurat
      * @throws {RequiredError}
      */
     workspacesControllerFetchUserRelatedWorkspaces: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerParcialUpdate: (workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * WorkspacesApi - functional programming interface
@@ -4314,6 +4353,14 @@ export declare const WorkspacesApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     workspacesControllerFetchUserRelatedWorkspaces(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserRelatedWorkspaceEntity>>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>>;
 };
 /**
  * WorkspacesApi - factory interface
@@ -4333,6 +4380,14 @@ export declare const WorkspacesApiFactory: (configuration?: Configuration, baseP
      * @throws {RequiredError}
      */
     workspacesControllerFetchUserRelatedWorkspaces(options?: any): AxiosPromise<Array<UserRelatedWorkspaceEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity>;
 };
 /**
  * WorkspacesApi - object-oriented interface
@@ -4356,4 +4411,13 @@ export declare class WorkspacesApi extends BaseAPI {
      * @memberof WorkspacesApi
      */
     workspacesControllerFetchUserRelatedWorkspaces(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserRelatedWorkspaceEntity[], any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<WorkspaceEntity, any>>;
 }

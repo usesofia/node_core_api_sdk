@@ -1777,6 +1777,25 @@ export interface FinancialTransactionsFeatureSpecificationEntity {
 /**
  * 
  * @export
+ * @interface ParcialUpdateWorkspaceRequestDto
+ */
+export interface ParcialUpdateWorkspaceRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof ParcialUpdateWorkspaceRequestDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParcialUpdateWorkspaceRequestDto
+     */
+    'unverifiedBankTransactionHistory': string;
+}
+/**
+ * 
+ * @export
  * @interface PaymentDataDto
  */
 export interface PaymentDataDto {
@@ -2357,6 +2376,12 @@ export interface UserRelatedWorkspaceEntity {
      * @memberof UserRelatedWorkspaceEntity
      */
     'relationType': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserRelatedWorkspaceEntity
+     */
+    'unverifiedBankTransactionHistory'?: string;
 }
 /**
  * 
@@ -2406,6 +2431,12 @@ export interface WorkspaceEntity {
      * @memberof WorkspaceEntity
      */
     'selectedTreeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkspaceEntity
+     */
+    'unverifiedBankTransactionHistory'?: string;
 }
 /**
  * 
@@ -6298,6 +6329,45 @@ export const WorkspacesApiAxiosParamCreator = function (configuration?: Configur
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerParcialUpdate: async (workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('workspacesControllerParcialUpdate', 'workspaceId', workspaceId)
+            // verify required parameter 'parcialUpdateWorkspaceRequestDto' is not null or undefined
+            assertParamExists('workspacesControllerParcialUpdate', 'parcialUpdateWorkspaceRequestDto', parcialUpdateWorkspaceRequestDto)
+            const localVarPath = `/workspaces/{workspaceId}`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(parcialUpdateWorkspaceRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -6331,6 +6401,19 @@ export const WorkspacesApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.workspacesControllerFetchUserRelatedWorkspaces']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.workspacesControllerParcialUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -6357,6 +6440,16 @@ export const WorkspacesApiFactory = function (configuration?: Configuration, bas
          */
         workspacesControllerFetchUserRelatedWorkspaces(options?: any): AxiosPromise<Array<UserRelatedWorkspaceEntity>> {
             return localVarFp.workspacesControllerFetchUserRelatedWorkspaces(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity> {
+            return localVarFp.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -6387,6 +6480,18 @@ export class WorkspacesApi extends BaseAPI {
      */
     public workspacesControllerFetchUserRelatedWorkspaces(options?: RawAxiosRequestConfig) {
         return WorkspacesApiFp(this.configuration).workspacesControllerFetchUserRelatedWorkspaces(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    public workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig) {
+        return WorkspacesApiFp(this.configuration).workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
