@@ -1533,6 +1533,12 @@ export interface CreatePluggyConnectTokenRequestDto {
      * @memberof CreatePluggyConnectTokenRequestDto
      */
     'workspaceId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreatePluggyConnectTokenRequestDto
+     */
+    'historyRange': string;
 }
 /**
  *
