@@ -208,6 +208,12 @@ export interface BankConnectionEntity {
      * @type {string}
      * @memberof BankConnectionEntity
      */
+    'historyRange': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankConnectionEntity
+     */
     'connectorId': string;
     /**
      *
@@ -1374,6 +1380,12 @@ export interface CreateOrUpdateBankConnectionRequestDto {
      * @memberof CreateOrUpdateBankConnectionRequestDto
      */
     'providerConnectorId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankConnectionRequestDto
+     */
+    'historyRange': string;
 }
 /**
  *
@@ -1771,12 +1783,6 @@ export interface ParcialUpdateWorkspaceRequestDto {
      * @memberof ParcialUpdateWorkspaceRequestDto
      */
     'name': string;
-    /**
-     *
-     * @type {string}
-     * @memberof ParcialUpdateWorkspaceRequestDto
-     */
-    'unverifiedBankTransactionHistory': string;
 }
 /**
  *
@@ -2361,12 +2367,6 @@ export interface UserRelatedWorkspaceEntity {
      * @memberof UserRelatedWorkspaceEntity
      */
     'relationType': string;
-    /**
-     *
-     * @type {string}
-     * @memberof UserRelatedWorkspaceEntity
-     */
-    'unverifiedBankTransactionHistory'?: string;
 }
 /**
  *
@@ -2416,12 +2416,6 @@ export interface WorkspaceEntity {
      * @memberof WorkspaceEntity
      */
     'selectedTreeId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof WorkspaceEntity
-     */
-    'unverifiedBankTransactionHistory'?: string;
 }
 /**
  *
