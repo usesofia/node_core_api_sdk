@@ -4285,17 +4285,15 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
         /**
          * 
          * @param {string} workspaceId 
-         * @param {boolean} considerIgnored 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
+         * @param {boolean} [considerIgnored] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsNotConfirmed: async (workspaceId: string, considerIgnored: boolean, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bankTransactionsControllerGetBankTransactionsNotConfirmed: async (workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('bankTransactionsControllerGetBankTransactionsNotConfirmed', 'workspaceId', workspaceId)
-            // verify required parameter 'considerIgnored' is not null or undefined
-            assertParamExists('bankTransactionsControllerGetBankTransactionsNotConfirmed', 'considerIgnored', considerIgnored)
             const localVarPath = `/workspaces/{workspaceId}/bank/transactions/not-confirmed`
                 .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4484,14 +4482,14 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} workspaceId 
-         * @param {boolean} considerIgnored 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
+         * @param {boolean} [considerIgnored] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, considerIgnored: boolean, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, considerIgnored, pageIndex, pageSize, options);
+        async bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, considerIgnored, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionsNotConfirmed']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4574,14 +4572,14 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
         /**
          * 
          * @param {string} workspaceId 
-         * @param {boolean} considerIgnored 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
+         * @param {boolean} [considerIgnored] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, considerIgnored: boolean, pageIndex?: number, pageSize?: number, options?: any): AxiosPromise<BankTransactionsPageEntity> {
-            return localVarFp.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, considerIgnored, pageIndex, pageSize, options).then((request) => request(axios, basePath));
+        bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
+            return localVarFp.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, considerIgnored, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4656,15 +4654,15 @@ export class BankTransactionsApi extends BaseAPI {
     /**
      * 
      * @param {string} workspaceId 
-     * @param {boolean} considerIgnored 
      * @param {number} [pageIndex] 
      * @param {number} [pageSize] 
+     * @param {boolean} [considerIgnored] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    public bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, considerIgnored: boolean, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, considerIgnored, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
+    public bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, considerIgnored, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
