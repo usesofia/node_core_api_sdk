@@ -297,6 +297,12 @@ export interface BankConnectionWithAccountsEntity {
      * @type {string}
      * @memberof BankConnectionWithAccountsEntity
      */
+    'historyRange': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankConnectionWithAccountsEntity
+     */
     'connectorId': string;
     /**
      * 
