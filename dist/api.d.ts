@@ -3315,12 +3315,13 @@ export declare const BankTransactionsApiAxiosParamCreator: (configuration?: Conf
     /**
      *
      * @param {string} workspaceId
+     * @param {boolean} considerIgnored
      * @param {number} [pageIndex]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionsControllerGetBankTransactionsNotConfirmed: (workspaceId: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    bankTransactionsControllerGetBankTransactionsNotConfirmed: (workspaceId: string, considerIgnored: boolean, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {string} workspaceId
@@ -3376,12 +3377,13 @@ export declare const BankTransactionsApiFp: (configuration?: Configuration) => {
     /**
      *
      * @param {string} workspaceId
+     * @param {boolean} considerIgnored
      * @param {number} [pageIndex]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
+    bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, considerIgnored: boolean, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
     /**
      *
      * @param {string} workspaceId
@@ -3437,12 +3439,13 @@ export declare const BankTransactionsApiFactory: (configuration?: Configuration,
     /**
      *
      * @param {string} workspaceId
+     * @param {boolean} considerIgnored
      * @param {number} [pageIndex]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, options?: any): AxiosPromise<BankTransactionsPageEntity>;
+    bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, considerIgnored: boolean, pageIndex?: number, pageSize?: number, options?: any): AxiosPromise<BankTransactionsPageEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -3502,13 +3505,14 @@ export declare class BankTransactionsApi extends BaseAPI {
     /**
      *
      * @param {string} workspaceId
+     * @param {boolean} considerIgnored
      * @param {number} [pageIndex]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
+    bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, considerIgnored: boolean, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
     /**
      *
      * @param {string} workspaceId

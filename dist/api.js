@@ -2014,18 +2014,21 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @param {string} workspaceId
+         * @param {boolean} considerIgnored
          * @param {number} [pageIndex]
          * @param {number} [pageSize]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsNotConfirmed: function (workspaceId, pageIndex, pageSize, options) {
+        bankTransactionsControllerGetBankTransactionsNotConfirmed: function (workspaceId, considerIgnored, pageIndex, pageSize, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankTransactionsControllerGetBankTransactionsNotConfirmed', 'workspaceId', workspaceId);
+                    // verify required parameter 'considerIgnored' is not null or undefined
+                    (0, common_1.assertParamExists)('bankTransactionsControllerGetBankTransactionsNotConfirmed', 'considerIgnored', considerIgnored);
                     localVarPath = "/workspaces/{workspaceId}/bank/transactions/not-confirmed"
                         .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
                     localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -2040,6 +2043,9 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
                     }
                     if (pageSize !== undefined) {
                         localVarQueryParameter['pageSize'] = pageSize;
+                    }
+                    if (considerIgnored !== undefined) {
+                        localVarQueryParameter['considerIgnored'] = considerIgnored;
                     }
                     (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
                     headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -2219,18 +2225,19 @@ var BankTransactionsApiFp = function (configuration) {
         /**
          *
          * @param {string} workspaceId
+         * @param {boolean} considerIgnored
          * @param {number} [pageIndex]
          * @param {number} [pageSize]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsNotConfirmed: function (workspaceId, pageIndex, pageSize, options) {
+        bankTransactionsControllerGetBankTransactionsNotConfirmed: function (workspaceId, considerIgnored, pageIndex, pageSize, options) {
             var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, considerIgnored, pageIndex, pageSize, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -2348,13 +2355,14 @@ var BankTransactionsApiFactory = function (configuration, basePath, axios) {
         /**
          *
          * @param {string} workspaceId
+         * @param {boolean} considerIgnored
          * @param {number} [pageIndex]
          * @param {number} [pageSize]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsNotConfirmed: function (workspaceId, pageIndex, pageSize, options) {
-            return localVarFp.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, options).then(function (request) { return request(axios, basePath); });
+        bankTransactionsControllerGetBankTransactionsNotConfirmed: function (workspaceId, considerIgnored, pageIndex, pageSize, options) {
+            return localVarFp.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, considerIgnored, pageIndex, pageSize, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
@@ -2433,15 +2441,16 @@ var BankTransactionsApi = /** @class */ (function (_super) {
     /**
      *
      * @param {string} workspaceId
+     * @param {boolean} considerIgnored
      * @param {number} [pageIndex]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactionsNotConfirmed = function (workspaceId, pageIndex, pageSize, options) {
+    BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactionsNotConfirmed = function (workspaceId, considerIgnored, pageIndex, pageSize, options) {
         var _this = this;
-        return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, considerIgnored, pageIndex, pageSize, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
