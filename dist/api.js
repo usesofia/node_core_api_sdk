@@ -2016,6 +2016,46 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {string} workspaceId
          * @param {number} [pageIndex]
          * @param {number} [pageSize]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe: function (workspaceId, pageIndex, pageSize, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'workspaceId' is not null or undefined
+                    (0, common_1.assertParamExists)('bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe', 'workspaceId', workspaceId);
+                    localVarPath = "/workspaces/{workspaceId}/bank/transactions/confirmed-today-by-me"
+                        .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    if (pageIndex !== undefined) {
+                        localVarQueryParameter['pageIndex'] = pageIndex;
+                    }
+                    if (pageSize !== undefined) {
+                        localVarQueryParameter['pageSize'] = pageSize;
+                    }
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {number} [pageIndex]
+         * @param {number} [pageSize]
          * @param {boolean} [considerIgnored]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2225,6 +2265,30 @@ var BankTransactionsApiFp = function (configuration) {
          * @param {string} workspaceId
          * @param {number} [pageIndex]
          * @param {number} [pageSize]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe: function (workspaceId, pageIndex, pageSize, options) {
+            var _a, _b, _c;
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId, pageIndex, pageSize, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {number} [pageIndex]
+         * @param {number} [pageSize]
          * @param {boolean} [considerIgnored]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2355,6 +2419,17 @@ var BankTransactionsApiFactory = function (configuration, basePath, axios) {
          * @param {string} workspaceId
          * @param {number} [pageIndex]
          * @param {number} [pageSize]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe: function (workspaceId, pageIndex, pageSize, options) {
+            return localVarFp.bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId, pageIndex, pageSize, options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {number} [pageIndex]
+         * @param {number} [pageSize]
          * @param {boolean} [considerIgnored]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2435,6 +2510,19 @@ var BankTransactionsApi = /** @class */ (function (_super) {
     BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactions = function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options) {
         var _this = this;
         return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe = function (workspaceId, pageIndex, pageSize, options) {
+        var _this = this;
+        return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId, pageIndex, pageSize, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
