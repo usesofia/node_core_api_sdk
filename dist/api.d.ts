@@ -593,6 +593,12 @@ export interface BankTransactionEntity {
      * @type {string}
      * @memberof BankTransactionEntity
      */
+    'originalDescription': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntity
+     */
     'description': string;
     /**
      *
