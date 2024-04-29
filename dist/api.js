@@ -2829,6 +2829,39 @@ var ProfilesApiAxiosParamCreator = function (configuration) {
                 });
             });
         },
+        /**
+         *
+         * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerParcialUpdate: function (parcialUpdateProfileRequestDto, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'parcialUpdateProfileRequestDto' is not null or undefined
+                    (0, common_1.assertParamExists)('profilesControllerParcialUpdate', 'parcialUpdateProfileRequestDto', parcialUpdateProfileRequestDto);
+                    localVarPath = "/profiles/me";
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'PATCH' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'application/json';
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(parcialUpdateProfileRequestDto, localVarRequestOptions, configuration);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
     };
 };
 exports.ProfilesApiAxiosParamCreator = ProfilesApiAxiosParamCreator;
@@ -2882,6 +2915,28 @@ var ProfilesApiFp = function (configuration) {
                 });
             });
         },
+        /**
+         *
+         * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerParcialUpdate: function (parcialUpdateProfileRequestDto, options) {
+            var _a, _b, _c;
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.profilesControllerParcialUpdate(parcialUpdateProfileRequestDto, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['ProfilesApi.profilesControllerParcialUpdate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
     };
 };
 exports.ProfilesApiFp = ProfilesApiFp;
@@ -2908,6 +2963,15 @@ var ProfilesApiFactory = function (configuration, basePath, axios) {
          */
         profilesControllerGetMy: function (options) {
             return localVarFp.profilesControllerGetMy(options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
+         * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerParcialUpdate: function (parcialUpdateProfileRequestDto, options) {
+            return localVarFp.profilesControllerParcialUpdate(parcialUpdateProfileRequestDto, options).then(function (request) { return request(axios, basePath); });
         },
     };
 };
@@ -2943,6 +3007,17 @@ var ProfilesApi = /** @class */ (function (_super) {
     ProfilesApi.prototype.profilesControllerGetMy = function (options) {
         var _this = this;
         return (0, exports.ProfilesApiFp)(this.configuration).profilesControllerGetMy(options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    /**
+     *
+     * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfilesApi
+     */
+    ProfilesApi.prototype.profilesControllerParcialUpdate = function (parcialUpdateProfileRequestDto, options) {
+        var _this = this;
+        return (0, exports.ProfilesApiFp)(this.configuration).profilesControllerParcialUpdate(parcialUpdateProfileRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     return ProfilesApi;
 }(base_1.BaseAPI));
