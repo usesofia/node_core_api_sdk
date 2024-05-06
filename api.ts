@@ -1788,6 +1788,187 @@ export interface ExceptionResponseEntity {
 /**
  * 
  * @export
+ * @interface FinancialStatementOutcomeReportDataEntity
+ */
+export interface FinancialStatementOutcomeReportDataEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof FinancialStatementOutcomeReportDataEntity
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FinancialStatementOutcomeReportDataEntity
+     */
+    'outcome': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FinancialStatementOutcomeReportDataEntity
+     */
+    'percentage'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface FinancialStatementOutflowsSubcategoryData
+ */
+export interface FinancialStatementOutflowsSubcategoryData {
+    /**
+     * 
+     * @type {string}
+     * @memberof FinancialStatementOutflowsSubcategoryData
+     */
+    'subcategoryId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FinancialStatementOutflowsSubcategoryData
+     */
+    'subcategoryName': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FinancialStatementOutflowsSubcategoryData
+     */
+    'outcome': number;
+}
+/**
+ * 
+ * @export
+ * @interface FinancialStatementOutlfowsCategoryData
+ */
+export interface FinancialStatementOutlfowsCategoryData {
+    /**
+     * 
+     * @type {string}
+     * @memberof FinancialStatementOutlfowsCategoryData
+     */
+    'categoryId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FinancialStatementOutlfowsCategoryData
+     */
+    'categoryName': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FinancialStatementOutlfowsCategoryData
+     */
+    'outcome': number;
+    /**
+     * 
+     * @type {Array<FinancialStatementOutflowsSubcategoryData>}
+     * @memberof FinancialStatementOutlfowsCategoryData
+     */
+    'subcategories': Array<FinancialStatementOutflowsSubcategoryData>;
+}
+/**
+ * 
+ * @export
+ * @interface FinancialStatementReport
+ */
+export interface FinancialStatementReport {
+    /**
+     * 
+     * @type {Array<FinancialStatementReportItemEntity>}
+     * @memberof FinancialStatementReport
+     */
+    'items': Array<FinancialStatementReportItemEntity>;
+}
+/**
+ * 
+ * @export
+ * @interface FinancialStatementReportItemEntity
+ */
+export interface FinancialStatementReportItemEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof FinancialStatementReportItemEntity
+     */
+    'type': string;
+    /**
+     * 
+     * @type {FinancialStatementeEntriesCategoryData}
+     * @memberof FinancialStatementReportItemEntity
+     */
+    'entriesCategoryData': FinancialStatementeEntriesCategoryData;
+    /**
+     * 
+     * @type {FinancialStatementOutlfowsCategoryData}
+     * @memberof FinancialStatementReportItemEntity
+     */
+    'outflowsCategoryData': FinancialStatementOutlfowsCategoryData;
+    /**
+     * 
+     * @type {FinancialStatementOutcomeReportDataEntity}
+     * @memberof FinancialStatementReportItemEntity
+     */
+    'outcomeData': FinancialStatementOutcomeReportDataEntity;
+}
+/**
+ * 
+ * @export
+ * @interface FinancialStatementeEntriesCategoryData
+ */
+export interface FinancialStatementeEntriesCategoryData {
+    /**
+     * 
+     * @type {string}
+     * @memberof FinancialStatementeEntriesCategoryData
+     */
+    'categoryId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FinancialStatementeEntriesCategoryData
+     */
+    'categoryName': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FinancialStatementeEntriesCategoryData
+     */
+    'outcome': number;
+    /**
+     * 
+     * @type {Array<FinancialStatementeEntriesSubcategoryData>}
+     * @memberof FinancialStatementeEntriesCategoryData
+     */
+    'subcategories': Array<FinancialStatementeEntriesSubcategoryData>;
+}
+/**
+ * 
+ * @export
+ * @interface FinancialStatementeEntriesSubcategoryData
+ */
+export interface FinancialStatementeEntriesSubcategoryData {
+    /**
+     * 
+     * @type {string}
+     * @memberof FinancialStatementeEntriesSubcategoryData
+     */
+    'subcategoryId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FinancialStatementeEntriesSubcategoryData
+     */
+    'subcategoryName': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FinancialStatementeEntriesSubcategoryData
+     */
+    'outcome': number;
+}
+/**
+ * 
+ * @export
  * @interface FinancialTransactionsFeatureSpecificationEntity
  */
 export interface FinancialTransactionsFeatureSpecificationEntity {
@@ -5755,7 +5936,7 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>> {
+        async reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FinancialStatementReport>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetFinancialStatementReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReportsApi.reportsControllerGetFinancialStatementReport']?.[localVarOperationServerIndex]?.url;
@@ -5863,7 +6044,7 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowReportEntity> {
+        reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, costCenterIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<FinancialStatementReport> {
             return localVarFp.reportsControllerGetFinancialStatementReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(axios, basePath));
         },
     };
