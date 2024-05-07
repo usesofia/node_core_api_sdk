@@ -1881,19 +1881,19 @@ export interface FinancialStatementReportItemEntity {
      * @type {FinancialStatementeEntriesCategoryData}
      * @memberof FinancialStatementReportItemEntity
      */
-    'entriesCategoryData': FinancialStatementeEntriesCategoryData;
+    'entriesCategoryData'?: FinancialStatementeEntriesCategoryData;
     /**
      *
      * @type {FinancialStatementOutlfowsCategoryData}
      * @memberof FinancialStatementReportItemEntity
      */
-    'outflowsCategoryData': FinancialStatementOutlfowsCategoryData;
+    'outflowsCategoryData'?: FinancialStatementOutlfowsCategoryData;
     /**
      *
      * @type {FinancialStatementOutcomeReportDataEntity}
      * @memberof FinancialStatementReportItemEntity
      */
-    'outcomeData': FinancialStatementOutcomeReportDataEntity;
+    'outcomeData'?: FinancialStatementOutcomeReportDataEntity;
 }
 /**
  *
