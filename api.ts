@@ -1557,6 +1557,19 @@ export interface CreateOrUpdateBankTransactionsInBulkRequestDto {
 /**
  * 
  * @export
+ * @interface CreateOrUpdateMessageTokenRequestDto
+ */
+export interface CreateOrUpdateMessageTokenRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateMessageTokenRequestDto
+     */
+    'token': string;
+}
+/**
+ * 
+ * @export
  * @interface CreatePluggyConnectTokenRequestDto
  */
 export interface CreatePluggyConnectTokenRequestDto {
@@ -1997,6 +2010,74 @@ export interface FinancialTransactionsFeatureSpecificationEntity {
      */
     'subscriptionProductId': string;
 }
+/**
+ * 
+ * @export
+ * @interface MessageTokenEntity
+ */
+export interface MessageTokenEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'workspaceId': string;
+    /**
+     * 
+     * @type {WorkspaceEntity}
+     * @memberof MessageTokenEntity
+     */
+    'workspace': WorkspaceEntity;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'userId': string;
+    /**
+     * 
+     * @type {UserEntity}
+     * @memberof MessageTokenEntity
+     */
+    'user': UserEntity;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'provider': MessageTokenEntityProviderEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'token': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'updatedAt': string;
+}
+
+export const MessageTokenEntityProviderEnum = {
+    FirebaseMessaging: 'FIREBASE_MESSAGING'
+} as const;
+
+export type MessageTokenEntityProviderEnum = typeof MessageTokenEntityProviderEnum[keyof typeof MessageTokenEntityProviderEnum];
+
 /**
  * 
  * @export
@@ -5010,6 +5091,184 @@ export class BankTransactionsApi extends BaseAPI {
      */
     public bankTransactionsControllerUpdateTransaction(bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig) {
         return BankTransactionsApiFp(this.configuration).bankTransactionsControllerUpdateTransaction(bankTransactionId, updateBankTransactionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * MessageTokensApi - axios parameter creator
+ * @export
+ */
+export const MessageTokensApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        messageTokensControllerCreateOrUpdateMessageToken: async (workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('messageTokensControllerCreateOrUpdateMessageToken', 'workspaceId', workspaceId)
+            // verify required parameter 'createOrUpdateMessageTokenRequestDto' is not null or undefined
+            assertParamExists('messageTokensControllerCreateOrUpdateMessageToken', 'createOrUpdateMessageTokenRequestDto', createOrUpdateMessageTokenRequestDto)
+            const localVarPath = `/workspaces/{workspaceId}/message-tokens`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createOrUpdateMessageTokenRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        messageTokensControllerGetWorkspaceMessageTokens: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('messageTokensControllerGetWorkspaceMessageTokens', 'workspaceId', workspaceId)
+            const localVarPath = `/workspaces/{workspaceId}/message-tokens`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * MessageTokensApi - functional programming interface
+ * @export
+ */
+export const MessageTokensApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MessageTokensApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageTokenEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.messageTokensControllerCreateOrUpdateMessageToken(workspaceId, createOrUpdateMessageTokenRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MessageTokensApi.messageTokensControllerCreateOrUpdateMessageToken']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MessageTokenEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.messageTokensControllerGetWorkspaceMessageTokens(workspaceId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MessageTokensApi.messageTokensControllerGetWorkspaceMessageTokens']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * MessageTokensApi - factory interface
+ * @export
+ */
+export const MessageTokensApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MessageTokensApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: any): AxiosPromise<MessageTokenEntity> {
+            return localVarFp.messageTokensControllerCreateOrUpdateMessageToken(workspaceId, createOrUpdateMessageTokenRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: any): AxiosPromise<Array<MessageTokenEntity>> {
+            return localVarFp.messageTokensControllerGetWorkspaceMessageTokens(workspaceId, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * MessageTokensApi - object-oriented interface
+ * @export
+ * @class MessageTokensApi
+ * @extends {BaseAPI}
+ */
+export class MessageTokensApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessageTokensApi
+     */
+    public messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig) {
+        return MessageTokensApiFp(this.configuration).messageTokensControllerCreateOrUpdateMessageToken(workspaceId, createOrUpdateMessageTokenRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessageTokensApi
+     */
+    public messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: RawAxiosRequestConfig) {
+        return MessageTokensApiFp(this.configuration).messageTokensControllerGetWorkspaceMessageTokens(workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

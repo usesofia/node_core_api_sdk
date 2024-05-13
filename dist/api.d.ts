@@ -1542,6 +1542,19 @@ export interface CreateOrUpdateBankTransactionsInBulkRequestDto {
 /**
  *
  * @export
+ * @interface CreateOrUpdateMessageTokenRequestDto
+ */
+export interface CreateOrUpdateMessageTokenRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateMessageTokenRequestDto
+     */
+    'token': string;
+}
+/**
+ *
+ * @export
  * @interface CreatePluggyConnectTokenRequestDto
  */
 export interface CreatePluggyConnectTokenRequestDto {
@@ -1982,6 +1995,71 @@ export interface FinancialTransactionsFeatureSpecificationEntity {
      */
     'subscriptionProductId': string;
 }
+/**
+ *
+ * @export
+ * @interface MessageTokenEntity
+ */
+export interface MessageTokenEntity {
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'workspaceId': string;
+    /**
+     *
+     * @type {WorkspaceEntity}
+     * @memberof MessageTokenEntity
+     */
+    'workspace': WorkspaceEntity;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'userId': string;
+    /**
+     *
+     * @type {UserEntity}
+     * @memberof MessageTokenEntity
+     */
+    'user': UserEntity;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'provider': MessageTokenEntityProviderEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'token': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'createdAt': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'updatedAt': string;
+}
+export declare const MessageTokenEntityProviderEnum: {
+    readonly FirebaseMessaging: "FIREBASE_MESSAGING";
+};
+export type MessageTokenEntityProviderEnum = typeof MessageTokenEntityProviderEnum[keyof typeof MessageTokenEntityProviderEnum];
 /**
  *
  * @export
@@ -3809,6 +3887,94 @@ export declare class BankTransactionsApi extends BaseAPI {
      * @memberof BankTransactionsApi
      */
     bankTransactionsControllerUpdateTransaction(bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity, any>>;
+}
+/**
+ * MessageTokensApi - axios parameter creator
+ * @export
+ */
+export declare const MessageTokensApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerCreateOrUpdateMessageToken: (workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerGetWorkspaceMessageTokens: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * MessageTokensApi - functional programming interface
+ * @export
+ */
+export declare const MessageTokensApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageTokenEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MessageTokenEntity>>>;
+};
+/**
+ * MessageTokensApi - factory interface
+ * @export
+ */
+export declare const MessageTokensApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: any): AxiosPromise<MessageTokenEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: any): AxiosPromise<Array<MessageTokenEntity>>;
+};
+/**
+ * MessageTokensApi - object-oriented interface
+ * @export
+ * @class MessageTokensApi
+ * @extends {BaseAPI}
+ */
+export declare class MessageTokensApi extends BaseAPI {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessageTokensApi
+     */
+    messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<MessageTokenEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessageTokensApi
+     */
+    messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<MessageTokenEntity[], any>>;
 }
 /**
  * PluggyApi - axios parameter creator
