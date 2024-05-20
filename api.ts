@@ -1660,12 +1660,6 @@ export interface CreateWorkspaceRequestDto {
      * @memberof CreateWorkspaceRequestDto
      */
     'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkspaceRequestDto
-     */
-    'type': string;
 }
 /**
  * 
