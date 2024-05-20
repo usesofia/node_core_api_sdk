@@ -467,43 +467,6 @@ export interface BankTransactionCategoryPlainEntity {
 /**
  * 
  * @export
- * @interface BankTransactionCostCenterEntity
- */
-export interface BankTransactionCostCenterEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCostCenterEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCostCenterEntity
-     */
-    'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCostCenterEntity
-     */
-    'workspaceId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCostCenterEntity
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCostCenterEntity
-     */
-    'updatedAt': string;
-}
-/**
- * 
- * @export
  * @interface BankTransactionCreditCardMetadataEntity
  */
 export interface BankTransactionCreditCardMetadataEntity {
@@ -678,16 +641,10 @@ export interface BankTransactionEntity {
     'category'?: BankTransactionCategoryPlainEntity;
     /**
      * 
-     * @type {string}
+     * @type {Array<BankTransactionTagEntity>}
      * @memberof BankTransactionEntity
      */
-    'costCenterId'?: string;
-    /**
-     * 
-     * @type {BankTransactionCostCenterEntity}
-     * @memberof BankTransactionEntity
-     */
-    'costCenter'?: BankTransactionCostCenterEntity;
+    'tags': Array<BankTransactionTagEntity>;
     /**
      * 
      * @type {string}
@@ -905,6 +862,37 @@ export interface BankTransactionPaymentDataEntity {
      * 
      * @type {string}
      * @memberof BankTransactionPaymentDataEntity
+     */
+    'updatedAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface BankTransactionTagEntity
+ */
+export interface BankTransactionTagEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionTagEntity
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionTagEntity
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionTagEntity
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionTagEntity
      */
     'updatedAt': string;
 }
@@ -1324,13 +1312,13 @@ export interface ConnectionFeatureSpecificationEntity {
 /**
  * 
  * @export
- * @interface CreateBankTransactionCostCenterRequestDto
+ * @interface CreateBankTransactionTagRequestDto
  */
-export interface CreateBankTransactionCostCenterRequestDto {
+export interface CreateBankTransactionTagRequestDto {
     /**
      * 
      * @type {string}
-     * @memberof CreateBankTransactionCostCenterRequestDto
+     * @memberof CreateBankTransactionTagRequestDto
      */
     'name': string;
 }
@@ -1510,12 +1498,6 @@ export interface CreateOrUpdateBankTransactionsInBulkItemDto {
      * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
      */
     'categoryId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'costCenterId'?: string;
     /**
      * 
      * @type {PaymentDataDto}
@@ -2594,12 +2576,6 @@ export interface UpdateBankTransactionRequestDto {
      * @type {string}
      * @memberof UpdateBankTransactionRequestDto
      */
-    'costCenterId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateBankTransactionRequestDto
-     */
     'competencyDate'?: string;
     /**
      * 
@@ -2613,6 +2589,12 @@ export interface UpdateBankTransactionRequestDto {
      * @memberof UpdateBankTransactionRequestDto
      */
     'confirm'?: boolean;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdateBankTransactionRequestDto
+     */
+    'tagIds'?: Array<string>;
 }
 /**
  * 
@@ -4288,24 +4270,24 @@ export class BankTransactionCategoriesApi extends BaseAPI {
 
 
 /**
- * BankTransactionCostCentersApi - axios parameter creator
+ * BankTransactionTagsApi - axios parameter creator
  * @export
  */
-export const BankTransactionCostCentersApiAxiosParamCreator = function (configuration?: Configuration) {
+export const BankTransactionTagsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
          * @param {string} workspaceId 
-         * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto 
+         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCostCentersControllerCreateCostCenter: async (workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bankTransactionTagsControllerCreateTag: async (workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionCostCentersControllerCreateCostCenter', 'workspaceId', workspaceId)
-            // verify required parameter 'createBankTransactionCostCenterRequestDto' is not null or undefined
-            assertParamExists('bankTransactionCostCentersControllerCreateCostCenter', 'createBankTransactionCostCenterRequestDto', createBankTransactionCostCenterRequestDto)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/cost-centers`
+            assertParamExists('bankTransactionTagsControllerCreateTag', 'workspaceId', workspaceId)
+            // verify required parameter 'createBankTransactionTagRequestDto' is not null or undefined
+            assertParamExists('bankTransactionTagsControllerCreateTag', 'createBankTransactionTagRequestDto', createBankTransactionTagRequestDto)
+            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/tags`
                 .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4325,7 +4307,7 @@ export const BankTransactionCostCentersApiAxiosParamCreator = function (configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createBankTransactionCostCenterRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createBankTransactionTagRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4338,10 +4320,10 @@ export const BankTransactionCostCentersApiAxiosParamCreator = function (configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCostCentersControllerListCostCenters: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bankTransactionTagsControllerListTags: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionCostCentersControllerListCostCenters', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/cost-centers`
+            assertParamExists('bankTransactionTagsControllerListTags', 'workspaceId', workspaceId)
+            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/tags`
                 .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4369,23 +4351,23 @@ export const BankTransactionCostCentersApiAxiosParamCreator = function (configur
 };
 
 /**
- * BankTransactionCostCentersApi - functional programming interface
+ * BankTransactionTagsApi - functional programming interface
  * @export
  */
-export const BankTransactionCostCentersApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BankTransactionCostCentersApiAxiosParamCreator(configuration)
+export const BankTransactionTagsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BankTransactionTagsApiAxiosParamCreator(configuration)
     return {
         /**
          * 
          * @param {string} workspaceId 
-         * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto 
+         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionCostCentersControllerCreateCostCenter(workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionCostCenterEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionCostCentersControllerCreateCostCenter(workspaceId, createBankTransactionCostCenterRequestDto, options);
+        async bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionTagEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionTagsControllerCreateTag(workspaceId, createBankTransactionTagRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionCostCentersApi.bankTransactionCostCentersControllerCreateCostCenter']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionTagsApi.bankTransactionTagsControllerCreateTag']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4394,31 +4376,31 @@ export const BankTransactionCostCentersApiFp = function(configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionCostCentersControllerListCostCenters(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCostCenterEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionCostCentersControllerListCostCenters(workspaceId, options);
+        async bankTransactionTagsControllerListTags(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionTagEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionTagsControllerListTags(workspaceId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionCostCentersApi.bankTransactionCostCentersControllerListCostCenters']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionTagsApi.bankTransactionTagsControllerListTags']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * BankTransactionCostCentersApi - factory interface
+ * BankTransactionTagsApi - factory interface
  * @export
  */
-export const BankTransactionCostCentersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BankTransactionCostCentersApiFp(configuration)
+export const BankTransactionTagsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BankTransactionTagsApiFp(configuration)
     return {
         /**
          * 
          * @param {string} workspaceId 
-         * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto 
+         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCostCentersControllerCreateCostCenter(workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: any): AxiosPromise<BankTransactionCostCenterEntity> {
-            return localVarFp.bankTransactionCostCentersControllerCreateCostCenter(workspaceId, createBankTransactionCostCenterRequestDto, options).then((request) => request(axios, basePath));
+        bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: any): AxiosPromise<BankTransactionTagEntity> {
+            return localVarFp.bankTransactionTagsControllerCreateTag(workspaceId, createBankTransactionTagRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4426,29 +4408,29 @@ export const BankTransactionCostCentersApiFactory = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCostCentersControllerListCostCenters(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionCostCenterEntity>> {
-            return localVarFp.bankTransactionCostCentersControllerListCostCenters(workspaceId, options).then((request) => request(axios, basePath));
+        bankTransactionTagsControllerListTags(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionTagEntity>> {
+            return localVarFp.bankTransactionTagsControllerListTags(workspaceId, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * BankTransactionCostCentersApi - object-oriented interface
+ * BankTransactionTagsApi - object-oriented interface
  * @export
- * @class BankTransactionCostCentersApi
+ * @class BankTransactionTagsApi
  * @extends {BaseAPI}
  */
-export class BankTransactionCostCentersApi extends BaseAPI {
+export class BankTransactionTagsApi extends BaseAPI {
     /**
      * 
      * @param {string} workspaceId 
-     * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto 
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BankTransactionCostCentersApi
+     * @memberof BankTransactionTagsApi
      */
-    public bankTransactionCostCentersControllerCreateCostCenter(workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: RawAxiosRequestConfig) {
-        return BankTransactionCostCentersApiFp(this.configuration).bankTransactionCostCentersControllerCreateCostCenter(workspaceId, createBankTransactionCostCenterRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig) {
+        return BankTransactionTagsApiFp(this.configuration).bankTransactionTagsControllerCreateTag(workspaceId, createBankTransactionTagRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4456,10 +4438,10 @@ export class BankTransactionCostCentersApi extends BaseAPI {
      * @param {string} workspaceId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BankTransactionCostCentersApi
+     * @memberof BankTransactionTagsApi
      */
-    public bankTransactionCostCentersControllerListCostCenters(workspaceId: string, options?: RawAxiosRequestConfig) {
-        return BankTransactionCostCentersApiFp(this.configuration).bankTransactionCostCentersControllerListCostCenters(workspaceId, options).then((request) => request(this.axios, this.basePath));
+    public bankTransactionTagsControllerListTags(workspaceId: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionTagsApiFp(this.configuration).bankTransactionTagsControllerListTags(workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -4513,7 +4495,7 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
          * @param {number} [pageSize] 
          * @param {string} [accountIds] 
          * @param {string} [categoryIds] 
-         * @param {string} [costCenterIds] 
+         * @param {string} [tagIds] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -4522,7 +4504,7 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions: async (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bankTransactionsControllerGetBankTransactions: async (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('bankTransactionsControllerGetBankTransactions', 'workspaceId', workspaceId)
             const localVarPath = `/workspaces/{workspaceId}/bank/transactions`
@@ -4554,8 +4536,8 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
                 localVarQueryParameter['categoryIds'] = categoryIds;
             }
 
-            if (costCenterIds !== undefined) {
-                localVarQueryParameter['costCenterIds'] = costCenterIds;
+            if (tagIds !== undefined) {
+                localVarQueryParameter['tagIds'] = tagIds;
             }
 
             if (minPostedDate !== undefined) {
@@ -4814,7 +4796,7 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
          * @param {number} [pageSize] 
          * @param {string} [accountIds] 
          * @param {string} [categoryIds] 
-         * @param {string} [costCenterIds] 
+         * @param {string} [tagIds] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -4823,8 +4805,8 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options);
+        async bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4921,7 +4903,7 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
          * @param {number} [pageSize] 
          * @param {string} [accountIds] 
          * @param {string} [categoryIds] 
-         * @param {string} [costCenterIds] 
+         * @param {string} [tagIds] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -4930,8 +4912,8 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
-            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then((request) => request(axios, basePath));
+        bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
+            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5012,7 +4994,7 @@ export class BankTransactionsApi extends BaseAPI {
      * @param {number} [pageSize] 
      * @param {string} [accountIds] 
      * @param {string} [categoryIds] 
-     * @param {string} [costCenterIds] 
+     * @param {string} [tagIds] 
      * @param {string} [minPostedDate] 
      * @param {string} [maxPostedDate] 
      * @param {string} [minCompetencyDate] 
@@ -5022,8 +5004,8 @@ export class BankTransactionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    public bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then((request) => request(this.axios, this.basePath));
+    public bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

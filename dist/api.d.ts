@@ -457,43 +457,6 @@ export interface BankTransactionCategoryPlainEntity {
 /**
  *
  * @export
- * @interface BankTransactionCostCenterEntity
- */
-export interface BankTransactionCostCenterEntity {
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCostCenterEntity
-     */
-    'id': string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCostCenterEntity
-     */
-    'name': string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCostCenterEntity
-     */
-    'workspaceId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCostCenterEntity
-     */
-    'createdAt': string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCostCenterEntity
-     */
-    'updatedAt': string;
-}
-/**
- *
- * @export
  * @interface BankTransactionCreditCardMetadataEntity
  */
 export interface BankTransactionCreditCardMetadataEntity {
@@ -668,16 +631,10 @@ export interface BankTransactionEntity {
     'category'?: BankTransactionCategoryPlainEntity;
     /**
      *
-     * @type {string}
+     * @type {Array<BankTransactionTagEntity>}
      * @memberof BankTransactionEntity
      */
-    'costCenterId'?: string;
-    /**
-     *
-     * @type {BankTransactionCostCenterEntity}
-     * @memberof BankTransactionEntity
-     */
-    'costCenter'?: BankTransactionCostCenterEntity;
+    'tags': Array<BankTransactionTagEntity>;
     /**
      *
      * @type {string}
@@ -890,6 +847,37 @@ export interface BankTransactionPaymentDataEntity {
      *
      * @type {string}
      * @memberof BankTransactionPaymentDataEntity
+     */
+    'updatedAt': string;
+}
+/**
+ *
+ * @export
+ * @interface BankTransactionTagEntity
+ */
+export interface BankTransactionTagEntity {
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionTagEntity
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionTagEntity
+     */
+    'name': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionTagEntity
+     */
+    'createdAt': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionTagEntity
      */
     'updatedAt': string;
 }
@@ -1309,13 +1297,13 @@ export interface ConnectionFeatureSpecificationEntity {
 /**
  *
  * @export
- * @interface CreateBankTransactionCostCenterRequestDto
+ * @interface CreateBankTransactionTagRequestDto
  */
-export interface CreateBankTransactionCostCenterRequestDto {
+export interface CreateBankTransactionTagRequestDto {
     /**
      *
      * @type {string}
-     * @memberof CreateBankTransactionCostCenterRequestDto
+     * @memberof CreateBankTransactionTagRequestDto
      */
     'name': string;
 }
@@ -1495,12 +1483,6 @@ export interface CreateOrUpdateBankTransactionsInBulkItemDto {
      * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
      */
     'categoryId'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'costCenterId'?: string;
     /**
      *
      * @type {PaymentDataDto}
@@ -2576,12 +2558,6 @@ export interface UpdateBankTransactionRequestDto {
      * @type {string}
      * @memberof UpdateBankTransactionRequestDto
      */
-    'costCenterId'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof UpdateBankTransactionRequestDto
-     */
     'competencyDate'?: string;
     /**
      *
@@ -2595,6 +2571,12 @@ export interface UpdateBankTransactionRequestDto {
      * @memberof UpdateBankTransactionRequestDto
      */
     'confirm'?: boolean;
+    /**
+     *
+     * @type {Array<string>}
+     * @memberof UpdateBankTransactionRequestDto
+     */
+    'tagIds'?: Array<string>;
 }
 /**
  *
@@ -3502,92 +3484,92 @@ export declare class BankTransactionCategoriesApi extends BaseAPI {
     bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCategoryEntity[], any>>;
 }
 /**
- * BankTransactionCostCentersApi - axios parameter creator
+ * BankTransactionTagsApi - axios parameter creator
  * @export
  */
-export declare const BankTransactionCostCentersApiAxiosParamCreator: (configuration?: Configuration) => {
+export declare const BankTransactionTagsApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
      *
      * @param {string} workspaceId
-     * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCostCentersControllerCreateCostCenter: (workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    bankTransactionTagsControllerCreateTag: (workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {string} workspaceId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCostCentersControllerListCostCenters: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    bankTransactionTagsControllerListTags: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
- * BankTransactionCostCentersApi - functional programming interface
+ * BankTransactionTagsApi - functional programming interface
  * @export
  */
-export declare const BankTransactionCostCentersApiFp: (configuration?: Configuration) => {
+export declare const BankTransactionTagsApiFp: (configuration?: Configuration) => {
     /**
      *
      * @param {string} workspaceId
-     * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCostCentersControllerCreateCostCenter(workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionCostCenterEntity>>;
+    bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionTagEntity>>;
     /**
      *
      * @param {string} workspaceId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCostCentersControllerListCostCenters(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCostCenterEntity>>>;
+    bankTransactionTagsControllerListTags(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionTagEntity>>>;
 };
 /**
- * BankTransactionCostCentersApi - factory interface
+ * BankTransactionTagsApi - factory interface
  * @export
  */
-export declare const BankTransactionCostCentersApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+export declare const BankTransactionTagsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
      *
      * @param {string} workspaceId
-     * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCostCentersControllerCreateCostCenter(workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: any): AxiosPromise<BankTransactionCostCenterEntity>;
+    bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: any): AxiosPromise<BankTransactionTagEntity>;
     /**
      *
      * @param {string} workspaceId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCostCentersControllerListCostCenters(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionCostCenterEntity>>;
+    bankTransactionTagsControllerListTags(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionTagEntity>>;
 };
 /**
- * BankTransactionCostCentersApi - object-oriented interface
+ * BankTransactionTagsApi - object-oriented interface
  * @export
- * @class BankTransactionCostCentersApi
+ * @class BankTransactionTagsApi
  * @extends {BaseAPI}
  */
-export declare class BankTransactionCostCentersApi extends BaseAPI {
+export declare class BankTransactionTagsApi extends BaseAPI {
     /**
      *
      * @param {string} workspaceId
-     * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BankTransactionCostCentersApi
+     * @memberof BankTransactionTagsApi
      */
-    bankTransactionCostCentersControllerCreateCostCenter(workspaceId: string, createBankTransactionCostCenterRequestDto: CreateBankTransactionCostCenterRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCostCenterEntity, any>>;
+    bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionTagEntity, any>>;
     /**
      *
      * @param {string} workspaceId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BankTransactionCostCentersApi
+     * @memberof BankTransactionTagsApi
      */
-    bankTransactionCostCentersControllerListCostCenters(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCostCenterEntity[], any>>;
+    bankTransactionTagsControllerListTags(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionTagEntity[], any>>;
 }
 /**
  * BankTransactionsApi - axios parameter creator
@@ -3608,7 +3590,7 @@ export declare const BankTransactionsApiAxiosParamCreator: (configuration?: Conf
      * @param {number} [pageSize]
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
      * @param {string} [minPostedDate]
      * @param {string} [maxPostedDate]
      * @param {string} [minCompetencyDate]
@@ -3617,7 +3599,7 @@ export declare const BankTransactionsApiAxiosParamCreator: (configuration?: Conf
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionsControllerGetBankTransactions: (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    bankTransactionsControllerGetBankTransactions: (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {string} workspaceId
@@ -3679,7 +3661,7 @@ export declare const BankTransactionsApiFp: (configuration?: Configuration) => {
      * @param {number} [pageSize]
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
      * @param {string} [minPostedDate]
      * @param {string} [maxPostedDate]
      * @param {string} [minCompetencyDate]
@@ -3688,7 +3670,7 @@ export declare const BankTransactionsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
+    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
     /**
      *
      * @param {string} workspaceId
@@ -3750,7 +3732,7 @@ export declare const BankTransactionsApiFactory: (configuration?: Configuration,
      * @param {number} [pageSize]
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
      * @param {string} [minPostedDate]
      * @param {string} [maxPostedDate]
      * @param {string} [minCompetencyDate]
@@ -3759,7 +3741,7 @@ export declare const BankTransactionsApiFactory: (configuration?: Configuration,
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity>;
+    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -3824,7 +3806,7 @@ export declare class BankTransactionsApi extends BaseAPI {
      * @param {number} [pageSize]
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
      * @param {string} [minPostedDate]
      * @param {string} [maxPostedDate]
      * @param {string} [minCompetencyDate]
@@ -3834,7 +3816,7 @@ export declare class BankTransactionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, costCenterIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
+    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
     /**
      *
      * @param {string} workspaceId

@@ -74,8 +74,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StripeApi = exports.StripeApiFactory = exports.StripeApiFp = exports.StripeApiAxiosParamCreator = exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionCostCentersApi = exports.BankTransactionCostCentersApiFactory = exports.BankTransactionCostCentersApiFp = exports.BankTransactionCostCentersApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.AuthApi = exports.AuthApiFactory = exports.AuthApiFp = exports.AuthApiAxiosParamCreator = exports.WorkspaceSubscriptionEntityPaymentSystemEnum = exports.WorkspaceSubscriptionEntityStatusEnum = exports.MessageTokenEntityProviderEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
+exports.StripeApi = exports.StripeApiFactory = exports.StripeApiFp = exports.StripeApiAxiosParamCreator = exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionTagsApi = exports.BankTransactionTagsApiFactory = exports.BankTransactionTagsApiFp = exports.BankTransactionTagsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.AuthApi = exports.AuthApiFactory = exports.AuthApiFp = exports.AuthApiAxiosParamCreator = exports.WorkspaceSubscriptionEntityPaymentSystemEnum = exports.WorkspaceSubscriptionEntityStatusEnum = exports.MessageTokenEntityProviderEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
 exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.WorkspaceSubscriptionsApi = exports.WorkspaceSubscriptionsApiFactory = exports.WorkspaceSubscriptionsApiFp = exports.WorkspaceSubscriptionsApiAxiosParamCreator = exports.WorkspaceJoinRequestsApi = exports.WorkspaceJoinRequestsApiFactory = exports.WorkspaceJoinRequestsApiFp = exports.WorkspaceJoinRequestsApiAxiosParamCreator = exports.SubscriptionProductsApi = exports.SubscriptionProductsApiFactory = exports.SubscriptionProductsApiFp = exports.SubscriptionProductsApiAxiosParamCreator = void 0;
 var axios_1 = require("axios");
 // Some imports not used depending on template conditions
@@ -119,10 +128,14 @@ var AuthApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerCheckEmailInUse: function (checkEmailInUseRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        authControllerCheckEmailInUse: function (checkEmailInUseRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([checkEmailInUseRequestDto_1], args_1, true), void 0, function (checkEmailInUseRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'checkEmailInUseRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('authControllerCheckEmailInUse', 'checkEmailInUseRequestDto', checkEmailInUseRequestDto);
@@ -152,10 +165,14 @@ var AuthApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerRefresh: function (refreshRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        authControllerRefresh: function (refreshRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([refreshRequestDto_1], args_1, true), void 0, function (refreshRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'refreshRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('authControllerRefresh', 'refreshRequestDto', refreshRequestDto);
@@ -185,10 +202,14 @@ var AuthApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerSendEmailVerificationCode: function (sendEmailVerificationCodeRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        authControllerSendEmailVerificationCode: function (sendEmailVerificationCodeRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([sendEmailVerificationCodeRequestDto_1], args_1, true), void 0, function (sendEmailVerificationCodeRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'sendEmailVerificationCodeRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('authControllerSendEmailVerificationCode', 'sendEmailVerificationCodeRequestDto', sendEmailVerificationCodeRequestDto);
@@ -218,10 +239,14 @@ var AuthApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerSignInWithEmailPassword: function (signInWithEmailPasswordRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        authControllerSignInWithEmailPassword: function (signInWithEmailPasswordRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([signInWithEmailPasswordRequestDto_1], args_1, true), void 0, function (signInWithEmailPasswordRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'signInWithEmailPasswordRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('authControllerSignInWithEmailPassword', 'signInWithEmailPasswordRequestDto', signInWithEmailPasswordRequestDto);
@@ -251,10 +276,14 @@ var AuthApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerSignUpWithEmailPassword: function (signUpWithEmailPasswordRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        authControllerSignUpWithEmailPassword: function (signUpWithEmailPasswordRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([signUpWithEmailPasswordRequestDto_1], args_1, true), void 0, function (signUpWithEmailPasswordRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'signUpWithEmailPasswordRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('authControllerSignUpWithEmailPassword', 'signUpWithEmailPasswordRequestDto', signUpWithEmailPasswordRequestDto);
@@ -295,9 +324,9 @@ var AuthApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         authControllerCheckEmailInUse: function (checkEmailInUseRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.authControllerCheckEmailInUse(checkEmailInUseRequestDto, options)];
@@ -317,9 +346,9 @@ var AuthApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         authControllerRefresh: function (refreshRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.authControllerRefresh(refreshRequestDto, options)];
@@ -339,9 +368,9 @@ var AuthApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         authControllerSendEmailVerificationCode: function (sendEmailVerificationCodeRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.authControllerSendEmailVerificationCode(sendEmailVerificationCodeRequestDto, options)];
@@ -361,9 +390,9 @@ var AuthApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         authControllerSignInWithEmailPassword: function (signInWithEmailPasswordRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.authControllerSignInWithEmailPassword(signInWithEmailPasswordRequestDto, options)];
@@ -383,9 +412,9 @@ var AuthApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         authControllerSignUpWithEmailPassword: function (signUpWithEmailPasswordRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto, options)];
@@ -538,10 +567,14 @@ var BankAccountsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankAccountsControllerActivateBankAccount: function (bankAccountId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankAccountsControllerActivateBankAccount: function (bankAccountId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([bankAccountId_1], args_1, true), void 0, function (bankAccountId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'bankAccountId' is not null or undefined
                     (0, common_1.assertParamExists)('bankAccountsControllerActivateBankAccount', 'bankAccountId', bankAccountId);
@@ -571,10 +604,14 @@ var BankAccountsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankAccountsControllerCreateOrUpdateBankAccount: function (workspaceId, createOrUpdateBankAccountRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankAccountsControllerCreateOrUpdateBankAccount: function (workspaceId_1, createOrUpdateBankAccountRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 2; _i < arguments.length; _i++) {
+                args_1[_i - 2] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, createOrUpdateBankAccountRequestDto_1], args_1, true), void 0, function (workspaceId, createOrUpdateBankAccountRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankAccountsControllerCreateOrUpdateBankAccount', 'workspaceId', workspaceId);
@@ -609,10 +646,14 @@ var BankAccountsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport: function (workspaceId, enabled, types, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport: function (workspaceId_1, enabled_1, types_1) {
+            var args_1 = [];
+            for (var _i = 3; _i < arguments.length; _i++) {
+                args_1[_i - 3] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, enabled_1, types_1], args_1, true), void 0, function (workspaceId, enabled, types, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport', 'workspaceId', workspaceId);
@@ -647,10 +688,14 @@ var BankAccountsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankAccountsControllerDisableBankAccount: function (bankAccountId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankAccountsControllerDisableBankAccount: function (bankAccountId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([bankAccountId_1], args_1, true), void 0, function (bankAccountId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'bankAccountId' is not null or undefined
                     (0, common_1.assertParamExists)('bankAccountsControllerDisableBankAccount', 'bankAccountId', bankAccountId);
@@ -682,10 +727,14 @@ var BankAccountsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankAccountsControllerFetchConnectionBankAccounts: function (workspaceId, bankConnectionId, enabled, types, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankAccountsControllerFetchConnectionBankAccounts: function (workspaceId_1, bankConnectionId_1, enabled_1, types_1) {
+            var args_1 = [];
+            for (var _i = 4; _i < arguments.length; _i++) {
+                args_1[_i - 4] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, bankConnectionId_1, enabled_1, types_1], args_1, true), void 0, function (workspaceId, bankConnectionId, enabled, types, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankAccountsControllerFetchConnectionBankAccounts', 'workspaceId', workspaceId);
@@ -729,10 +778,14 @@ var BankAccountsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankAccountsControllerFetchWorkspaceBankAccounts: function (workspaceId, enabled, types, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankAccountsControllerFetchWorkspaceBankAccounts: function (workspaceId_1, enabled_1, types_1) {
+            var args_1 = [];
+            for (var _i = 3; _i < arguments.length; _i++) {
+                args_1[_i - 3] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, enabled_1, types_1], args_1, true), void 0, function (workspaceId, enabled, types, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankAccountsControllerFetchWorkspaceBankAccounts', 'workspaceId', workspaceId);
@@ -767,10 +820,14 @@ var BankAccountsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankAccountsControllerGetBankAccountDetails: function (bankAccountId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankAccountsControllerGetBankAccountDetails: function (bankAccountId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([bankAccountId_1], args_1, true), void 0, function (bankAccountId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'bankAccountId' is not null or undefined
                     (0, common_1.assertParamExists)('bankAccountsControllerGetBankAccountDetails', 'bankAccountId', bankAccountId);
@@ -810,9 +867,9 @@ var BankAccountsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankAccountsControllerActivateBankAccount: function (bankAccountId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankAccountsControllerActivateBankAccount(bankAccountId, options)];
@@ -833,9 +890,9 @@ var BankAccountsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankAccountsControllerCreateOrUpdateBankAccount: function (workspaceId, createOrUpdateBankAccountRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankAccountsControllerCreateOrUpdateBankAccount(workspaceId, createOrUpdateBankAccountRequestDto, options)];
@@ -857,9 +914,9 @@ var BankAccountsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport: function (workspaceId, enabled, types, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport(workspaceId, enabled, types, options)];
@@ -879,9 +936,9 @@ var BankAccountsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankAccountsControllerDisableBankAccount: function (bankAccountId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankAccountsControllerDisableBankAccount(bankAccountId, options)];
@@ -904,9 +961,9 @@ var BankAccountsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankAccountsControllerFetchConnectionBankAccounts: function (workspaceId, bankConnectionId, enabled, types, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankAccountsControllerFetchConnectionBankAccounts(workspaceId, bankConnectionId, enabled, types, options)];
@@ -928,9 +985,9 @@ var BankAccountsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankAccountsControllerFetchWorkspaceBankAccounts: function (workspaceId, enabled, types, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankAccountsControllerFetchWorkspaceBankAccounts(workspaceId, enabled, types, options)];
@@ -950,9 +1007,9 @@ var BankAccountsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankAccountsControllerGetBankAccountDetails: function (bankAccountId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankAccountsControllerGetBankAccountDetails(bankAccountId, options)];
@@ -1161,10 +1218,14 @@ var BankConnectionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankConnectionsControllerActivateBankConnection: function (bankConnectionId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankConnectionsControllerActivateBankConnection: function (bankConnectionId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([bankConnectionId_1], args_1, true), void 0, function (bankConnectionId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'bankConnectionId' is not null or undefined
                     (0, common_1.assertParamExists)('bankConnectionsControllerActivateBankConnection', 'bankConnectionId', bankConnectionId);
@@ -1194,10 +1255,14 @@ var BankConnectionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankConnectionsControllerCreateOrUpdateBankConnection: function (workspaceId, createOrUpdateBankConnectionRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankConnectionsControllerCreateOrUpdateBankConnection: function (workspaceId_1, createOrUpdateBankConnectionRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 2; _i < arguments.length; _i++) {
+                args_1[_i - 2] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, createOrUpdateBankConnectionRequestDto_1], args_1, true), void 0, function (workspaceId, createOrUpdateBankConnectionRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankConnectionsControllerCreateOrUpdateBankConnection', 'workspaceId', workspaceId);
@@ -1230,10 +1295,14 @@ var BankConnectionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankConnectionsControllerDisableBankConnection: function (bankConnectionId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankConnectionsControllerDisableBankConnection: function (bankConnectionId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([bankConnectionId_1], args_1, true), void 0, function (bankConnectionId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'bankConnectionId' is not null or undefined
                     (0, common_1.assertParamExists)('bankConnectionsControllerDisableBankConnection', 'bankConnectionId', bankConnectionId);
@@ -1263,10 +1332,14 @@ var BankConnectionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankConnectionsControllerFetchUserBankConnections: function (workspaceId, enabled, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankConnectionsControllerFetchUserBankConnections: function (workspaceId_1, enabled_1) {
+            var args_1 = [];
+            for (var _i = 2; _i < arguments.length; _i++) {
+                args_1[_i - 2] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, enabled_1], args_1, true), void 0, function (workspaceId, enabled, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankConnectionsControllerFetchUserBankConnections', 'workspaceId', workspaceId);
@@ -1298,10 +1371,14 @@ var BankConnectionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankConnectionsControllerGetBankConnectionDetails: function (bankConnectionId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankConnectionsControllerGetBankConnectionDetails: function (bankConnectionId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([bankConnectionId_1], args_1, true), void 0, function (bankConnectionId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'bankConnectionId' is not null or undefined
                     (0, common_1.assertParamExists)('bankConnectionsControllerGetBankConnectionDetails', 'bankConnectionId', bankConnectionId);
@@ -1341,9 +1418,9 @@ var BankConnectionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankConnectionsControllerActivateBankConnection: function (bankConnectionId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankConnectionsControllerActivateBankConnection(bankConnectionId, options)];
@@ -1364,9 +1441,9 @@ var BankConnectionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankConnectionsControllerCreateOrUpdateBankConnection: function (workspaceId, createOrUpdateBankConnectionRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankConnectionsControllerCreateOrUpdateBankConnection(workspaceId, createOrUpdateBankConnectionRequestDto, options)];
@@ -1386,9 +1463,9 @@ var BankConnectionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankConnectionsControllerDisableBankConnection: function (bankConnectionId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankConnectionsControllerDisableBankConnection(bankConnectionId, options)];
@@ -1409,9 +1486,9 @@ var BankConnectionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankConnectionsControllerFetchUserBankConnections: function (workspaceId, enabled, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankConnectionsControllerFetchUserBankConnections(workspaceId, enabled, options)];
@@ -1431,9 +1508,9 @@ var BankConnectionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankConnectionsControllerGetBankConnectionDetails: function (bankConnectionId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankConnectionsControllerGetBankConnectionDetails(bankConnectionId, options)];
@@ -1592,10 +1669,14 @@ var BankTransactionCategoriesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCategoriesControllerGetBankTransactionCategories: function (workspaceId, onlyLeafs, transactionNatures, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankTransactionCategoriesControllerGetBankTransactionCategories: function (workspaceId_1, onlyLeafs_1, transactionNatures_1) {
+            var args_1 = [];
+            for (var _i = 3; _i < arguments.length; _i++) {
+                args_1[_i - 3] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, onlyLeafs_1, transactionNatures_1], args_1, true), void 0, function (workspaceId, onlyLeafs, transactionNatures, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankTransactionCategoriesControllerGetBankTransactionCategories', 'workspaceId', workspaceId);
@@ -1643,9 +1724,9 @@ var BankTransactionCategoriesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankTransactionCategoriesControllerGetBankTransactionCategories: function (workspaceId, onlyLeafs, transactionNatures, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, transactionNatures, options)];
@@ -1710,29 +1791,33 @@ var BankTransactionCategoriesApi = /** @class */ (function (_super) {
 }(base_1.BaseAPI));
 exports.BankTransactionCategoriesApi = BankTransactionCategoriesApi;
 /**
- * BankTransactionCostCentersApi - axios parameter creator
+ * BankTransactionTagsApi - axios parameter creator
  * @export
  */
-var BankTransactionCostCentersApiAxiosParamCreator = function (configuration) {
+var BankTransactionTagsApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
          *
          * @param {string} workspaceId
-         * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCostCentersControllerCreateCostCenter: function (workspaceId, createBankTransactionCostCenterRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankTransactionTagsControllerCreateTag: function (workspaceId_1, createBankTransactionTagRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 2; _i < arguments.length; _i++) {
+                args_1[_i - 2] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, createBankTransactionTagRequestDto_1], args_1, true), void 0, function (workspaceId, createBankTransactionTagRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
-                    (0, common_1.assertParamExists)('bankTransactionCostCentersControllerCreateCostCenter', 'workspaceId', workspaceId);
-                    // verify required parameter 'createBankTransactionCostCenterRequestDto' is not null or undefined
-                    (0, common_1.assertParamExists)('bankTransactionCostCentersControllerCreateCostCenter', 'createBankTransactionCostCenterRequestDto', createBankTransactionCostCenterRequestDto);
-                    localVarPath = "/workspaces/{workspaceId}/bank/transactions/cost-centers"
+                    (0, common_1.assertParamExists)('bankTransactionTagsControllerCreateTag', 'workspaceId', workspaceId);
+                    // verify required parameter 'createBankTransactionTagRequestDto' is not null or undefined
+                    (0, common_1.assertParamExists)('bankTransactionTagsControllerCreateTag', 'createBankTransactionTagRequestDto', createBankTransactionTagRequestDto);
+                    localVarPath = "/workspaces/{workspaceId}/bank/transactions/tags"
                         .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
                     localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
                     if (configuration) {
@@ -1745,7 +1830,7 @@ var BankTransactionCostCentersApiAxiosParamCreator = function (configuration) {
                     (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
                     headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
                     localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(createBankTransactionCostCenterRequestDto, localVarRequestOptions, configuration);
+                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(createBankTransactionTagRequestDto, localVarRequestOptions, configuration);
                     return [2 /*return*/, {
                             url: (0, common_1.toPathString)(localVarUrlObj),
                             options: localVarRequestOptions,
@@ -1759,14 +1844,18 @@ var BankTransactionCostCentersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCostCentersControllerListCostCenters: function (workspaceId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankTransactionTagsControllerListTags: function (workspaceId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1], args_1, true), void 0, function (workspaceId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
-                    (0, common_1.assertParamExists)('bankTransactionCostCentersControllerListCostCenters', 'workspaceId', workspaceId);
-                    localVarPath = "/workspaces/{workspaceId}/bank/transactions/cost-centers"
+                    (0, common_1.assertParamExists)('bankTransactionTagsControllerListTags', 'workspaceId', workspaceId);
+                    localVarPath = "/workspaces/{workspaceId}/bank/transactions/tags"
                         .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
                     localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
                     if (configuration) {
@@ -1787,32 +1876,32 @@ var BankTransactionCostCentersApiAxiosParamCreator = function (configuration) {
         },
     };
 };
-exports.BankTransactionCostCentersApiAxiosParamCreator = BankTransactionCostCentersApiAxiosParamCreator;
+exports.BankTransactionTagsApiAxiosParamCreator = BankTransactionTagsApiAxiosParamCreator;
 /**
- * BankTransactionCostCentersApi - functional programming interface
+ * BankTransactionTagsApi - functional programming interface
  * @export
  */
-var BankTransactionCostCentersApiFp = function (configuration) {
-    var localVarAxiosParamCreator = (0, exports.BankTransactionCostCentersApiAxiosParamCreator)(configuration);
+var BankTransactionTagsApiFp = function (configuration) {
+    var localVarAxiosParamCreator = (0, exports.BankTransactionTagsApiAxiosParamCreator)(configuration);
     return {
         /**
          *
          * @param {string} workspaceId
-         * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCostCentersControllerCreateCostCenter: function (workspaceId, createBankTransactionCostCenterRequestDto, options) {
-            var _a, _b, _c;
+        bankTransactionTagsControllerCreateTag: function (workspaceId, createBankTransactionTagRequestDto, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionCostCentersControllerCreateCostCenter(workspaceId, createBankTransactionCostCenterRequestDto, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionTagsControllerCreateTag(workspaceId, createBankTransactionTagRequestDto, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['BankTransactionCostCentersApi.bankTransactionCostCentersControllerCreateCostCenter']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['BankTransactionTagsApi.bankTransactionTagsControllerCreateTag']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
                             return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
                     }
                 });
@@ -1824,17 +1913,17 @@ var BankTransactionCostCentersApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCostCentersControllerListCostCenters: function (workspaceId, options) {
-            var _a, _b, _c;
+        bankTransactionTagsControllerListTags: function (workspaceId, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionCostCentersControllerListCostCenters(workspaceId, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionTagsControllerListTags(workspaceId, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['BankTransactionCostCentersApi.bankTransactionCostCentersControllerListCostCenters']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['BankTransactionTagsApi.bankTransactionTagsControllerListTags']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
                             return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
                     }
                 });
@@ -1842,23 +1931,23 @@ var BankTransactionCostCentersApiFp = function (configuration) {
         },
     };
 };
-exports.BankTransactionCostCentersApiFp = BankTransactionCostCentersApiFp;
+exports.BankTransactionTagsApiFp = BankTransactionTagsApiFp;
 /**
- * BankTransactionCostCentersApi - factory interface
+ * BankTransactionTagsApi - factory interface
  * @export
  */
-var BankTransactionCostCentersApiFactory = function (configuration, basePath, axios) {
-    var localVarFp = (0, exports.BankTransactionCostCentersApiFp)(configuration);
+var BankTransactionTagsApiFactory = function (configuration, basePath, axios) {
+    var localVarFp = (0, exports.BankTransactionTagsApiFp)(configuration);
     return {
         /**
          *
          * @param {string} workspaceId
-         * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCostCentersControllerCreateCostCenter: function (workspaceId, createBankTransactionCostCenterRequestDto, options) {
-            return localVarFp.bankTransactionCostCentersControllerCreateCostCenter(workspaceId, createBankTransactionCostCenterRequestDto, options).then(function (request) { return request(axios, basePath); });
+        bankTransactionTagsControllerCreateTag: function (workspaceId, createBankTransactionTagRequestDto, options) {
+            return localVarFp.bankTransactionTagsControllerCreateTag(workspaceId, createBankTransactionTagRequestDto, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
@@ -1866,49 +1955,49 @@ var BankTransactionCostCentersApiFactory = function (configuration, basePath, ax
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCostCentersControllerListCostCenters: function (workspaceId, options) {
-            return localVarFp.bankTransactionCostCentersControllerListCostCenters(workspaceId, options).then(function (request) { return request(axios, basePath); });
+        bankTransactionTagsControllerListTags: function (workspaceId, options) {
+            return localVarFp.bankTransactionTagsControllerListTags(workspaceId, options).then(function (request) { return request(axios, basePath); });
         },
     };
 };
-exports.BankTransactionCostCentersApiFactory = BankTransactionCostCentersApiFactory;
+exports.BankTransactionTagsApiFactory = BankTransactionTagsApiFactory;
 /**
- * BankTransactionCostCentersApi - object-oriented interface
+ * BankTransactionTagsApi - object-oriented interface
  * @export
- * @class BankTransactionCostCentersApi
+ * @class BankTransactionTagsApi
  * @extends {BaseAPI}
  */
-var BankTransactionCostCentersApi = /** @class */ (function (_super) {
-    __extends(BankTransactionCostCentersApi, _super);
-    function BankTransactionCostCentersApi() {
+var BankTransactionTagsApi = /** @class */ (function (_super) {
+    __extends(BankTransactionTagsApi, _super);
+    function BankTransactionTagsApi() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      *
      * @param {string} workspaceId
-     * @param {CreateBankTransactionCostCenterRequestDto} createBankTransactionCostCenterRequestDto
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BankTransactionCostCentersApi
+     * @memberof BankTransactionTagsApi
      */
-    BankTransactionCostCentersApi.prototype.bankTransactionCostCentersControllerCreateCostCenter = function (workspaceId, createBankTransactionCostCenterRequestDto, options) {
+    BankTransactionTagsApi.prototype.bankTransactionTagsControllerCreateTag = function (workspaceId, createBankTransactionTagRequestDto, options) {
         var _this = this;
-        return (0, exports.BankTransactionCostCentersApiFp)(this.configuration).bankTransactionCostCentersControllerCreateCostCenter(workspaceId, createBankTransactionCostCenterRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.BankTransactionTagsApiFp)(this.configuration).bankTransactionTagsControllerCreateTag(workspaceId, createBankTransactionTagRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
      * @param {string} workspaceId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BankTransactionCostCentersApi
+     * @memberof BankTransactionTagsApi
      */
-    BankTransactionCostCentersApi.prototype.bankTransactionCostCentersControllerListCostCenters = function (workspaceId, options) {
+    BankTransactionTagsApi.prototype.bankTransactionTagsControllerListTags = function (workspaceId, options) {
         var _this = this;
-        return (0, exports.BankTransactionCostCentersApiFp)(this.configuration).bankTransactionCostCentersControllerListCostCenters(workspaceId, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.BankTransactionTagsApiFp)(this.configuration).bankTransactionTagsControllerListTags(workspaceId, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
-    return BankTransactionCostCentersApi;
+    return BankTransactionTagsApi;
 }(base_1.BaseAPI));
-exports.BankTransactionCostCentersApi = BankTransactionCostCentersApi;
+exports.BankTransactionTagsApi = BankTransactionTagsApi;
 /**
  * BankTransactionsApi - axios parameter creator
  * @export
@@ -1922,10 +2011,14 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk: function (createOrUpdateBankTransactionsInBulkRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk: function (createOrUpdateBankTransactionsInBulkRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([createOrUpdateBankTransactionsInBulkRequestDto_1], args_1, true), void 0, function (createOrUpdateBankTransactionsInBulkRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'createOrUpdateBankTransactionsInBulkRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk', 'createOrUpdateBankTransactionsInBulkRequestDto', createOrUpdateBankTransactionsInBulkRequestDto);
@@ -1956,7 +2049,7 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {number} [pageSize]
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -1965,10 +2058,14 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions: function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankTransactionsControllerGetBankTransactions: function (workspaceId_1, pageIndex_1, pageSize_1, accountIds_1, categoryIds_1, tagIds_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, showIgnored_1) {
+            var args_1 = [];
+            for (var _i = 11; _i < arguments.length; _i++) {
+                args_1[_i - 11] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, pageIndex_1, pageSize_1, accountIds_1, categoryIds_1, tagIds_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, showIgnored_1], args_1, true), void 0, function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankTransactionsControllerGetBankTransactions', 'workspaceId', workspaceId);
@@ -1993,8 +2090,8 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
                     if (categoryIds !== undefined) {
                         localVarQueryParameter['categoryIds'] = categoryIds;
                     }
-                    if (costCenterIds !== undefined) {
-                        localVarQueryParameter['costCenterIds'] = costCenterIds;
+                    if (tagIds !== undefined) {
+                        localVarQueryParameter['tagIds'] = tagIds;
                     }
                     if (minPostedDate !== undefined) {
                         localVarQueryParameter['minPostedDate'] = minPostedDate;
@@ -2029,10 +2126,14 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe: function (workspaceId, pageIndex, pageSize, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe: function (workspaceId_1, pageIndex_1, pageSize_1) {
+            var args_1 = [];
+            for (var _i = 3; _i < arguments.length; _i++) {
+                args_1[_i - 3] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, pageIndex_1, pageSize_1], args_1, true), void 0, function (workspaceId, pageIndex, pageSize, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe', 'workspaceId', workspaceId);
@@ -2070,10 +2171,14 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsNotConfirmed: function (workspaceId, pageIndex, pageSize, considerIgnored, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankTransactionsControllerGetBankTransactionsNotConfirmed: function (workspaceId_1, pageIndex_1, pageSize_1, considerIgnored_1) {
+            var args_1 = [];
+            for (var _i = 4; _i < arguments.length; _i++) {
+                args_1[_i - 4] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, pageIndex_1, pageSize_1, considerIgnored_1], args_1, true), void 0, function (workspaceId, pageIndex, pageSize, considerIgnored, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankTransactionsControllerGetBankTransactionsNotConfirmed', 'workspaceId', workspaceId);
@@ -2111,10 +2216,14 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetRecent: function (workspaceId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankTransactionsControllerGetRecent: function (workspaceId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1], args_1, true), void 0, function (workspaceId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('bankTransactionsControllerGetRecent', 'workspaceId', workspaceId);
@@ -2143,10 +2252,14 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetTransactionDetails: function (bankTransactionId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankTransactionsControllerGetTransactionDetails: function (bankTransactionId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([bankTransactionId_1], args_1, true), void 0, function (bankTransactionId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'bankTransactionId' is not null or undefined
                     (0, common_1.assertParamExists)('bankTransactionsControllerGetTransactionDetails', 'bankTransactionId', bankTransactionId);
@@ -2176,10 +2289,14 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerUpdateTransaction: function (bankTransactionId, updateBankTransactionRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        bankTransactionsControllerUpdateTransaction: function (bankTransactionId_1, updateBankTransactionRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 2; _i < arguments.length; _i++) {
+                args_1[_i - 2] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([bankTransactionId_1, updateBankTransactionRequestDto_1], args_1, true), void 0, function (bankTransactionId, updateBankTransactionRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'bankTransactionId' is not null or undefined
                     (0, common_1.assertParamExists)('bankTransactionsControllerUpdateTransaction', 'bankTransactionId', bankTransactionId);
@@ -2223,9 +2340,9 @@ var BankTransactionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk: function (createOrUpdateBankTransactionsInBulkRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto, options)];
@@ -2245,7 +2362,7 @@ var BankTransactionsApiFp = function (configuration) {
          * @param {number} [pageSize]
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -2254,13 +2371,13 @@ var BankTransactionsApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions: function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options) {
-            var _a, _b, _c;
+        bankTransactionsControllerGetBankTransactions: function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -2279,9 +2396,9 @@ var BankTransactionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe: function (workspaceId, pageIndex, pageSize, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId, pageIndex, pageSize, options)];
@@ -2304,9 +2421,9 @@ var BankTransactionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankTransactionsControllerGetBankTransactionsNotConfirmed: function (workspaceId, pageIndex, pageSize, considerIgnored, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, considerIgnored, options)];
@@ -2326,9 +2443,9 @@ var BankTransactionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankTransactionsControllerGetRecent: function (workspaceId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetRecent(workspaceId, options)];
@@ -2348,9 +2465,9 @@ var BankTransactionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankTransactionsControllerGetTransactionDetails: function (bankTransactionId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetTransactionDetails(bankTransactionId, options)];
@@ -2371,9 +2488,9 @@ var BankTransactionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         bankTransactionsControllerUpdateTransaction: function (bankTransactionId, updateBankTransactionRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerUpdateTransaction(bankTransactionId, updateBankTransactionRequestDto, options)];
@@ -2412,7 +2529,7 @@ var BankTransactionsApiFactory = function (configuration, basePath, axios) {
          * @param {number} [pageSize]
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -2421,8 +2538,8 @@ var BankTransactionsApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions: function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options) {
-            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then(function (request) { return request(axios, basePath); });
+        bankTransactionsControllerGetBankTransactions: function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options) {
+            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
@@ -2507,7 +2624,7 @@ var BankTransactionsApi = /** @class */ (function (_super) {
      * @param {number} [pageSize]
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
      * @param {string} [minPostedDate]
      * @param {string} [maxPostedDate]
      * @param {string} [minCompetencyDate]
@@ -2517,9 +2634,9 @@ var BankTransactionsApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactions = function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options) {
+    BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactions = function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options) {
         var _this = this;
-        return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, costCenterIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
@@ -2599,10 +2716,14 @@ var MessageTokensApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        messageTokensControllerCreateOrUpdateMessageToken: function (workspaceId, createOrUpdateMessageTokenRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        messageTokensControllerCreateOrUpdateMessageToken: function (workspaceId_1, createOrUpdateMessageTokenRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 2; _i < arguments.length; _i++) {
+                args_1[_i - 2] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, createOrUpdateMessageTokenRequestDto_1], args_1, true), void 0, function (workspaceId, createOrUpdateMessageTokenRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('messageTokensControllerCreateOrUpdateMessageToken', 'workspaceId', workspaceId);
@@ -2635,10 +2756,14 @@ var MessageTokensApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        messageTokensControllerGetWorkspaceMessageTokens: function (workspaceId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        messageTokensControllerGetWorkspaceMessageTokens: function (workspaceId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1], args_1, true), void 0, function (workspaceId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('messageTokensControllerGetWorkspaceMessageTokens', 'workspaceId', workspaceId);
@@ -2679,9 +2804,9 @@ var MessageTokensApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         messageTokensControllerCreateOrUpdateMessageToken: function (workspaceId, createOrUpdateMessageTokenRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.messageTokensControllerCreateOrUpdateMessageToken(workspaceId, createOrUpdateMessageTokenRequestDto, options)];
@@ -2701,9 +2826,9 @@ var MessageTokensApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         messageTokensControllerGetWorkspaceMessageTokens: function (workspaceId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.messageTokensControllerGetWorkspaceMessageTokens(workspaceId, options)];
@@ -2798,10 +2923,14 @@ var PluggyApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        pluggyControllerCreate: function (createPluggyConnectTokenRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        pluggyControllerCreate: function (createPluggyConnectTokenRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([createPluggyConnectTokenRequestDto_1], args_1, true), void 0, function (createPluggyConnectTokenRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'createPluggyConnectTokenRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('pluggyControllerCreate', 'createPluggyConnectTokenRequestDto', createPluggyConnectTokenRequestDto);
@@ -2830,10 +2959,14 @@ var PluggyApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        pluggyControllerWebhook: function (options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        pluggyControllerWebhook: function () {
+            var args_1 = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args_1[_i] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([], args_1, true), void 0, function (options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     localVarPath = "/pluggy/webhook";
                     localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -2870,9 +3003,9 @@ var PluggyApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         pluggyControllerCreate: function (createPluggyConnectTokenRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.pluggyControllerCreate(createPluggyConnectTokenRequestDto, options)];
@@ -2891,9 +3024,9 @@ var PluggyApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         pluggyControllerWebhook: function (options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.pluggyControllerWebhook(options)];
@@ -2984,10 +3117,14 @@ var ProfilesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        profilesControllerCreate: function (createProfileRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        profilesControllerCreate: function (createProfileRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([createProfileRequestDto_1], args_1, true), void 0, function (createProfileRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'createProfileRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('profilesControllerCreate', 'createProfileRequestDto', createProfileRequestDto);
@@ -3016,10 +3153,14 @@ var ProfilesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        profilesControllerGetMy: function (options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        profilesControllerGetMy: function () {
+            var args_1 = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args_1[_i] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([], args_1, true), void 0, function (options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     localVarPath = "/profiles/me";
                     localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -3045,10 +3186,14 @@ var ProfilesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        profilesControllerParcialUpdate: function (parcialUpdateProfileRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        profilesControllerParcialUpdate: function (parcialUpdateProfileRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([parcialUpdateProfileRequestDto_1], args_1, true), void 0, function (parcialUpdateProfileRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'parcialUpdateProfileRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('profilesControllerParcialUpdate', 'parcialUpdateProfileRequestDto', parcialUpdateProfileRequestDto);
@@ -3089,9 +3234,9 @@ var ProfilesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         profilesControllerCreate: function (createProfileRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.profilesControllerCreate(createProfileRequestDto, options)];
@@ -3110,9 +3255,9 @@ var ProfilesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         profilesControllerGetMy: function (options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.profilesControllerGetMy(options)];
@@ -3132,9 +3277,9 @@ var ProfilesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         profilesControllerParcialUpdate: function (parcialUpdateProfileRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.profilesControllerParcialUpdate(parcialUpdateProfileRequestDto, options)];
@@ -3253,10 +3398,14 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
+            var args_1 = [];
+            for (var _i = 9; _i < arguments.length; _i++) {
+                args_1[_i - 9] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('reportsControllerGetAccountsEntriesByCategoryReport', 'workspaceId', workspaceId);
@@ -3317,10 +3466,14 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
+            var args_1 = [];
+            for (var _i = 9; _i < arguments.length; _i++) {
+                args_1[_i - 9] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('reportsControllerGetAccountsOutputsByCategoryReport', 'workspaceId', workspaceId);
@@ -3378,10 +3531,14 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCardsCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        reportsControllerGetCardsCashFlowReport: function (workspaceId_1, accountIds_1, categoryIds_1, costCenterIds_1, considerIgnored_1, ignoreInvoiceRelated_1) {
+            var args_1 = [];
+            for (var _i = 6; _i < arguments.length; _i++) {
+                args_1[_i - 6] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, categoryIds_1, costCenterIds_1, considerIgnored_1, ignoreInvoiceRelated_1], args_1, true), void 0, function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('reportsControllerGetCardsCashFlowReport', 'workspaceId', workspaceId);
@@ -3433,10 +3590,14 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, ignoreInvoiceRelated_1) {
+            var args_1 = [];
+            for (var _i = 9; _i < arguments.length; _i++) {
+                args_1[_i - 9] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, ignoreInvoiceRelated_1], args_1, true), void 0, function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('reportsControllerGetCardsOutputsByCategoryReport', 'workspaceId', workspaceId);
@@ -3494,10 +3655,14 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        reportsControllerGetCashFlowReport: function (workspaceId_1, accountIds_1, categoryIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1) {
+            var args_1 = [];
+            for (var _i = 6; _i < arguments.length; _i++) {
+                args_1[_i - 6] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, categoryIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1], args_1, true), void 0, function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('reportsControllerGetCashFlowReport', 'workspaceId', workspaceId);
@@ -3548,10 +3713,14 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetFinancialStatementReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        reportsControllerGetFinancialStatementReport: function (workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
+            var args_1 = [];
+            for (var _i = 8; _i < arguments.length; _i++) {
+                args_1[_i - 8] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('reportsControllerGetFinancialStatementReport', 'workspaceId', workspaceId);
@@ -3620,9 +3789,9 @@ var ReportsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
@@ -3650,9 +3819,9 @@ var ReportsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
@@ -3677,9 +3846,9 @@ var ReportsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         reportsControllerGetCardsCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCardsCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options)];
@@ -3707,9 +3876,9 @@ var ReportsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCardsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options)];
@@ -3734,9 +3903,9 @@ var ReportsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options)];
@@ -3763,9 +3932,9 @@ var ReportsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         reportsControllerGetFinancialStatementReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetFinancialStatementReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
@@ -4020,10 +4189,14 @@ var StripeApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stripeControllerCreateCheckoutSessionForStripe: function (createStripeCheckoutSessionRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        stripeControllerCreateCheckoutSessionForStripe: function (createStripeCheckoutSessionRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([createStripeCheckoutSessionRequestDto_1], args_1, true), void 0, function (createStripeCheckoutSessionRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'createStripeCheckoutSessionRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('stripeControllerCreateCheckoutSessionForStripe', 'createStripeCheckoutSessionRequestDto', createStripeCheckoutSessionRequestDto);
@@ -4053,10 +4226,14 @@ var StripeApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stripeControllerStripeWebhook: function (stripeSignature, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        stripeControllerStripeWebhook: function (stripeSignature_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([stripeSignature_1], args_1, true), void 0, function (stripeSignature, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'stripeSignature' is not null or undefined
                     (0, common_1.assertParamExists)('stripeControllerStripeWebhook', 'stripeSignature', stripeSignature);
@@ -4098,9 +4275,9 @@ var StripeApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         stripeControllerCreateCheckoutSessionForStripe: function (createStripeCheckoutSessionRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.stripeControllerCreateCheckoutSessionForStripe(createStripeCheckoutSessionRequestDto, options)];
@@ -4120,9 +4297,9 @@ var StripeApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         stripeControllerStripeWebhook: function (stripeSignature, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.stripeControllerStripeWebhook(stripeSignature, options)];
@@ -4215,10 +4392,14 @@ var SubscriptionProductsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        subscriptionProductsControllerList: function (workspaceId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        subscriptionProductsControllerList: function (workspaceId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1], args_1, true), void 0, function (workspaceId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('subscriptionProductsControllerList', 'workspaceId', workspaceId);
@@ -4258,9 +4439,9 @@ var SubscriptionProductsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         subscriptionProductsControllerList: function (workspaceId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.subscriptionProductsControllerList(workspaceId, options)];
@@ -4333,10 +4514,14 @@ var WorkspaceJoinRequestsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent: function (workspaceId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent: function (workspaceId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1], args_1, true), void 0, function (workspaceId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent', 'workspaceId', workspaceId);
@@ -4376,9 +4561,9 @@ var WorkspaceJoinRequestsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent: function (workspaceId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent(workspaceId, options)];
@@ -4451,10 +4636,14 @@ var WorkspaceSubscriptionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        workspaceSubscriptionsControllerGet: function (workspaceId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        workspaceSubscriptionsControllerGet: function (workspaceId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1], args_1, true), void 0, function (workspaceId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('workspaceSubscriptionsControllerGet', 'workspaceId', workspaceId);
@@ -4494,9 +4683,9 @@ var WorkspaceSubscriptionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         workspaceSubscriptionsControllerGet: function (workspaceId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspaceSubscriptionsControllerGet(workspaceId, options)];
@@ -4569,10 +4758,14 @@ var WorkspacesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        workspacesControllerCreate: function (createWorkspaceRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        workspacesControllerCreate: function (createWorkspaceRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([createWorkspaceRequestDto_1], args_1, true), void 0, function (createWorkspaceRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'createWorkspaceRequestDto' is not null or undefined
                     (0, common_1.assertParamExists)('workspacesControllerCreate', 'createWorkspaceRequestDto', createWorkspaceRequestDto);
@@ -4601,10 +4794,14 @@ var WorkspacesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        workspacesControllerFetchUserRelatedWorkspaces: function (options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        workspacesControllerFetchUserRelatedWorkspaces: function () {
+            var args_1 = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args_1[_i] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([], args_1, true), void 0, function (options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     localVarPath = "/workspaces/related-to-me";
                     localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -4630,10 +4827,14 @@ var WorkspacesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        workspacesControllerGet: function (workspaceId, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        workspacesControllerGet: function (workspaceId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1], args_1, true), void 0, function (workspaceId, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('workspacesControllerGet', 'workspaceId', workspaceId);
@@ -4663,10 +4864,14 @@ var WorkspacesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        workspacesControllerParcialUpdate: function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
+        workspacesControllerParcialUpdate: function (workspaceId_1, parcialUpdateWorkspaceRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 2; _i < arguments.length; _i++) {
+                args_1[_i - 2] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, parcialUpdateWorkspaceRequestDto_1], args_1, true), void 0, function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
                     // verify required parameter 'workspaceId' is not null or undefined
                     (0, common_1.assertParamExists)('workspacesControllerParcialUpdate', 'workspaceId', workspaceId);
@@ -4710,9 +4915,9 @@ var WorkspacesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         workspacesControllerCreate: function (createWorkspaceRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspacesControllerCreate(createWorkspaceRequestDto, options)];
@@ -4731,9 +4936,9 @@ var WorkspacesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         workspacesControllerFetchUserRelatedWorkspaces: function (options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspacesControllerFetchUserRelatedWorkspaces(options)];
@@ -4753,9 +4958,9 @@ var WorkspacesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         workspacesControllerGet: function (workspaceId, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspacesControllerGet(workspaceId, options)];
@@ -4776,9 +4981,9 @@ var WorkspacesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         workspacesControllerParcialUpdate: function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options)];

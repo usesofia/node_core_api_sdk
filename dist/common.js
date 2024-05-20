@@ -59,15 +59,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createRequestFunction = exports.toPathString = exports.serializeDataIfNeeded = exports.setSearchParams = exports.setOAuthToObject = exports.setBearerAuthToObject = exports.setBasicAuthToObject = exports.setApiKeyToObject = exports.assertParamExists = exports.DUMMY_BASE_URL = void 0;
 var base_1 = require("./base");
@@ -234,53 +225,10 @@ var serializeDataIfNeeded = function (value, requestOptions, configuration) {
         ? configuration.isJsonMime(requestOptions.headers['Content-Type'])
         : nonString;
     return needsSerialization
-        ? JSON.stringify(value !== undefined ? convertMapsAndSetsToPlain(value) : {})
+        ? JSON.stringify(value !== undefined ? value : {})
         : (value || "");
 };
 exports.serializeDataIfNeeded = serializeDataIfNeeded;
-function convertMapsAndSetsToPlain(value) {
-    if (typeof Set === "undefined")
-        return value;
-    if (typeof Map === "undefined")
-        return value;
-    if (typeof value !== "object" || !value) {
-        return value;
-    }
-    if (value instanceof Set) {
-        return Array.from(value).map(function (item) { return convertMapsAndSetsToPlain(item); });
-    }
-    if (value instanceof Map) {
-        var entries_1 = [];
-        value.forEach(function (value, key) {
-            entries_1.push([key, convertMapsAndSetsToPlain(value)]);
-        });
-        return objectFromEntries(entries_1);
-    }
-    if (Array.isArray(value)) {
-        return value.map(function (it) { return convertMapsAndSetsToPlain(it); });
-    }
-    return objectFromEntries(objectEntries(value)
-        .map(function (_a) {
-        var k = _a[0], v = _a[1];
-        return [k, convertMapsAndSetsToPlain(v)];
-    }));
-}
-/**
- * Ponyfill for Object.entries
- */
-function objectEntries(object) {
-    return Object.keys(object).map(function (key) { return [key, object[key]]; });
-}
-/**
- * Ponyfill for Object.fromEntries
- */
-function objectFromEntries(entries) {
-    return __spreadArray([], entries, true).reduce(function (object, _a) {
-        var key = _a[0], val = _a[1];
-        object[key] = val;
-        return object;
-    }, {});
-}
 /**
  *
  * @export
