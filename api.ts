@@ -620,6 +620,12 @@ export interface BankTransactionEntity {
      * @type {string}
      * @memberof BankTransactionEntity
      */
+    'legalNature': BankTransactionEntityLegalNatureEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntity
+     */
     'providerCategoryId'?: string;
     /**
      * 
@@ -725,6 +731,12 @@ export const BankTransactionEntityStatusEnum = {
 } as const;
 
 export type BankTransactionEntityStatusEnum = typeof BankTransactionEntityStatusEnum[keyof typeof BankTransactionEntityStatusEnum];
+export const BankTransactionEntityLegalNatureEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS'
+} as const;
+
+export type BankTransactionEntityLegalNatureEnum = typeof BankTransactionEntityLegalNatureEnum[keyof typeof BankTransactionEntityLegalNatureEnum];
 
 /**
  * 
@@ -1480,6 +1492,12 @@ export interface CreateOrUpdateBankTransactionsInBulkItemDto {
      * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
      */
     'status': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
+     */
+    'legalNature': string;
     /**
      * 
      * @type {string}
@@ -2595,6 +2613,12 @@ export interface UpdateBankTransactionRequestDto {
      * @memberof UpdateBankTransactionRequestDto
      */
     'tagIds'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateBankTransactionRequestDto
+     */
+    'legalNature': string;
 }
 /**
  * 
