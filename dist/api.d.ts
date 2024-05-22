@@ -1499,7 +1499,7 @@ export interface CreateOrUpdateBankTransactionsInBulkItemDto {
      * @type {string}
      * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
      */
-    'categoryId'?: string;
+    'categoryId': string;
     /**
      *
      * @type {PaymentDataDto}
