@@ -3406,7 +3406,8 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
          * @param {string} [minPostedDate]
@@ -3416,12 +3417,12 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
+        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
             var args_1 = [];
-            for (var _i = 9; _i < arguments.length; _i++) {
-                args_1[_i - 9] = arguments[_i];
+            for (var _i = 10; _i < arguments.length; _i++) {
+                args_1[_i - 10] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -3439,8 +3440,11 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                     if (accountIds !== undefined) {
                         localVarQueryParameter['accountIds'] = accountIds;
                     }
-                    if (costCenterIds !== undefined) {
-                        localVarQueryParameter['costCenterIds'] = costCenterIds;
+                    if (tagIds !== undefined) {
+                        localVarQueryParameter['tagIds'] = tagIds;
+                    }
+                    if (legalNatures !== undefined) {
+                        localVarQueryParameter['legalNatures'] = legalNatures;
                     }
                     if (considerIgnored !== undefined) {
                         localVarQueryParameter['considerIgnored'] = considerIgnored;
@@ -3474,7 +3478,8 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
          * @param {string} [minPostedDate]
@@ -3484,12 +3489,12 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
+        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
             var args_1 = [];
-            for (var _i = 9; _i < arguments.length; _i++) {
-                args_1[_i - 9] = arguments[_i];
+            for (var _i = 10; _i < arguments.length; _i++) {
+                args_1[_i - 10] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -3507,8 +3512,11 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                     if (accountIds !== undefined) {
                         localVarQueryParameter['accountIds'] = accountIds;
                     }
-                    if (costCenterIds !== undefined) {
-                        localVarQueryParameter['costCenterIds'] = costCenterIds;
+                    if (tagIds !== undefined) {
+                        localVarQueryParameter['tagIds'] = tagIds;
+                    }
+                    if (legalNatures !== undefined) {
+                        localVarQueryParameter['legalNatures'] = legalNatures;
                     }
                     if (considerIgnored !== undefined) {
                         localVarQueryParameter['considerIgnored'] = considerIgnored;
@@ -3543,18 +3551,19 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {string} workspaceId
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInvoiceRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCardsCashFlowReport: function (workspaceId_1, accountIds_1, categoryIds_1, costCenterIds_1, considerIgnored_1, ignoreInvoiceRelated_1) {
+        reportsControllerGetCardsCashFlowReport: function (workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInvoiceRelated_1) {
             var args_1 = [];
-            for (var _i = 6; _i < arguments.length; _i++) {
-                args_1[_i - 6] = arguments[_i];
+            for (var _i = 7; _i < arguments.length; _i++) {
+                args_1[_i - 7] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, categoryIds_1, costCenterIds_1, considerIgnored_1, ignoreInvoiceRelated_1], args_1, true), void 0, function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInvoiceRelated_1], args_1, true), void 0, function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInvoiceRelated, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -3575,8 +3584,11 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                     if (categoryIds !== undefined) {
                         localVarQueryParameter['categoryIds'] = categoryIds;
                     }
-                    if (costCenterIds !== undefined) {
-                        localVarQueryParameter['costCenterIds'] = costCenterIds;
+                    if (tagIds !== undefined) {
+                        localVarQueryParameter['tagIds'] = tagIds;
+                    }
+                    if (legalNatures !== undefined) {
+                        localVarQueryParameter['legalNatures'] = legalNatures;
                     }
                     if (considerIgnored !== undefined) {
                         localVarQueryParameter['considerIgnored'] = considerIgnored;
@@ -3598,7 +3610,8 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
@@ -3608,12 +3621,12 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, ignoreInvoiceRelated_1) {
+        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, ignoreInvoiceRelated_1) {
             var args_1 = [];
-            for (var _i = 9; _i < arguments.length; _i++) {
-                args_1[_i - 9] = arguments[_i];
+            for (var _i = 10; _i < arguments.length; _i++) {
+                args_1[_i - 10] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, ignoreInvoiceRelated_1], args_1, true), void 0, function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, ignoreInvoiceRelated_1], args_1, true), void 0, function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -3631,8 +3644,11 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                     if (accountIds !== undefined) {
                         localVarQueryParameter['accountIds'] = accountIds;
                     }
-                    if (costCenterIds !== undefined) {
-                        localVarQueryParameter['costCenterIds'] = costCenterIds;
+                    if (tagIds !== undefined) {
+                        localVarQueryParameter['tagIds'] = tagIds;
+                    }
+                    if (legalNatures !== undefined) {
+                        localVarQueryParameter['legalNatures'] = legalNatures;
                     }
                     if (considerIgnored !== undefined) {
                         localVarQueryParameter['considerIgnored'] = considerIgnored;
@@ -3667,18 +3683,19 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {string} workspaceId
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: function (workspaceId_1, accountIds_1, categoryIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1) {
+        reportsControllerGetCashFlowReport: function (workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1) {
             var args_1 = [];
-            for (var _i = 6; _i < arguments.length; _i++) {
-                args_1[_i - 6] = arguments[_i];
+            for (var _i = 7; _i < arguments.length; _i++) {
+                args_1[_i - 7] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, categoryIds_1, costCenterIds_1, considerIgnored_1, ignoreInternalTransfers_1], args_1, true), void 0, function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1], args_1, true), void 0, function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -3699,8 +3716,11 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                     if (categoryIds !== undefined) {
                         localVarQueryParameter['categoryIds'] = categoryIds;
                     }
-                    if (costCenterIds !== undefined) {
-                        localVarQueryParameter['costCenterIds'] = costCenterIds;
+                    if (tagIds !== undefined) {
+                        localVarQueryParameter['tagIds'] = tagIds;
+                    }
+                    if (legalNatures !== undefined) {
+                        localVarQueryParameter['legalNatures'] = legalNatures;
                     }
                     if (considerIgnored !== undefined) {
                         localVarQueryParameter['considerIgnored'] = considerIgnored;
@@ -3722,7 +3742,8 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
@@ -3731,12 +3752,12 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetFinancialStatementReport: function (workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
+        reportsControllerGetFinancialStatementReport: function (workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
             var args_1 = [];
-            for (var _i = 8; _i < arguments.length; _i++) {
-                args_1[_i - 8] = arguments[_i];
+            for (var _i = 9; _i < arguments.length; _i++) {
+                args_1[_i - 9] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, costCenterIds_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -3754,8 +3775,11 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                     if (accountIds !== undefined) {
                         localVarQueryParameter['accountIds'] = accountIds;
                     }
-                    if (costCenterIds !== undefined) {
-                        localVarQueryParameter['costCenterIds'] = costCenterIds;
+                    if (tagIds !== undefined) {
+                        localVarQueryParameter['tagIds'] = tagIds;
+                    }
+                    if (legalNatures !== undefined) {
+                        localVarQueryParameter['legalNatures'] = legalNatures;
                     }
                     if (considerIgnored !== undefined) {
                         localVarQueryParameter['considerIgnored'] = considerIgnored;
@@ -3796,7 +3820,8 @@ var ReportsApiFp = function (configuration) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
          * @param {string} [minPostedDate]
@@ -3806,13 +3831,13 @@ var ReportsApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -3826,7 +3851,8 @@ var ReportsApiFp = function (configuration) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
          * @param {string} [minPostedDate]
@@ -3836,13 +3862,13 @@ var ReportsApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -3857,19 +3883,20 @@ var ReportsApiFp = function (configuration) {
          * @param {string} workspaceId
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInvoiceRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCardsCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options) {
+        reportsControllerGetCardsCashFlowReport: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInvoiceRelated, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCardsCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCardsCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInvoiceRelated, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -3883,7 +3910,8 @@ var ReportsApiFp = function (configuration) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
@@ -3893,13 +3921,13 @@ var ReportsApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
+        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCardsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCardsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -3914,19 +3942,20 @@ var ReportsApiFp = function (configuration) {
          * @param {string} workspaceId
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options) {
+        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -3940,7 +3969,8 @@ var ReportsApiFp = function (configuration) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
@@ -3949,13 +3979,13 @@ var ReportsApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetFinancialStatementReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+        reportsControllerGetFinancialStatementReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetFinancialStatementReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetFinancialStatementReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -3979,7 +4009,8 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
          * @param {string} [minPostedDate]
@@ -3989,14 +4020,15 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            return localVarFp.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(axios, basePath); });
+        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+            return localVarFp.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
          * @param {string} [minPostedDate]
@@ -4006,28 +4038,30 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            return localVarFp.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(axios, basePath); });
+        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+            return localVarFp.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInvoiceRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCardsCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options) {
-            return localVarFp.reportsControllerGetCardsCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options).then(function (request) { return request(axios, basePath); });
+        reportsControllerGetCardsCashFlowReport: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInvoiceRelated, options) {
+            return localVarFp.reportsControllerGetCardsCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInvoiceRelated, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
@@ -4037,28 +4071,30 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
-            return localVarFp.reportsControllerGetCardsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options).then(function (request) { return request(axios, basePath); });
+        reportsControllerGetCardsOutputsByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
+            return localVarFp.reportsControllerGetCardsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
          * @param {string} [categoryIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options) {
-            return localVarFp.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options).then(function (request) { return request(axios, basePath); });
+        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options) {
+            return localVarFp.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
          * @param {string} workspaceId
          * @param {string} [accountIds]
-         * @param {string} [costCenterIds]
+         * @param {string} [tagIds]
+         * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
@@ -4067,8 +4103,8 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetFinancialStatementReport: function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            return localVarFp.reportsControllerGetFinancialStatementReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(axios, basePath); });
+        reportsControllerGetFinancialStatementReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+            return localVarFp.reportsControllerGetFinancialStatementReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(axios, basePath); });
         },
     };
 };
@@ -4088,7 +4124,8 @@ var ReportsApi = /** @class */ (function (_super) {
      *
      * @param {string} workspaceId
      * @param {string} [accountIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
      * @param {boolean} [considerIgnored]
      * @param {boolean} [ignoreInternalTransfers]
      * @param {string} [minPostedDate]
@@ -4099,15 +4136,16 @@ var ReportsApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    ReportsApi.prototype.reportsControllerGetAccountsEntriesByCategoryReport = function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+    ReportsApi.prototype.reportsControllerGetAccountsEntriesByCategoryReport = function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
         var _this = this;
-        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
      * @param {string} workspaceId
      * @param {string} [accountIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
      * @param {boolean} [considerIgnored]
      * @param {boolean} [ignoreInternalTransfers]
      * @param {string} [minPostedDate]
@@ -4118,31 +4156,33 @@ var ReportsApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    ReportsApi.prototype.reportsControllerGetAccountsOutputsByCategoryReport = function (workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+    ReportsApi.prototype.reportsControllerGetAccountsOutputsByCategoryReport = function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
         var _this = this;
-        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
      * @param {string} workspaceId
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
      * @param {boolean} [considerIgnored]
      * @param {boolean} [ignoreInvoiceRelated]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    ReportsApi.prototype.reportsControllerGetCardsCashFlowReport = function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options) {
+    ReportsApi.prototype.reportsControllerGetCardsCashFlowReport = function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInvoiceRelated, options) {
         var _this = this;
-        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCardsCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInvoiceRelated, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCardsCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInvoiceRelated, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
      * @param {string} workspaceId
      * @param {string} [accountIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
      * @param {boolean} [considerIgnored]
      * @param {string} [minPostedDate]
      * @param {string} [maxPostedDate]
@@ -4153,31 +4193,33 @@ var ReportsApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    ReportsApi.prototype.reportsControllerGetCardsOutputsByCategoryReport = function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
+    ReportsApi.prototype.reportsControllerGetCardsOutputsByCategoryReport = function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options) {
         var _this = this;
-        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCardsOutputsByCategoryReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCardsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, ignoreInvoiceRelated, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
      * @param {string} workspaceId
      * @param {string} [accountIds]
      * @param {string} [categoryIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
      * @param {boolean} [considerIgnored]
      * @param {boolean} [ignoreInternalTransfers]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    ReportsApi.prototype.reportsControllerGetCashFlowReport = function (workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options) {
+    ReportsApi.prototype.reportsControllerGetCashFlowReport = function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options) {
         var _this = this;
-        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, costCenterIds, considerIgnored, ignoreInternalTransfers, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
      * @param {string} workspaceId
      * @param {string} [accountIds]
-     * @param {string} [costCenterIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
      * @param {boolean} [considerIgnored]
      * @param {string} [minPostedDate]
      * @param {string} [maxPostedDate]
@@ -4187,9 +4229,9 @@ var ReportsApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    ReportsApi.prototype.reportsControllerGetFinancialStatementReport = function (workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+    ReportsApi.prototype.reportsControllerGetFinancialStatementReport = function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
         var _this = this;
-        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetFinancialStatementReport(workspaceId, accountIds, costCenterIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetFinancialStatementReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     return ReportsApi;
 }(base_1.BaseAPI));
