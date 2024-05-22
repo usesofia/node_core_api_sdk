@@ -4546,6 +4546,7 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
          * @param {string} [accountIds] 
          * @param {string} [categoryIds] 
          * @param {string} [tagIds] 
+         * @param {string} [legalNatures] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -4554,7 +4555,7 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions: async (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bankTransactionsControllerGetBankTransactions: async (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('bankTransactionsControllerGetBankTransactions', 'workspaceId', workspaceId)
             const localVarPath = `/workspaces/{workspaceId}/bank/transactions`
@@ -4588,6 +4589,10 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
 
             if (tagIds !== undefined) {
                 localVarQueryParameter['tagIds'] = tagIds;
+            }
+
+            if (legalNatures !== undefined) {
+                localVarQueryParameter['legalNatures'] = legalNatures;
             }
 
             if (minPostedDate !== undefined) {
@@ -4847,6 +4852,7 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
          * @param {string} [accountIds] 
          * @param {string} [categoryIds] 
          * @param {string} [tagIds] 
+         * @param {string} [legalNatures] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -4855,8 +4861,8 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options);
+        async bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4954,6 +4960,7 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
          * @param {string} [accountIds] 
          * @param {string} [categoryIds] 
          * @param {string} [tagIds] 
+         * @param {string} [legalNatures] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -4962,8 +4969,8 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
-            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then((request) => request(axios, basePath));
+        bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
+            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5045,6 +5052,7 @@ export class BankTransactionsApi extends BaseAPI {
      * @param {string} [accountIds] 
      * @param {string} [categoryIds] 
      * @param {string} [tagIds] 
+     * @param {string} [legalNatures] 
      * @param {string} [minPostedDate] 
      * @param {string} [maxPostedDate] 
      * @param {string} [minCompetencyDate] 
@@ -5054,8 +5062,8 @@ export class BankTransactionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    public bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then((request) => request(this.axios, this.basePath));
+    public bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
