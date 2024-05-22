@@ -1660,6 +1660,18 @@ export interface CreateWorkspaceRequestDto {
      * @memberof CreateWorkspaceRequestDto
      */
     'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateWorkspaceRequestDto
+     */
+    'businessSegment'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateWorkspaceRequestDto
+     */
+    'otherDescription'?: string;
 }
 /**
  * 
@@ -2747,7 +2759,13 @@ export interface WorkspaceEntity {
      * @type {string}
      * @memberof WorkspaceEntity
      */
-    'selectedTreeId': string;
+    'selectedPersonalCategoryTreeId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkspaceEntity
+     */
+    'selectedBusinessCategoryTreeId'?: string;
 }
 /**
  * 
@@ -4184,10 +4202,11 @@ export const BankTransactionCategoriesApiAxiosParamCreator = function (configura
          * @param {string} workspaceId 
          * @param {boolean} [onlyLeafs] 
          * @param {string} [transactionNatures] 
+         * @param {string} [legalNatures] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCategoriesControllerGetBankTransactionCategories: async (workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bankTransactionCategoriesControllerGetBankTransactionCategories: async (workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('bankTransactionCategoriesControllerGetBankTransactionCategories', 'workspaceId', workspaceId)
             const localVarPath = `/workspaces/{workspaceId}/bank/transactions/categories`
@@ -4209,6 +4228,10 @@ export const BankTransactionCategoriesApiAxiosParamCreator = function (configura
 
             if (transactionNatures !== undefined) {
                 localVarQueryParameter['transactionNatures'] = transactionNatures;
+            }
+
+            if (legalNatures !== undefined) {
+                localVarQueryParameter['legalNatures'] = legalNatures;
             }
 
 
@@ -4237,11 +4260,12 @@ export const BankTransactionCategoriesApiFp = function(configuration?: Configura
          * @param {string} workspaceId 
          * @param {boolean} [onlyLeafs] 
          * @param {string} [transactionNatures] 
+         * @param {string} [legalNatures] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCategoryEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, transactionNatures, options);
+        async bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCategoryEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, transactionNatures, legalNatures, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionCategoriesApi.bankTransactionCategoriesControllerGetBankTransactionCategories']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4261,11 +4285,12 @@ export const BankTransactionCategoriesApiFactory = function (configuration?: Con
          * @param {string} workspaceId 
          * @param {boolean} [onlyLeafs] 
          * @param {string} [transactionNatures] 
+         * @param {string} [legalNatures] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, options?: any): AxiosPromise<Array<BankTransactionCategoryEntity>> {
-            return localVarFp.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, transactionNatures, options).then((request) => request(axios, basePath));
+        bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: any): AxiosPromise<Array<BankTransactionCategoryEntity>> {
+            return localVarFp.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, transactionNatures, legalNatures, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4282,12 +4307,13 @@ export class BankTransactionCategoriesApi extends BaseAPI {
      * @param {string} workspaceId 
      * @param {boolean} [onlyLeafs] 
      * @param {string} [transactionNatures] 
+     * @param {string} [legalNatures] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionCategoriesApi
      */
-    public bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, options?: RawAxiosRequestConfig) {
-        return BankTransactionCategoriesApiFp(this.configuration).bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, transactionNatures, options).then((request) => request(this.axios, this.basePath));
+    public bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionCategoriesApiFp(this.configuration).bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, transactionNatures, legalNatures, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

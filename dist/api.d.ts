@@ -1644,6 +1644,18 @@ export interface CreateWorkspaceRequestDto {
      * @memberof CreateWorkspaceRequestDto
      */
     'name': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateWorkspaceRequestDto
+     */
+    'businessSegment'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateWorkspaceRequestDto
+     */
+    'otherDescription'?: string;
 }
 /**
  *
@@ -2728,7 +2740,13 @@ export interface WorkspaceEntity {
      * @type {string}
      * @memberof WorkspaceEntity
      */
-    'selectedTreeId': string;
+    'selectedPersonalCategoryTreeId'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof WorkspaceEntity
+     */
+    'selectedBusinessCategoryTreeId'?: string;
 }
 /**
  *
@@ -3453,10 +3471,11 @@ export declare const BankTransactionCategoriesApiAxiosParamCreator: (configurati
      * @param {string} workspaceId
      * @param {boolean} [onlyLeafs]
      * @param {string} [transactionNatures]
+     * @param {string} [legalNatures]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories: (workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories: (workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * BankTransactionCategoriesApi - functional programming interface
@@ -3468,10 +3487,11 @@ export declare const BankTransactionCategoriesApiFp: (configuration?: Configurat
      * @param {string} workspaceId
      * @param {boolean} [onlyLeafs]
      * @param {string} [transactionNatures]
+     * @param {string} [legalNatures]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCategoryEntity>>>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCategoryEntity>>>;
 };
 /**
  * BankTransactionCategoriesApi - factory interface
@@ -3483,10 +3503,11 @@ export declare const BankTransactionCategoriesApiFactory: (configuration?: Confi
      * @param {string} workspaceId
      * @param {boolean} [onlyLeafs]
      * @param {string} [transactionNatures]
+     * @param {string} [legalNatures]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, options?: any): AxiosPromise<Array<BankTransactionCategoryEntity>>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: any): AxiosPromise<Array<BankTransactionCategoryEntity>>;
 };
 /**
  * BankTransactionCategoriesApi - object-oriented interface
@@ -3500,11 +3521,12 @@ export declare class BankTransactionCategoriesApi extends BaseAPI {
      * @param {string} workspaceId
      * @param {boolean} [onlyLeafs]
      * @param {string} [transactionNatures]
+     * @param {string} [legalNatures]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionCategoriesApi
      */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCategoryEntity[], any>>;
+    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCategoryEntity[], any>>;
 }
 /**
  * BankTransactionTagsApi - axios parameter creator
