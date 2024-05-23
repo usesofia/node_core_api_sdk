@@ -3669,6 +3669,23 @@ export declare const BankTransactionsApiAxiosParamCreator: (configuration?: Conf
     /**
      *
      * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {boolean} [showIgnored]
+     * @param {boolean} [ignoreAutomaticApplicationRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetBankTransactionsTotals: (workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -3742,6 +3759,23 @@ export declare const BankTransactionsApiFp: (configuration?: Configuration) => {
     /**
      *
      * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {boolean} [showIgnored]
+     * @param {boolean} [ignoreAutomaticApplicationRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -3812,6 +3846,23 @@ export declare const BankTransactionsApiFactory: (configuration?: Configuration,
      * @throws {RequiredError}
      */
     bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {boolean} [showIgnored]
+     * @param {boolean} [ignoreAutomaticApplicationRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity>;
     /**
      *
      * @param {string} workspaceId
@@ -3891,6 +3942,24 @@ export declare class BankTransactionsApi extends BaseAPI {
      * @memberof BankTransactionsApi
      */
     bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {boolean} [showIgnored]
+     * @param {boolean} [ignoreAutomaticApplicationRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
     /**
      *
      * @param {string} workspaceId
