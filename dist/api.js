@@ -3417,6 +3417,7 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
+         * @param {boolean} [ignoreAutomaticApplicationRelated]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -3424,12 +3425,12 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
+        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, ignoreAutomaticApplicationRelated_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
             var args_1 = [];
-            for (var _i = 10; _i < arguments.length; _i++) {
-                args_1[_i - 10] = arguments[_i];
+            for (var _i = 11; _i < arguments.length; _i++) {
+                args_1[_i - 11] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, ignoreAutomaticApplicationRelated_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -3458,6 +3459,9 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                     }
                     if (ignoreInternalTransfers !== undefined) {
                         localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
+                    }
+                    if (ignoreAutomaticApplicationRelated !== undefined) {
+                        localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
                     }
                     if (minPostedDate !== undefined) {
                         localVarQueryParameter['minPostedDate'] = minPostedDate;
@@ -3489,6 +3493,7 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
+         * @param {boolean} [ignoreAutomaticApplicationRelated]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -3496,12 +3501,12 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
+        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, ignoreAutomaticApplicationRelated_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1) {
             var args_1 = [];
-            for (var _i = 10; _i < arguments.length; _i++) {
-                args_1[_i - 10] = arguments[_i];
+            for (var _i = 11; _i < arguments.length; _i++) {
+                args_1[_i - 11] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, ignoreAutomaticApplicationRelated_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1], args_1, true), void 0, function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -3530,6 +3535,9 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                     }
                     if (ignoreInternalTransfers !== undefined) {
                         localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
+                    }
+                    if (ignoreAutomaticApplicationRelated !== undefined) {
+                        localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
                     }
                     if (minPostedDate !== undefined) {
                         localVarQueryParameter['minPostedDate'] = minPostedDate;
@@ -3694,15 +3702,16 @@ var ReportsApiAxiosParamCreator = function (configuration) {
          * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
+         * @param {boolean} [ignoreAutomaticApplicationRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: function (workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1) {
+        reportsControllerGetCashFlowReport: function (workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, ignoreAutomaticApplicationRelated_1) {
             var args_1 = [];
-            for (var _i = 7; _i < arguments.length; _i++) {
-                args_1[_i - 7] = arguments[_i];
+            for (var _i = 8; _i < arguments.length; _i++) {
+                args_1[_i - 8] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1], args_1, true), void 0, function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, considerIgnored_1, ignoreInternalTransfers_1, ignoreAutomaticApplicationRelated_1], args_1, true), void 0, function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -3734,6 +3743,9 @@ var ReportsApiAxiosParamCreator = function (configuration) {
                     }
                     if (ignoreInternalTransfers !== undefined) {
                         localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
+                    }
+                    if (ignoreAutomaticApplicationRelated !== undefined) {
+                        localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
                     }
                     (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
                     headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -3831,6 +3843,7 @@ var ReportsApiFp = function (configuration) {
          * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
+         * @param {boolean} [ignoreAutomaticApplicationRelated]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -3838,13 +3851,13 @@ var ReportsApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -3862,6 +3875,7 @@ var ReportsApiFp = function (configuration) {
          * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
+         * @param {boolean} [ignoreAutomaticApplicationRelated]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -3869,13 +3883,13 @@ var ReportsApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -3953,16 +3967,17 @@ var ReportsApiFp = function (configuration) {
          * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
+         * @param {boolean} [ignoreAutomaticApplicationRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options) {
+        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -4020,6 +4035,7 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
+         * @param {boolean} [ignoreAutomaticApplicationRelated]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -4027,8 +4043,8 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            return localVarFp.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(axios, basePath); });
+        reportsControllerGetAccountsEntriesByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+            return localVarFp.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
@@ -4038,6 +4054,7 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
+         * @param {boolean} [ignoreAutomaticApplicationRelated]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -4045,8 +4062,8 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
-            return localVarFp.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(axios, basePath); });
+        reportsControllerGetAccountsOutputsByCategoryReport: function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+            return localVarFp.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
@@ -4090,11 +4107,12 @@ var ReportsApiFactory = function (configuration, basePath, axios) {
          * @param {string} [legalNatures]
          * @param {boolean} [considerIgnored]
          * @param {boolean} [ignoreInternalTransfers]
+         * @param {boolean} [ignoreAutomaticApplicationRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options) {
-            return localVarFp.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options).then(function (request) { return request(axios, basePath); });
+        reportsControllerGetCashFlowReport: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, options) {
+            return localVarFp.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
@@ -4135,6 +4153,7 @@ var ReportsApi = /** @class */ (function (_super) {
      * @param {string} [legalNatures]
      * @param {boolean} [considerIgnored]
      * @param {boolean} [ignoreInternalTransfers]
+     * @param {boolean} [ignoreAutomaticApplicationRelated]
      * @param {string} [minPostedDate]
      * @param {string} [maxPostedDate]
      * @param {string} [minCompetencyDate]
@@ -4143,9 +4162,9 @@ var ReportsApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    ReportsApi.prototype.reportsControllerGetAccountsEntriesByCategoryReport = function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+    ReportsApi.prototype.reportsControllerGetAccountsEntriesByCategoryReport = function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
         var _this = this;
-        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
@@ -4155,6 +4174,7 @@ var ReportsApi = /** @class */ (function (_super) {
      * @param {string} [legalNatures]
      * @param {boolean} [considerIgnored]
      * @param {boolean} [ignoreInternalTransfers]
+     * @param {boolean} [ignoreAutomaticApplicationRelated]
      * @param {string} [minPostedDate]
      * @param {string} [maxPostedDate]
      * @param {string} [minCompetencyDate]
@@ -4163,9 +4183,9 @@ var ReportsApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    ReportsApi.prototype.reportsControllerGetAccountsOutputsByCategoryReport = function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
+    ReportsApi.prototype.reportsControllerGetAccountsOutputsByCategoryReport = function (workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options) {
         var _this = this;
-        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
@@ -4213,13 +4233,14 @@ var ReportsApi = /** @class */ (function (_super) {
      * @param {string} [legalNatures]
      * @param {boolean} [considerIgnored]
      * @param {boolean} [ignoreInternalTransfers]
+     * @param {boolean} [ignoreAutomaticApplicationRelated]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    ReportsApi.prototype.reportsControllerGetCashFlowReport = function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options) {
+    ReportsApi.prototype.reportsControllerGetCashFlowReport = function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, options) {
         var _this = this;
-        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.ReportsApiFp)(this.configuration).reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *

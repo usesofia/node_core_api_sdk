@@ -5725,6 +5725,7 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [legalNatures] 
          * @param {boolean} [considerIgnored] 
          * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreAutomaticApplicationRelated] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -5732,7 +5733,7 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsEntriesByCategoryReport: async (workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        reportsControllerGetAccountsEntriesByCategoryReport: async (workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('reportsControllerGetAccountsEntriesByCategoryReport', 'workspaceId', workspaceId)
             const localVarPath = `/workspaces/{workspaceId}/reports/accounts/entries-by-category`
@@ -5766,6 +5767,10 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
 
             if (ignoreInternalTransfers !== undefined) {
                 localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
+            }
+
+            if (ignoreAutomaticApplicationRelated !== undefined) {
+                localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
             }
 
             if (minPostedDate !== undefined) {
@@ -5803,6 +5808,7 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [legalNatures] 
          * @param {boolean} [considerIgnored] 
          * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreAutomaticApplicationRelated] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -5810,7 +5816,7 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsOutputsByCategoryReport: async (workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        reportsControllerGetAccountsOutputsByCategoryReport: async (workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('reportsControllerGetAccountsOutputsByCategoryReport', 'workspaceId', workspaceId)
             const localVarPath = `/workspaces/{workspaceId}/reports/accounts/outputs-by-category`
@@ -5844,6 +5850,10 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
 
             if (ignoreInternalTransfers !== undefined) {
                 localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
+            }
+
+            if (ignoreAutomaticApplicationRelated !== undefined) {
+                localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
             }
 
             if (minPostedDate !== undefined) {
@@ -6023,10 +6033,11 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [legalNatures] 
          * @param {boolean} [considerIgnored] 
          * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreAutomaticApplicationRelated] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport: async (workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        reportsControllerGetCashFlowReport: async (workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('reportsControllerGetCashFlowReport', 'workspaceId', workspaceId)
             const localVarPath = `/workspaces/{workspaceId}/reports/accounts/cash-flow`
@@ -6064,6 +6075,10 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
 
             if (ignoreInternalTransfers !== undefined) {
                 localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
+            }
+
+            if (ignoreAutomaticApplicationRelated !== undefined) {
+                localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
             }
 
 
@@ -6168,6 +6183,7 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {string} [legalNatures] 
          * @param {boolean} [considerIgnored] 
          * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreAutomaticApplicationRelated] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -6175,8 +6191,8 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowByCategoryReportEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options);
+        async reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowByCategoryReportEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReportsApi.reportsControllerGetAccountsEntriesByCategoryReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -6189,6 +6205,7 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {string} [legalNatures] 
          * @param {boolean} [considerIgnored] 
          * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreAutomaticApplicationRelated] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -6196,8 +6213,8 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowByCategoryReportEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options);
+        async reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowByCategoryReportEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReportsApi.reportsControllerGetAccountsOutputsByCategoryReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -6250,11 +6267,12 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {string} [legalNatures] 
          * @param {boolean} [considerIgnored] 
          * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreAutomaticApplicationRelated] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options);
+        async reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowReportEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReportsApi.reportsControllerGetCashFlowReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -6297,6 +6315,7 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [legalNatures] 
          * @param {boolean} [considerIgnored] 
          * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreAutomaticApplicationRelated] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -6304,8 +6323,8 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowByCategoryReportEntity> {
-            return localVarFp.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(axios, basePath));
+        reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowByCategoryReportEntity> {
+            return localVarFp.reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6315,6 +6334,7 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [legalNatures] 
          * @param {boolean} [considerIgnored] 
          * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreAutomaticApplicationRelated] 
          * @param {string} [minPostedDate] 
          * @param {string} [maxPostedDate] 
          * @param {string} [minCompetencyDate] 
@@ -6322,8 +6342,8 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowByCategoryReportEntity> {
-            return localVarFp.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(axios, basePath));
+        reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<CashFlowByCategoryReportEntity> {
+            return localVarFp.reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6367,11 +6387,12 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [legalNatures] 
          * @param {boolean} [considerIgnored] 
          * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreAutomaticApplicationRelated] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: any): AxiosPromise<CashFlowReportEntity> {
-            return localVarFp.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options).then((request) => request(axios, basePath));
+        reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, options?: any): AxiosPromise<CashFlowReportEntity> {
+            return localVarFp.reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6408,6 +6429,7 @@ export class ReportsApi extends BaseAPI {
      * @param {string} [legalNatures] 
      * @param {boolean} [considerIgnored] 
      * @param {boolean} [ignoreInternalTransfers] 
+     * @param {boolean} [ignoreAutomaticApplicationRelated] 
      * @param {string} [minPostedDate] 
      * @param {string} [maxPostedDate] 
      * @param {string} [minCompetencyDate] 
@@ -6416,8 +6438,8 @@ export class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    public reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) {
-        return ReportsApiFp(this.configuration).reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(this.axios, this.basePath));
+    public reportsControllerGetAccountsEntriesByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) {
+        return ReportsApiFp(this.configuration).reportsControllerGetAccountsEntriesByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6428,6 +6450,7 @@ export class ReportsApi extends BaseAPI {
      * @param {string} [legalNatures] 
      * @param {boolean} [considerIgnored] 
      * @param {boolean} [ignoreInternalTransfers] 
+     * @param {boolean} [ignoreAutomaticApplicationRelated] 
      * @param {string} [minPostedDate] 
      * @param {string} [maxPostedDate] 
      * @param {string} [minCompetencyDate] 
@@ -6436,8 +6459,8 @@ export class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    public reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) {
-        return ReportsApiFp(this.configuration).reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(this.axios, this.basePath));
+    public reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) {
+        return ReportsApiFp(this.configuration).reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6486,12 +6509,13 @@ export class ReportsApi extends BaseAPI {
      * @param {string} [legalNatures] 
      * @param {boolean} [considerIgnored] 
      * @param {boolean} [ignoreInternalTransfers] 
+     * @param {boolean} [ignoreAutomaticApplicationRelated] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    public reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, options?: RawAxiosRequestConfig) {
-        return ReportsApiFp(this.configuration).reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, options).then((request) => request(this.axios, this.basePath));
+    public reportsControllerGetCashFlowReport(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, options?: RawAxiosRequestConfig) {
+        return ReportsApiFp(this.configuration).reportsControllerGetCashFlowReport(workspaceId, accountIds, categoryIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
