@@ -1649,6 +1649,12 @@ export interface CreateWorkspaceRequestDto {
      * @type {string}
      * @memberof CreateWorkspaceRequestDto
      */
+    'type'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateWorkspaceRequestDto
+     */
     'businessSegment'?: string;
     /**
      *
