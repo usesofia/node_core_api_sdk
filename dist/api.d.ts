@@ -2617,7 +2617,7 @@ export interface UpdateBankTransactionRequestDto {
      * @type {string}
      * @memberof UpdateBankTransactionRequestDto
      */
-    'legalNature': string;
+    'legalNature'?: string;
 }
 /**
  *
