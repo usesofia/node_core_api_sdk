@@ -4716,10 +4716,12 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
          * @param {string} [maxCompetencyDate] 
          * @param {boolean} [showIgnored] 
          * @param {boolean} [ignoreAutomaticApplicationRelated] 
+         * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreInvoiceRelated] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions: async (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bankTransactionsControllerGetBankTransactions: async (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('bankTransactionsControllerGetBankTransactions', 'workspaceId', workspaceId)
             const localVarPath = `/workspaces/{workspaceId}/bank/transactions`
@@ -4785,6 +4787,14 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
 
             if (ignoreAutomaticApplicationRelated !== undefined) {
                 localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
+            }
+
+            if (ignoreInternalTransfers !== undefined) {
+                localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
+            }
+
+            if (ignoreInvoiceRelated !== undefined) {
+                localVarQueryParameter['ignoreInvoiceRelated'] = ignoreInvoiceRelated;
             }
 
 
@@ -4902,11 +4912,13 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
          * @param {string} [maxCompetencyDate] 
          * @param {boolean} [showIgnored] 
          * @param {boolean} [ignoreAutomaticApplicationRelated] 
+         * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreInvoiceRelated] 
          * @param {string} [types] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsTotals: async (workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, types?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bankTransactionsControllerGetBankTransactionsTotals: async (workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('bankTransactionsControllerGetBankTransactionsTotals', 'workspaceId', workspaceId)
             const localVarPath = `/workspaces/{workspaceId}/bank/transactions/totals`
@@ -4960,6 +4972,14 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
 
             if (ignoreAutomaticApplicationRelated !== undefined) {
                 localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
+            }
+
+            if (ignoreInternalTransfers !== undefined) {
+                localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
+            }
+
+            if (ignoreInvoiceRelated !== undefined) {
+                localVarQueryParameter['ignoreInvoiceRelated'] = ignoreInvoiceRelated;
             }
 
             if (types !== undefined) {
@@ -5120,11 +5140,13 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
          * @param {string} [maxCompetencyDate] 
          * @param {boolean} [showIgnored] 
          * @param {boolean} [ignoreAutomaticApplicationRelated] 
+         * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreInvoiceRelated] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options);
+        async bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5171,12 +5193,14 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
          * @param {string} [maxCompetencyDate] 
          * @param {boolean} [showIgnored] 
          * @param {boolean} [ignoreAutomaticApplicationRelated] 
+         * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreInvoiceRelated] 
          * @param {string} [types] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, types, options);
+        async bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, types, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionsTotals']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5253,11 +5277,13 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
          * @param {string} [maxCompetencyDate] 
          * @param {boolean} [showIgnored] 
          * @param {boolean} [ignoreAutomaticApplicationRelated] 
+         * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreInvoiceRelated] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
-            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options).then((request) => request(axios, basePath));
+        bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
+            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5295,12 +5321,14 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
          * @param {string} [maxCompetencyDate] 
          * @param {boolean} [showIgnored] 
          * @param {boolean} [ignoreAutomaticApplicationRelated] 
+         * @param {boolean} [ignoreInternalTransfers] 
+         * @param {boolean} [ignoreInvoiceRelated] 
          * @param {string} [types] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, types?: string, options?: any): AxiosPromise<BankTransactionsPageEntity> {
-            return localVarFp.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, types, options).then((request) => request(axios, basePath));
+        bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: any): AxiosPromise<BankTransactionsPageEntity> {
+            return localVarFp.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, types, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5367,12 +5395,14 @@ export class BankTransactionsApi extends BaseAPI {
      * @param {string} [maxCompetencyDate] 
      * @param {boolean} [showIgnored] 
      * @param {boolean} [ignoreAutomaticApplicationRelated] 
+     * @param {boolean} [ignoreInternalTransfers] 
+     * @param {boolean} [ignoreInvoiceRelated] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    public bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options).then((request) => request(this.axios, this.basePath));
+    public bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5415,13 +5445,15 @@ export class BankTransactionsApi extends BaseAPI {
      * @param {string} [maxCompetencyDate] 
      * @param {boolean} [showIgnored] 
      * @param {boolean} [ignoreAutomaticApplicationRelated] 
+     * @param {boolean} [ignoreInternalTransfers] 
+     * @param {boolean} [ignoreInvoiceRelated] 
      * @param {string} [types] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    public bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, types?: string, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, types, options).then((request) => request(this.axios, this.basePath));
+    public bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, types, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
