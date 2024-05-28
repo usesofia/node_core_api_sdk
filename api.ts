@@ -51,6 +51,19 @@ export interface AiChatFeatureSpecificationEntity {
 /**
  * 
  * @export
+ * @interface BalancePointResultEntity
+ */
+export interface BalancePointResultEntity {
+    /**
+     * 
+     * @type {number}
+     * @memberof BalancePointResultEntity
+     */
+    'amountInCents'?: number;
+}
+/**
+ * 
+ * @export
  * @interface BankAccountEntity
  */
 export interface BankAccountEntity {
@@ -738,6 +751,73 @@ export const BankTransactionEntityLegalNatureEnum = {
 
 export type BankTransactionEntityLegalNatureEnum = typeof BankTransactionEntityLegalNatureEnum[keyof typeof BankTransactionEntityLegalNatureEnum];
 
+/**
+ * 
+ * @export
+ * @interface BankTransactionIndicatorEntity
+ */
+export interface BankTransactionIndicatorEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'prettyId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'type': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'description': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'data': object;
+    /**
+     * 
+     * @type {DreLineOutcomeResultEntity}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'dreLineOutcomeResult'?: DreLineOutcomeResultEntity;
+    /**
+     * 
+     * @type {BalancePointResultEntity}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'balancePointResult'?: BalancePointResultEntity;
+    /**
+     * 
+     * @type {MeanResultEntity}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'meanResult'?: MeanResultEntity;
+    /**
+     * 
+     * @type {ProportionResultEntity}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'proportionResult'?: ProportionResultEntity;
+}
 /**
  * 
  * @export
@@ -1750,6 +1830,25 @@ export interface CreditCardMetadataDto {
 /**
  * 
  * @export
+ * @interface DreLineOutcomeResultEntity
+ */
+export interface DreLineOutcomeResultEntity {
+    /**
+     * 
+     * @type {number}
+     * @memberof DreLineOutcomeResultEntity
+     */
+    'amountInCents': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DreLineOutcomeResultEntity
+     */
+    'ratio'?: number;
+}
+/**
+ * 
+ * @export
  * @interface EmailInUseEntity
  */
 export interface EmailInUseEntity {
@@ -2021,6 +2120,50 @@ export interface FinancialTransactionsFeatureSpecificationEntity {
      * @memberof FinancialTransactionsFeatureSpecificationEntity
      */
     'subscriptionProductId': string;
+}
+/**
+ * 
+ * @export
+ * @interface MeanResultEntity
+ */
+export interface MeanResultEntity {
+    /**
+     * 
+     * @type {number}
+     * @memberof MeanResultEntity
+     */
+    'amountInCents': number;
+    /**
+     * 
+     * @type {Array<MeanResultSubcategoryItemEntity>}
+     * @memberof MeanResultEntity
+     */
+    'subcategories'?: Array<MeanResultSubcategoryItemEntity>;
+}
+/**
+ * 
+ * @export
+ * @interface MeanResultSubcategoryItemEntity
+ */
+export interface MeanResultSubcategoryItemEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof MeanResultSubcategoryItemEntity
+     */
+    'subcategoryId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MeanResultSubcategoryItemEntity
+     */
+    'subcategoryName': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof MeanResultSubcategoryItemEntity
+     */
+    'amountInCents': number;
 }
 /**
  * 
@@ -2445,6 +2588,19 @@ export interface ProfileEntity {
      * @memberof ProfileEntity
      */
     'updatedAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface ProportionResultEntity
+ */
+export interface ProportionResultEntity {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProportionResultEntity
+     */
+    'ratio'?: number;
 }
 /**
  * 
@@ -6038,6 +6194,74 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @param {string} workspaceId 
          * @param {string} [accountIds] 
+         * @param {string} [tagIds] 
+         * @param {boolean} [considerIgnored] 
+         * @param {string} [minPostedDate] 
+         * @param {string} [maxPostedDate] 
+         * @param {string} [minCompetencyDate] 
+         * @param {string} [maxCompetencyDate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetBusinessIndicators: async (workspaceId: string, accountIds?: string, tagIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('reportsControllerGetBusinessIndicators', 'workspaceId', workspaceId)
+            const localVarPath = `/workspaces/{workspaceId}/reports/indicators/business`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (accountIds !== undefined) {
+                localVarQueryParameter['accountIds'] = accountIds;
+            }
+
+            if (tagIds !== undefined) {
+                localVarQueryParameter['tagIds'] = tagIds;
+            }
+
+            if (considerIgnored !== undefined) {
+                localVarQueryParameter['considerIgnored'] = considerIgnored;
+            }
+
+            if (minPostedDate !== undefined) {
+                localVarQueryParameter['minPostedDate'] = minPostedDate;
+            }
+
+            if (maxPostedDate !== undefined) {
+                localVarQueryParameter['maxPostedDate'] = maxPostedDate;
+            }
+
+            if (minCompetencyDate !== undefined) {
+                localVarQueryParameter['minCompetencyDate'] = minCompetencyDate;
+            }
+
+            if (maxCompetencyDate !== undefined) {
+                localVarQueryParameter['maxCompetencyDate'] = maxCompetencyDate;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
          * @param {string} [categoryIds] 
          * @param {string} [tagIds] 
          * @param {string} [legalNatures] 
@@ -6374,6 +6598,25 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * 
          * @param {string} workspaceId 
          * @param {string} [accountIds] 
+         * @param {string} [tagIds] 
+         * @param {boolean} [considerIgnored] 
+         * @param {string} [minPostedDate] 
+         * @param {string} [maxPostedDate] 
+         * @param {string} [minCompetencyDate] 
+         * @param {string} [maxCompetencyDate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async reportsControllerGetBusinessIndicators(workspaceId: string, accountIds?: string, tagIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionIndicatorEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reportsControllerGetBusinessIndicators(workspaceId, accountIds, tagIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportsApi.reportsControllerGetBusinessIndicators']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
          * @param {string} [categoryIds] 
          * @param {string} [tagIds] 
          * @param {string} [legalNatures] 
@@ -6500,6 +6743,22 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * 
          * @param {string} workspaceId 
          * @param {string} [accountIds] 
+         * @param {string} [tagIds] 
+         * @param {boolean} [considerIgnored] 
+         * @param {string} [minPostedDate] 
+         * @param {string} [maxPostedDate] 
+         * @param {string} [minCompetencyDate] 
+         * @param {string} [maxCompetencyDate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportsControllerGetBusinessIndicators(workspaceId: string, accountIds?: string, tagIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<Array<BankTransactionIndicatorEntity>> {
+            return localVarFp.reportsControllerGetBusinessIndicators(workspaceId, accountIds, tagIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
          * @param {string} [categoryIds] 
          * @param {string} [tagIds] 
          * @param {string} [legalNatures] 
@@ -6612,6 +6871,24 @@ export class ReportsApi extends BaseAPI {
      */
     public reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) {
         return ReportsApiFp(this.configuration).reportsControllerGetAccountsOutputsByCategoryReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, ignoreInternalTransfers, ignoreAutomaticApplicationRelated, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {string} [accountIds] 
+     * @param {string} [tagIds] 
+     * @param {boolean} [considerIgnored] 
+     * @param {string} [minPostedDate] 
+     * @param {string} [maxPostedDate] 
+     * @param {string} [minCompetencyDate] 
+     * @param {string} [maxCompetencyDate] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    public reportsControllerGetBusinessIndicators(workspaceId: string, accountIds?: string, tagIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) {
+        return ReportsApiFp(this.configuration).reportsControllerGetBusinessIndicators(workspaceId, accountIds, tagIds, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -41,6 +41,19 @@ export interface AiChatFeatureSpecificationEntity {
 /**
  *
  * @export
+ * @interface BalancePointResultEntity
+ */
+export interface BalancePointResultEntity {
+    /**
+     *
+     * @type {number}
+     * @memberof BalancePointResultEntity
+     */
+    'amountInCents'?: number;
+}
+/**
+ *
+ * @export
  * @interface BankAccountEntity
  */
 export interface BankAccountEntity {
@@ -722,6 +735,73 @@ export declare const BankTransactionEntityLegalNatureEnum: {
     readonly Business: "BUSINESS";
 };
 export type BankTransactionEntityLegalNatureEnum = typeof BankTransactionEntityLegalNatureEnum[keyof typeof BankTransactionEntityLegalNatureEnum];
+/**
+ *
+ * @export
+ * @interface BankTransactionIndicatorEntity
+ */
+export interface BankTransactionIndicatorEntity {
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'prettyId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'type': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'name': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'description': string;
+    /**
+     *
+     * @type {object}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'data': object;
+    /**
+     *
+     * @type {DreLineOutcomeResultEntity}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'dreLineOutcomeResult'?: DreLineOutcomeResultEntity;
+    /**
+     *
+     * @type {BalancePointResultEntity}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'balancePointResult'?: BalancePointResultEntity;
+    /**
+     *
+     * @type {MeanResultEntity}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'meanResult'?: MeanResultEntity;
+    /**
+     *
+     * @type {ProportionResultEntity}
+     * @memberof BankTransactionIndicatorEntity
+     */
+    'proportionResult'?: ProportionResultEntity;
+}
 /**
  *
  * @export
@@ -1734,6 +1814,25 @@ export interface CreditCardMetadataDto {
 /**
  *
  * @export
+ * @interface DreLineOutcomeResultEntity
+ */
+export interface DreLineOutcomeResultEntity {
+    /**
+     *
+     * @type {number}
+     * @memberof DreLineOutcomeResultEntity
+     */
+    'amountInCents': number;
+    /**
+     *
+     * @type {number}
+     * @memberof DreLineOutcomeResultEntity
+     */
+    'ratio'?: number;
+}
+/**
+ *
+ * @export
  * @interface EmailInUseEntity
  */
 export interface EmailInUseEntity {
@@ -2005,6 +2104,50 @@ export interface FinancialTransactionsFeatureSpecificationEntity {
      * @memberof FinancialTransactionsFeatureSpecificationEntity
      */
     'subscriptionProductId': string;
+}
+/**
+ *
+ * @export
+ * @interface MeanResultEntity
+ */
+export interface MeanResultEntity {
+    /**
+     *
+     * @type {number}
+     * @memberof MeanResultEntity
+     */
+    'amountInCents': number;
+    /**
+     *
+     * @type {Array<MeanResultSubcategoryItemEntity>}
+     * @memberof MeanResultEntity
+     */
+    'subcategories'?: Array<MeanResultSubcategoryItemEntity>;
+}
+/**
+ *
+ * @export
+ * @interface MeanResultSubcategoryItemEntity
+ */
+export interface MeanResultSubcategoryItemEntity {
+    /**
+     *
+     * @type {string}
+     * @memberof MeanResultSubcategoryItemEntity
+     */
+    'subcategoryId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MeanResultSubcategoryItemEntity
+     */
+    'subcategoryName': string;
+    /**
+     *
+     * @type {number}
+     * @memberof MeanResultSubcategoryItemEntity
+     */
+    'amountInCents': number;
 }
 /**
  *
@@ -2426,6 +2569,19 @@ export interface ProfileEntity {
      * @memberof ProfileEntity
      */
     'updatedAt': string;
+}
+/**
+ *
+ * @export
+ * @interface ProportionResultEntity
+ */
+export interface ProportionResultEntity {
+    /**
+     *
+     * @type {number}
+     * @memberof ProportionResultEntity
+     */
+    'ratio'?: number;
 }
 /**
  *
@@ -4312,6 +4468,20 @@ export declare const ReportsApiAxiosParamCreator: (configuration?: Configuration
      *
      * @param {string} workspaceId
      * @param {string} [accountIds]
+     * @param {string} [tagIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetBusinessIndicators: (workspaceId: string, accountIds?: string, tagIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
      * @param {string} [categoryIds]
      * @param {string} [tagIds]
      * @param {string} [legalNatures]
@@ -4406,6 +4576,20 @@ export declare const ReportsApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CashFlowByCategoryReportEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [tagIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetBusinessIndicators(workspaceId: string, accountIds?: string, tagIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionIndicatorEntity>>>;
     /**
      *
      * @param {string} workspaceId
@@ -4508,6 +4692,20 @@ export declare const ReportsApiFactory: (configuration?: Configuration, basePath
      *
      * @param {string} workspaceId
      * @param {string} [accountIds]
+     * @param {string} [tagIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reportsControllerGetBusinessIndicators(workspaceId: string, accountIds?: string, tagIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: any): AxiosPromise<Array<BankTransactionIndicatorEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
      * @param {string} [categoryIds]
      * @param {string} [tagIds]
      * @param {string} [legalNatures]
@@ -4606,6 +4804,21 @@ export declare class ReportsApi extends BaseAPI {
      * @memberof ReportsApi
      */
     reportsControllerGetAccountsOutputsByCategoryReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, ignoreInternalTransfers?: boolean, ignoreAutomaticApplicationRelated?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CashFlowByCategoryReportEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [tagIds]
+     * @param {boolean} [considerIgnored]
+     * @param {string} [minPostedDate]
+     * @param {string} [maxPostedDate]
+     * @param {string} [minCompetencyDate]
+     * @param {string} [maxCompetencyDate]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    reportsControllerGetBusinessIndicators(workspaceId: string, accountIds?: string, tagIds?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionIndicatorEntity[], any>>;
     /**
      *
      * @param {string} workspaceId
