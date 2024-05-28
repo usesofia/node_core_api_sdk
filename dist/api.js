@@ -2062,6 +2062,7 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {string} [categoryIds]
          * @param {string} [tagIds]
          * @param {string} [legalNatures]
+         * @param {string} [types]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -2071,12 +2072,12 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions: function (workspaceId_1, pageIndex_1, pageSize_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, showIgnored_1, ignoreAutomaticApplicationRelated_1) {
+        bankTransactionsControllerGetBankTransactions: function (workspaceId_1, pageIndex_1, pageSize_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, types_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, showIgnored_1, ignoreAutomaticApplicationRelated_1) {
             var args_1 = [];
-            for (var _i = 13; _i < arguments.length; _i++) {
-                args_1[_i - 13] = arguments[_i];
+            for (var _i = 14; _i < arguments.length; _i++) {
+                args_1[_i - 14] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, pageIndex_1, pageSize_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, showIgnored_1, ignoreAutomaticApplicationRelated_1], args_1, true), void 0, function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, pageIndex_1, pageSize_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, types_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, showIgnored_1, ignoreAutomaticApplicationRelated_1], args_1, true), void 0, function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -2108,6 +2109,9 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
                     }
                     if (legalNatures !== undefined) {
                         localVarQueryParameter['legalNatures'] = legalNatures;
+                    }
+                    if (types !== undefined) {
+                        localVarQueryParameter['types'] = types;
                     }
                     if (minPostedDate !== undefined) {
                         localVarQueryParameter['minPostedDate'] = minPostedDate;
@@ -2242,15 +2246,16 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {string} [maxCompetencyDate]
          * @param {boolean} [showIgnored]
          * @param {boolean} [ignoreAutomaticApplicationRelated]
+         * @param {string} [types]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsTotals: function (workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, showIgnored_1, ignoreAutomaticApplicationRelated_1) {
+        bankTransactionsControllerGetBankTransactionsTotals: function (workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, showIgnored_1, ignoreAutomaticApplicationRelated_1, types_1) {
             var args_1 = [];
-            for (var _i = 11; _i < arguments.length; _i++) {
-                args_1[_i - 11] = arguments[_i];
+            for (var _i = 12; _i < arguments.length; _i++) {
+                args_1[_i - 12] = arguments[_i];
             }
-            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, showIgnored_1, ignoreAutomaticApplicationRelated_1], args_1, true), void 0, function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
+            return __awaiter(_this, __spreadArray([workspaceId_1, accountIds_1, categoryIds_1, tagIds_1, legalNatures_1, minPostedDate_1, maxPostedDate_1, minCompetencyDate_1, maxCompetencyDate_1, showIgnored_1, ignoreAutomaticApplicationRelated_1, types_1], args_1, true), void 0, function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, types, options) {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
                 if (options === void 0) { options = {}; }
                 return __generator(this, function (_a) {
@@ -2294,6 +2299,9 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
                     }
                     if (ignoreAutomaticApplicationRelated !== undefined) {
                         localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
+                    }
+                    if (types !== undefined) {
+                        localVarQueryParameter['types'] = types;
                     }
                     (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
                     headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -2459,6 +2467,7 @@ var BankTransactionsApiFp = function (configuration) {
          * @param {string} [categoryIds]
          * @param {string} [tagIds]
          * @param {string} [legalNatures]
+         * @param {string} [types]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -2468,13 +2477,13 @@ var BankTransactionsApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions: function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
+        bankTransactionsControllerGetBankTransactions: function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -2546,16 +2555,17 @@ var BankTransactionsApiFp = function (configuration) {
          * @param {string} [maxCompetencyDate]
          * @param {boolean} [showIgnored]
          * @param {boolean} [ignoreAutomaticApplicationRelated]
+         * @param {string} [types]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsTotals: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
+        bankTransactionsControllerGetBankTransactionsTotals: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, types, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options)];
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, types, options)];
                         case 1:
                             localVarAxiosArgs = _d.sent();
                             localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
@@ -2660,6 +2670,7 @@ var BankTransactionsApiFactory = function (configuration, basePath, axios) {
          * @param {string} [categoryIds]
          * @param {string} [tagIds]
          * @param {string} [legalNatures]
+         * @param {string} [types]
          * @param {string} [minPostedDate]
          * @param {string} [maxPostedDate]
          * @param {string} [minCompetencyDate]
@@ -2669,8 +2680,8 @@ var BankTransactionsApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactions: function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
-            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options).then(function (request) { return request(axios, basePath); });
+        bankTransactionsControllerGetBankTransactions: function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
+            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
@@ -2708,11 +2719,12 @@ var BankTransactionsApiFactory = function (configuration, basePath, axios) {
          * @param {string} [maxCompetencyDate]
          * @param {boolean} [showIgnored]
          * @param {boolean} [ignoreAutomaticApplicationRelated]
+         * @param {string} [types]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsTotals: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
-            return localVarFp.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options).then(function (request) { return request(axios, basePath); });
+        bankTransactionsControllerGetBankTransactionsTotals: function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, types, options) {
+            return localVarFp.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, types, options).then(function (request) { return request(axios, basePath); });
         },
         /**
          *
@@ -2776,6 +2788,7 @@ var BankTransactionsApi = /** @class */ (function (_super) {
      * @param {string} [categoryIds]
      * @param {string} [tagIds]
      * @param {string} [legalNatures]
+     * @param {string} [types]
      * @param {string} [minPostedDate]
      * @param {string} [maxPostedDate]
      * @param {string} [minCompetencyDate]
@@ -2786,9 +2799,9 @@ var BankTransactionsApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactions = function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
+    BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactions = function (workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
         var _this = this;
-        return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
@@ -2830,13 +2843,14 @@ var BankTransactionsApi = /** @class */ (function (_super) {
      * @param {string} [maxCompetencyDate]
      * @param {boolean} [showIgnored]
      * @param {boolean} [ignoreAutomaticApplicationRelated]
+     * @param {string} [types]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
      */
-    BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactionsTotals = function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options) {
+    BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactionsTotals = function (workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, types, options) {
         var _this = this;
-        return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, options).then(function (request) { return request(_this.axios, _this.basePath); });
+        return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, types, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
