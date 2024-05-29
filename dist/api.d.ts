@@ -1629,6 +1629,18 @@ export interface CreateOrUpdateMessageTokenRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateMessageTokenRequestDto
      */
+    'platform': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateMessageTokenRequestDto
+     */
+    'deviceId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateMessageTokenRequestDto
+     */
     'token': string;
 }
 /**
@@ -2196,6 +2208,18 @@ export interface MessageTokenEntity {
      * @type {string}
      * @memberof MessageTokenEntity
      */
+    'platform': MessageTokenEntityPlatformEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'deviceId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
     'token': string;
     /**
      *
@@ -2214,6 +2238,12 @@ export declare const MessageTokenEntityProviderEnum: {
     readonly FirebaseMessaging: "FIREBASE_MESSAGING";
 };
 export type MessageTokenEntityProviderEnum = typeof MessageTokenEntityProviderEnum[keyof typeof MessageTokenEntityProviderEnum];
+export declare const MessageTokenEntityPlatformEnum: {
+    readonly Web: "WEB";
+    readonly Android: "ANDROID";
+    readonly Ios: "IOS";
+};
+export type MessageTokenEntityPlatformEnum = typeof MessageTokenEntityPlatformEnum[keyof typeof MessageTokenEntityPlatformEnum];
 /**
  *
  * @export

@@ -1645,6 +1645,18 @@ export interface CreateOrUpdateMessageTokenRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateMessageTokenRequestDto
      */
+    'platform': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateMessageTokenRequestDto
+     */
+    'deviceId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateMessageTokenRequestDto
+     */
     'token': string;
 }
 /**
@@ -2212,6 +2224,18 @@ export interface MessageTokenEntity {
      * @type {string}
      * @memberof MessageTokenEntity
      */
+    'platform': MessageTokenEntityPlatformEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
+    'deviceId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntity
+     */
     'token': string;
     /**
      * 
@@ -2232,6 +2256,13 @@ export const MessageTokenEntityProviderEnum = {
 } as const;
 
 export type MessageTokenEntityProviderEnum = typeof MessageTokenEntityProviderEnum[keyof typeof MessageTokenEntityProviderEnum];
+export const MessageTokenEntityPlatformEnum = {
+    Web: 'WEB',
+    Android: 'ANDROID',
+    Ios: 'IOS'
+} as const;
+
+export type MessageTokenEntityPlatformEnum = typeof MessageTokenEntityPlatformEnum[keyof typeof MessageTokenEntityPlatformEnum];
 
 /**
  * 
