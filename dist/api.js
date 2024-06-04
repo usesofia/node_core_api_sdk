@@ -2061,6 +2061,54 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @param {string} workspaceId
+         * @param {string} provider
+         * @param {string} providerTransactionId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetBankTransactionByProvider: function (workspaceId_1, provider_1, providerTransactionId_1) {
+            var args_1 = [];
+            for (var _i = 3; _i < arguments.length; _i++) {
+                args_1[_i - 3] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, provider_1, providerTransactionId_1], args_1, true), void 0, function (workspaceId, provider, providerTransactionId, options) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
+                return __generator(this, function (_a) {
+                    // verify required parameter 'workspaceId' is not null or undefined
+                    (0, common_1.assertParamExists)('bankTransactionsControllerGetBankTransactionByProvider', 'workspaceId', workspaceId);
+                    // verify required parameter 'provider' is not null or undefined
+                    (0, common_1.assertParamExists)('bankTransactionsControllerGetBankTransactionByProvider', 'provider', provider);
+                    // verify required parameter 'providerTransactionId' is not null or undefined
+                    (0, common_1.assertParamExists)('bankTransactionsControllerGetBankTransactionByProvider', 'providerTransactionId', providerTransactionId);
+                    localVarPath = "/workspaces/{workspaceId}/bank/transactions/by-provider"
+                        .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    if (provider !== undefined) {
+                        localVarQueryParameter['provider'] = provider;
+                    }
+                    if (providerTransactionId !== undefined) {
+                        localVarQueryParameter['providerTransactionId'] = providerTransactionId;
+                    }
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+        /**
+         *
+         * @param {string} workspaceId
          * @param {number} [pageIndex]
          * @param {number} [pageSize]
          * @param {string} [accountIds]
@@ -2482,6 +2530,30 @@ var BankTransactionsApiFp = function (configuration) {
         /**
          *
          * @param {string} workspaceId
+         * @param {string} provider
+         * @param {string} providerTransactionId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetBankTransactionByProvider: function (workspaceId, provider, providerTransactionId, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionByProvider(workspaceId, provider, providerTransactionId, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionByProvider']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+        /**
+         *
+         * @param {string} workspaceId
          * @param {number} [pageIndex]
          * @param {number} [pageSize]
          * @param {string} [accountIds]
@@ -2689,6 +2761,17 @@ var BankTransactionsApiFactory = function (configuration, basePath, axios) {
         /**
          *
          * @param {string} workspaceId
+         * @param {string} provider
+         * @param {string} providerTransactionId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetBankTransactionByProvider: function (workspaceId, provider, providerTransactionId, options) {
+            return localVarFp.bankTransactionsControllerGetBankTransactionByProvider(workspaceId, provider, providerTransactionId, options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
+         * @param {string} workspaceId
          * @param {number} [pageIndex]
          * @param {number} [pageSize]
          * @param {string} [accountIds]
@@ -2807,6 +2890,19 @@ var BankTransactionsApi = /** @class */ (function (_super) {
     BankTransactionsApi.prototype.bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk = function (createOrUpdateBankTransactionsInBulkRequestDto, options) {
         var _this = this;
         return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} provider
+     * @param {string} providerTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    BankTransactionsApi.prototype.bankTransactionsControllerGetBankTransactionByProvider = function (workspaceId, provider, providerTransactionId, options) {
+        var _this = this;
+        return (0, exports.BankTransactionsApiFp)(this.configuration).bankTransactionsControllerGetBankTransactionByProvider(workspaceId, provider, providerTransactionId, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *

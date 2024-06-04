@@ -4734,6 +4734,53 @@ export const BankTransactionsApiAxiosParamCreator = function (configuration?: Co
         /**
          * 
          * @param {string} workspaceId 
+         * @param {string} provider 
+         * @param {string} providerTransactionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetBankTransactionByProvider: async (workspaceId: string, provider: string, providerTransactionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankTransactionsControllerGetBankTransactionByProvider', 'workspaceId', workspaceId)
+            // verify required parameter 'provider' is not null or undefined
+            assertParamExists('bankTransactionsControllerGetBankTransactionByProvider', 'provider', provider)
+            // verify required parameter 'providerTransactionId' is not null or undefined
+            assertParamExists('bankTransactionsControllerGetBankTransactionByProvider', 'providerTransactionId', providerTransactionId)
+            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/by-provider`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (provider !== undefined) {
+                localVarQueryParameter['provider'] = provider;
+            }
+
+            if (providerTransactionId !== undefined) {
+                localVarQueryParameter['providerTransactionId'] = providerTransactionId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
          * @param {string} [accountIds] 
@@ -5158,6 +5205,20 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} workspaceId 
+         * @param {string} provider 
+         * @param {string} providerTransactionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionByProvider(workspaceId, provider, providerTransactionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionByProvider']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
          * @param {string} [accountIds] 
@@ -5295,6 +5356,17 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
         /**
          * 
          * @param {string} workspaceId 
+         * @param {string} provider 
+         * @param {string} providerTransactionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: any): AxiosPromise<BankTransactionEntity> {
+            return localVarFp.bankTransactionsControllerGetBankTransactionByProvider(workspaceId, provider, providerTransactionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
          * @param {string} [accountIds] 
@@ -5408,6 +5480,19 @@ export class BankTransactionsApi extends BaseAPI {
      */
     public bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig) {
         return BankTransactionsApiFp(this.configuration).bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {string} provider 
+     * @param {string} providerTransactionId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    public bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactionByProvider(workspaceId, provider, providerTransactionId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

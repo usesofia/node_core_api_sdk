@@ -3823,6 +3823,15 @@ export declare const BankTransactionsApiAxiosParamCreator: (configuration?: Conf
     /**
      *
      * @param {string} workspaceId
+     * @param {string} provider
+     * @param {string} providerTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetBankTransactionByProvider: (workspaceId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
      * @param {number} [pageIndex]
      * @param {number} [pageSize]
      * @param {string} [accountIds]
@@ -3916,6 +3925,15 @@ export declare const BankTransactionsApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionEntity>>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} provider
+     * @param {string} providerTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>>;
     /**
      *
      * @param {string} workspaceId
@@ -4015,6 +4033,15 @@ export declare const BankTransactionsApiFactory: (configuration?: Configuration,
     /**
      *
      * @param {string} workspaceId
+     * @param {string} provider
+     * @param {string} providerTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: any): AxiosPromise<BankTransactionEntity>;
+    /**
+     *
+     * @param {string} workspaceId
      * @param {number} [pageIndex]
      * @param {number} [pageSize]
      * @param {string} [accountIds]
@@ -4111,6 +4138,16 @@ export declare class BankTransactionsApi extends BaseAPI {
      * @memberof BankTransactionsApi
      */
     bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity[], any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} provider
+     * @param {string} providerTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity, any>>;
     /**
      *
      * @param {string} workspaceId
