@@ -2888,6 +2888,43 @@ export interface UserRelatedWorkspaceEntity {
 /**
  *
  * @export
+ * @interface UserWithProfileEntity
+ */
+export interface UserWithProfileEntity {
+    /**
+     *
+     * @type {string}
+     * @memberof UserWithProfileEntity
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserWithProfileEntity
+     */
+    'email': string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserWithProfileEntity
+     */
+    'createdAt': string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserWithProfileEntity
+     */
+    'passwordHash'?: string;
+    /**
+     *
+     * @type {ProfileEntity}
+     * @memberof UserWithProfileEntity
+     */
+    'profile': ProfileEntity;
+}
+/**
+ *
+ * @export
  * @interface WorkspaceEntity
  */
 export interface WorkspaceEntity {
@@ -4238,6 +4275,61 @@ export declare class BankTransactionsApi extends BaseAPI {
      * @memberof BankTransactionsApi
      */
     bankTransactionsControllerUpdateTransaction(bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity, any>>;
+}
+/**
+ * DefaultApi - axios parameter creator
+ * @export
+ */
+export declare const DefaultApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    usersControllerGet: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * DefaultApi - functional programming interface
+ * @export
+ */
+export declare const DefaultApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    usersControllerGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserWithProfileEntity>>;
+};
+/**
+ * DefaultApi - factory interface
+ * @export
+ */
+export declare const DefaultApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    usersControllerGet(userId: string, options?: any): AxiosPromise<UserWithProfileEntity>;
+};
+/**
+ * DefaultApi - object-oriented interface
+ * @export
+ * @class DefaultApi
+ * @extends {BaseAPI}
+ */
+export declare class DefaultApi extends BaseAPI {
+    /**
+     *
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    usersControllerGet(userId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserWithProfileEntity, any>>;
 }
 /**
  * MessageTokensApi - axios parameter creator
