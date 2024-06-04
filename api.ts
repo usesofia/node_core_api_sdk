@@ -2945,6 +2945,31 @@ export interface UserWithProfileEntity {
 /**
  * 
  * @export
+ * @interface WorkspaceCompanySettingsEntity
+ */
+export interface WorkspaceCompanySettingsEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkspaceCompanySettingsEntity
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkspaceCompanySettingsEntity
+     */
+    'businessSegment': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkspaceCompanySettingsEntity
+     */
+    'otherBusinessDescription'?: string;
+}
+/**
+ * 
+ * @export
  * @interface WorkspaceEntity
  */
 export interface WorkspaceEntity {
@@ -2996,6 +3021,49 @@ export interface WorkspaceEntity {
      * @memberof WorkspaceEntity
      */
     'selectedBusinessCategoryTreeId'?: string;
+    /**
+     * 
+     * @type {WorkspaceHybridSettingsEntity}
+     * @memberof WorkspaceEntity
+     */
+    'hybridSettings'?: WorkspaceHybridSettingsEntity;
+    /**
+     * 
+     * @type {WorkspaceCompanySettingsEntity}
+     * @memberof WorkspaceEntity
+     */
+    'companySettings'?: WorkspaceCompanySettingsEntity;
+    /**
+     * 
+     * @type {WorkspacePersonalSettingsEntity}
+     * @memberof WorkspaceEntity
+     */
+    'personalSettings'?: WorkspacePersonalSettingsEntity;
+}
+/**
+ * 
+ * @export
+ * @interface WorkspaceHybridSettingsEntity
+ */
+export interface WorkspaceHybridSettingsEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkspaceHybridSettingsEntity
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkspaceHybridSettingsEntity
+     */
+    'businessSegment': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkspaceHybridSettingsEntity
+     */
+    'otherBusinessDescription'?: string;
 }
 /**
  * 
@@ -3033,6 +3101,19 @@ export interface WorkspaceJoinRequestEntity {
      * @memberof WorkspaceJoinRequestEntity
      */
     'createdAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface WorkspacePersonalSettingsEntity
+ */
+export interface WorkspacePersonalSettingsEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkspacePersonalSettingsEntity
+     */
+    'id': string;
 }
 /**
  * 
