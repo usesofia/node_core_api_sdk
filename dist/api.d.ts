@@ -1597,7 +1597,7 @@ export interface CreateOrUpdateBankTransactionsInBulkItemDto {
      * @type {Array<CategoryGuessDto>}
      * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
      */
-    'categoryGuesses': Array<CategoryGuessDto>;
+    'categoryGuesses'?: Array<CategoryGuessDto>;
     /**
      *
      * @type {string}
