@@ -84,8 +84,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.DefaultApi = exports.DefaultApiFactory = exports.DefaultApiFp = exports.DefaultApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionTagsApi = exports.BankTransactionTagsApiFactory = exports.BankTransactionTagsApiFp = exports.BankTransactionTagsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.AuthApi = exports.AuthApiFactory = exports.AuthApiFp = exports.AuthApiAxiosParamCreator = exports.WorkspaceSubscriptionEntityPaymentSystemEnum = exports.WorkspaceSubscriptionEntityStatusEnum = exports.MessageTokenEntityPlatformEnum = exports.MessageTokenEntityProviderEnum = exports.BankTransactionEntityLegalNatureEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
-exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.WorkspaceSubscriptionsApi = exports.WorkspaceSubscriptionsApiFactory = exports.WorkspaceSubscriptionsApiFp = exports.WorkspaceSubscriptionsApiAxiosParamCreator = exports.WorkspaceJoinRequestsApi = exports.WorkspaceJoinRequestsApiFactory = exports.WorkspaceJoinRequestsApiFp = exports.WorkspaceJoinRequestsApiAxiosParamCreator = exports.SubscriptionProductsApi = exports.SubscriptionProductsApiFactory = exports.SubscriptionProductsApiFp = exports.SubscriptionProductsApiAxiosParamCreator = exports.StripeApi = exports.StripeApiFactory = exports.StripeApiFp = exports.StripeApiAxiosParamCreator = exports.ReportsApi = exports.ReportsApiFactory = void 0;
+exports.StripeApiFp = exports.StripeApiAxiosParamCreator = exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionTagsApi = exports.BankTransactionTagsApiFactory = exports.BankTransactionTagsApiFp = exports.BankTransactionTagsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.AuthApi = exports.AuthApiFactory = exports.AuthApiFp = exports.AuthApiAxiosParamCreator = exports.WorkspaceSubscriptionEntityPaymentSystemEnum = exports.WorkspaceSubscriptionEntityStatusEnum = exports.MessageTokenEntityPlatformEnum = exports.MessageTokenEntityProviderEnum = exports.BankTransactionEntityLegalNatureEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
+exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.WorkspaceSubscriptionsApi = exports.WorkspaceSubscriptionsApiFactory = exports.WorkspaceSubscriptionsApiFp = exports.WorkspaceSubscriptionsApiAxiosParamCreator = exports.WorkspaceJoinRequestsApi = exports.WorkspaceJoinRequestsApiFactory = exports.WorkspaceJoinRequestsApiFp = exports.WorkspaceJoinRequestsApiAxiosParamCreator = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.SubscriptionProductsApi = exports.SubscriptionProductsApiFactory = exports.SubscriptionProductsApiFp = exports.SubscriptionProductsApiAxiosParamCreator = exports.StripeApi = exports.StripeApiFactory = void 0;
 var axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -3019,128 +3019,6 @@ var BankTransactionsApi = /** @class */ (function (_super) {
 }(base_1.BaseAPI));
 exports.BankTransactionsApi = BankTransactionsApi;
 /**
- * DefaultApi - axios parameter creator
- * @export
- */
-var DefaultApiAxiosParamCreator = function (configuration) {
-    var _this = this;
-    return {
-        /**
-         *
-         * @param {string} userId
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usersControllerGet: function (userId_1) {
-            var args_1 = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args_1[_i - 1] = arguments[_i];
-            }
-            return __awaiter(_this, __spreadArray([userId_1], args_1, true), void 0, function (userId, options) {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
-                if (options === void 0) { options = {}; }
-                return __generator(this, function (_a) {
-                    // verify required parameter 'userId' is not null or undefined
-                    (0, common_1.assertParamExists)('usersControllerGet', 'userId', userId);
-                    localVarPath = "/users/users/{userId}"
-                        .replace("{".concat("userId", "}"), encodeURIComponent(String(userId)));
-                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
-                    if (configuration) {
-                        baseOptions = configuration.baseOptions;
-                    }
-                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
-                    localVarHeaderParameter = {};
-                    localVarQueryParameter = {};
-                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
-                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                    return [2 /*return*/, {
-                            url: (0, common_1.toPathString)(localVarUrlObj),
-                            options: localVarRequestOptions,
-                        }];
-                });
-            });
-        },
-    };
-};
-exports.DefaultApiAxiosParamCreator = DefaultApiAxiosParamCreator;
-/**
- * DefaultApi - functional programming interface
- * @export
- */
-var DefaultApiFp = function (configuration) {
-    var localVarAxiosParamCreator = (0, exports.DefaultApiAxiosParamCreator)(configuration);
-    return {
-        /**
-         *
-         * @param {string} userId
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usersControllerGet: function (userId, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
-                var _a, _b, _c;
-                return __generator(this, function (_d) {
-                    switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.usersControllerGet(userId, options)];
-                        case 1:
-                            localVarAxiosArgs = _d.sent();
-                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['DefaultApi.usersControllerGet']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
-                    }
-                });
-            });
-        },
-    };
-};
-exports.DefaultApiFp = DefaultApiFp;
-/**
- * DefaultApi - factory interface
- * @export
- */
-var DefaultApiFactory = function (configuration, basePath, axios) {
-    var localVarFp = (0, exports.DefaultApiFp)(configuration);
-    return {
-        /**
-         *
-         * @param {string} userId
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usersControllerGet: function (userId, options) {
-            return localVarFp.usersControllerGet(userId, options).then(function (request) { return request(axios, basePath); });
-        },
-    };
-};
-exports.DefaultApiFactory = DefaultApiFactory;
-/**
- * DefaultApi - object-oriented interface
- * @export
- * @class DefaultApi
- * @extends {BaseAPI}
- */
-var DefaultApi = /** @class */ (function (_super) {
-    __extends(DefaultApi, _super);
-    function DefaultApi() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    /**
-     *
-     * @param {string} userId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    DefaultApi.prototype.usersControllerGet = function (userId, options) {
-        var _this = this;
-        return (0, exports.DefaultApiFp)(this.configuration).usersControllerGet(userId, options).then(function (request) { return request(_this.axios, _this.basePath); });
-    };
-    return DefaultApi;
-}(base_1.BaseAPI));
-exports.DefaultApi = DefaultApi;
-/**
  * MessageTokensApi - axios parameter creator
  * @export
  */
@@ -5129,6 +5007,128 @@ var SubscriptionProductsApi = /** @class */ (function (_super) {
     return SubscriptionProductsApi;
 }(base_1.BaseAPI));
 exports.SubscriptionProductsApi = SubscriptionProductsApi;
+/**
+ * UsersApi - axios parameter creator
+ * @export
+ */
+var UsersApiAxiosParamCreator = function (configuration) {
+    var _this = this;
+    return {
+        /**
+         *
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersControllerGet: function (userId_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([userId_1], args_1, true), void 0, function (userId, options) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
+                return __generator(this, function (_a) {
+                    // verify required parameter 'userId' is not null or undefined
+                    (0, common_1.assertParamExists)('usersControllerGet', 'userId', userId);
+                    localVarPath = "/users/users/{userId}"
+                        .replace("{".concat("userId", "}"), encodeURIComponent(String(userId)));
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+    };
+};
+exports.UsersApiAxiosParamCreator = UsersApiAxiosParamCreator;
+/**
+ * UsersApi - functional programming interface
+ * @export
+ */
+var UsersApiFp = function (configuration) {
+    var localVarAxiosParamCreator = (0, exports.UsersApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersControllerGet: function (userId, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.usersControllerGet(userId, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['UsersApi.usersControllerGet']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+    };
+};
+exports.UsersApiFp = UsersApiFp;
+/**
+ * UsersApi - factory interface
+ * @export
+ */
+var UsersApiFactory = function (configuration, basePath, axios) {
+    var localVarFp = (0, exports.UsersApiFp)(configuration);
+    return {
+        /**
+         *
+         * @param {string} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersControllerGet: function (userId, options) {
+            return localVarFp.usersControllerGet(userId, options).then(function (request) { return request(axios, basePath); });
+        },
+    };
+};
+exports.UsersApiFactory = UsersApiFactory;
+/**
+ * UsersApi - object-oriented interface
+ * @export
+ * @class UsersApi
+ * @extends {BaseAPI}
+ */
+var UsersApi = /** @class */ (function (_super) {
+    __extends(UsersApi, _super);
+    function UsersApi() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     *
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    UsersApi.prototype.usersControllerGet = function (userId, options) {
+        var _this = this;
+        return (0, exports.UsersApiFp)(this.configuration).usersControllerGet(userId, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    return UsersApi;
+}(base_1.BaseAPI));
+exports.UsersApi = UsersApi;
 /**
  * WorkspaceJoinRequestsApi - axios parameter creator
  * @export
