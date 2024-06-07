@@ -2128,7 +2128,7 @@ export interface MeanResultEntity {
      * @type {number}
      * @memberof MeanResultEntity
      */
-    'amountInCents': number;
+    'amountInCents'?: number;
     /**
      *
      * @type {Array<MeanResultSubcategoryItemEntity>}
@@ -2159,7 +2159,7 @@ export interface MeanResultSubcategoryItemEntity {
      * @type {number}
      * @memberof MeanResultSubcategoryItemEntity
      */
-    'amountInCents': number;
+    'amountInCents'?: number;
 }
 /**
  *
