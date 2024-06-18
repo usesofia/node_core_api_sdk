@@ -26,31 +26,6 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 /**
  * 
  * @export
- * @interface AiChatFeatureSpecificationEntity
- */
-export interface AiChatFeatureSpecificationEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof AiChatFeatureSpecificationEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof AiChatFeatureSpecificationEntity
-     */
-    'enabled': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof AiChatFeatureSpecificationEntity
-     */
-    'subscriptionProductId': string;
-}
-/**
- * 
- * @export
  * @interface BalancePointResultEntity
  */
 export interface BalancePointResultEntity {
@@ -734,7 +709,8 @@ export const BankTransactionEntityProviderEnum = {
 export type BankTransactionEntityProviderEnum = typeof BankTransactionEntityProviderEnum[keyof typeof BankTransactionEntityProviderEnum];
 export const BankTransactionEntityTypeEnum = {
     Debit: 'DEBIT',
-    Credit: 'CREDIT'
+    Credit: 'CREDIT',
+    Undefined: 'UNDEFINED'
 } as const;
 
 export type BankTransactionEntityTypeEnum = typeof BankTransactionEntityTypeEnum[keyof typeof BankTransactionEntityTypeEnum];
@@ -1024,6 +1000,31 @@ export interface BankTransactionsPageEntity {
      * @memberof BankTransactionsPageEntity
      */
     'items': Array<BankTransactionEntity>;
+}
+/**
+ * 
+ * @export
+ * @interface BankTransactionsTotalsEntity
+ */
+export interface BankTransactionsTotalsEntity {
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionsTotalsEntity
+     */
+    'entriesInCents'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionsTotalsEntity
+     */
+    'outflowsInCents'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionsTotalsEntity
+     */
+    'outcomeInCents'?: number;
 }
 /**
  * 
@@ -1360,50 +1361,6 @@ export interface CheckEmailInUseRequestDto {
 /**
  * 
  * @export
- * @interface CheckoutSessionEntity
- */
-export interface CheckoutSessionEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof CheckoutSessionEntity
-     */
-    'url': string;
-}
-/**
- * 
- * @export
- * @interface ConnectionFeatureSpecificationEntity
- */
-export interface ConnectionFeatureSpecificationEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof ConnectionFeatureSpecificationEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ConnectionFeatureSpecificationEntity
-     */
-    'unlimited': boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof ConnectionFeatureSpecificationEntity
-     */
-    'max'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ConnectionFeatureSpecificationEntity
-     */
-    'subscriptionProductId': string;
-}
-/**
- * 
- * @export
  * @interface CreateBankTransactionTagRequestDto
  */
 export interface CreateBankTransactionTagRequestDto {
@@ -1708,31 +1665,6 @@ export interface CreateProfileRequestDto {
      * @memberof CreateProfileRequestDto
      */
     'birthDate': string;
-}
-/**
- * 
- * @export
- * @interface CreateStripeCheckoutSessionRequestDto
- */
-export interface CreateStripeCheckoutSessionRequestDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateStripeCheckoutSessionRequestDto
-     */
-    'workspaceId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateStripeCheckoutSessionRequestDto
-     */
-    'priceId': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateStripeCheckoutSessionRequestDto
-     */
-    'isTrial': boolean;
 }
 /**
  * 
@@ -2105,37 +2037,6 @@ export interface FinancialStatementeEntriesSubcategoryData {
 /**
  * 
  * @export
- * @interface FinancialTransactionsFeatureSpecificationEntity
- */
-export interface FinancialTransactionsFeatureSpecificationEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof FinancialTransactionsFeatureSpecificationEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FinancialTransactionsFeatureSpecificationEntity
-     */
-    'unlimited': boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof FinancialTransactionsFeatureSpecificationEntity
-     */
-    'maxPerMonth'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof FinancialTransactionsFeatureSpecificationEntity
-     */
-    'subscriptionProductId': string;
-}
-/**
- * 
- * @export
  * @interface MeanResultEntity
  */
 export interface MeanResultEntity {
@@ -2420,68 +2321,6 @@ export interface PaymentDataDto {
 /**
  * 
  * @export
- * @interface PaymentsManagerProductDataEntity
- */
-export interface PaymentsManagerProductDataEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentsManagerProductDataEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentsManagerProductDataEntity
-     */
-    'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentsManagerProductDataEntity
-     */
-    'description': string;
-    /**
-     * 
-     * @type {Array<PaymentsManagerProductPriceEntity>}
-     * @memberof PaymentsManagerProductDataEntity
-     */
-    'prices': Array<PaymentsManagerProductPriceEntity>;
-}
-/**
- * 
- * @export
- * @interface PaymentsManagerProductPriceEntity
- */
-export interface PaymentsManagerProductPriceEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentsManagerProductPriceEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PaymentsManagerProductPriceEntity
-     */
-    'active': boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaymentsManagerProductPriceEntity
-     */
-    'unitAmount': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentsManagerProductPriceEntity
-     */
-    'interval': string;
-}
-/**
- * 
- * @export
  * @interface PlainBankAccountEntity
  */
 export interface PlainBankAccountEntity {
@@ -2589,12 +2428,6 @@ export interface ProfileEntity {
      * @memberof ProfileEntity
      */
     'fullName': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileEntity
-     */
-    'phone': string;
     /**
      * 
      * @type {string}
@@ -2708,73 +2541,6 @@ export interface SignUpWithEmailPasswordRequestDto {
      * @memberof SignUpWithEmailPasswordRequestDto
      */
     'emailVerificationCode': string;
-}
-/**
- * 
- * @export
- * @interface SubscriptionProductEntity
- */
-export interface SubscriptionProductEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof SubscriptionProductEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SubscriptionProductEntity
-     */
-    'paymentSystem': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SubscriptionProductEntity
-     */
-    'paymentSystemProductId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SubscriptionProductEntity
-     */
-    'workspaceType': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SubscriptionProductEntity
-     */
-    'trialPeriodInDays'?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof SubscriptionProductEntity
-     */
-    'trialAlreadyUsed'?: boolean;
-    /**
-     * 
-     * @type {ConnectionFeatureSpecificationEntity}
-     * @memberof SubscriptionProductEntity
-     */
-    'connectionFeatureSpecification': ConnectionFeatureSpecificationEntity;
-    /**
-     * 
-     * @type {FinancialTransactionsFeatureSpecificationEntity}
-     * @memberof SubscriptionProductEntity
-     */
-    'financialTransactionsFeatureSpecification': FinancialTransactionsFeatureSpecificationEntity;
-    /**
-     * 
-     * @type {AiChatFeatureSpecificationEntity}
-     * @memberof SubscriptionProductEntity
-     */
-    'aiChatFeatureSpecification': AiChatFeatureSpecificationEntity;
-    /**
-     * 
-     * @type {PaymentsManagerProductDataEntity}
-     * @memberof SubscriptionProductEntity
-     */
-    'paymentsManagerData': PaymentsManagerProductDataEntity;
 }
 /**
  * 
@@ -3115,75 +2881,6 @@ export interface WorkspacePersonalSettingsEntity {
      */
     'id': string;
 }
-/**
- * 
- * @export
- * @interface WorkspaceSubscriptionEntity
- */
-export interface WorkspaceSubscriptionEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceSubscriptionEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceSubscriptionEntity
-     */
-    'workspaceId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceSubscriptionEntity
-     */
-    'subscriptionProductId': string;
-    /**
-     * 
-     * @type {SubscriptionProductEntity}
-     * @memberof WorkspaceSubscriptionEntity
-     */
-    'subscriptionProduct': SubscriptionProductEntity;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceSubscriptionEntity
-     */
-    'status': WorkspaceSubscriptionEntityStatusEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceSubscriptionEntity
-     */
-    'paymentSystem': WorkspaceSubscriptionEntityPaymentSystemEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceSubscriptionEntity
-     */
-    'paymentSystemSubscriptionId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceSubscriptionEntity
-     */
-    'createdAt': string;
-}
-
-export const WorkspaceSubscriptionEntityStatusEnum = {
-    Active: 'ACTIVE',
-    NotActive: 'NOT_ACTIVE',
-    Trial: 'TRIAL'
-} as const;
-
-export type WorkspaceSubscriptionEntityStatusEnum = typeof WorkspaceSubscriptionEntityStatusEnum[keyof typeof WorkspaceSubscriptionEntityStatusEnum];
-export const WorkspaceSubscriptionEntityPaymentSystemEnum = {
-    Stripe: 'STRIPE'
-} as const;
-
-export type WorkspaceSubscriptionEntityPaymentSystemEnum = typeof WorkspaceSubscriptionEntityPaymentSystemEnum[keyof typeof WorkspaceSubscriptionEntityPaymentSystemEnum];
-
 
 /**
  * AuthApi - axios parameter creator
@@ -5409,7 +5106,7 @@ export const BankTransactionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
+        async bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsTotalsEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, types, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionsTotals']?.[localVarOperationServerIndex]?.url;
@@ -5548,7 +5245,7 @@ export const BankTransactionsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: any): AxiosPromise<BankTransactionsPageEntity> {
+        bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: any): AxiosPromise<BankTransactionsTotalsEntity> {
             return localVarFp.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, types, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7251,284 +6948,6 @@ export class ReportsApi extends BaseAPI {
 
 
 /**
- * StripeApi - axios parameter creator
- * @export
- */
-export const StripeApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {CreateStripeCheckoutSessionRequestDto} createStripeCheckoutSessionRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        stripeControllerCreateCheckoutSessionForStripe: async (createStripeCheckoutSessionRequestDto: CreateStripeCheckoutSessionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createStripeCheckoutSessionRequestDto' is not null or undefined
-            assertParamExists('stripeControllerCreateCheckoutSessionForStripe', 'createStripeCheckoutSessionRequestDto', createStripeCheckoutSessionRequestDto)
-            const localVarPath = `/stripe/checkout-session`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createStripeCheckoutSessionRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} stripeSignature 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        stripeControllerStripeWebhook: async (stripeSignature: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'stripeSignature' is not null or undefined
-            assertParamExists('stripeControllerStripeWebhook', 'stripeSignature', stripeSignature)
-            const localVarPath = `/stripe/webhook`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (stripeSignature != null) {
-                localVarHeaderParameter['stripe-signature'] = String(stripeSignature);
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * StripeApi - functional programming interface
- * @export
- */
-export const StripeApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = StripeApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {CreateStripeCheckoutSessionRequestDto} createStripeCheckoutSessionRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async stripeControllerCreateCheckoutSessionForStripe(createStripeCheckoutSessionRequestDto: CreateStripeCheckoutSessionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckoutSessionEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stripeControllerCreateCheckoutSessionForStripe(createStripeCheckoutSessionRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['StripeApi.stripeControllerCreateCheckoutSessionForStripe']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} stripeSignature 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async stripeControllerStripeWebhook(stripeSignature: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stripeControllerStripeWebhook(stripeSignature, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['StripeApi.stripeControllerStripeWebhook']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * StripeApi - factory interface
- * @export
- */
-export const StripeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = StripeApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {CreateStripeCheckoutSessionRequestDto} createStripeCheckoutSessionRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        stripeControllerCreateCheckoutSessionForStripe(createStripeCheckoutSessionRequestDto: CreateStripeCheckoutSessionRequestDto, options?: any): AxiosPromise<CheckoutSessionEntity> {
-            return localVarFp.stripeControllerCreateCheckoutSessionForStripe(createStripeCheckoutSessionRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} stripeSignature 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        stripeControllerStripeWebhook(stripeSignature: string, options?: any): AxiosPromise<void> {
-            return localVarFp.stripeControllerStripeWebhook(stripeSignature, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * StripeApi - object-oriented interface
- * @export
- * @class StripeApi
- * @extends {BaseAPI}
- */
-export class StripeApi extends BaseAPI {
-    /**
-     * 
-     * @param {CreateStripeCheckoutSessionRequestDto} createStripeCheckoutSessionRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof StripeApi
-     */
-    public stripeControllerCreateCheckoutSessionForStripe(createStripeCheckoutSessionRequestDto: CreateStripeCheckoutSessionRequestDto, options?: RawAxiosRequestConfig) {
-        return StripeApiFp(this.configuration).stripeControllerCreateCheckoutSessionForStripe(createStripeCheckoutSessionRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} stripeSignature 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof StripeApi
-     */
-    public stripeControllerStripeWebhook(stripeSignature: string, options?: RawAxiosRequestConfig) {
-        return StripeApiFp(this.configuration).stripeControllerStripeWebhook(stripeSignature, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * SubscriptionProductsApi - axios parameter creator
- * @export
- */
-export const SubscriptionProductsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        subscriptionProductsControllerList: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('subscriptionProductsControllerList', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/subscription-products`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * SubscriptionProductsApi - functional programming interface
- * @export
- */
-export const SubscriptionProductsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SubscriptionProductsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async subscriptionProductsControllerList(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SubscriptionProductEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionProductsControllerList(workspaceId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SubscriptionProductsApi.subscriptionProductsControllerList']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * SubscriptionProductsApi - factory interface
- * @export
- */
-export const SubscriptionProductsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SubscriptionProductsApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        subscriptionProductsControllerList(workspaceId: string, options?: any): AxiosPromise<Array<SubscriptionProductEntity>> {
-            return localVarFp.subscriptionProductsControllerList(workspaceId, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * SubscriptionProductsApi - object-oriented interface
- * @export
- * @class SubscriptionProductsApi
- * @extends {BaseAPI}
- */
-export class SubscriptionProductsApi extends BaseAPI {
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SubscriptionProductsApi
-     */
-    public subscriptionProductsControllerList(workspaceId: string, options?: RawAxiosRequestConfig) {
-        return SubscriptionProductsApiFp(this.configuration).subscriptionProductsControllerList(workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
  * UsersApi - axios parameter creator
  * @export
  */
@@ -7731,110 +7150,6 @@ export class WorkspaceJoinRequestsApi extends BaseAPI {
      */
     public workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent(workspaceId: string, options?: RawAxiosRequestConfig) {
         return WorkspaceJoinRequestsApiFp(this.configuration).workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent(workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * WorkspaceSubscriptionsApi - axios parameter creator
- * @export
- */
-export const WorkspaceSubscriptionsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspaceSubscriptionsControllerGet: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('workspaceSubscriptionsControllerGet', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/subscription`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * WorkspaceSubscriptionsApi - functional programming interface
- * @export
- */
-export const WorkspaceSubscriptionsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = WorkspaceSubscriptionsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async workspaceSubscriptionsControllerGet(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceSubscriptionEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.workspaceSubscriptionsControllerGet(workspaceId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceSubscriptionsApi.workspaceSubscriptionsControllerGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * WorkspaceSubscriptionsApi - factory interface
- * @export
- */
-export const WorkspaceSubscriptionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = WorkspaceSubscriptionsApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspaceSubscriptionsControllerGet(workspaceId: string, options?: any): AxiosPromise<WorkspaceSubscriptionEntity> {
-            return localVarFp.workspaceSubscriptionsControllerGet(workspaceId, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * WorkspaceSubscriptionsApi - object-oriented interface
- * @export
- * @class WorkspaceSubscriptionsApi
- * @extends {BaseAPI}
- */
-export class WorkspaceSubscriptionsApi extends BaseAPI {
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceSubscriptionsApi
-     */
-    public workspaceSubscriptionsControllerGet(workspaceId: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceSubscriptionsApiFp(this.configuration).workspaceSubscriptionsControllerGet(workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
