@@ -1332,19 +1332,6 @@ export interface CategoryGuessDto {
 /**
  *
  * @export
- * @interface CheckEmailInUseRequestDto
- */
-export interface CheckEmailInUseRequestDto {
-    /**
-     *
-     * @type {string}
-     * @memberof CheckEmailInUseRequestDto
-     */
-    'email': string;
-}
-/**
- *
- * @export
  * @interface CreateBankTransactionTagRequestDto
  */
 export interface CreateBankTransactionTagRequestDto {
@@ -1690,31 +1677,6 @@ export interface CreateWorkspaceRequestDto {
 /**
  *
  * @export
- * @interface CredentialsEntity
- */
-export interface CredentialsEntity {
-    /**
-     *
-     * @type {string}
-     * @memberof CredentialsEntity
-     */
-    'userId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CredentialsEntity
-     */
-    'accessToken': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CredentialsEntity
-     */
-    'refreshToken': string;
-}
-/**
- *
- * @export
  * @interface CreditCardMetadataDto
  */
 export interface CreditCardMetadataDto {
@@ -1777,44 +1739,6 @@ export interface DreLineOutcomeResultEntity {
 /**
  *
  * @export
- * @interface EmailInUseEntity
- */
-export interface EmailInUseEntity {
-    /**
-     *
-     * @type {string}
-     * @memberof EmailInUseEntity
-     */
-    'email': string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof EmailInUseEntity
-     */
-    'inUse': boolean;
-}
-/**
- *
- * @export
- * @interface ErrorEntity
- */
-export interface ErrorEntity {
-    /**
-     *
-     * @type {string}
-     * @memberof ErrorEntity
-     */
-    'fieldId': string;
-    /**
-     *
-     * @type {Array<string>}
-     * @memberof ErrorEntity
-     */
-    'messages': Array<string>;
-}
-/**
- *
- * @export
  * @interface ExceptionResponseEntity
  */
 export interface ExceptionResponseEntity {
@@ -1832,10 +1756,29 @@ export interface ExceptionResponseEntity {
     'message': string;
     /**
      *
-     * @type {Array<ErrorEntity>}
+     * @type {Array<ExceptionResponseEntityErrorsInner>}
      * @memberof ExceptionResponseEntity
      */
-    'errors': Array<ErrorEntity>;
+    'errors': Array<ExceptionResponseEntityErrorsInner>;
+}
+/**
+ *
+ * @export
+ * @interface ExceptionResponseEntityErrorsInner
+ */
+export interface ExceptionResponseEntityErrorsInner {
+    /**
+     *
+     * @type {string}
+     * @memberof ExceptionResponseEntityErrorsInner
+     */
+    'fieldPath': string;
+    /**
+     *
+     * @type {Array<string>}
+     * @memberof ExceptionResponseEntityErrorsInner
+     */
+    'messages': Array<string>;
 }
 /**
  *
@@ -2410,10 +2353,10 @@ export interface ProfileEntity {
     'fullName': string;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof ProfileEntity
      */
-    'birthDate': string;
+    'birthDate': any;
     /**
      *
      * @type {string}
@@ -2422,16 +2365,16 @@ export interface ProfileEntity {
     'userId': string;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof ProfileEntity
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof ProfileEntity
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
 /**
  *
@@ -2449,19 +2392,6 @@ export interface ProportionResultEntity {
 /**
  *
  * @export
- * @interface RefreshRequestDto
- */
-export interface RefreshRequestDto {
-    /**
-     *
-     * @type {string}
-     * @memberof RefreshRequestDto
-     */
-    'clientId': string;
-}
-/**
- *
- * @export
  * @interface SendEmailVerificationCodeRequestDto
  */
 export interface SendEmailVerificationCodeRequestDto {
@@ -2475,27 +2405,15 @@ export interface SendEmailVerificationCodeRequestDto {
 /**
  *
  * @export
- * @interface SignInWithEmailPasswordRequestDto
+ * @interface SendPhoneVerificationCodeRequestDto
  */
-export interface SignInWithEmailPasswordRequestDto {
+export interface SendPhoneVerificationCodeRequestDto {
     /**
      *
      * @type {string}
-     * @memberof SignInWithEmailPasswordRequestDto
+     * @memberof SendPhoneVerificationCodeRequestDto
      */
-    'email': string;
-    /**
-     *
-     * @type {string}
-     * @memberof SignInWithEmailPasswordRequestDto
-     */
-    'password': string;
-    /**
-     *
-     * @type {string}
-     * @memberof SignInWithEmailPasswordRequestDto
-     */
-    'clientId': string;
+    'phone': string;
 }
 /**
  *
@@ -2521,6 +2439,12 @@ export interface SignUpWithEmailPasswordRequestDto {
      * @memberof SignUpWithEmailPasswordRequestDto
      */
     'emailVerificationCode': string;
+    /**
+     *
+     * @type {string}
+     * @memberof SignUpWithEmailPasswordRequestDto
+     */
+    'phoneVerificationCode': string;
 }
 /**
  *
@@ -2594,13 +2518,13 @@ export interface UserEntity {
      * @type {string}
      * @memberof UserEntity
      */
-    'createdAt': string;
+    'phone': string;
     /**
      *
      * @type {string}
      * @memberof UserEntity
      */
-    'passwordHash'?: string;
+    'passwordHash': string;
 }
 /**
  *
@@ -2650,43 +2574,6 @@ export interface UserRelatedWorkspaceEntity {
      * @memberof UserRelatedWorkspaceEntity
      */
     'relationType': string;
-}
-/**
- *
- * @export
- * @interface UserWithProfileEntity
- */
-export interface UserWithProfileEntity {
-    /**
-     *
-     * @type {string}
-     * @memberof UserWithProfileEntity
-     */
-    'id': string;
-    /**
-     *
-     * @type {string}
-     * @memberof UserWithProfileEntity
-     */
-    'email': string;
-    /**
-     *
-     * @type {string}
-     * @memberof UserWithProfileEntity
-     */
-    'createdAt': string;
-    /**
-     *
-     * @type {string}
-     * @memberof UserWithProfileEntity
-     */
-    'passwordHash'?: string;
-    /**
-     *
-     * @type {ProfileEntity}
-     * @memberof UserWithProfileEntity
-     */
-    'profile': ProfileEntity;
 }
 /**
  *
@@ -2860,177 +2747,6 @@ export interface WorkspacePersonalSettingsEntity {
      * @memberof WorkspacePersonalSettingsEntity
      */
     'id': string;
-}
-/**
- * AuthApi - axios parameter creator
- * @export
- */
-export declare const AuthApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerCheckEmailInUse: (checkEmailInUseRequestDto: CheckEmailInUseRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {RefreshRequestDto} refreshRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerRefresh: (refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerSendEmailVerificationCode: (sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {SignInWithEmailPasswordRequestDto} signInWithEmailPasswordRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerSignInWithEmailPassword: (signInWithEmailPasswordRequestDto: SignInWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerSignUpWithEmailPassword: (signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * AuthApi - functional programming interface
- * @export
- */
-export declare const AuthApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerCheckEmailInUse(checkEmailInUseRequestDto: CheckEmailInUseRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailInUseEntity>>;
-    /**
-     *
-     * @param {RefreshRequestDto} refreshRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsEntity>>;
-    /**
-     *
-     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerSendEmailVerificationCode(sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
-    /**
-     *
-     * @param {SignInWithEmailPasswordRequestDto} signInWithEmailPasswordRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerSignInWithEmailPassword(signInWithEmailPasswordRequestDto: SignInWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsEntity>>;
-    /**
-     *
-     * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>>;
-};
-/**
- * AuthApi - factory interface
- * @export
- */
-export declare const AuthApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerCheckEmailInUse(checkEmailInUseRequestDto: CheckEmailInUseRequestDto, options?: any): AxiosPromise<EmailInUseEntity>;
-    /**
-     *
-     * @param {RefreshRequestDto} refreshRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: any): AxiosPromise<CredentialsEntity>;
-    /**
-     *
-     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerSendEmailVerificationCode(sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
-    /**
-     *
-     * @param {SignInWithEmailPasswordRequestDto} signInWithEmailPasswordRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerSignInWithEmailPassword(signInWithEmailPasswordRequestDto: SignInWithEmailPasswordRequestDto, options?: any): AxiosPromise<CredentialsEntity>;
-    /**
-     *
-     * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: any): AxiosPromise<UserEntity>;
-};
-/**
- * AuthApi - object-oriented interface
- * @export
- * @class AuthApi
- * @extends {BaseAPI}
- */
-export declare class AuthApi extends BaseAPI {
-    /**
-     *
-     * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthApi
-     */
-    authControllerCheckEmailInUse(checkEmailInUseRequestDto: CheckEmailInUseRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<EmailInUseEntity, any>>;
-    /**
-     *
-     * @param {RefreshRequestDto} refreshRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthApi
-     */
-    authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CredentialsEntity, any>>;
-    /**
-     *
-     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthApi
-     */
-    authControllerSendEmailVerificationCode(sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
-    /**
-     *
-     * @param {SignInWithEmailPasswordRequestDto} signInWithEmailPasswordRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthApi
-     */
-    authControllerSignInWithEmailPassword(signInWithEmailPasswordRequestDto: SignInWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CredentialsEntity, any>>;
-    /**
-     *
-     * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthApi
-     */
-    authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserEntity, any>>;
 }
 /**
  * BankAccountsApi - axios parameter creator
@@ -4059,6 +3775,119 @@ export declare class BankTransactionsApi extends BaseAPI {
     bankTransactionsControllerUpdateTransaction(bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity, any>>;
 }
 /**
+ * IamAuthApi - axios parameter creator
+ * @export
+ */
+export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGenerateAndSendEmailVerificationCodeForSignUp: (sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {SendPhoneVerificationCodeRequestDto} sendPhoneVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGenerateAndSendPhoneVerificationCodeForSignUp: (sendPhoneVerificationCodeRequestDto: SendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerSignUpWithEmailPassword: (signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * IamAuthApi - functional programming interface
+ * @export
+ */
+export declare const IamAuthApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGenerateAndSendEmailVerificationCodeForSignUp(sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @param {SendPhoneVerificationCodeRequestDto} sendPhoneVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGenerateAndSendPhoneVerificationCodeForSignUp(sendPhoneVerificationCodeRequestDto: SendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>>;
+};
+/**
+ * IamAuthApi - factory interface
+ * @export
+ */
+export declare const IamAuthApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGenerateAndSendEmailVerificationCodeForSignUp(sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
+    /**
+     *
+     * @param {SendPhoneVerificationCodeRequestDto} sendPhoneVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGenerateAndSendPhoneVerificationCodeForSignUp(sendPhoneVerificationCodeRequestDto: SendPhoneVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
+    /**
+     *
+     * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: any): AxiosPromise<UserEntity>;
+};
+/**
+ * IamAuthApi - object-oriented interface
+ * @export
+ * @class IamAuthApi
+ * @extends {BaseAPI}
+ */
+export declare class IamAuthApi extends BaseAPI {
+    /**
+     *
+     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    authControllerGenerateAndSendEmailVerificationCodeForSignUp(sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @param {SendPhoneVerificationCodeRequestDto} sendPhoneVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    authControllerGenerateAndSendPhoneVerificationCodeForSignUp(sendPhoneVerificationCodeRequestDto: SendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserEntity, any>>;
+}
+/**
  * MessageTokensApi - axios parameter creator
  * @export
  */
@@ -4816,7 +4645,7 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersControllerGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserWithProfileEntity>>;
+    usersControllerGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>>;
 };
 /**
  * UsersApi - factory interface
@@ -4829,7 +4658,7 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    usersControllerGet(userId: string, options?: any): AxiosPromise<UserWithProfileEntity>;
+    usersControllerGet(userId: string, options?: any): AxiosPromise<UserEntity>;
 };
 /**
  * UsersApi - object-oriented interface
@@ -4845,7 +4674,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    usersControllerGet(userId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserWithProfileEntity, any>>;
+    usersControllerGet(userId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserEntity, any>>;
 }
 /**
  * WorkspaceJoinRequestsApi - axios parameter creator
