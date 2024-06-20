@@ -84,8 +84,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersApiAxiosParamCreator = exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.IamAuthApi = exports.IamAuthApiFactory = exports.IamAuthApiFp = exports.IamAuthApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionTagsApi = exports.BankTransactionTagsApiFactory = exports.BankTransactionTagsApiFp = exports.BankTransactionTagsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.VerifyEmailVerificationCodeRequestDtoPurposeEnum = exports.MessageTokenEntityPlatformEnum = exports.MessageTokenEntityProviderEnum = exports.GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum = exports.GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum = exports.BankTransactionEntityLegalNatureEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
-exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.WorkspaceJoinRequestsApi = exports.WorkspaceJoinRequestsApiFactory = exports.WorkspaceJoinRequestsApiFp = exports.WorkspaceJoinRequestsApiAxiosParamCreator = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = void 0;
+exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.IamAuthApi = exports.IamAuthApiFactory = exports.IamAuthApiFp = exports.IamAuthApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionTagsApi = exports.BankTransactionTagsApiFactory = exports.BankTransactionTagsApiFp = exports.BankTransactionTagsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.VerifyPhoneVerificationCodeRequestDtoPurposeEnum = exports.VerifyEmailVerificationCodeRequestDtoPurposeEnum = exports.MessageTokenEntityPlatformEnum = exports.MessageTokenEntityProviderEnum = exports.GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum = exports.GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum = exports.BankTransactionEntityLegalNatureEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
+exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.WorkspaceJoinRequestsApi = exports.WorkspaceJoinRequestsApiFactory = exports.WorkspaceJoinRequestsApiFp = exports.WorkspaceJoinRequestsApiAxiosParamCreator = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = void 0;
 var axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -126,6 +126,10 @@ exports.MessageTokenEntityPlatformEnum = {
     Ios: 'IOS'
 };
 exports.VerifyEmailVerificationCodeRequestDtoPurposeEnum = {
+    Up: 'SIGN_UP',
+    In: 'SIGN_IN'
+};
+exports.VerifyPhoneVerificationCodeRequestDtoPurposeEnum = {
     Up: 'SIGN_UP',
     In: 'SIGN_IN'
 };
@@ -2739,6 +2743,43 @@ var IamAuthApiAxiosParamCreator = function (configuration) {
                 });
             });
         },
+        /**
+         *
+         * @param {VerifyPhoneVerificationCodeRequestDto} verifyPhoneVerificationCodeRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerVerifyPhoneVerificationCode: function (verifyPhoneVerificationCodeRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([verifyPhoneVerificationCodeRequestDto_1], args_1, true), void 0, function (verifyPhoneVerificationCodeRequestDto, options) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
+                return __generator(this, function (_a) {
+                    // verify required parameter 'verifyPhoneVerificationCodeRequestDto' is not null or undefined
+                    (0, common_1.assertParamExists)('authControllerVerifyPhoneVerificationCode', 'verifyPhoneVerificationCodeRequestDto', verifyPhoneVerificationCodeRequestDto);
+                    localVarPath = "/iam/auth/phone-verification-code/verify";
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'application/json';
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(verifyPhoneVerificationCodeRequestDto, localVarRequestOptions, configuration);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
     };
 };
 exports.IamAuthApiAxiosParamCreator = IamAuthApiAxiosParamCreator;
@@ -2837,6 +2878,28 @@ var IamAuthApiFp = function (configuration) {
                 });
             });
         },
+        /**
+         *
+         * @param {VerifyPhoneVerificationCodeRequestDto} verifyPhoneVerificationCodeRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerVerifyPhoneVerificationCode: function (verifyPhoneVerificationCodeRequestDto, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['IamAuthApi.authControllerVerifyPhoneVerificationCode']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
     };
 };
 exports.IamAuthApiFp = IamAuthApiFp;
@@ -2882,6 +2945,15 @@ var IamAuthApiFactory = function (configuration, basePath, axios) {
          */
         authControllerVerifyEmailVerificationCode: function (verifyEmailVerificationCodeRequestDto, options) {
             return localVarFp.authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto, options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
+         * @param {VerifyPhoneVerificationCodeRequestDto} verifyPhoneVerificationCodeRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerVerifyPhoneVerificationCode: function (verifyPhoneVerificationCodeRequestDto, options) {
+            return localVarFp.authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto, options).then(function (request) { return request(axios, basePath); });
         },
     };
 };
@@ -2940,6 +3012,17 @@ var IamAuthApi = /** @class */ (function (_super) {
     IamAuthApi.prototype.authControllerVerifyEmailVerificationCode = function (verifyEmailVerificationCodeRequestDto, options) {
         var _this = this;
         return (0, exports.IamAuthApiFp)(this.configuration).authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    /**
+     *
+     * @param {VerifyPhoneVerificationCodeRequestDto} verifyPhoneVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    IamAuthApi.prototype.authControllerVerifyPhoneVerificationCode = function (verifyPhoneVerificationCodeRequestDto, options) {
+        var _this = this;
+        return (0, exports.IamAuthApiFp)(this.configuration).authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     return IamAuthApi;
 }(base_1.BaseAPI));

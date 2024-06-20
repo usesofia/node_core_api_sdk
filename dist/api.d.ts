@@ -2630,6 +2630,36 @@ export type VerifyEmailVerificationCodeRequestDtoPurposeEnum = typeof VerifyEmai
 /**
  *
  * @export
+ * @interface VerifyPhoneVerificationCodeRequestDto
+ */
+export interface VerifyPhoneVerificationCodeRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof VerifyPhoneVerificationCodeRequestDto
+     */
+    'phone': string;
+    /**
+     *
+     * @type {string}
+     * @memberof VerifyPhoneVerificationCodeRequestDto
+     */
+    'purpose': VerifyPhoneVerificationCodeRequestDtoPurposeEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof VerifyPhoneVerificationCodeRequestDto
+     */
+    'code': string;
+}
+export declare const VerifyPhoneVerificationCodeRequestDtoPurposeEnum: {
+    readonly Up: "SIGN_UP";
+    readonly In: "SIGN_IN";
+};
+export type VerifyPhoneVerificationCodeRequestDtoPurposeEnum = typeof VerifyPhoneVerificationCodeRequestDtoPurposeEnum[keyof typeof VerifyPhoneVerificationCodeRequestDtoPurposeEnum];
+/**
+ *
+ * @export
  * @interface WorkspaceCompanySettingsEntity
  */
 export interface WorkspaceCompanySettingsEntity {
@@ -3859,6 +3889,13 @@ export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration
      * @throws {RequiredError}
      */
     authControllerVerifyEmailVerificationCode: (verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {VerifyPhoneVerificationCodeRequestDto} verifyPhoneVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerVerifyPhoneVerificationCode: (verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * IamAuthApi - functional programming interface
@@ -3893,6 +3930,13 @@ export declare const IamAuthApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @param {VerifyPhoneVerificationCodeRequestDto} verifyPhoneVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
 };
 /**
  * IamAuthApi - factory interface
@@ -3927,6 +3971,13 @@ export declare const IamAuthApiFactory: (configuration?: Configuration, basePath
      * @throws {RequiredError}
      */
     authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
+    /**
+     *
+     * @param {VerifyPhoneVerificationCodeRequestDto} verifyPhoneVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
 };
 /**
  * IamAuthApi - object-oriented interface
@@ -3967,6 +4018,14 @@ export declare class IamAuthApi extends BaseAPI {
      * @memberof IamAuthApi
      */
     authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @param {VerifyPhoneVerificationCodeRequestDto} verifyPhoneVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
  * MessageTokensApi - axios parameter creator
