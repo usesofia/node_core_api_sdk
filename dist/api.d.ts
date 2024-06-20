@@ -1964,6 +1964,54 @@ export interface FinancialStatementeEntriesSubcategoryData {
 /**
  *
  * @export
+ * @interface GenerateAndSendEmailVerificationCodeRequestDto
+ */
+export interface GenerateAndSendEmailVerificationCodeRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof GenerateAndSendEmailVerificationCodeRequestDto
+     */
+    'email': string;
+    /**
+     *
+     * @type {string}
+     * @memberof GenerateAndSendEmailVerificationCodeRequestDto
+     */
+    'purpose': GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum;
+}
+export declare const GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum: {
+    readonly Up: "SIGN_UP";
+    readonly In: "SIGN_IN";
+};
+export type GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum = typeof GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum[keyof typeof GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum];
+/**
+ *
+ * @export
+ * @interface GenerateAndSendPhoneVerificationCodeRequestDto
+ */
+export interface GenerateAndSendPhoneVerificationCodeRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof GenerateAndSendPhoneVerificationCodeRequestDto
+     */
+    'phone': string;
+    /**
+     *
+     * @type {string}
+     * @memberof GenerateAndSendPhoneVerificationCodeRequestDto
+     */
+    'purpose': GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum;
+}
+export declare const GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum: {
+    readonly Up: "SIGN_UP";
+    readonly In: "SIGN_IN";
+};
+export type GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum = typeof GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum[keyof typeof GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum];
+/**
+ *
+ * @export
  * @interface MeanResultEntity
  */
 export interface MeanResultEntity {
@@ -2392,32 +2440,6 @@ export interface ProportionResultEntity {
 /**
  *
  * @export
- * @interface SendEmailVerificationCodeRequestDto
- */
-export interface SendEmailVerificationCodeRequestDto {
-    /**
-     *
-     * @type {string}
-     * @memberof SendEmailVerificationCodeRequestDto
-     */
-    'email': string;
-}
-/**
- *
- * @export
- * @interface SendPhoneVerificationCodeRequestDto
- */
-export interface SendPhoneVerificationCodeRequestDto {
-    /**
-     *
-     * @type {string}
-     * @memberof SendPhoneVerificationCodeRequestDto
-     */
-    'phone': string;
-}
-/**
- *
- * @export
  * @interface SignUpWithEmailPasswordRequestDto
  */
 export interface SignUpWithEmailPasswordRequestDto {
@@ -2575,6 +2597,36 @@ export interface UserRelatedWorkspaceEntity {
      */
     'relationType': string;
 }
+/**
+ *
+ * @export
+ * @interface VerifyEmailVerificationCodeRequestDto
+ */
+export interface VerifyEmailVerificationCodeRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof VerifyEmailVerificationCodeRequestDto
+     */
+    'email': string;
+    /**
+     *
+     * @type {string}
+     * @memberof VerifyEmailVerificationCodeRequestDto
+     */
+    'purpose': VerifyEmailVerificationCodeRequestDtoPurposeEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof VerifyEmailVerificationCodeRequestDto
+     */
+    'code': string;
+}
+export declare const VerifyEmailVerificationCodeRequestDtoPurposeEnum: {
+    readonly Up: "SIGN_UP";
+    readonly In: "SIGN_IN";
+};
+export type VerifyEmailVerificationCodeRequestDtoPurposeEnum = typeof VerifyEmailVerificationCodeRequestDtoPurposeEnum[keyof typeof VerifyEmailVerificationCodeRequestDtoPurposeEnum];
 /**
  *
  * @export
@@ -3781,18 +3833,18 @@ export declare class BankTransactionsApi extends BaseAPI {
 export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
      *
-     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
+     * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authControllerGenerateAndSendEmailVerificationCodeForSignUp: (sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    authControllerGenerateAndSendEmailVerificationCode: (generateAndSendEmailVerificationCodeRequestDto: GenerateAndSendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
-     * @param {SendPhoneVerificationCodeRequestDto} sendPhoneVerificationCodeRequestDto
+     * @param {GenerateAndSendPhoneVerificationCodeRequestDto} generateAndSendPhoneVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authControllerGenerateAndSendPhoneVerificationCodeForSignUp: (sendPhoneVerificationCodeRequestDto: SendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    authControllerGenerateAndSendPhoneVerificationCode: (generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
@@ -3800,6 +3852,13 @@ export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration
      * @throws {RequiredError}
      */
     authControllerSignUpWithEmailPassword: (signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {VerifyEmailVerificationCodeRequestDto} verifyEmailVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerVerifyEmailVerificationCode: (verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * IamAuthApi - functional programming interface
@@ -3808,18 +3867,18 @@ export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration
 export declare const IamAuthApiFp: (configuration?: Configuration) => {
     /**
      *
-     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
+     * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authControllerGenerateAndSendEmailVerificationCodeForSignUp(sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    authControllerGenerateAndSendEmailVerificationCode(generateAndSendEmailVerificationCodeRequestDto: GenerateAndSendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      *
-     * @param {SendPhoneVerificationCodeRequestDto} sendPhoneVerificationCodeRequestDto
+     * @param {GenerateAndSendPhoneVerificationCodeRequestDto} generateAndSendPhoneVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authControllerGenerateAndSendPhoneVerificationCodeForSignUp(sendPhoneVerificationCodeRequestDto: SendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      *
      * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
@@ -3827,6 +3886,13 @@ export declare const IamAuthApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>>;
+    /**
+     *
+     * @param {VerifyEmailVerificationCodeRequestDto} verifyEmailVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
 };
 /**
  * IamAuthApi - factory interface
@@ -3835,18 +3901,18 @@ export declare const IamAuthApiFp: (configuration?: Configuration) => {
 export declare const IamAuthApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
      *
-     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
+     * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authControllerGenerateAndSendEmailVerificationCodeForSignUp(sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
+    authControllerGenerateAndSendEmailVerificationCode(generateAndSendEmailVerificationCodeRequestDto: GenerateAndSendEmailVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
     /**
      *
-     * @param {SendPhoneVerificationCodeRequestDto} sendPhoneVerificationCodeRequestDto
+     * @param {GenerateAndSendPhoneVerificationCodeRequestDto} generateAndSendPhoneVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authControllerGenerateAndSendPhoneVerificationCodeForSignUp(sendPhoneVerificationCodeRequestDto: SendPhoneVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
+    authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
     /**
      *
      * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
@@ -3854,6 +3920,13 @@ export declare const IamAuthApiFactory: (configuration?: Configuration, basePath
      * @throws {RequiredError}
      */
     authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: any): AxiosPromise<UserEntity>;
+    /**
+     *
+     * @param {VerifyEmailVerificationCodeRequestDto} verifyEmailVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
 };
 /**
  * IamAuthApi - object-oriented interface
@@ -3864,20 +3937,20 @@ export declare const IamAuthApiFactory: (configuration?: Configuration, basePath
 export declare class IamAuthApi extends BaseAPI {
     /**
      *
-     * @param {SendEmailVerificationCodeRequestDto} sendEmailVerificationCodeRequestDto
+     * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IamAuthApi
      */
-    authControllerGenerateAndSendEmailVerificationCodeForSignUp(sendEmailVerificationCodeRequestDto: SendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    authControllerGenerateAndSendEmailVerificationCode(generateAndSendEmailVerificationCodeRequestDto: GenerateAndSendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      *
-     * @param {SendPhoneVerificationCodeRequestDto} sendPhoneVerificationCodeRequestDto
+     * @param {GenerateAndSendPhoneVerificationCodeRequestDto} generateAndSendPhoneVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IamAuthApi
      */
-    authControllerGenerateAndSendPhoneVerificationCodeForSignUp(sendPhoneVerificationCodeRequestDto: SendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      *
      * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto
@@ -3886,6 +3959,14 @@ export declare class IamAuthApi extends BaseAPI {
      * @memberof IamAuthApi
      */
     authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserEntity, any>>;
+    /**
+     *
+     * @param {VerifyEmailVerificationCodeRequestDto} verifyEmailVerificationCodeRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
  * MessageTokensApi - axios parameter creator
