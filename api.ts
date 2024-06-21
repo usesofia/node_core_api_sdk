@@ -2466,31 +2466,37 @@ export interface ProportionResultEntity {
 /**
  * 
  * @export
- * @interface SignUpWithEmailPasswordRequestDto
+ * @interface SignUpWithEmailRequestDto
  */
-export interface SignUpWithEmailPasswordRequestDto {
+export interface SignUpWithEmailRequestDto {
     /**
      * 
      * @type {string}
-     * @memberof SignUpWithEmailPasswordRequestDto
+     * @memberof SignUpWithEmailRequestDto
      */
     'email': string;
     /**
      * 
      * @type {string}
-     * @memberof SignUpWithEmailPasswordRequestDto
+     * @memberof SignUpWithEmailRequestDto
+     */
+    'phone': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignUpWithEmailRequestDto
      */
     'password': string;
     /**
      * 
      * @type {string}
-     * @memberof SignUpWithEmailPasswordRequestDto
+     * @memberof SignUpWithEmailRequestDto
      */
     'emailVerificationCode': string;
     /**
      * 
      * @type {string}
-     * @memberof SignUpWithEmailPasswordRequestDto
+     * @memberof SignUpWithEmailRequestDto
      */
     'phoneVerificationCode': string;
 }
@@ -5109,14 +5115,14 @@ export const IamAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto 
+         * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerSignUpWithEmailPassword: async (signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'signUpWithEmailPasswordRequestDto' is not null or undefined
-            assertParamExists('authControllerSignUpWithEmailPassword', 'signUpWithEmailPasswordRequestDto', signUpWithEmailPasswordRequestDto)
-            const localVarPath = `/iam/auth/sign-up/email-password`;
+        authControllerSignUpWithEmail: async (signUpWithEmailRequestDto: SignUpWithEmailRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'signUpWithEmailRequestDto' is not null or undefined
+            assertParamExists('authControllerSignUpWithEmail', 'signUpWithEmailRequestDto', signUpWithEmailRequestDto)
+            const localVarPath = `/iam/auth/sign-up/email`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5135,7 +5141,7 @@ export const IamAuthApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(signUpWithEmailPasswordRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(signUpWithEmailRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5248,14 +5254,14 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto 
+         * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto, options);
+        async authControllerSignUpWithEmail(signUpWithEmailRequestDto: SignUpWithEmailRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerSignUpWithEmail(signUpWithEmailRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerSignUpWithEmailPassword']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerSignUpWithEmail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5312,12 +5318,12 @@ export const IamAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto 
+         * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: any): AxiosPromise<UserEntity> {
-            return localVarFp.authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto, options).then((request) => request(axios, basePath));
+        authControllerSignUpWithEmail(signUpWithEmailRequestDto: SignUpWithEmailRequestDto, options?: any): AxiosPromise<UserEntity> {
+            return localVarFp.authControllerSignUpWithEmail(signUpWithEmailRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5371,13 +5377,13 @@ export class IamAuthApi extends BaseAPI {
 
     /**
      * 
-     * @param {SignUpWithEmailPasswordRequestDto} signUpWithEmailPasswordRequestDto 
+     * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IamAuthApi
      */
-    public authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto: SignUpWithEmailPasswordRequestDto, options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerSignUpWithEmailPassword(signUpWithEmailPasswordRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public authControllerSignUpWithEmail(signUpWithEmailRequestDto: SignUpWithEmailRequestDto, options?: RawAxiosRequestConfig) {
+        return IamAuthApiFp(this.configuration).authControllerSignUpWithEmail(signUpWithEmailRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
