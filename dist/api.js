@@ -2671,6 +2671,43 @@ var IamAuthApiAxiosParamCreator = function (configuration) {
         },
         /**
          *
+         * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerSignInWithEmail: function (signInWithEmailRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([signInWithEmailRequestDto_1], args_1, true), void 0, function (signInWithEmailRequestDto, options) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
+                return __generator(this, function (_a) {
+                    // verify required parameter 'signInWithEmailRequestDto' is not null or undefined
+                    (0, common_1.assertParamExists)('authControllerSignInWithEmail', 'signInWithEmailRequestDto', signInWithEmailRequestDto);
+                    localVarPath = "/iam/auth/sign-in/email";
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'application/json';
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(signInWithEmailRequestDto, localVarRequestOptions, configuration);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+        /**
+         *
          * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2836,6 +2873,28 @@ var IamAuthApiFp = function (configuration) {
         },
         /**
          *
+         * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerSignInWithEmail: function (signInWithEmailRequestDto, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.authControllerSignInWithEmail(signInWithEmailRequestDto, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['IamAuthApi.authControllerSignInWithEmail']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+        /**
+         *
          * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2930,6 +2989,15 @@ var IamAuthApiFactory = function (configuration, basePath, axios) {
         },
         /**
          *
+         * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerSignInWithEmail: function (signInWithEmailRequestDto, options) {
+            return localVarFp.authControllerSignInWithEmail(signInWithEmailRequestDto, options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
          * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2990,6 +3058,17 @@ var IamAuthApi = /** @class */ (function (_super) {
     IamAuthApi.prototype.authControllerGenerateAndSendPhoneVerificationCode = function (generateAndSendPhoneVerificationCodeRequestDto, options) {
         var _this = this;
         return (0, exports.IamAuthApiFp)(this.configuration).authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    /**
+     *
+     * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    IamAuthApi.prototype.authControllerSignInWithEmail = function (signInWithEmailRequestDto, options) {
+        var _this = this;
+        return (0, exports.IamAuthApiFp)(this.configuration).authControllerSignInWithEmail(signInWithEmailRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *

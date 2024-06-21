@@ -1693,6 +1693,31 @@ export interface CreateWorkspaceRequestDto {
 /**
  * 
  * @export
+ * @interface CredentialsEntity
+ */
+export interface CredentialsEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof CredentialsEntity
+     */
+    'userId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CredentialsEntity
+     */
+    'accessToken': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CredentialsEntity
+     */
+    'refreshToken': string;
+}
+/**
+ * 
+ * @export
  * @interface CreditCardMetadataDto
  */
 export interface CreditCardMetadataDto {
@@ -2462,6 +2487,31 @@ export interface ProportionResultEntity {
      * @memberof ProportionResultEntity
      */
     'ratio'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface SignInWithEmailRequestDto
+ */
+export interface SignInWithEmailRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SignInWithEmailRequestDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignInWithEmailRequestDto
+     */
+    'password': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignInWithEmailRequestDto
+     */
+    'clientId': string;
 }
 /**
  * 
@@ -5115,6 +5165,41 @@ export const IamAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerSignInWithEmail: async (signInWithEmailRequestDto: SignInWithEmailRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'signInWithEmailRequestDto' is not null or undefined
+            assertParamExists('authControllerSignInWithEmail', 'signInWithEmailRequestDto', signInWithEmailRequestDto)
+            const localVarPath = `/iam/auth/sign-in/email`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(signInWithEmailRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5254,6 +5339,18 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authControllerSignInWithEmail(signInWithEmailRequestDto: SignInWithEmailRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerSignInWithEmail(signInWithEmailRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerSignInWithEmail']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5318,6 +5415,15 @@ export const IamAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerSignInWithEmail(signInWithEmailRequestDto: SignInWithEmailRequestDto, options?: any): AxiosPromise<CredentialsEntity> {
+            return localVarFp.authControllerSignInWithEmail(signInWithEmailRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5373,6 +5479,17 @@ export class IamAuthApi extends BaseAPI {
      */
     public authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) {
         return IamAuthApiFp(this.configuration).authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    public authControllerSignInWithEmail(signInWithEmailRequestDto: SignInWithEmailRequestDto, options?: RawAxiosRequestConfig) {
+        return IamAuthApiFp(this.configuration).authControllerSignInWithEmail(signInWithEmailRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
