@@ -2687,6 +2687,18 @@ export interface UserEntity {
      * @memberof UserEntity
      */
     'passwordHash': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UserEntity
+     */
+    'isRoot': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserEntity
+     */
+    'createdAt': string;
 }
 /**
  * 
@@ -5293,6 +5305,35 @@ export const IamAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerMe: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/iam/auth/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {RefreshRequestDto} refreshRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5526,6 +5567,17 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authControllerMe(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerMe(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerMe']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {RefreshRequestDto} refreshRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5632,6 +5684,14 @@ export const IamAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerMe(options?: any): AxiosPromise<UserEntity> {
+            return localVarFp.authControllerMe(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {RefreshRequestDto} refreshRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5727,6 +5787,16 @@ export class IamAuthApi extends BaseAPI {
      */
     public authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: RawAxiosRequestConfig) {
         return IamAuthApiFp(this.configuration).authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    public authControllerMe(options?: RawAxiosRequestConfig) {
+        return IamAuthApiFp(this.configuration).authControllerMe(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
