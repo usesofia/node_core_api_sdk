@@ -2465,6 +2465,19 @@ export interface ProportionResultEntity {
 /**
  *
  * @export
+ * @interface RefreshRequestDto
+ */
+export interface RefreshRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof RefreshRequestDto
+     */
+    'clientId': string;
+}
+/**
+ *
+ * @export
  * @interface SignInWithEmailRequestDto
  */
 export interface SignInWithEmailRequestDto {
@@ -3933,6 +3946,13 @@ export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration
     authControllerGenerateAndSendPhoneVerificationCode: (generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
+     * @param {RefreshRequestDto} refreshRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerRefresh: (refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
      * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3981,6 +4001,13 @@ export declare const IamAuthApiFp: (configuration?: Configuration) => {
     authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      *
+     * @param {RefreshRequestDto} refreshRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsEntity>>;
+    /**
+     *
      * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4027,6 +4054,13 @@ export declare const IamAuthApiFactory: (configuration?: Configuration, basePath
      * @throws {RequiredError}
      */
     authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
+    /**
+     *
+     * @param {RefreshRequestDto} refreshRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: any): AxiosPromise<CredentialsEntity>;
     /**
      *
      * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto
@@ -4079,6 +4113,14 @@ export declare class IamAuthApi extends BaseAPI {
      * @memberof IamAuthApi
      */
     authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @param {RefreshRequestDto} refreshRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CredentialsEntity, any>>;
     /**
      *
      * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto

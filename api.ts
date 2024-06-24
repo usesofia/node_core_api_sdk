@@ -2491,6 +2491,19 @@ export interface ProportionResultEntity {
 /**
  * 
  * @export
+ * @interface RefreshRequestDto
+ */
+export interface RefreshRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof RefreshRequestDto
+     */
+    'clientId': string;
+}
+/**
+ * 
+ * @export
  * @interface SignInWithEmailRequestDto
  */
 export interface SignInWithEmailRequestDto {
@@ -5165,6 +5178,41 @@ export const IamAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {RefreshRequestDto} refreshRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerRefresh: async (refreshRequestDto: RefreshRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'refreshRequestDto' is not null or undefined
+            assertParamExists('authControllerRefresh', 'refreshRequestDto', refreshRequestDto)
+            const localVarPath = `/iam/auth/refresh`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(refreshRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5339,6 +5387,18 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {RefreshRequestDto} refreshRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerRefresh(refreshRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerRefresh']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5415,6 +5475,15 @@ export const IamAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {RefreshRequestDto} refreshRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: any): AxiosPromise<CredentialsEntity> {
+            return localVarFp.authControllerRefresh(refreshRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5479,6 +5548,17 @@ export class IamAuthApi extends BaseAPI {
      */
     public authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) {
         return IamAuthApiFp(this.configuration).authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {RefreshRequestDto} refreshRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    public authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig) {
+        return IamAuthApiFp(this.configuration).authControllerRefresh(refreshRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
