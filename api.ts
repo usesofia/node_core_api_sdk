@@ -2242,6 +2242,25 @@ export interface ParcialUpdateWorkspaceRequestDto {
 /**
  * 
  * @export
+ * @interface PartialUpdateProfileRequestDto
+ */
+export interface PartialUpdateProfileRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof PartialUpdateProfileRequestDto
+     */
+    'fullName'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PartialUpdateProfileRequestDto
+     */
+    'birthDate'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface PaymentDataDto
  */
 export interface PaymentDataDto {
@@ -5896,6 +5915,41 @@ export const IamProfilesApiAxiosParamCreator = function (configuration?: Configu
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {PartialUpdateProfileRequestDto} partialUpdateProfileRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerPartialUpdate: async (partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'partialUpdateProfileRequestDto' is not null or undefined
+            assertParamExists('profilesControllerPartialUpdate', 'partialUpdateProfileRequestDto', partialUpdateProfileRequestDto)
+            const localVarPath = `/iam/profiles/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(partialUpdateProfileRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -5929,6 +5983,18 @@ export const IamProfilesApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['IamProfilesApi.profilesControllerGetMy']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {PartialUpdateProfileRequestDto} partialUpdateProfileRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.profilesControllerPartialUpdate(partialUpdateProfileRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IamProfilesApi.profilesControllerPartialUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -5955,6 +6021,15 @@ export const IamProfilesApiFactory = function (configuration?: Configuration, ba
          */
         profilesControllerGetMy(options?: any): AxiosPromise<ProfileEntity> {
             return localVarFp.profilesControllerGetMy(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {PartialUpdateProfileRequestDto} partialUpdateProfileRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: any): AxiosPromise<ProfileEntity> {
+            return localVarFp.profilesControllerPartialUpdate(partialUpdateProfileRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5985,6 +6060,17 @@ export class IamProfilesApi extends BaseAPI {
      */
     public profilesControllerGetMy(options?: RawAxiosRequestConfig) {
         return IamProfilesApiFp(this.configuration).profilesControllerGetMy(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {PartialUpdateProfileRequestDto} partialUpdateProfileRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamProfilesApi
+     */
+    public profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: RawAxiosRequestConfig) {
+        return IamProfilesApiFp(this.configuration).profilesControllerPartialUpdate(partialUpdateProfileRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

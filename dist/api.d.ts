@@ -2216,6 +2216,25 @@ export interface ParcialUpdateWorkspaceRequestDto {
 /**
  *
  * @export
+ * @interface PartialUpdateProfileRequestDto
+ */
+export interface PartialUpdateProfileRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof PartialUpdateProfileRequestDto
+     */
+    'fullName'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof PartialUpdateProfileRequestDto
+     */
+    'birthDate'?: string | null;
+}
+/**
+ *
+ * @export
  * @interface PaymentDataDto
  */
 export interface PaymentDataDto {
@@ -4281,6 +4300,13 @@ export declare const IamProfilesApiAxiosParamCreator: (configuration?: Configura
      * @throws {RequiredError}
      */
     profilesControllerGetMy: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {PartialUpdateProfileRequestDto} partialUpdateProfileRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    profilesControllerPartialUpdate: (partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * IamProfilesApi - functional programming interface
@@ -4300,6 +4326,13 @@ export declare const IamProfilesApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>>;
+    /**
+     *
+     * @param {PartialUpdateProfileRequestDto} partialUpdateProfileRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>>;
 };
 /**
  * IamProfilesApi - factory interface
@@ -4319,6 +4352,13 @@ export declare const IamProfilesApiFactory: (configuration?: Configuration, base
      * @throws {RequiredError}
      */
     profilesControllerGetMy(options?: any): AxiosPromise<ProfileEntity>;
+    /**
+     *
+     * @param {PartialUpdateProfileRequestDto} partialUpdateProfileRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: any): AxiosPromise<ProfileEntity>;
 };
 /**
  * IamProfilesApi - object-oriented interface
@@ -4342,6 +4382,14 @@ export declare class IamProfilesApi extends BaseAPI {
      * @memberof IamProfilesApi
      */
     profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
+    /**
+     *
+     * @param {PartialUpdateProfileRequestDto} partialUpdateProfileRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamProfilesApi
+     */
+    profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
 }
 /**
  * MessageTokensApi - axios parameter creator
