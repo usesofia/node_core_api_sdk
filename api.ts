@@ -2091,6 +2091,19 @@ export interface GenerateEmailInUseReportRequestDto {
 /**
  * 
  * @export
+ * @interface GeneratePhoneInUseReportRequestDto
+ */
+export interface GeneratePhoneInUseReportRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof GeneratePhoneInUseReportRequestDto
+     */
+    'phone': string;
+}
+/**
+ * 
+ * @export
  * @interface MeanResultEntity
  */
 export interface MeanResultEntity {
@@ -5245,6 +5258,41 @@ export const IamAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {GeneratePhoneInUseReportRequestDto} generatePhoneInUseReportRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerGeneratePhoneInUseReport: async (generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'generatePhoneInUseReportRequestDto' is not null or undefined
+            assertParamExists('authControllerGeneratePhoneInUseReport', 'generatePhoneInUseReportRequestDto', generatePhoneInUseReportRequestDto)
+            const localVarPath = `/iam/auth/phone-in-use`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(generatePhoneInUseReportRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {RefreshRequestDto} refreshRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5466,6 +5514,18 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {GeneratePhoneInUseReportRequestDto} generatePhoneInUseReportRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailInUseReportEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerGeneratePhoneInUseReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {RefreshRequestDto} refreshRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5563,6 +5623,15 @@ export const IamAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {GeneratePhoneInUseReportRequestDto} generatePhoneInUseReportRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: any): AxiosPromise<EmailInUseReportEntity> {
+            return localVarFp.authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {RefreshRequestDto} refreshRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5647,6 +5716,17 @@ export class IamAuthApi extends BaseAPI {
      */
     public authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: RawAxiosRequestConfig) {
         return IamAuthApiFp(this.configuration).authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {GeneratePhoneInUseReportRequestDto} generatePhoneInUseReportRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    public authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: RawAxiosRequestConfig) {
+        return IamAuthApiFp(this.configuration).authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

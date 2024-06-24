@@ -2069,6 +2069,19 @@ export interface GenerateEmailInUseReportRequestDto {
 /**
  *
  * @export
+ * @interface GeneratePhoneInUseReportRequestDto
+ */
+export interface GeneratePhoneInUseReportRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof GeneratePhoneInUseReportRequestDto
+     */
+    'phone': string;
+}
+/**
+ *
+ * @export
  * @interface MeanResultEntity
  */
 export interface MeanResultEntity {
@@ -3985,6 +3998,13 @@ export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration
     authControllerGenerateEmailInUseReport: (generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
+     * @param {GeneratePhoneInUseReportRequestDto} generatePhoneInUseReportRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGeneratePhoneInUseReport: (generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
      * @param {RefreshRequestDto} refreshRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4047,6 +4067,13 @@ export declare const IamAuthApiFp: (configuration?: Configuration) => {
     authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailInUseReportEntity>>;
     /**
      *
+     * @param {GeneratePhoneInUseReportRequestDto} generatePhoneInUseReportRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailInUseReportEntity>>;
+    /**
+     *
      * @param {RefreshRequestDto} refreshRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4107,6 +4134,13 @@ export declare const IamAuthApiFactory: (configuration?: Configuration, basePath
      * @throws {RequiredError}
      */
     authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: any): AxiosPromise<EmailInUseReportEntity>;
+    /**
+     *
+     * @param {GeneratePhoneInUseReportRequestDto} generatePhoneInUseReportRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: any): AxiosPromise<EmailInUseReportEntity>;
     /**
      *
      * @param {RefreshRequestDto} refreshRequestDto
@@ -4174,6 +4208,14 @@ export declare class IamAuthApi extends BaseAPI {
      * @memberof IamAuthApi
      */
     authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<EmailInUseReportEntity, any>>;
+    /**
+     *
+     * @param {GeneratePhoneInUseReportRequestDto} generatePhoneInUseReportRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<EmailInUseReportEntity, any>>;
     /**
      *
      * @param {RefreshRequestDto} refreshRequestDto
