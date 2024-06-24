@@ -1631,6 +1631,25 @@ export interface CreatePluggyConnectTokenRequestDto {
 /**
  * 
  * @export
+ * @interface CreateProfileRequestDto
+ */
+export interface CreateProfileRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateProfileRequestDto
+     */
+    'fullName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateProfileRequestDto
+     */
+    'birthDate': string;
+}
+/**
+ * 
+ * @export
  * @interface CreateWorkspaceRequestDto
  */
 export interface CreateWorkspaceRequestDto {
@@ -5815,6 +5834,41 @@ export const IamProfilesApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
+         * @param {CreateProfileRequestDto} createProfileRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerCreate: async (createProfileRequestDto: CreateProfileRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createProfileRequestDto' is not null or undefined
+            assertParamExists('profilesControllerCreate', 'createProfileRequestDto', createProfileRequestDto)
+            const localVarPath = `/iam/profiles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createProfileRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5854,6 +5908,18 @@ export const IamProfilesApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {CreateProfileRequestDto} createProfileRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.profilesControllerCreate(createProfileRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IamProfilesApi.profilesControllerCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5875,6 +5941,15 @@ export const IamProfilesApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
+         * @param {CreateProfileRequestDto} createProfileRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: any): AxiosPromise<ProfileEntity> {
+            return localVarFp.profilesControllerCreate(createProfileRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5891,6 +5966,17 @@ export const IamProfilesApiFactory = function (configuration?: Configuration, ba
  * @extends {BaseAPI}
  */
 export class IamProfilesApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateProfileRequestDto} createProfileRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamProfilesApi
+     */
+    public profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig) {
+        return IamProfilesApiFp(this.configuration).profilesControllerCreate(createProfileRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {*} [options] Override http request option.

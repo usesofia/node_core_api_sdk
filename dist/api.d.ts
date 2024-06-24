@@ -1615,6 +1615,25 @@ export interface CreatePluggyConnectTokenRequestDto {
 /**
  *
  * @export
+ * @interface CreateProfileRequestDto
+ */
+export interface CreateProfileRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof CreateProfileRequestDto
+     */
+    'fullName': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateProfileRequestDto
+     */
+    'birthDate': string;
+}
+/**
+ *
+ * @export
  * @interface CreateWorkspaceRequestDto
  */
 export interface CreateWorkspaceRequestDto {
@@ -4251,6 +4270,13 @@ export declare class IamAuthApi extends BaseAPI {
 export declare const IamProfilesApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
      *
+     * @param {CreateProfileRequestDto} createProfileRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    profilesControllerCreate: (createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -4261,6 +4287,13 @@ export declare const IamProfilesApiAxiosParamCreator: (configuration?: Configura
  * @export
  */
 export declare const IamProfilesApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {CreateProfileRequestDto} createProfileRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>>;
     /**
      *
      * @param {*} [options] Override http request option.
@@ -4275,6 +4308,13 @@ export declare const IamProfilesApiFp: (configuration?: Configuration) => {
 export declare const IamProfilesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
      *
+     * @param {CreateProfileRequestDto} createProfileRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: any): AxiosPromise<ProfileEntity>;
+    /**
+     *
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -4287,6 +4327,14 @@ export declare const IamProfilesApiFactory: (configuration?: Configuration, base
  * @extends {BaseAPI}
  */
 export declare class IamProfilesApi extends BaseAPI {
+    /**
+     *
+     * @param {CreateProfileRequestDto} createProfileRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamProfilesApi
+     */
+    profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
     /**
      *
      * @param {*} [options] Override http request option.

@@ -3423,6 +3423,43 @@ var IamProfilesApiAxiosParamCreator = function (configuration) {
     return {
         /**
          *
+         * @param {CreateProfileRequestDto} createProfileRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerCreate: function (createProfileRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([createProfileRequestDto_1], args_1, true), void 0, function (createProfileRequestDto, options) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
+                return __generator(this, function (_a) {
+                    // verify required parameter 'createProfileRequestDto' is not null or undefined
+                    (0, common_1.assertParamExists)('profilesControllerCreate', 'createProfileRequestDto', createProfileRequestDto);
+                    localVarPath = "/iam/profiles";
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'application/json';
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(createProfileRequestDto, localVarRequestOptions, configuration);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+        /**
+         *
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3465,6 +3502,28 @@ var IamProfilesApiFp = function (configuration) {
     return {
         /**
          *
+         * @param {CreateProfileRequestDto} createProfileRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerCreate: function (createProfileRequestDto, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.profilesControllerCreate(createProfileRequestDto, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['IamProfilesApi.profilesControllerCreate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+        /**
+         *
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3496,6 +3555,15 @@ var IamProfilesApiFactory = function (configuration, basePath, axios) {
     return {
         /**
          *
+         * @param {CreateProfileRequestDto} createProfileRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerCreate: function (createProfileRequestDto, options) {
+            return localVarFp.profilesControllerCreate(createProfileRequestDto, options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3516,6 +3584,17 @@ var IamProfilesApi = /** @class */ (function (_super) {
     function IamProfilesApi() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    /**
+     *
+     * @param {CreateProfileRequestDto} createProfileRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamProfilesApi
+     */
+    IamProfilesApi.prototype.profilesControllerCreate = function (createProfileRequestDto, options) {
+        var _this = this;
+        return (0, exports.IamProfilesApiFp)(this.configuration).profilesControllerCreate(createProfileRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
     /**
      *
      * @param {*} [options] Override http request option.
