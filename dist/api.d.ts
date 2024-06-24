@@ -1332,19 +1332,6 @@ export interface CategoryGuessDto {
 /**
  *
  * @export
- * @interface CheckEmailInUseRequestDto
- */
-export interface CheckEmailInUseRequestDto {
-    /**
-     *
-     * @type {string}
-     * @memberof CheckEmailInUseRequestDto
-     */
-    'email': string;
-}
-/**
- *
- * @export
  * @interface CreateBankTransactionTagRequestDto
  */
 export interface CreateBankTransactionTagRequestDto {
@@ -1777,19 +1764,19 @@ export interface DreLineOutcomeResultEntity {
 /**
  *
  * @export
- * @interface EmailInUseEntity
+ * @interface EmailInUseReportEntity
  */
-export interface EmailInUseEntity {
+export interface EmailInUseReportEntity {
     /**
      *
      * @type {string}
-     * @memberof EmailInUseEntity
+     * @memberof EmailInUseReportEntity
      */
     'email': string;
     /**
      *
      * @type {boolean}
-     * @memberof EmailInUseEntity
+     * @memberof EmailInUseReportEntity
      */
     'inUse': boolean;
 }
@@ -2066,6 +2053,19 @@ export declare const GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum: 
     readonly In: "SIGN_IN";
 };
 export type GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum = typeof GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum[keyof typeof GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum];
+/**
+ *
+ * @export
+ * @interface GenerateEmailInUseReportRequestDto
+ */
+export interface GenerateEmailInUseReportRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof GenerateEmailInUseReportRequestDto
+     */
+    'email': string;
+}
 /**
  *
  * @export
@@ -3964,13 +3964,6 @@ export declare class BankTransactionsApi extends BaseAPI {
 export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
      *
-     * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerCheckEmailInUse: (checkEmailInUseRequestDto: CheckEmailInUseRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
      * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3983,6 +3976,13 @@ export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration
      * @throws {RequiredError}
      */
     authControllerGenerateAndSendPhoneVerificationCode: (generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {GenerateEmailInUseReportRequestDto} generateEmailInUseReportRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGenerateEmailInUseReport: (generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {RefreshRequestDto} refreshRequestDto
@@ -4026,13 +4026,6 @@ export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration
 export declare const IamAuthApiFp: (configuration?: Configuration) => {
     /**
      *
-     * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerCheckEmailInUse(checkEmailInUseRequestDto: CheckEmailInUseRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailInUseEntity>>;
-    /**
-     *
      * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4045,6 +4038,13 @@ export declare const IamAuthApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @param {GenerateEmailInUseReportRequestDto} generateEmailInUseReportRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailInUseReportEntity>>;
     /**
      *
      * @param {RefreshRequestDto} refreshRequestDto
@@ -4088,13 +4088,6 @@ export declare const IamAuthApiFp: (configuration?: Configuration) => {
 export declare const IamAuthApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
      *
-     * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerCheckEmailInUse(checkEmailInUseRequestDto: CheckEmailInUseRequestDto, options?: any): AxiosPromise<EmailInUseEntity>;
-    /**
-     *
      * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4107,6 +4100,13 @@ export declare const IamAuthApiFactory: (configuration?: Configuration, basePath
      * @throws {RequiredError}
      */
     authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
+    /**
+     *
+     * @param {GenerateEmailInUseReportRequestDto} generateEmailInUseReportRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: any): AxiosPromise<EmailInUseReportEntity>;
     /**
      *
      * @param {RefreshRequestDto} refreshRequestDto
@@ -4152,14 +4152,6 @@ export declare const IamAuthApiFactory: (configuration?: Configuration, basePath
 export declare class IamAuthApi extends BaseAPI {
     /**
      *
-     * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof IamAuthApi
-     */
-    authControllerCheckEmailInUse(checkEmailInUseRequestDto: CheckEmailInUseRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<EmailInUseEntity, any>>;
-    /**
-     *
      * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4174,6 +4166,14 @@ export declare class IamAuthApi extends BaseAPI {
      * @memberof IamAuthApi
      */
     authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @param {GenerateEmailInUseReportRequestDto} generateEmailInUseReportRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<EmailInUseReportEntity, any>>;
     /**
      *
      * @param {RefreshRequestDto} refreshRequestDto
