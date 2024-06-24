@@ -2597,6 +2597,43 @@ var IamAuthApiAxiosParamCreator = function (configuration) {
     return {
         /**
          *
+         * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerCheckEmailInUse: function (checkEmailInUseRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([checkEmailInUseRequestDto_1], args_1, true), void 0, function (checkEmailInUseRequestDto, options) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
+                return __generator(this, function (_a) {
+                    // verify required parameter 'checkEmailInUseRequestDto' is not null or undefined
+                    (0, common_1.assertParamExists)('authControllerCheckEmailInUse', 'checkEmailInUseRequestDto', checkEmailInUseRequestDto);
+                    localVarPath = "/iam/auth/check-email-in-use";
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'application/json';
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(checkEmailInUseRequestDto, localVarRequestOptions, configuration);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+        /**
+         *
          * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2866,6 +2903,28 @@ var IamAuthApiFp = function (configuration) {
     return {
         /**
          *
+         * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerCheckEmailInUse: function (checkEmailInUseRequestDto, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.authControllerCheckEmailInUse(checkEmailInUseRequestDto, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['IamAuthApi.authControllerCheckEmailInUse']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+        /**
+         *
          * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3030,6 +3089,15 @@ var IamAuthApiFactory = function (configuration, basePath, axios) {
     return {
         /**
          *
+         * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerCheckEmailInUse: function (checkEmailInUseRequestDto, options) {
+            return localVarFp.authControllerCheckEmailInUse(checkEmailInUseRequestDto, options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
          * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3105,6 +3173,17 @@ var IamAuthApi = /** @class */ (function (_super) {
     function IamAuthApi() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    /**
+     *
+     * @param {CheckEmailInUseRequestDto} checkEmailInUseRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamAuthApi
+     */
+    IamAuthApi.prototype.authControllerCheckEmailInUse = function (checkEmailInUseRequestDto, options) {
+        var _this = this;
+        return (0, exports.IamAuthApiFp)(this.configuration).authControllerCheckEmailInUse(checkEmailInUseRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
     /**
      *
      * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
