@@ -1615,31 +1615,6 @@ export interface CreatePluggyConnectTokenRequestDto {
 /**
  *
  * @export
- * @interface CreateProfileRequestDto
- */
-export interface CreateProfileRequestDto {
-    /**
-     *
-     * @type {string}
-     * @memberof CreateProfileRequestDto
-     */
-    'fullName': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateProfileRequestDto
-     */
-    'phone': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateProfileRequestDto
-     */
-    'birthDate': string;
-}
-/**
- *
- * @export
  * @interface CreateWorkspaceRequestDto
  */
 export interface CreateWorkspaceRequestDto {
@@ -2209,31 +2184,6 @@ export type MessageTokenEntityPlatformEnum = typeof MessageTokenEntityPlatformEn
 /**
  *
  * @export
- * @interface ParcialUpdateProfileRequestDto
- */
-export interface ParcialUpdateProfileRequestDto {
-    /**
-     *
-     * @type {string}
-     * @memberof ParcialUpdateProfileRequestDto
-     */
-    'fullName'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ParcialUpdateProfileRequestDto
-     */
-    'phone'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ParcialUpdateProfileRequestDto
-     */
-    'birthDate'?: string;
-}
-/**
- *
- * @export
  * @interface ParcialUpdateWorkspaceRequestDto
  */
 export interface ParcialUpdateWorkspaceRequestDto {
@@ -2468,31 +2418,31 @@ export interface ProfileEntity {
      * @type {string}
      * @memberof ProfileEntity
      */
-    'fullName': string;
-    /**
-     *
-     * @type {any}
-     * @memberof ProfileEntity
-     */
-    'birthDate': any;
+    'userId': string;
     /**
      *
      * @type {string}
      * @memberof ProfileEntity
      */
-    'userId': string;
+    'fullName': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof ProfileEntity
      */
-    'createdAt': any;
+    'birthDate': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof ProfileEntity
      */
-    'updatedAt': any;
+    'createdAt': string;
+    /**
+     *
+     * @type {string}
+     * @memberof ProfileEntity
+     */
+    'updatedAt': string;
 }
 /**
  *
@@ -4295,6 +4245,57 @@ export declare class IamAuthApi extends BaseAPI {
     authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
+ * IamProfilesApi - axios parameter creator
+ * @export
+ */
+export declare const IamProfilesApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    profilesControllerGetMy: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * IamProfilesApi - functional programming interface
+ * @export
+ */
+export declare const IamProfilesApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>>;
+};
+/**
+ * IamProfilesApi - factory interface
+ * @export
+ */
+export declare const IamProfilesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    profilesControllerGetMy(options?: any): AxiosPromise<ProfileEntity>;
+};
+/**
+ * IamProfilesApi - object-oriented interface
+ * @export
+ * @class IamProfilesApi
+ * @extends {BaseAPI}
+ */
+export declare class IamProfilesApi extends BaseAPI {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamProfilesApi
+     */
+    profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
+}
+/**
  * MessageTokensApi - axios parameter creator
  * @export
  */
@@ -4461,115 +4462,6 @@ export declare class PluggyApi extends BaseAPI {
      * @memberof PluggyApi
      */
     pluggyControllerWebhook(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
-}
-/**
- * ProfilesApi - axios parameter creator
- * @export
- */
-export declare const ProfilesApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {CreateProfileRequestDto} createProfileRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    profilesControllerCreate: (createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    profilesControllerGetMy: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    profilesControllerParcialUpdate: (parcialUpdateProfileRequestDto: ParcialUpdateProfileRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * ProfilesApi - functional programming interface
- * @export
- */
-export declare const ProfilesApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {CreateProfileRequestDto} createProfileRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>>;
-    /**
-     *
-     * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    profilesControllerParcialUpdate(parcialUpdateProfileRequestDto: ParcialUpdateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>>;
-};
-/**
- * ProfilesApi - factory interface
- * @export
- */
-export declare const ProfilesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {CreateProfileRequestDto} createProfileRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: any): AxiosPromise<ProfileEntity>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    profilesControllerGetMy(options?: any): AxiosPromise<ProfileEntity>;
-    /**
-     *
-     * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    profilesControllerParcialUpdate(parcialUpdateProfileRequestDto: ParcialUpdateProfileRequestDto, options?: any): AxiosPromise<ProfileEntity>;
-};
-/**
- * ProfilesApi - object-oriented interface
- * @export
- * @class ProfilesApi
- * @extends {BaseAPI}
- */
-export declare class ProfilesApi extends BaseAPI {
-    /**
-     *
-     * @param {CreateProfileRequestDto} createProfileRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProfilesApi
-     */
-    profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProfilesApi
-     */
-    profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
-    /**
-     *
-     * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProfilesApi
-     */
-    profilesControllerParcialUpdate(parcialUpdateProfileRequestDto: ParcialUpdateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
 }
 /**
  * ReportsApi - axios parameter creator

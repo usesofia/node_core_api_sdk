@@ -1631,31 +1631,6 @@ export interface CreatePluggyConnectTokenRequestDto {
 /**
  * 
  * @export
- * @interface CreateProfileRequestDto
- */
-export interface CreateProfileRequestDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateProfileRequestDto
-     */
-    'fullName': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateProfileRequestDto
-     */
-    'phone': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateProfileRequestDto
-     */
-    'birthDate': string;
-}
-/**
- * 
- * @export
  * @interface CreateWorkspaceRequestDto
  */
 export interface CreateWorkspaceRequestDto {
@@ -2235,31 +2210,6 @@ export type MessageTokenEntityPlatformEnum = typeof MessageTokenEntityPlatformEn
 /**
  * 
  * @export
- * @interface ParcialUpdateProfileRequestDto
- */
-export interface ParcialUpdateProfileRequestDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof ParcialUpdateProfileRequestDto
-     */
-    'fullName'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParcialUpdateProfileRequestDto
-     */
-    'phone'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParcialUpdateProfileRequestDto
-     */
-    'birthDate'?: string;
-}
-/**
- * 
- * @export
  * @interface ParcialUpdateWorkspaceRequestDto
  */
 export interface ParcialUpdateWorkspaceRequestDto {
@@ -2494,31 +2444,31 @@ export interface ProfileEntity {
      * @type {string}
      * @memberof ProfileEntity
      */
-    'fullName': string;
-    /**
-     * 
-     * @type {any}
-     * @memberof ProfileEntity
-     */
-    'birthDate': any;
+    'userId': string;
     /**
      * 
      * @type {string}
      * @memberof ProfileEntity
      */
-    'userId': string;
+    'fullName': string;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof ProfileEntity
      */
-    'createdAt': any;
+    'birthDate': string;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof ProfileEntity
      */
-    'updatedAt': any;
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfileEntity
+     */
+    'updatedAt': string;
 }
 /**
  * 
@@ -5858,6 +5808,103 @@ export class IamAuthApi extends BaseAPI {
 
 
 /**
+ * IamProfilesApi - axios parameter creator
+ * @export
+ */
+export const IamProfilesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerGetMy: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/iam/profiles/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * IamProfilesApi - functional programming interface
+ * @export
+ */
+export const IamProfilesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = IamProfilesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.profilesControllerGetMy(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IamProfilesApi.profilesControllerGetMy']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * IamProfilesApi - factory interface
+ * @export
+ */
+export const IamProfilesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = IamProfilesApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profilesControllerGetMy(options?: any): AxiosPromise<ProfileEntity> {
+            return localVarFp.profilesControllerGetMy(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * IamProfilesApi - object-oriented interface
+ * @export
+ * @class IamProfilesApi
+ * @extends {BaseAPI}
+ */
+export class IamProfilesApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamProfilesApi
+     */
+    public profilesControllerGetMy(options?: RawAxiosRequestConfig) {
+        return IamProfilesApiFp(this.configuration).profilesControllerGetMy(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * MessageTokensApi - axios parameter creator
  * @export
  */
@@ -6194,237 +6241,6 @@ export class PluggyApi extends BaseAPI {
      */
     public pluggyControllerWebhook(options?: RawAxiosRequestConfig) {
         return PluggyApiFp(this.configuration).pluggyControllerWebhook(options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * ProfilesApi - axios parameter creator
- * @export
- */
-export const ProfilesApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {CreateProfileRequestDto} createProfileRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        profilesControllerCreate: async (createProfileRequestDto: CreateProfileRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createProfileRequestDto' is not null or undefined
-            assertParamExists('profilesControllerCreate', 'createProfileRequestDto', createProfileRequestDto)
-            const localVarPath = `/profiles`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createProfileRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        profilesControllerGetMy: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/profiles/me`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        profilesControllerParcialUpdate: async (parcialUpdateProfileRequestDto: ParcialUpdateProfileRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'parcialUpdateProfileRequestDto' is not null or undefined
-            assertParamExists('profilesControllerParcialUpdate', 'parcialUpdateProfileRequestDto', parcialUpdateProfileRequestDto)
-            const localVarPath = `/profiles/me`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(parcialUpdateProfileRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ProfilesApi - functional programming interface
- * @export
- */
-export const ProfilesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ProfilesApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {CreateProfileRequestDto} createProfileRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.profilesControllerCreate(createProfileRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.profilesControllerCreate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.profilesControllerGetMy(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.profilesControllerGetMy']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async profilesControllerParcialUpdate(parcialUpdateProfileRequestDto: ParcialUpdateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.profilesControllerParcialUpdate(parcialUpdateProfileRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.profilesControllerParcialUpdate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * ProfilesApi - factory interface
- * @export
- */
-export const ProfilesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ProfilesApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {CreateProfileRequestDto} createProfileRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: any): AxiosPromise<ProfileEntity> {
-            return localVarFp.profilesControllerCreate(createProfileRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        profilesControllerGetMy(options?: any): AxiosPromise<ProfileEntity> {
-            return localVarFp.profilesControllerGetMy(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        profilesControllerParcialUpdate(parcialUpdateProfileRequestDto: ParcialUpdateProfileRequestDto, options?: any): AxiosPromise<ProfileEntity> {
-            return localVarFp.profilesControllerParcialUpdate(parcialUpdateProfileRequestDto, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ProfilesApi - object-oriented interface
- * @export
- * @class ProfilesApi
- * @extends {BaseAPI}
- */
-export class ProfilesApi extends BaseAPI {
-    /**
-     * 
-     * @param {CreateProfileRequestDto} createProfileRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProfilesApi
-     */
-    public profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).profilesControllerCreate(createProfileRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProfilesApi
-     */
-    public profilesControllerGetMy(options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).profilesControllerGetMy(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {ParcialUpdateProfileRequestDto} parcialUpdateProfileRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProfilesApi
-     */
-    public profilesControllerParcialUpdate(parcialUpdateProfileRequestDto: ParcialUpdateProfileRequestDto, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).profilesControllerParcialUpdate(parcialUpdateProfileRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
