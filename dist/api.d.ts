@@ -5017,61 +5017,6 @@ export declare class ReportsApi extends BaseAPI {
     reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<FinancialStatementReport, any>>;
 }
 /**
- * UsersApi - axios parameter creator
- * @export
- */
-export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} userId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    usersControllerGet: (userId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * UsersApi - functional programming interface
- * @export
- */
-export declare const UsersApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} userId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    usersControllerGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>>;
-};
-/**
- * UsersApi - factory interface
- * @export
- */
-export declare const UsersApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {string} userId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    usersControllerGet(userId: string, options?: any): AxiosPromise<UserEntity>;
-};
-/**
- * UsersApi - object-oriented interface
- * @export
- * @class UsersApi
- * @extends {BaseAPI}
- */
-export declare class UsersApi extends BaseAPI {
-    /**
-     *
-     * @param {string} userId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsersApi
-     */
-    usersControllerGet(userId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserEntity, any>>;
-}
-/**
  * WorkspaceJoinRequestsApi - axios parameter creator
  * @export
  */
