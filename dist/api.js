@@ -85,7 +85,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.IamProfilesApi = exports.IamProfilesApiFactory = exports.IamProfilesApiFp = exports.IamProfilesApiAxiosParamCreator = exports.IamAuthApi = exports.IamAuthApiFactory = exports.IamAuthApiFp = exports.IamAuthApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionTagsApi = exports.BankTransactionTagsApiFactory = exports.BankTransactionTagsApiFp = exports.BankTransactionTagsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.VerifyPhoneVerificationCodeRequestDtoPurposeEnum = exports.VerifyEmailVerificationCodeRequestDtoPurposeEnum = exports.MessageTokenEntityPlatformEnum = exports.MessageTokenEntityProviderEnum = exports.GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum = exports.GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum = exports.BankTransactionEntityLegalNatureEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
-exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.WorkspaceJoinRequestsApi = exports.WorkspaceJoinRequestsApiFactory = exports.WorkspaceJoinRequestsApiFp = exports.WorkspaceJoinRequestsApiAxiosParamCreator = void 0;
+exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = void 0;
 var axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -5078,128 +5078,6 @@ var ReportsApi = /** @class */ (function (_super) {
     return ReportsApi;
 }(base_1.BaseAPI));
 exports.ReportsApi = ReportsApi;
-/**
- * WorkspaceJoinRequestsApi - axios parameter creator
- * @export
- */
-var WorkspaceJoinRequestsApiAxiosParamCreator = function (configuration) {
-    var _this = this;
-    return {
-        /**
-         *
-         * @param {string} workspaceId
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent: function (workspaceId_1) {
-            var args_1 = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args_1[_i - 1] = arguments[_i];
-            }
-            return __awaiter(_this, __spreadArray([workspaceId_1], args_1, true), void 0, function (workspaceId, options) {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
-                if (options === void 0) { options = {}; }
-                return __generator(this, function (_a) {
-                    // verify required parameter 'workspaceId' is not null or undefined
-                    (0, common_1.assertParamExists)('workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent', 'workspaceId', workspaceId);
-                    localVarPath = "/workspaces/{workspaceId}/join-requests"
-                        .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
-                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
-                    if (configuration) {
-                        baseOptions = configuration.baseOptions;
-                    }
-                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
-                    localVarHeaderParameter = {};
-                    localVarQueryParameter = {};
-                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
-                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                    return [2 /*return*/, {
-                            url: (0, common_1.toPathString)(localVarUrlObj),
-                            options: localVarRequestOptions,
-                        }];
-                });
-            });
-        },
-    };
-};
-exports.WorkspaceJoinRequestsApiAxiosParamCreator = WorkspaceJoinRequestsApiAxiosParamCreator;
-/**
- * WorkspaceJoinRequestsApi - functional programming interface
- * @export
- */
-var WorkspaceJoinRequestsApiFp = function (configuration) {
-    var localVarAxiosParamCreator = (0, exports.WorkspaceJoinRequestsApiAxiosParamCreator)(configuration);
-    return {
-        /**
-         *
-         * @param {string} workspaceId
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent: function (workspaceId, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
-                var _a, _b, _c;
-                return __generator(this, function (_d) {
-                    switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent(workspaceId, options)];
-                        case 1:
-                            localVarAxiosArgs = _d.sent();
-                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WorkspaceJoinRequestsApi.workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
-                    }
-                });
-            });
-        },
-    };
-};
-exports.WorkspaceJoinRequestsApiFp = WorkspaceJoinRequestsApiFp;
-/**
- * WorkspaceJoinRequestsApi - factory interface
- * @export
- */
-var WorkspaceJoinRequestsApiFactory = function (configuration, basePath, axios) {
-    var localVarFp = (0, exports.WorkspaceJoinRequestsApiFp)(configuration);
-    return {
-        /**
-         *
-         * @param {string} workspaceId
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent: function (workspaceId, options) {
-            return localVarFp.workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent(workspaceId, options).then(function (request) { return request(axios, basePath); });
-        },
-    };
-};
-exports.WorkspaceJoinRequestsApiFactory = WorkspaceJoinRequestsApiFactory;
-/**
- * WorkspaceJoinRequestsApi - object-oriented interface
- * @export
- * @class WorkspaceJoinRequestsApi
- * @extends {BaseAPI}
- */
-var WorkspaceJoinRequestsApi = /** @class */ (function (_super) {
-    __extends(WorkspaceJoinRequestsApi, _super);
-    function WorkspaceJoinRequestsApi() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceJoinRequestsApi
-     */
-    WorkspaceJoinRequestsApi.prototype.workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent = function (workspaceId, options) {
-        var _this = this;
-        return (0, exports.WorkspaceJoinRequestsApiFp)(this.configuration).workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent(workspaceId, options).then(function (request) { return request(_this.axios, _this.basePath); });
-    };
-    return WorkspaceJoinRequestsApi;
-}(base_1.BaseAPI));
-exports.WorkspaceJoinRequestsApi = WorkspaceJoinRequestsApi;
 /**
  * WorkspacesApi - axios parameter creator
  * @export

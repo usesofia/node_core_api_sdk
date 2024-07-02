@@ -2897,43 +2897,6 @@ export interface WorkspaceHybridSettingsEntity {
 /**
  *
  * @export
- * @interface WorkspaceJoinRequestEntity
- */
-export interface WorkspaceJoinRequestEntity {
-    /**
-     *
-     * @type {string}
-     * @memberof WorkspaceJoinRequestEntity
-     */
-    'id': string;
-    /**
-     *
-     * @type {string}
-     * @memberof WorkspaceJoinRequestEntity
-     */
-    'status': string;
-    /**
-     *
-     * @type {string}
-     * @memberof WorkspaceJoinRequestEntity
-     */
-    'workspaceId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof WorkspaceJoinRequestEntity
-     */
-    'userId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof WorkspaceJoinRequestEntity
-     */
-    'createdAt': string;
-}
-/**
- *
- * @export
  * @interface WorkspacePersonalSettingsEntity
  */
 export interface WorkspacePersonalSettingsEntity {
@@ -5015,61 +4978,6 @@ export declare class ReportsApi extends BaseAPI {
      * @memberof ReportsApi
      */
     reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<FinancialStatementReport, any>>;
-}
-/**
- * WorkspaceJoinRequestsApi - axios parameter creator
- * @export
- */
-export declare const WorkspaceJoinRequestsApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * WorkspaceJoinRequestsApi - functional programming interface
- * @export
- */
-export declare const WorkspaceJoinRequestsApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceJoinRequestEntity>>;
-};
-/**
- * WorkspaceJoinRequestsApi - factory interface
- * @export
- */
-export declare const WorkspaceJoinRequestsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent(workspaceId: string, options?: any): AxiosPromise<WorkspaceJoinRequestEntity>;
-};
-/**
- * WorkspaceJoinRequestsApi - object-oriented interface
- * @export
- * @class WorkspaceJoinRequestsApi
- * @extends {BaseAPI}
- */
-export declare class WorkspaceJoinRequestsApi extends BaseAPI {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceJoinRequestsApi
-     */
-    workspaceJoinRequestsControllerCreateNewPendingOrReturnCurrent(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<WorkspaceJoinRequestEntity, any>>;
 }
 /**
  * WorkspacesApi - axios parameter creator
