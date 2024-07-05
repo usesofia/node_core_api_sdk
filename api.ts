@@ -1670,20 +1670,50 @@ export interface CreateWorkspaceRequestDto {
      * @type {string}
      * @memberof CreateWorkspaceRequestDto
      */
-    'type'?: string;
+    'type': CreateWorkspaceRequestDtoTypeEnum;
     /**
      * 
      * @type {string}
      * @memberof CreateWorkspaceRequestDto
      */
-    'businessSegment'?: string;
+    'businessSegment'?: CreateWorkspaceRequestDtoBusinessSegmentEnum | null;
     /**
      * 
      * @type {string}
      * @memberof CreateWorkspaceRequestDto
      */
-    'otherDescription'?: string;
+    'otherDescription'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateWorkspaceRequestDto
+     */
+    'throwAfterCreateWorkspace'?: boolean | null;
 }
+
+export const CreateWorkspaceRequestDtoTypeEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Hybrid: 'HYBRID'
+} as const;
+
+export type CreateWorkspaceRequestDtoTypeEnum = typeof CreateWorkspaceRequestDtoTypeEnum[keyof typeof CreateWorkspaceRequestDtoTypeEnum];
+export const CreateWorkspaceRequestDtoBusinessSegmentEnum = {
+    Attorney: 'ATTORNEY',
+    Architect: 'ARCHITECT',
+    Consultant: 'CONSULTANT',
+    Realtor: 'REALTOR',
+    InsuranceBroker: 'INSURANCE_BROKER',
+    Dentist: 'DENTIST',
+    Physiotherapist: 'PHYSIOTHERAPIST',
+    Physician: 'PHYSICIAN',
+    Tutor: 'TUTOR',
+    Psychologist: 'PSYCHOLOGIST',
+    Other: 'OTHER'
+} as const;
+
+export type CreateWorkspaceRequestDtoBusinessSegmentEnum = typeof CreateWorkspaceRequestDtoBusinessSegmentEnum[keyof typeof CreateWorkspaceRequestDtoBusinessSegmentEnum];
+
 /**
  * 
  * @export
@@ -2237,7 +2267,7 @@ export interface ParcialUpdateWorkspaceRequestDto {
      * @type {string}
      * @memberof ParcialUpdateWorkspaceRequestDto
      */
-    'name': string;
+    'name'?: string | null;
 }
 /**
  * 
@@ -2497,16 +2527,16 @@ export interface ProfileEntity {
     'birthDate': string;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof ProfileEntity
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof ProfileEntity
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
 /**
  * 
@@ -2674,7 +2704,7 @@ export interface UserEntity {
      * @type {string}
      * @memberof UserEntity
      */
-    'passwordHash': string;
+    'passwordHash'?: string | null;
     /**
      * 
      * @type {boolean}
@@ -2683,59 +2713,153 @@ export interface UserEntity {
     'isRoot': boolean;
     /**
      * 
-     * @type {string}
+     * @type {Array<UserEntityWorkspacesInner>}
      * @memberof UserEntity
      */
-    'createdAt': string;
+    'workspaces'?: Array<UserEntityWorkspacesInner> | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof UserEntity
+     */
+    'createdAt': any;
 }
 /**
  * 
  * @export
- * @interface UserRelatedWorkspaceEntity
+ * @interface UserEntityWorkspacesInner
  */
-export interface UserRelatedWorkspaceEntity {
+export interface UserEntityWorkspacesInner {
     /**
      * 
      * @type {string}
-     * @memberof UserRelatedWorkspaceEntity
+     * @memberof UserEntityWorkspacesInner
      */
     'id': string;
     /**
      * 
      * @type {string}
-     * @memberof UserRelatedWorkspaceEntity
+     * @memberof UserEntityWorkspacesInner
      */
     'prettyId': string;
     /**
      * 
      * @type {string}
-     * @memberof UserRelatedWorkspaceEntity
+     * @memberof UserEntityWorkspacesInner
      */
     'name': string;
     /**
      * 
      * @type {string}
-     * @memberof UserRelatedWorkspaceEntity
+     * @memberof UserEntityWorkspacesInner
      */
-    'type': string;
+    'type': UserEntityWorkspacesInnerTypeEnum;
     /**
      * 
      * @type {string}
-     * @memberof UserRelatedWorkspaceEntity
+     * @memberof UserEntityWorkspacesInner
      */
     'creatorUserId': string;
     /**
      * 
      * @type {string}
-     * @memberof UserRelatedWorkspaceEntity
+     * @memberof UserEntityWorkspacesInner
      */
-    'createdAt': string;
+    'selectedPersonalCategoryTreeId'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof UserRelatedWorkspaceEntity
+     * @memberof UserEntityWorkspacesInner
      */
-    'relationType': string;
+    'selectedBusinessCategoryTreeId'?: string | null;
+    /**
+     * 
+     * @type {UserEntityWorkspacesInnerHybridSettings}
+     * @memberof UserEntityWorkspacesInner
+     */
+    'hybridSettings'?: UserEntityWorkspacesInnerHybridSettings | null;
+    /**
+     * 
+     * @type {UserEntityWorkspacesInnerHybridSettings}
+     * @memberof UserEntityWorkspacesInner
+     */
+    'businessSettings'?: UserEntityWorkspacesInnerHybridSettings | null;
+    /**
+     * 
+     * @type {UserEntityWorkspacesInnerPersonalSettings}
+     * @memberof UserEntityWorkspacesInner
+     */
+    'personalSettings'?: UserEntityWorkspacesInnerPersonalSettings | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof UserEntityWorkspacesInner
+     */
+    'createdAt': any;
+}
+
+export const UserEntityWorkspacesInnerTypeEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Hybrid: 'HYBRID'
+} as const;
+
+export type UserEntityWorkspacesInnerTypeEnum = typeof UserEntityWorkspacesInnerTypeEnum[keyof typeof UserEntityWorkspacesInnerTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface UserEntityWorkspacesInnerHybridSettings
+ */
+export interface UserEntityWorkspacesInnerHybridSettings {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserEntityWorkspacesInnerHybridSettings
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserEntityWorkspacesInnerHybridSettings
+     */
+    'businessSegment': UserEntityWorkspacesInnerHybridSettingsBusinessSegmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserEntityWorkspacesInnerHybridSettings
+     */
+    'otherBusinessDescription'?: string | null;
+}
+
+export const UserEntityWorkspacesInnerHybridSettingsBusinessSegmentEnum = {
+    Attorney: 'ATTORNEY',
+    Architect: 'ARCHITECT',
+    Consultant: 'CONSULTANT',
+    Realtor: 'REALTOR',
+    InsuranceBroker: 'INSURANCE_BROKER',
+    Dentist: 'DENTIST',
+    Physiotherapist: 'PHYSIOTHERAPIST',
+    Physician: 'PHYSICIAN',
+    Tutor: 'TUTOR',
+    Psychologist: 'PSYCHOLOGIST',
+    Other: 'OTHER'
+} as const;
+
+export type UserEntityWorkspacesInnerHybridSettingsBusinessSegmentEnum = typeof UserEntityWorkspacesInnerHybridSettingsBusinessSegmentEnum[keyof typeof UserEntityWorkspacesInnerHybridSettingsBusinessSegmentEnum];
+
+/**
+ * 
+ * @export
+ * @interface UserEntityWorkspacesInnerPersonalSettings
+ */
+export interface UserEntityWorkspacesInnerPersonalSettings {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserEntityWorkspacesInnerPersonalSettings
+     */
+    'id': string;
 }
 /**
  * 
@@ -2806,31 +2930,6 @@ export type VerifyPhoneVerificationCodeRequestDtoPurposeEnum = typeof VerifyPhon
 /**
  * 
  * @export
- * @interface WorkspaceCompanySettingsEntity
- */
-export interface WorkspaceCompanySettingsEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceCompanySettingsEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceCompanySettingsEntity
-     */
-    'businessSegment': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceCompanySettingsEntity
-     */
-    'otherBusinessDescription'?: string;
-}
-/**
- * 
- * @export
  * @interface WorkspaceEntity
  */
 export interface WorkspaceEntity {
@@ -2857,7 +2956,7 @@ export interface WorkspaceEntity {
      * @type {string}
      * @memberof WorkspaceEntity
      */
-    'type': string;
+    'type': WorkspaceEntityTypeEnum;
     /**
      * 
      * @type {string}
@@ -2869,76 +2968,47 @@ export interface WorkspaceEntity {
      * @type {string}
      * @memberof WorkspaceEntity
      */
-    'createdAt': string;
+    'selectedPersonalCategoryTreeId'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WorkspaceEntity
      */
-    'selectedPersonalCategoryTreeId'?: string;
+    'selectedBusinessCategoryTreeId'?: string | null;
     /**
      * 
-     * @type {string}
+     * @type {UserEntityWorkspacesInnerHybridSettings}
      * @memberof WorkspaceEntity
      */
-    'selectedBusinessCategoryTreeId'?: string;
+    'hybridSettings'?: UserEntityWorkspacesInnerHybridSettings | null;
     /**
      * 
-     * @type {WorkspaceHybridSettingsEntity}
+     * @type {UserEntityWorkspacesInnerHybridSettings}
      * @memberof WorkspaceEntity
      */
-    'hybridSettings'?: WorkspaceHybridSettingsEntity;
+    'businessSettings'?: UserEntityWorkspacesInnerHybridSettings | null;
     /**
      * 
-     * @type {WorkspaceCompanySettingsEntity}
+     * @type {UserEntityWorkspacesInnerPersonalSettings}
      * @memberof WorkspaceEntity
      */
-    'companySettings'?: WorkspaceCompanySettingsEntity;
+    'personalSettings'?: UserEntityWorkspacesInnerPersonalSettings | null;
     /**
      * 
-     * @type {WorkspacePersonalSettingsEntity}
+     * @type {any}
      * @memberof WorkspaceEntity
      */
-    'personalSettings'?: WorkspacePersonalSettingsEntity;
+    'createdAt': any;
 }
-/**
- * 
- * @export
- * @interface WorkspaceHybridSettingsEntity
- */
-export interface WorkspaceHybridSettingsEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceHybridSettingsEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceHybridSettingsEntity
-     */
-    'businessSegment': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspaceHybridSettingsEntity
-     */
-    'otherBusinessDescription'?: string;
-}
-/**
- * 
- * @export
- * @interface WorkspacePersonalSettingsEntity
- */
-export interface WorkspacePersonalSettingsEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkspacePersonalSettingsEntity
-     */
-    'id': string;
-}
+
+export const WorkspaceEntityTypeEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Hybrid: 'HYBRID'
+} as const;
+
+export type WorkspaceEntityTypeEnum = typeof WorkspaceEntityTypeEnum[keyof typeof WorkspaceEntityTypeEnum];
+
 
 /**
  * BankAccountsApi - axios parameter creator
@@ -6040,6 +6110,186 @@ export class IamProfilesApi extends BaseAPI {
 
 
 /**
+ * IamWorkspacesApi - axios parameter creator
+ * @export
+ */
+export const IamWorkspacesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerCreate: async (createWorkspaceRequestDto: CreateWorkspaceRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createWorkspaceRequestDto' is not null or undefined
+            assertParamExists('workspacesControllerCreate', 'createWorkspaceRequestDto', createWorkspaceRequestDto)
+            const localVarPath = `/iam/workspaces`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createWorkspaceRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerParcialUpdate: async (workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('workspacesControllerParcialUpdate', 'workspaceId', workspaceId)
+            // verify required parameter 'parcialUpdateWorkspaceRequestDto' is not null or undefined
+            assertParamExists('workspacesControllerParcialUpdate', 'parcialUpdateWorkspaceRequestDto', parcialUpdateWorkspaceRequestDto)
+            const localVarPath = `/iam/workspaces/{workspaceId}`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(parcialUpdateWorkspaceRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * IamWorkspacesApi - functional programming interface
+ * @export
+ */
+export const IamWorkspacesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = IamWorkspacesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerCreate(createWorkspaceRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IamWorkspacesApi.workspacesControllerCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IamWorkspacesApi.workspacesControllerParcialUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * IamWorkspacesApi - factory interface
+ * @export
+ */
+export const IamWorkspacesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = IamWorkspacesApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity> {
+            return localVarFp.workspacesControllerCreate(createWorkspaceRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity> {
+            return localVarFp.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * IamWorkspacesApi - object-oriented interface
+ * @export
+ * @class IamWorkspacesApi
+ * @extends {BaseAPI}
+ */
+export class IamWorkspacesApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamWorkspacesApi
+     */
+    public workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig) {
+        return IamWorkspacesApiFp(this.configuration).workspacesControllerCreate(createWorkspaceRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamWorkspacesApi
+     */
+    public workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig) {
+        return IamWorkspacesApiFp(this.configuration).workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * MessageTokensApi - axios parameter creator
  * @export
  */
@@ -7326,309 +7576,6 @@ export class ReportsApi extends BaseAPI {
      */
     public reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) {
         return ReportsApiFp(this.configuration).reportsControllerGetFinancialStatementReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * WorkspacesApi - axios parameter creator
- * @export
- */
-export const WorkspacesApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerCreate: async (createWorkspaceRequestDto: CreateWorkspaceRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createWorkspaceRequestDto' is not null or undefined
-            assertParamExists('workspacesControllerCreate', 'createWorkspaceRequestDto', createWorkspaceRequestDto)
-            const localVarPath = `/workspaces`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createWorkspaceRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerFetchUserRelatedWorkspaces: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/workspaces/related-to-me`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerGet: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('workspacesControllerGet', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerParcialUpdate: async (workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('workspacesControllerParcialUpdate', 'workspaceId', workspaceId)
-            // verify required parameter 'parcialUpdateWorkspaceRequestDto' is not null or undefined
-            assertParamExists('workspacesControllerParcialUpdate', 'parcialUpdateWorkspaceRequestDto', parcialUpdateWorkspaceRequestDto)
-            const localVarPath = `/workspaces/{workspaceId}`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(parcialUpdateWorkspaceRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * WorkspacesApi - functional programming interface
- * @export
- */
-export const WorkspacesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = WorkspacesApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerCreate(createWorkspaceRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.workspacesControllerCreate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async workspacesControllerFetchUserRelatedWorkspaces(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserRelatedWorkspaceEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerFetchUserRelatedWorkspaces(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.workspacesControllerFetchUserRelatedWorkspaces']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async workspacesControllerGet(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerGet(workspaceId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.workspacesControllerGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.workspacesControllerParcialUpdate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * WorkspacesApi - factory interface
- * @export
- */
-export const WorkspacesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = WorkspacesApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity> {
-            return localVarFp.workspacesControllerCreate(createWorkspaceRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerFetchUserRelatedWorkspaces(options?: any): AxiosPromise<Array<UserRelatedWorkspaceEntity>> {
-            return localVarFp.workspacesControllerFetchUserRelatedWorkspaces(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerGet(workspaceId: string, options?: any): AxiosPromise<WorkspaceEntity> {
-            return localVarFp.workspacesControllerGet(workspaceId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity> {
-            return localVarFp.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * WorkspacesApi - object-oriented interface
- * @export
- * @class WorkspacesApi
- * @extends {BaseAPI}
- */
-export class WorkspacesApi extends BaseAPI {
-    /**
-     * 
-     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspacesApi
-     */
-    public workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig) {
-        return WorkspacesApiFp(this.configuration).workspacesControllerCreate(createWorkspaceRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspacesApi
-     */
-    public workspacesControllerFetchUserRelatedWorkspaces(options?: RawAxiosRequestConfig) {
-        return WorkspacesApiFp(this.configuration).workspacesControllerFetchUserRelatedWorkspaces(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspacesApi
-     */
-    public workspacesControllerGet(workspaceId: string, options?: RawAxiosRequestConfig) {
-        return WorkspacesApiFp(this.configuration).workspacesControllerGet(workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspacesApi
-     */
-    public workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig) {
-        return WorkspacesApiFp(this.configuration).workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -84,8 +84,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.IamProfilesApi = exports.IamProfilesApiFactory = exports.IamProfilesApiFp = exports.IamProfilesApiAxiosParamCreator = exports.IamAuthApi = exports.IamAuthApiFactory = exports.IamAuthApiFp = exports.IamAuthApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionTagsApi = exports.BankTransactionTagsApiFactory = exports.BankTransactionTagsApiFp = exports.BankTransactionTagsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.VerifyPhoneVerificationCodeRequestDtoPurposeEnum = exports.VerifyEmailVerificationCodeRequestDtoPurposeEnum = exports.MessageTokenEntityPlatformEnum = exports.MessageTokenEntityProviderEnum = exports.GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum = exports.GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum = exports.BankTransactionEntityLegalNatureEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
-exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = void 0;
+exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.IamWorkspacesApi = exports.IamWorkspacesApiFactory = exports.IamWorkspacesApiFp = exports.IamWorkspacesApiAxiosParamCreator = exports.IamProfilesApi = exports.IamProfilesApiFactory = exports.IamProfilesApiFp = exports.IamProfilesApiAxiosParamCreator = exports.IamAuthApi = exports.IamAuthApiFactory = exports.IamAuthApiFp = exports.IamAuthApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionTagsApi = exports.BankTransactionTagsApiFactory = exports.BankTransactionTagsApiFp = exports.BankTransactionTagsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.WorkspaceEntityTypeEnum = exports.VerifyPhoneVerificationCodeRequestDtoPurposeEnum = exports.VerifyEmailVerificationCodeRequestDtoPurposeEnum = exports.UserEntityWorkspacesInnerHybridSettingsBusinessSegmentEnum = exports.UserEntityWorkspacesInnerTypeEnum = exports.MessageTokenEntityPlatformEnum = exports.MessageTokenEntityProviderEnum = exports.GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum = exports.GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum = exports.CreateWorkspaceRequestDtoBusinessSegmentEnum = exports.CreateWorkspaceRequestDtoTypeEnum = exports.BankTransactionEntityLegalNatureEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityTypeEnum = exports.BankTransactionEntityProviderEnum = void 0;
+exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = void 0;
 var axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -109,6 +109,24 @@ exports.BankTransactionEntityLegalNatureEnum = {
     Personal: 'PERSONAL',
     Business: 'BUSINESS'
 };
+exports.CreateWorkspaceRequestDtoTypeEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Hybrid: 'HYBRID'
+};
+exports.CreateWorkspaceRequestDtoBusinessSegmentEnum = {
+    Attorney: 'ATTORNEY',
+    Architect: 'ARCHITECT',
+    Consultant: 'CONSULTANT',
+    Realtor: 'REALTOR',
+    InsuranceBroker: 'INSURANCE_BROKER',
+    Dentist: 'DENTIST',
+    Physiotherapist: 'PHYSIOTHERAPIST',
+    Physician: 'PHYSICIAN',
+    Tutor: 'TUTOR',
+    Psychologist: 'PSYCHOLOGIST',
+    Other: 'OTHER'
+};
 exports.GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum = {
     Up: 'SIGN_UP',
     In: 'SIGN_IN'
@@ -125,6 +143,24 @@ exports.MessageTokenEntityPlatformEnum = {
     Android: 'ANDROID',
     Ios: 'IOS'
 };
+exports.UserEntityWorkspacesInnerTypeEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Hybrid: 'HYBRID'
+};
+exports.UserEntityWorkspacesInnerHybridSettingsBusinessSegmentEnum = {
+    Attorney: 'ATTORNEY',
+    Architect: 'ARCHITECT',
+    Consultant: 'CONSULTANT',
+    Realtor: 'REALTOR',
+    InsuranceBroker: 'INSURANCE_BROKER',
+    Dentist: 'DENTIST',
+    Physiotherapist: 'PHYSIOTHERAPIST',
+    Physician: 'PHYSICIAN',
+    Tutor: 'TUTOR',
+    Psychologist: 'PSYCHOLOGIST',
+    Other: 'OTHER'
+};
 exports.VerifyEmailVerificationCodeRequestDtoPurposeEnum = {
     Up: 'SIGN_UP',
     In: 'SIGN_IN'
@@ -132,6 +168,11 @@ exports.VerifyEmailVerificationCodeRequestDtoPurposeEnum = {
 exports.VerifyPhoneVerificationCodeRequestDtoPurposeEnum = {
     Up: 'SIGN_UP',
     In: 'SIGN_IN'
+};
+exports.WorkspaceEntityTypeEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Hybrid: 'HYBRID'
 };
 /**
  * BankAccountsApi - axios parameter creator
@@ -3688,6 +3729,215 @@ var IamProfilesApi = /** @class */ (function (_super) {
 }(base_1.BaseAPI));
 exports.IamProfilesApi = IamProfilesApi;
 /**
+ * IamWorkspacesApi - axios parameter creator
+ * @export
+ */
+var IamWorkspacesApiAxiosParamCreator = function (configuration) {
+    var _this = this;
+    return {
+        /**
+         *
+         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerCreate: function (createWorkspaceRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args_1[_i - 1] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([createWorkspaceRequestDto_1], args_1, true), void 0, function (createWorkspaceRequestDto, options) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
+                return __generator(this, function (_a) {
+                    // verify required parameter 'createWorkspaceRequestDto' is not null or undefined
+                    (0, common_1.assertParamExists)('workspacesControllerCreate', 'createWorkspaceRequestDto', createWorkspaceRequestDto);
+                    localVarPath = "/iam/workspaces";
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'application/json';
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(createWorkspaceRequestDto, localVarRequestOptions, configuration);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerParcialUpdate: function (workspaceId_1, parcialUpdateWorkspaceRequestDto_1) {
+            var args_1 = [];
+            for (var _i = 2; _i < arguments.length; _i++) {
+                args_1[_i - 2] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, parcialUpdateWorkspaceRequestDto_1], args_1, true), void 0, function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
+                return __generator(this, function (_a) {
+                    // verify required parameter 'workspaceId' is not null or undefined
+                    (0, common_1.assertParamExists)('workspacesControllerParcialUpdate', 'workspaceId', workspaceId);
+                    // verify required parameter 'parcialUpdateWorkspaceRequestDto' is not null or undefined
+                    (0, common_1.assertParamExists)('workspacesControllerParcialUpdate', 'parcialUpdateWorkspaceRequestDto', parcialUpdateWorkspaceRequestDto);
+                    localVarPath = "/iam/workspaces/{workspaceId}"
+                        .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'PATCH' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'application/json';
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(parcialUpdateWorkspaceRequestDto, localVarRequestOptions, configuration);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+    };
+};
+exports.IamWorkspacesApiAxiosParamCreator = IamWorkspacesApiAxiosParamCreator;
+/**
+ * IamWorkspacesApi - functional programming interface
+ * @export
+ */
+var IamWorkspacesApiFp = function (configuration) {
+    var localVarAxiosParamCreator = (0, exports.IamWorkspacesApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerCreate: function (createWorkspaceRequestDto, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspacesControllerCreate(createWorkspaceRequestDto, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['IamWorkspacesApi.workspacesControllerCreate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerParcialUpdate: function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['IamWorkspacesApi.workspacesControllerParcialUpdate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+    };
+};
+exports.IamWorkspacesApiFp = IamWorkspacesApiFp;
+/**
+ * IamWorkspacesApi - factory interface
+ * @export
+ */
+var IamWorkspacesApiFactory = function (configuration, basePath, axios) {
+    var localVarFp = (0, exports.IamWorkspacesApiFp)(configuration);
+    return {
+        /**
+         *
+         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerCreate: function (createWorkspaceRequestDto, options) {
+            return localVarFp.workspacesControllerCreate(createWorkspaceRequestDto, options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
+         * @param {string} workspaceId
+         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerParcialUpdate: function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
+            return localVarFp.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then(function (request) { return request(axios, basePath); });
+        },
+    };
+};
+exports.IamWorkspacesApiFactory = IamWorkspacesApiFactory;
+/**
+ * IamWorkspacesApi - object-oriented interface
+ * @export
+ * @class IamWorkspacesApi
+ * @extends {BaseAPI}
+ */
+var IamWorkspacesApi = /** @class */ (function (_super) {
+    __extends(IamWorkspacesApi, _super);
+    function IamWorkspacesApi() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     *
+     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamWorkspacesApi
+     */
+    IamWorkspacesApi.prototype.workspacesControllerCreate = function (createWorkspaceRequestDto, options) {
+        var _this = this;
+        return (0, exports.IamWorkspacesApiFp)(this.configuration).workspacesControllerCreate(createWorkspaceRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IamWorkspacesApi
+     */
+    IamWorkspacesApi.prototype.workspacesControllerParcialUpdate = function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
+        var _this = this;
+        return (0, exports.IamWorkspacesApiFp)(this.configuration).workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    return IamWorkspacesApi;
+}(base_1.BaseAPI));
+exports.IamWorkspacesApi = IamWorkspacesApi;
+/**
  * MessageTokensApi - axios parameter creator
  * @export
  */
@@ -5078,361 +5328,3 @@ var ReportsApi = /** @class */ (function (_super) {
     return ReportsApi;
 }(base_1.BaseAPI));
 exports.ReportsApi = ReportsApi;
-/**
- * WorkspacesApi - axios parameter creator
- * @export
- */
-var WorkspacesApiAxiosParamCreator = function (configuration) {
-    var _this = this;
-    return {
-        /**
-         *
-         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerCreate: function (createWorkspaceRequestDto_1) {
-            var args_1 = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args_1[_i - 1] = arguments[_i];
-            }
-            return __awaiter(_this, __spreadArray([createWorkspaceRequestDto_1], args_1, true), void 0, function (createWorkspaceRequestDto, options) {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
-                if (options === void 0) { options = {}; }
-                return __generator(this, function (_a) {
-                    // verify required parameter 'createWorkspaceRequestDto' is not null or undefined
-                    (0, common_1.assertParamExists)('workspacesControllerCreate', 'createWorkspaceRequestDto', createWorkspaceRequestDto);
-                    localVarPath = "/workspaces";
-                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
-                    if (configuration) {
-                        baseOptions = configuration.baseOptions;
-                    }
-                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
-                    localVarHeaderParameter = {};
-                    localVarQueryParameter = {};
-                    localVarHeaderParameter['Content-Type'] = 'application/json';
-                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
-                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(createWorkspaceRequestDto, localVarRequestOptions, configuration);
-                    return [2 /*return*/, {
-                            url: (0, common_1.toPathString)(localVarUrlObj),
-                            options: localVarRequestOptions,
-                        }];
-                });
-            });
-        },
-        /**
-         *
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerFetchUserRelatedWorkspaces: function () {
-            var args_1 = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args_1[_i] = arguments[_i];
-            }
-            return __awaiter(_this, __spreadArray([], args_1, true), void 0, function (options) {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
-                if (options === void 0) { options = {}; }
-                return __generator(this, function (_a) {
-                    localVarPath = "/workspaces/related-to-me";
-                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
-                    if (configuration) {
-                        baseOptions = configuration.baseOptions;
-                    }
-                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
-                    localVarHeaderParameter = {};
-                    localVarQueryParameter = {};
-                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
-                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                    return [2 /*return*/, {
-                            url: (0, common_1.toPathString)(localVarUrlObj),
-                            options: localVarRequestOptions,
-                        }];
-                });
-            });
-        },
-        /**
-         *
-         * @param {string} workspaceId
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerGet: function (workspaceId_1) {
-            var args_1 = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args_1[_i - 1] = arguments[_i];
-            }
-            return __awaiter(_this, __spreadArray([workspaceId_1], args_1, true), void 0, function (workspaceId, options) {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
-                if (options === void 0) { options = {}; }
-                return __generator(this, function (_a) {
-                    // verify required parameter 'workspaceId' is not null or undefined
-                    (0, common_1.assertParamExists)('workspacesControllerGet', 'workspaceId', workspaceId);
-                    localVarPath = "/workspaces/{workspaceId}"
-                        .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
-                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
-                    if (configuration) {
-                        baseOptions = configuration.baseOptions;
-                    }
-                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
-                    localVarHeaderParameter = {};
-                    localVarQueryParameter = {};
-                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
-                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                    return [2 /*return*/, {
-                            url: (0, common_1.toPathString)(localVarUrlObj),
-                            options: localVarRequestOptions,
-                        }];
-                });
-            });
-        },
-        /**
-         *
-         * @param {string} workspaceId
-         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerParcialUpdate: function (workspaceId_1, parcialUpdateWorkspaceRequestDto_1) {
-            var args_1 = [];
-            for (var _i = 2; _i < arguments.length; _i++) {
-                args_1[_i - 2] = arguments[_i];
-            }
-            return __awaiter(_this, __spreadArray([workspaceId_1, parcialUpdateWorkspaceRequestDto_1], args_1, true), void 0, function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
-                if (options === void 0) { options = {}; }
-                return __generator(this, function (_a) {
-                    // verify required parameter 'workspaceId' is not null or undefined
-                    (0, common_1.assertParamExists)('workspacesControllerParcialUpdate', 'workspaceId', workspaceId);
-                    // verify required parameter 'parcialUpdateWorkspaceRequestDto' is not null or undefined
-                    (0, common_1.assertParamExists)('workspacesControllerParcialUpdate', 'parcialUpdateWorkspaceRequestDto', parcialUpdateWorkspaceRequestDto);
-                    localVarPath = "/workspaces/{workspaceId}"
-                        .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
-                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
-                    if (configuration) {
-                        baseOptions = configuration.baseOptions;
-                    }
-                    localVarRequestOptions = __assign(__assign({ method: 'PATCH' }, baseOptions), options);
-                    localVarHeaderParameter = {};
-                    localVarQueryParameter = {};
-                    localVarHeaderParameter['Content-Type'] = 'application/json';
-                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
-                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                    localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(parcialUpdateWorkspaceRequestDto, localVarRequestOptions, configuration);
-                    return [2 /*return*/, {
-                            url: (0, common_1.toPathString)(localVarUrlObj),
-                            options: localVarRequestOptions,
-                        }];
-                });
-            });
-        },
-    };
-};
-exports.WorkspacesApiAxiosParamCreator = WorkspacesApiAxiosParamCreator;
-/**
- * WorkspacesApi - functional programming interface
- * @export
- */
-var WorkspacesApiFp = function (configuration) {
-    var localVarAxiosParamCreator = (0, exports.WorkspacesApiAxiosParamCreator)(configuration);
-    return {
-        /**
-         *
-         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerCreate: function (createWorkspaceRequestDto, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
-                var _a, _b, _c;
-                return __generator(this, function (_d) {
-                    switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspacesControllerCreate(createWorkspaceRequestDto, options)];
-                        case 1:
-                            localVarAxiosArgs = _d.sent();
-                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WorkspacesApi.workspacesControllerCreate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
-                    }
-                });
-            });
-        },
-        /**
-         *
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerFetchUserRelatedWorkspaces: function (options) {
-            return __awaiter(this, void 0, void 0, function () {
-                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
-                var _a, _b, _c;
-                return __generator(this, function (_d) {
-                    switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspacesControllerFetchUserRelatedWorkspaces(options)];
-                        case 1:
-                            localVarAxiosArgs = _d.sent();
-                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WorkspacesApi.workspacesControllerFetchUserRelatedWorkspaces']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
-                    }
-                });
-            });
-        },
-        /**
-         *
-         * @param {string} workspaceId
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerGet: function (workspaceId, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
-                var _a, _b, _c;
-                return __generator(this, function (_d) {
-                    switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspacesControllerGet(workspaceId, options)];
-                        case 1:
-                            localVarAxiosArgs = _d.sent();
-                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WorkspacesApi.workspacesControllerGet']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
-                    }
-                });
-            });
-        },
-        /**
-         *
-         * @param {string} workspaceId
-         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerParcialUpdate: function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
-                var _a, _b, _c;
-                return __generator(this, function (_d) {
-                    switch (_d.label) {
-                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options)];
-                        case 1:
-                            localVarAxiosArgs = _d.sent();
-                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WorkspacesApi.workspacesControllerParcialUpdate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
-                    }
-                });
-            });
-        },
-    };
-};
-exports.WorkspacesApiFp = WorkspacesApiFp;
-/**
- * WorkspacesApi - factory interface
- * @export
- */
-var WorkspacesApiFactory = function (configuration, basePath, axios) {
-    var localVarFp = (0, exports.WorkspacesApiFp)(configuration);
-    return {
-        /**
-         *
-         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerCreate: function (createWorkspaceRequestDto, options) {
-            return localVarFp.workspacesControllerCreate(createWorkspaceRequestDto, options).then(function (request) { return request(axios, basePath); });
-        },
-        /**
-         *
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerFetchUserRelatedWorkspaces: function (options) {
-            return localVarFp.workspacesControllerFetchUserRelatedWorkspaces(options).then(function (request) { return request(axios, basePath); });
-        },
-        /**
-         *
-         * @param {string} workspaceId
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerGet: function (workspaceId, options) {
-            return localVarFp.workspacesControllerGet(workspaceId, options).then(function (request) { return request(axios, basePath); });
-        },
-        /**
-         *
-         * @param {string} workspaceId
-         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerParcialUpdate: function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
-            return localVarFp.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then(function (request) { return request(axios, basePath); });
-        },
-    };
-};
-exports.WorkspacesApiFactory = WorkspacesApiFactory;
-/**
- * WorkspacesApi - object-oriented interface
- * @export
- * @class WorkspacesApi
- * @extends {BaseAPI}
- */
-var WorkspacesApi = /** @class */ (function (_super) {
-    __extends(WorkspacesApi, _super);
-    function WorkspacesApi() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    /**
-     *
-     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspacesApi
-     */
-    WorkspacesApi.prototype.workspacesControllerCreate = function (createWorkspaceRequestDto, options) {
-        var _this = this;
-        return (0, exports.WorkspacesApiFp)(this.configuration).workspacesControllerCreate(createWorkspaceRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
-    };
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspacesApi
-     */
-    WorkspacesApi.prototype.workspacesControllerFetchUserRelatedWorkspaces = function (options) {
-        var _this = this;
-        return (0, exports.WorkspacesApiFp)(this.configuration).workspacesControllerFetchUserRelatedWorkspaces(options).then(function (request) { return request(_this.axios, _this.basePath); });
-    };
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspacesApi
-     */
-    WorkspacesApi.prototype.workspacesControllerGet = function (workspaceId, options) {
-        var _this = this;
-        return (0, exports.WorkspacesApiFp)(this.configuration).workspacesControllerGet(workspaceId, options).then(function (request) { return request(_this.axios, _this.basePath); });
-    };
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspacesApi
-     */
-    WorkspacesApi.prototype.workspacesControllerParcialUpdate = function (workspaceId, parcialUpdateWorkspaceRequestDto, options) {
-        var _this = this;
-        return (0, exports.WorkspacesApiFp)(this.configuration).workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
-    };
-    return WorkspacesApi;
-}(base_1.BaseAPI));
-exports.WorkspacesApi = WorkspacesApi;
