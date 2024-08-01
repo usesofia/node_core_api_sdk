@@ -16,6 +16,62 @@ import { BaseAPI } from './base';
 /**
  *
  * @export
+ * @interface AssignCategoryForBankTransactionsPageRequestDto
+ */
+export interface AssignCategoryForBankTransactionsPageRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof AssignCategoryForBankTransactionsPageRequestDto
+     */
+    'syncItemId': string;
+    /**
+     *
+     * @type {number}
+     * @memberof AssignCategoryForBankTransactionsPageRequestDto
+     */
+    'pageNumber': number;
+    /**
+     *
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage}
+     * @memberof AssignCategoryForBankTransactionsPageRequestDto
+     */
+    'bankProviderTransactionsPage': SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage;
+    /**
+     *
+     * @type {Array<SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner>}
+     * @memberof AssignCategoryForBankTransactionsPageRequestDto
+     */
+    'legalNatureAssignRequests': Array<SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner>;
+}
+/**
+ *
+ * @export
+ * @interface AssignLegalNatureForBankTransactionsPageRequestDto
+ */
+export interface AssignLegalNatureForBankTransactionsPageRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof AssignLegalNatureForBankTransactionsPageRequestDto
+     */
+    'syncItemId': string;
+    /**
+     *
+     * @type {number}
+     * @memberof AssignLegalNatureForBankTransactionsPageRequestDto
+     */
+    'pageNumber': number;
+    /**
+     *
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage}
+     * @memberof AssignLegalNatureForBankTransactionsPageRequestDto
+     */
+    'bankProviderTransactionsPage': SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage;
+}
+/**
+ *
+ * @export
  * @interface BalancePointResultEntity
  */
 export interface BalancePointResultEntity {
@@ -46,16 +102,10 @@ export interface BankAccountEntity {
     'bankConnectionId': string;
     /**
      *
-     * @type {BankConnectionEntity}
-     * @memberof BankAccountEntity
-     */
-    'bankConnection': BankConnectionEntity;
-    /**
-     *
      * @type {string}
      * @memberof BankAccountEntity
      */
-    'provider': string;
+    'provider': BankAccountEntityProviderEnum;
     /**
      *
      * @type {string}
@@ -67,7 +117,7 @@ export interface BankAccountEntity {
      * @type {string}
      * @memberof BankAccountEntity
      */
-    'type': string;
+    'type': BankAccountEntityTypeEnum;
     /**
      *
      * @type {boolean}
@@ -100,55 +150,28 @@ export interface BankAccountEntity {
     'name': string;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof BankAccountEntity
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof BankAccountEntity
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
-/**
- *
- * @export
- * @interface BankAccountsBalanceReportEntity
- */
-export interface BankAccountsBalanceReportEntity {
-    /**
-     *
-     * @type {Array<BankAccountsBalanceReportItemEntity>}
-     * @memberof BankAccountsBalanceReportEntity
-     */
-    'items': Array<BankAccountsBalanceReportItemEntity>;
-    /**
-     *
-     * @type {Array<BankAccountEntity>}
-     * @memberof BankAccountsBalanceReportEntity
-     */
-    'bankAccounts': Array<BankAccountEntity>;
-}
-/**
- *
- * @export
- * @interface BankAccountsBalanceReportItemEntity
- */
-export interface BankAccountsBalanceReportItemEntity {
-    /**
-     *
-     * @type {number}
-     * @memberof BankAccountsBalanceReportItemEntity
-     */
-    'totalBalance': number;
-    /**
-     *
-     * @type {string}
-     * @memberof BankAccountsBalanceReportItemEntity
-     */
-    'currencyCode': string;
-}
+export declare const BankAccountEntityProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type BankAccountEntityProviderEnum = typeof BankAccountEntityProviderEnum[keyof typeof BankAccountEntityProviderEnum];
+export declare const BankAccountEntityTypeEnum: {
+    readonly Checking: "CHECKING";
+    readonly Savings: "SAVINGS";
+    readonly CreditCard: "CREDIT_CARD";
+};
+export type BankAccountEntityTypeEnum = typeof BankAccountEntityTypeEnum[keyof typeof BankAccountEntityTypeEnum];
 /**
  *
  * @export
@@ -175,6 +198,12 @@ export interface BankConnectionEntity {
     'workspaceId': string;
     /**
      *
+     * @type {Array<BankConnectionEntityAccountsInner>}
+     * @memberof BankConnectionEntity
+     */
+    'accounts'?: Array<BankConnectionEntityAccountsInner> | null;
+    /**
+     *
      * @type {boolean}
      * @memberof BankConnectionEntity
      */
@@ -184,7 +213,7 @@ export interface BankConnectionEntity {
      * @type {string}
      * @memberof BankConnectionEntity
      */
-    'provider': string;
+    'provider': BankConnectionEntityProviderEnum;
     /**
      *
      * @type {string}
@@ -196,7 +225,7 @@ export interface BankConnectionEntity {
      * @type {string}
      * @memberof BankConnectionEntity
      */
-    'historyRange': string;
+    'historyRange': BankConnectionEntityHistoryRangeEnum;
     /**
      *
      * @type {string}
@@ -205,169 +234,208 @@ export interface BankConnectionEntity {
     'connectorId': string;
     /**
      *
-     * @type {BankConnectorEntity}
+     * @type {BankConnectionEntityConnector}
      * @memberof BankConnectionEntity
      */
-    'connector': BankConnectorEntity;
+    'connector'?: BankConnectionEntityConnector | null;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof BankConnectionEntity
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof BankConnectionEntity
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
+export declare const BankConnectionEntityProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type BankConnectionEntityProviderEnum = typeof BankConnectionEntityProviderEnum[keyof typeof BankConnectionEntityProviderEnum];
+export declare const BankConnectionEntityHistoryRangeEnum: {
+    readonly OneDay: "ONE_DAY";
+    readonly OneWeek: "ONE_WEEK";
+    readonly OneMonth: "ONE_MONTH";
+    readonly TwoMonths: "TWO_MONTHS";
+    readonly ThreeMonths: "THREE_MONTHS";
+    readonly SixMonths: "SIX_MONTHS";
+    readonly OneYear: "ONE_YEAR";
+};
+export type BankConnectionEntityHistoryRangeEnum = typeof BankConnectionEntityHistoryRangeEnum[keyof typeof BankConnectionEntityHistoryRangeEnum];
 /**
  *
  * @export
- * @interface BankConnectionWithAccountsEntity
+ * @interface BankConnectionEntityAccountsInner
  */
-export interface BankConnectionWithAccountsEntity {
+export interface BankConnectionEntityAccountsInner {
     /**
      *
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
     'id': string;
     /**
      *
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'createdByUserId': string;
+    'bankConnectionId': string;
     /**
      *
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'workspaceId': string;
+    'provider': BankConnectionEntityAccountsInnerProviderEnum;
     /**
      *
-     * @type {Array<PlainBankAccountEntity>}
-     * @memberof BankConnectionWithAccountsEntity
+     * @type {string}
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'accounts': Array<PlainBankAccountEntity>;
+    'providerAccountId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankConnectionEntityAccountsInner
+     */
+    'type': BankConnectionEntityAccountsInnerTypeEnum;
     /**
      *
      * @type {boolean}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
     'enabled': boolean;
     /**
      *
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'provider': string;
+    'number': string;
+    /**
+     *
+     * @type {number}
+     * @memberof BankConnectionEntityAccountsInner
+     */
+    'balance': number;
     /**
      *
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'providerItemId': string;
+    'currencyCode': string;
     /**
      *
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'historyRange': string;
+    'name': string;
     /**
      *
-     * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @type {any}
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'connectorId': string;
+    'createdAt': any;
     /**
      *
-     * @type {BankConnectorEntity}
-     * @memberof BankConnectionWithAccountsEntity
+     * @type {any}
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'connector': BankConnectorEntity;
-    /**
-     *
-     * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
-     */
-    'createdAt': string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
-     */
-    'updatedAt': string;
+    'updatedAt': any;
 }
+export declare const BankConnectionEntityAccountsInnerProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type BankConnectionEntityAccountsInnerProviderEnum = typeof BankConnectionEntityAccountsInnerProviderEnum[keyof typeof BankConnectionEntityAccountsInnerProviderEnum];
+export declare const BankConnectionEntityAccountsInnerTypeEnum: {
+    readonly Checking: "CHECKING";
+    readonly Savings: "SAVINGS";
+    readonly CreditCard: "CREDIT_CARD";
+};
+export type BankConnectionEntityAccountsInnerTypeEnum = typeof BankConnectionEntityAccountsInnerTypeEnum[keyof typeof BankConnectionEntityAccountsInnerTypeEnum];
 /**
  *
  * @export
- * @interface BankConnectorEntity
+ * @interface BankConnectionEntityConnector
  */
-export interface BankConnectorEntity {
+export interface BankConnectionEntityConnector {
     /**
      *
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'id': string;
     /**
      *
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
-    'provider': string;
+    'provider': BankConnectionEntityConnectorProviderEnum;
     /**
      *
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'name': string;
     /**
      *
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'institutionUrl': string;
     /**
      *
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'imageUrl': string;
     /**
      *
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'primaryColor': string;
     /**
      *
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
-    'type': string;
+    'type': BankConnectionEntityConnectorTypeEnum;
     /**
      *
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'country': string;
     /**
      *
-     * @type {string}
-     * @memberof BankConnectorEntity
+     * @type {any}
+     * @memberof BankConnectionEntityConnector
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      *
-     * @type {string}
-     * @memberof BankConnectorEntity
+     * @type {any}
+     * @memberof BankConnectionEntityConnector
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
+export declare const BankConnectionEntityConnectorProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type BankConnectionEntityConnectorProviderEnum = typeof BankConnectionEntityConnectorProviderEnum[keyof typeof BankConnectionEntityConnectorProviderEnum];
+export declare const BankConnectionEntityConnectorTypeEnum: {
+    readonly PersonalBank: "PERSONAL_BANK";
+    readonly BusinessBank: "BUSINESS_BANK";
+    readonly Investment: "INVESTMENT";
+    readonly DigitalEconomy: "DIGITAL_ECONOMY";
+    readonly Other: "OTHER";
+};
+export type BankConnectionEntityConnectorTypeEnum = typeof BankConnectionEntityConnectorTypeEnum[keyof typeof BankConnectionEntityConnectorTypeEnum];
 /**
  *
  * @export
@@ -391,124 +459,63 @@ export interface BankTransactionCategoryEntity {
      * @type {string}
      * @memberof BankTransactionCategoryEntity
      */
-    'nature': string;
+    'directionNature': BankTransactionCategoryEntityDirectionNatureEnum;
     /**
      *
      * @type {string}
      * @memberof BankTransactionCategoryEntity
      */
-    'parentId'?: string;
+    'parentId'?: string | null;
     /**
      *
-     * @type {Array<BankTransactionCategoryPlainEntity>}
+     * @type {Array<BankTransactionCategoryEntityChildrenInner>}
      * @memberof BankTransactionCategoryEntity
      */
-    'path': Array<BankTransactionCategoryPlainEntity>;
-    /**
-     *
-     * @type {Array<BankTransactionCategoryPlainEntity>}
-     * @memberof BankTransactionCategoryEntity
-     */
-    'children': Array<BankTransactionCategoryPlainEntity>;
+    'children': Array<BankTransactionCategoryEntityChildrenInner>;
 }
+export declare const BankTransactionCategoryEntityDirectionNatureEnum: {
+    readonly Credit: "CREDIT";
+    readonly Debit: "DEBIT";
+    readonly Undefined: "UNDEFINED";
+};
+export type BankTransactionCategoryEntityDirectionNatureEnum = typeof BankTransactionCategoryEntityDirectionNatureEnum[keyof typeof BankTransactionCategoryEntityDirectionNatureEnum];
 /**
  *
  * @export
- * @interface BankTransactionCategoryPlainEntity
+ * @interface BankTransactionCategoryEntityChildrenInner
  */
-export interface BankTransactionCategoryPlainEntity {
+export interface BankTransactionCategoryEntityChildrenInner {
     /**
      *
      * @type {string}
-     * @memberof BankTransactionCategoryPlainEntity
+     * @memberof BankTransactionCategoryEntityChildrenInner
      */
     'id': string;
     /**
      *
      * @type {string}
-     * @memberof BankTransactionCategoryPlainEntity
+     * @memberof BankTransactionCategoryEntityChildrenInner
      */
     'name': string;
     /**
      *
      * @type {string}
-     * @memberof BankTransactionCategoryPlainEntity
+     * @memberof BankTransactionCategoryEntityChildrenInner
      */
-    'nature': string;
+    'directionNature': BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum;
     /**
      *
      * @type {string}
-     * @memberof BankTransactionCategoryPlainEntity
+     * @memberof BankTransactionCategoryEntityChildrenInner
      */
-    'parentId'?: string;
+    'parentId'?: string | null;
 }
-/**
- *
- * @export
- * @interface BankTransactionCreditCardMetadataEntity
- */
-export interface BankTransactionCreditCardMetadataEntity {
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'id': string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'transactionId': string;
-    /**
-     *
-     * @type {number}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'installmentNumber'?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'totalInstallments'?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'totalAmount'?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'payeeMCC'?: number;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'cardNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'billId'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'createdAt': string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'updatedAt': string;
-}
+export declare const BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum: {
+    readonly Credit: "CREDIT";
+    readonly Debit: "DEBIT";
+    readonly Undefined: "UNDEFINED";
+};
+export type BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum = typeof BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum[keyof typeof BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum];
 /**
  *
  * @export
@@ -529,10 +536,10 @@ export interface BankTransactionEntity {
     'accountId': string;
     /**
      *
-     * @type {BankAccountEntity}
+     * @type {BankConnectionEntityAccountsInner}
      * @memberof BankTransactionEntity
      */
-    'account': BankAccountEntity;
+    'account': BankConnectionEntityAccountsInner;
     /**
      *
      * @type {string}
@@ -565,16 +572,16 @@ export interface BankTransactionEntity {
     'description': string;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionEntity
      */
-    'postedDate': string;
+    'postedDate': any;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionEntity
      */
-    'competencyDate': string;
+    'competencyDate': any;
     /**
      *
      * @type {number}
@@ -586,7 +593,7 @@ export interface BankTransactionEntity {
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'type': BankTransactionEntityTypeEnum;
+    'directionNature': BankTransactionEntityDirectionNatureEnum;
     /**
      *
      * @type {string}
@@ -604,103 +611,91 @@ export interface BankTransactionEntity {
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'providerCategoryId'?: string;
+    'providerCategoryId'?: string | null;
     /**
      *
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'providerCategoryName'?: string;
+    'providerCategoryName'?: string | null;
     /**
      *
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'categoryId'?: string;
+    'categoryId'?: string | null;
     /**
      *
-     * @type {BankTransactionCategoryPlainEntity}
+     * @type {BankTransactionEntityCategory}
      * @memberof BankTransactionEntity
      */
-    'category'?: BankTransactionCategoryPlainEntity;
+    'category'?: BankTransactionEntityCategory | null;
     /**
      *
-     * @type {Array<BankTransactionTagEntity>}
+     * @type {Array<BankTransactionEntityTagsInner>}
      * @memberof BankTransactionEntity
      */
-    'tags': Array<BankTransactionTagEntity>;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionEntity
-     */
-    'paymentDataId'?: string;
-    /**
-     *
-     * @type {BankTransactionPaymentDataEntity}
-     * @memberof BankTransactionEntity
-     */
-    'paymentData'?: BankTransactionPaymentDataEntity;
+    'tags': Array<BankTransactionEntityTagsInner>;
     /**
      *
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'creditCardMetadataId'?: string;
+    'paymentDataId'?: string | null;
     /**
      *
-     * @type {BankTransactionCreditCardMetadataEntity}
+     * @type {BankTransactionEntityPaymentData}
      * @memberof BankTransactionEntity
      */
-    'creditCardMetadata'?: BankTransactionCreditCardMetadataEntity;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionEntity
-     */
-    'bestGuessCategoryId'?: string;
-    /**
-     *
-     * @type {BankTransactionCategoryPlainEntity}
-     * @memberof BankTransactionEntity
-     */
-    'bestGuessCategory'?: BankTransactionCategoryPlainEntity;
+    'paymentData'?: BankTransactionEntityPaymentData | null;
     /**
      *
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'ignoredAt'?: string;
+    'creditCardMetadataId'?: string | null;
     /**
      *
-     * @type {string}
+     * @type {BankTransactionEntityCreditCardMetadata}
      * @memberof BankTransactionEntity
      */
-    'confirmedAt'?: string;
+    'creditCardMetadata'?: BankTransactionEntityCreditCardMetadata | null;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionEntity
      */
-    'createdAt': string;
+    'ignoredAt'?: any | null;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionEntity
      */
-    'updatedAt': string;
+    'verifiedAt'?: any | null;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionEntity
+     */
+    'createdAt': any;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionEntity
+     */
+    'updatedAt': any;
 }
 export declare const BankTransactionEntityProviderEnum: {
     readonly Pluggy: "PLUGGY";
     readonly Sofia: "SOFIA";
 };
 export type BankTransactionEntityProviderEnum = typeof BankTransactionEntityProviderEnum[keyof typeof BankTransactionEntityProviderEnum];
-export declare const BankTransactionEntityTypeEnum: {
-    readonly Debit: "DEBIT";
+export declare const BankTransactionEntityDirectionNatureEnum: {
     readonly Credit: "CREDIT";
+    readonly Debit: "DEBIT";
     readonly Undefined: "UNDEFINED";
 };
-export type BankTransactionEntityTypeEnum = typeof BankTransactionEntityTypeEnum[keyof typeof BankTransactionEntityTypeEnum];
+export type BankTransactionEntityDirectionNatureEnum = typeof BankTransactionEntityDirectionNatureEnum[keyof typeof BankTransactionEntityDirectionNatureEnum];
 export declare const BankTransactionEntityStatusEnum: {
     readonly Pending: "PENDING";
     readonly Posted: "POSTED";
@@ -709,8 +704,283 @@ export type BankTransactionEntityStatusEnum = typeof BankTransactionEntityStatus
 export declare const BankTransactionEntityLegalNatureEnum: {
     readonly Personal: "PERSONAL";
     readonly Business: "BUSINESS";
+    readonly Undefined: "UNDEFINED";
 };
 export type BankTransactionEntityLegalNatureEnum = typeof BankTransactionEntityLegalNatureEnum[keyof typeof BankTransactionEntityLegalNatureEnum];
+/**
+ *
+ * @export
+ * @interface BankTransactionEntityCategory
+ */
+export interface BankTransactionEntityCategory {
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityCategory
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityCategory
+     */
+    'name': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityCategory
+     */
+    'directionNature': BankTransactionEntityCategoryDirectionNatureEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityCategory
+     */
+    'parentId'?: string | null;
+}
+export declare const BankTransactionEntityCategoryDirectionNatureEnum: {
+    readonly Credit: "CREDIT";
+    readonly Debit: "DEBIT";
+    readonly Undefined: "UNDEFINED";
+};
+export type BankTransactionEntityCategoryDirectionNatureEnum = typeof BankTransactionEntityCategoryDirectionNatureEnum[keyof typeof BankTransactionEntityCategoryDirectionNatureEnum];
+/**
+ *
+ * @export
+ * @interface BankTransactionEntityCreditCardMetadata
+ */
+export interface BankTransactionEntityCreditCardMetadata {
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'transactionId': string;
+    /**
+     *
+     * @type {number}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'installmentNumber'?: number | null;
+    /**
+     *
+     * @type {number}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'totalInstallments'?: number | null;
+    /**
+     *
+     * @type {number}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'totalAmount'?: number | null;
+    /**
+     *
+     * @type {number}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'payeeMCC'?: number | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'cardNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'billId'?: string | null;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'createdAt': any;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'updatedAt': any;
+}
+/**
+ *
+ * @export
+ * @interface BankTransactionEntityPaymentData
+ */
+export interface BankTransactionEntityPaymentData {
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'transactionId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerName'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerBranchNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerAccountNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerRoutingNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerRoutingNumberISPB'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerDocumentNumberType'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerDocumentNumberValue'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'reason'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverName'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverBranchNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverAccountNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverRoutingNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverRoutingNumberISPB'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverDocumentNumberType'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverDocumentNumberValue'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'paymentMethod'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'referenceNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverReferenceId'?: string | null;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'createdAt': any;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'updatedAt': any;
+}
+/**
+ *
+ * @export
+ * @interface BankTransactionEntityTagsInner
+ */
+export interface BankTransactionEntityTagsInner {
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityTagsInner
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionEntityTagsInner
+     */
+    'name': string;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionEntityTagsInner
+     */
+    'createdAt': any;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionEntityTagsInner
+     */
+    'updatedAt': any;
+}
 /**
  *
  * @export
@@ -781,145 +1051,6 @@ export interface BankTransactionIndicatorEntity {
 /**
  *
  * @export
- * @interface BankTransactionPaymentDataEntity
- */
-export interface BankTransactionPaymentDataEntity {
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'id': string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'transactionId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payeerName'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerBranchNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerAccountNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerRoutingNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerRoutingNumberISPB'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerDocumentNumberType'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerDocumentNumberValue'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'reason'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverName'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverBranchNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverAccountNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverRoutingNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverRoutingNumberISPB'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverDocumentNumberType'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverDocumentNumberValue'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'paymentMethod'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'referenceNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverReferenceId'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'createdAt': string;
-    /**
-     *
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'updatedAt': string;
-}
-/**
- *
- * @export
  * @interface BankTransactionTagEntity
  */
 export interface BankTransactionTagEntity {
@@ -937,16 +1068,16 @@ export interface BankTransactionTagEntity {
     'name': string;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionTagEntity
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionTagEntity
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
 /**
  *
@@ -980,36 +1111,202 @@ export interface BankTransactionsPageEntity {
     'totalPages': number;
     /**
      *
-     * @type {Array<BankTransactionEntity>}
+     * @type {Array<BankTransactionsPageEntityItemsInner>}
      * @memberof BankTransactionsPageEntity
      */
-    'items': Array<BankTransactionEntity>;
+    'items': Array<BankTransactionsPageEntityItemsInner>;
 }
 /**
  *
  * @export
- * @interface BankTransactionsTotalsEntity
+ * @interface BankTransactionsPageEntityItemsInner
  */
-export interface BankTransactionsTotalsEntity {
+export interface BankTransactionsPageEntityItemsInner {
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'accountId': string;
+    /**
+     *
+     * @type {BankConnectionEntityAccountsInner}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'account': BankConnectionEntityAccountsInner;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'workspaceId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'provider': BankTransactionsPageEntityItemsInnerProviderEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'providerTransactionId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'originalDescription': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'description': string;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'postedDate': any;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'competencyDate': any;
     /**
      *
      * @type {number}
-     * @memberof BankTransactionsTotalsEntity
+     * @memberof BankTransactionsPageEntityItemsInner
      */
-    'entriesInCents'?: number;
+    'amount': number;
     /**
      *
-     * @type {number}
-     * @memberof BankTransactionsTotalsEntity
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
      */
-    'outflowsInCents'?: number;
+    'directionNature': BankTransactionsPageEntityItemsInnerDirectionNatureEnum;
     /**
      *
-     * @type {number}
-     * @memberof BankTransactionsTotalsEntity
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
      */
-    'outcomeInCents'?: number;
+    'status': BankTransactionsPageEntityItemsInnerStatusEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'legalNature': BankTransactionsPageEntityItemsInnerLegalNatureEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'providerCategoryId'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'providerCategoryName'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'categoryId'?: string | null;
+    /**
+     *
+     * @type {BankTransactionEntityCategory}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'category'?: BankTransactionEntityCategory | null;
+    /**
+     *
+     * @type {Array<BankTransactionEntityTagsInner>}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'tags': Array<BankTransactionEntityTagsInner>;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'paymentDataId'?: string | null;
+    /**
+     *
+     * @type {BankTransactionEntityPaymentData}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'paymentData'?: BankTransactionEntityPaymentData | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'creditCardMetadataId'?: string | null;
+    /**
+     *
+     * @type {BankTransactionEntityCreditCardMetadata}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'creditCardMetadata'?: BankTransactionEntityCreditCardMetadata | null;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'ignoredAt'?: any | null;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'verifiedAt'?: any | null;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'createdAt': any;
+    /**
+     *
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'updatedAt': any;
 }
+export declare const BankTransactionsPageEntityItemsInnerProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type BankTransactionsPageEntityItemsInnerProviderEnum = typeof BankTransactionsPageEntityItemsInnerProviderEnum[keyof typeof BankTransactionsPageEntityItemsInnerProviderEnum];
+export declare const BankTransactionsPageEntityItemsInnerDirectionNatureEnum: {
+    readonly Credit: "CREDIT";
+    readonly Debit: "DEBIT";
+    readonly Undefined: "UNDEFINED";
+};
+export type BankTransactionsPageEntityItemsInnerDirectionNatureEnum = typeof BankTransactionsPageEntityItemsInnerDirectionNatureEnum[keyof typeof BankTransactionsPageEntityItemsInnerDirectionNatureEnum];
+export declare const BankTransactionsPageEntityItemsInnerStatusEnum: {
+    readonly Pending: "PENDING";
+    readonly Posted: "POSTED";
+};
+export type BankTransactionsPageEntityItemsInnerStatusEnum = typeof BankTransactionsPageEntityItemsInnerStatusEnum[keyof typeof BankTransactionsPageEntityItemsInnerStatusEnum];
+export declare const BankTransactionsPageEntityItemsInnerLegalNatureEnum: {
+    readonly Personal: "PERSONAL";
+    readonly Business: "BUSINESS";
+    readonly Undefined: "UNDEFINED";
+};
+export type BankTransactionsPageEntityItemsInnerLegalNatureEnum = typeof BankTransactionsPageEntityItemsInnerLegalNatureEnum[keyof typeof BankTransactionsPageEntityItemsInnerLegalNatureEnum];
 /**
  *
  * @export
@@ -1301,37 +1598,6 @@ export interface CashFlowReportWeeklyItemEntity {
 /**
  *
  * @export
- * @interface CategoryGuessDto
- */
-export interface CategoryGuessDto {
-    /**
-     *
-     * @type {string}
-     * @memberof CategoryGuessDto
-     */
-    'categoryId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CategoryGuessDto
-     */
-    'name': string;
-    /**
-     *
-     * @type {number}
-     * @memberof CategoryGuessDto
-     */
-    'score': number;
-    /**
-     *
-     * @type {string}
-     * @memberof CategoryGuessDto
-     */
-    'origin': string;
-}
-/**
- *
- * @export
  * @interface CreateBankTransactionTagRequestDto
  */
 export interface CreateBankTransactionTagRequestDto {
@@ -1359,7 +1625,7 @@ export interface CreateOrUpdateBankAccountRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateBankAccountRequestDto
      */
-    'provider': string;
+    'provider': CreateOrUpdateBankAccountRequestDtoProviderEnum;
     /**
      *
      * @type {string}
@@ -1371,7 +1637,7 @@ export interface CreateOrUpdateBankAccountRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateBankAccountRequestDto
      */
-    'type': string;
+    'type': CreateOrUpdateBankAccountRequestDtoTypeEnum;
     /**
      *
      * @type {string}
@@ -1397,6 +1663,17 @@ export interface CreateOrUpdateBankAccountRequestDto {
      */
     'name': string;
 }
+export declare const CreateOrUpdateBankAccountRequestDtoProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type CreateOrUpdateBankAccountRequestDtoProviderEnum = typeof CreateOrUpdateBankAccountRequestDtoProviderEnum[keyof typeof CreateOrUpdateBankAccountRequestDtoProviderEnum];
+export declare const CreateOrUpdateBankAccountRequestDtoTypeEnum: {
+    readonly Checking: "CHECKING";
+    readonly Savings: "SAVINGS";
+    readonly CreditCard: "CREDIT_CARD";
+};
+export type CreateOrUpdateBankAccountRequestDtoTypeEnum = typeof CreateOrUpdateBankAccountRequestDtoTypeEnum[keyof typeof CreateOrUpdateBankAccountRequestDtoTypeEnum];
 /**
  *
  * @export
@@ -1414,7 +1691,7 @@ export interface CreateOrUpdateBankConnectionRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateBankConnectionRequestDto
      */
-    'provider': string;
+    'provider': CreateOrUpdateBankConnectionRequestDtoProviderEnum;
     /**
      *
      * @type {string}
@@ -1432,123 +1709,23 @@ export interface CreateOrUpdateBankConnectionRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateBankConnectionRequestDto
      */
-    'historyRange': string;
+    'historyRange': CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum;
 }
-/**
- *
- * @export
- * @interface CreateOrUpdateBankTransactionsInBulkItemDto
- */
-export interface CreateOrUpdateBankTransactionsInBulkItemDto {
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'accountId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'provider': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'workspaceId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'providerTransactionId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'description': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'postedDate': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'competencyDate': string;
-    /**
-     *
-     * @type {number}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'amount': number;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'type': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'status': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'legalNature': string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'providerCategoryId'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'providerCategoryName'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'categoryId': string;
-    /**
-     *
-     * @type {PaymentDataDto}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'paymentData': PaymentDataDto;
-    /**
-     *
-     * @type {CreditCardMetadataDto}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'creditCardMetadata': CreditCardMetadataDto;
-    /**
-     *
-     * @type {Array<CategoryGuessDto>}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'categoryGuesses'?: Array<CategoryGuessDto>;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'bestGuessCategoryId': string;
-}
+export declare const CreateOrUpdateBankConnectionRequestDtoProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type CreateOrUpdateBankConnectionRequestDtoProviderEnum = typeof CreateOrUpdateBankConnectionRequestDtoProviderEnum[keyof typeof CreateOrUpdateBankConnectionRequestDtoProviderEnum];
+export declare const CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum: {
+    readonly OneDay: "ONE_DAY";
+    readonly OneWeek: "ONE_WEEK";
+    readonly OneMonth: "ONE_MONTH";
+    readonly TwoMonths: "TWO_MONTHS";
+    readonly ThreeMonths: "THREE_MONTHS";
+    readonly SixMonths: "SIX_MONTHS";
+    readonly OneYear: "ONE_YEAR";
+};
+export type CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum = typeof CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum[keyof typeof CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum];
 /**
  *
  * @export
@@ -1557,10 +1734,361 @@ export interface CreateOrUpdateBankTransactionsInBulkItemDto {
 export interface CreateOrUpdateBankTransactionsInBulkRequestDto {
     /**
      *
-     * @type {Array<CreateOrUpdateBankTransactionsInBulkItemDto>}
+     * @type {Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner>}
      * @memberof CreateOrUpdateBankTransactionsInBulkRequestDto
      */
-    'items': Array<CreateOrUpdateBankTransactionsInBulkItemDto>;
+    'items': Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner>;
+}
+/**
+ *
+ * @export
+ * @interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+ */
+export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner {
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'accountId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'provider': CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'workspaceId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'providerTransactionId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'description': string;
+    /**
+     *
+     * @type {any}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'postedDate': any;
+    /**
+     *
+     * @type {any}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'competencyDate': any;
+    /**
+     *
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'amount': number;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'directionNature': CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'status': CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'legalNature': CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'providerCategoryId'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'providerCategoryName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'categoryId'?: string;
+    /**
+     *
+     * @type {CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'paymentData'?: CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData;
+    /**
+     *
+     * @type {CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'creditCardMetadata'?: CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata;
+    /**
+     *
+     * @type {Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner>}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'categoryGuesses'?: Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner>;
+    /**
+     *
+     * @type {Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner>}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'legalNatureGuesses'?: Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner>;
+}
+export declare const CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum = typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum[keyof typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum];
+export declare const CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum: {
+    readonly Credit: "CREDIT";
+    readonly Debit: "DEBIT";
+    readonly Undefined: "UNDEFINED";
+};
+export type CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum = typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum[keyof typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum];
+export declare const CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum: {
+    readonly Pending: "PENDING";
+    readonly Posted: "POSTED";
+};
+export type CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum = typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum[keyof typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum];
+export declare const CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum: {
+    readonly Personal: "PERSONAL";
+    readonly Business: "BUSINESS";
+    readonly Undefined: "UNDEFINED";
+};
+export type CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum = typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum[keyof typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum];
+/**
+ *
+ * @export
+ * @interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner
+ */
+export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner {
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner
+     */
+    'categoryId': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner
+     */
+    'confidenceScore': number;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner
+     */
+    'guesserModelId': string;
+}
+/**
+ *
+ * @export
+ * @interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+ */
+export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata {
+    /**
+     *
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'installmentNumber'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'totalInstallments'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'totalAmount'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'payeeMCC'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'cardNumber'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'billId'?: string;
+}
+/**
+ *
+ * @export
+ * @interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner
+ */
+export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner {
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner
+     */
+    'legalNature': CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum;
+    /**
+     *
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner
+     */
+    'confidenceScore': number;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner
+     */
+    'guesserModelId': string;
+}
+export declare const CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum: {
+    readonly Personal: "PERSONAL";
+    readonly Business: "BUSINESS";
+    readonly Undefined: "UNDEFINED";
+};
+export type CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum = typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum[keyof typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum];
+/**
+ *
+ * @export
+ * @interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+ */
+export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData {
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerBranchNumber'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerAccountNumber'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerRoutingNumber'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerRoutingNumberISPB'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerDocumentNumberType'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerDocumentNumberValue'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'reason'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverBranchNumber'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverAccountNumber'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverRoutingNumber'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverRoutingNumberISPB'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverDocumentNumberType'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverDocumentNumberValue'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'paymentMethod'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'referenceNumber'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverReferenceId'?: string;
 }
 /**
  *
@@ -1573,7 +2101,13 @@ export interface CreateOrUpdateMessageTokenRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateMessageTokenRequestDto
      */
-    'platform': string;
+    'platform': CreateOrUpdateMessageTokenRequestDtoPlatformEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOrUpdateMessageTokenRequestDto
+     */
+    'provider': CreateOrUpdateMessageTokenRequestDtoProviderEnum;
     /**
      *
      * @type {string}
@@ -1587,6 +2121,16 @@ export interface CreateOrUpdateMessageTokenRequestDto {
      */
     'token': string;
 }
+export declare const CreateOrUpdateMessageTokenRequestDtoPlatformEnum: {
+    readonly Web: "WEB";
+    readonly Android: "ANDROID";
+    readonly Ios: "IOS";
+};
+export type CreateOrUpdateMessageTokenRequestDtoPlatformEnum = typeof CreateOrUpdateMessageTokenRequestDtoPlatformEnum[keyof typeof CreateOrUpdateMessageTokenRequestDtoPlatformEnum];
+export declare const CreateOrUpdateMessageTokenRequestDtoProviderEnum: {
+    readonly FirebaseMessaging: "FIREBASE_MESSAGING";
+};
+export type CreateOrUpdateMessageTokenRequestDtoProviderEnum = typeof CreateOrUpdateMessageTokenRequestDtoProviderEnum[keyof typeof CreateOrUpdateMessageTokenRequestDtoProviderEnum];
 /**
  *
  * @export
@@ -1598,7 +2142,7 @@ export interface CreatePluggyConnectTokenRequestDto {
      * @type {string}
      * @memberof CreatePluggyConnectTokenRequestDto
      */
-    'itemId'?: string;
+    'itemId'?: string | null;
     /**
      *
      * @type {string}
@@ -1610,8 +2154,18 @@ export interface CreatePluggyConnectTokenRequestDto {
      * @type {string}
      * @memberof CreatePluggyConnectTokenRequestDto
      */
-    'historyRange': string;
+    'historyRange': CreatePluggyConnectTokenRequestDtoHistoryRangeEnum;
 }
+export declare const CreatePluggyConnectTokenRequestDtoHistoryRangeEnum: {
+    readonly OneDay: "ONE_DAY";
+    readonly OneWeek: "ONE_WEEK";
+    readonly OneMonth: "ONE_MONTH";
+    readonly TwoMonths: "TWO_MONTHS";
+    readonly ThreeMonths: "THREE_MONTHS";
+    readonly SixMonths: "SIX_MONTHS";
+    readonly OneYear: "ONE_YEAR";
+};
+export type CreatePluggyConnectTokenRequestDtoHistoryRangeEnum = typeof CreatePluggyConnectTokenRequestDtoHistoryRangeEnum[keyof typeof CreatePluggyConnectTokenRequestDtoHistoryRangeEnum];
 /**
  *
  * @export
@@ -1718,49 +2272,6 @@ export interface CredentialsEntity {
      * @memberof CredentialsEntity
      */
     'refreshToken': string;
-}
-/**
- *
- * @export
- * @interface CreditCardMetadataDto
- */
-export interface CreditCardMetadataDto {
-    /**
-     *
-     * @type {number}
-     * @memberof CreditCardMetadataDto
-     */
-    'installmentNumber'?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof CreditCardMetadataDto
-     */
-    'totalInstallments'?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof CreditCardMetadataDto
-     */
-    'totalAmount'?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof CreditCardMetadataDto
-     */
-    'payeeMCC'?: number;
-    /**
-     *
-     * @type {string}
-     * @memberof CreditCardMetadataDto
-     */
-    'cardNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreditCardMetadataDto
-     */
-    'billId'?: string;
 }
 /**
  *
@@ -2163,10 +2674,10 @@ export interface MessageTokenEntity {
     'workspaceId': string;
     /**
      *
-     * @type {WorkspaceEntity}
+     * @type {MessageTokenEntityWorksapce}
      * @memberof MessageTokenEntity
      */
-    'workspace': WorkspaceEntity;
+    'worksapce'?: MessageTokenEntityWorksapce | null;
     /**
      *
      * @type {string}
@@ -2175,10 +2686,10 @@ export interface MessageTokenEntity {
     'userId': string;
     /**
      *
-     * @type {UserEntity}
+     * @type {MessageTokenEntityUser}
      * @memberof MessageTokenEntity
      */
-    'user': UserEntity;
+    'user'?: MessageTokenEntityUser | null;
     /**
      *
      * @type {string}
@@ -2205,16 +2716,16 @@ export interface MessageTokenEntity {
     'token': string;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof MessageTokenEntity
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      *
-     * @type {string}
+     * @type {any}
      * @memberof MessageTokenEntity
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
 export declare const MessageTokenEntityProviderEnum: {
     readonly FirebaseMessaging: "FIREBASE_MESSAGING";
@@ -2229,16 +2740,186 @@ export type MessageTokenEntityPlatformEnum = typeof MessageTokenEntityPlatformEn
 /**
  *
  * @export
- * @interface ParcialUpdateWorkspaceRequestDto
+ * @interface MessageTokenEntityUser
  */
-export interface ParcialUpdateWorkspaceRequestDto {
+export interface MessageTokenEntityUser {
     /**
      *
      * @type {string}
-     * @memberof ParcialUpdateWorkspaceRequestDto
+     * @memberof MessageTokenEntityUser
      */
-    'name'?: string | null;
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntityUser
+     */
+    'email': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntityUser
+     */
+    'phone': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntityUser
+     */
+    'passwordHash'?: string | null;
+    /**
+     *
+     * @type {boolean}
+     * @memberof MessageTokenEntityUser
+     */
+    'isRoot': boolean;
+    /**
+     *
+     * @type {Array<UserEntityWorkspacesInner>}
+     * @memberof MessageTokenEntityUser
+     */
+    'workspaces'?: Array<UserEntityWorkspacesInner> | null;
+    /**
+     *
+     * @type {any}
+     * @memberof MessageTokenEntityUser
+     */
+    'createdAt': any;
 }
+/**
+ *
+ * @export
+ * @interface MessageTokenEntityWorksapce
+ */
+export interface MessageTokenEntityWorksapce {
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'prettyId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'name': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'type': MessageTokenEntityWorksapceTypeEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'creatorUserId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'selectedPersonalCategoryTreeId'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'selectedBusinessCategoryTreeId'?: string | null;
+    /**
+     *
+     * @type {UserEntityWorkspacesInnerHybridSettings}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'hybridSettings'?: UserEntityWorkspacesInnerHybridSettings | null;
+    /**
+     *
+     * @type {UserEntityWorkspacesInnerHybridSettings}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'businessSettings'?: UserEntityWorkspacesInnerHybridSettings | null;
+    /**
+     *
+     * @type {UserEntityWorkspacesInnerPersonalSettings}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'personalSettings'?: UserEntityWorkspacesInnerPersonalSettings | null;
+    /**
+     *
+     * @type {any}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'createdAt': any;
+}
+export declare const MessageTokenEntityWorksapceTypeEnum: {
+    readonly Personal: "PERSONAL";
+    readonly Business: "BUSINESS";
+    readonly Hybrid: "HYBRID";
+};
+export type MessageTokenEntityWorksapceTypeEnum = typeof MessageTokenEntityWorksapceTypeEnum[keyof typeof MessageTokenEntityWorksapceTypeEnum];
+/**
+ *
+ * @export
+ * @interface PartialUpdateBankTransactionRequestDto
+ */
+export interface PartialUpdateBankTransactionRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'description'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'categoryId'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'competencyDate'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'ignore'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'verify'?: boolean;
+    /**
+     *
+     * @type {Array<string>}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'tagIds'?: Array<string>;
+    /**
+     *
+     * @type {string}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'legalNature'?: PartialUpdateBankTransactionRequestDtoLegalNatureEnum;
+}
+export declare const PartialUpdateBankTransactionRequestDtoLegalNatureEnum: {
+    readonly Personal: "PERSONAL";
+    readonly Business: "BUSINESS";
+    readonly Undefined: "UNDEFINED";
+};
+export type PartialUpdateBankTransactionRequestDtoLegalNatureEnum = typeof PartialUpdateBankTransactionRequestDtoLegalNatureEnum[keyof typeof PartialUpdateBankTransactionRequestDtoLegalNatureEnum];
 /**
  *
  * @export
@@ -2261,196 +2942,15 @@ export interface PartialUpdateProfileRequestDto {
 /**
  *
  * @export
- * @interface PaymentDataDto
+ * @interface PartialUpdateWorkspaceRequestDto
  */
-export interface PaymentDataDto {
+export interface PartialUpdateWorkspaceRequestDto {
     /**
      *
      * @type {string}
-     * @memberof PaymentDataDto
+     * @memberof PartialUpdateWorkspaceRequestDto
      */
-    'payerName'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerBranchNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerAccountNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerRoutingNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerRoutingNumberISPB'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerDocumentNumberType'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerDocumentNumberValue'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'reason'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverName'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverBranchNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverAccountNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverRoutingNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverRoutingNumberISPB'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverDocumentNumberType'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverDocumentNumberValue'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'paymentMethod'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'referenceNumber'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverReferenceId'?: string;
-}
-/**
- *
- * @export
- * @interface PlainBankAccountEntity
- */
-export interface PlainBankAccountEntity {
-    /**
-     *
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'id': string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'bankConnectionId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'provider': string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'providerAccountId': string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'type': string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof PlainBankAccountEntity
-     */
-    'enabled': boolean;
-    /**
-     *
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'number': string;
-    /**
-     *
-     * @type {number}
-     * @memberof PlainBankAccountEntity
-     */
-    'balance': number;
-    /**
-     *
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'currencyCode': string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'name': string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'createdAt': string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'updatedAt': string;
+    'name'?: string | null;
 }
 /**
  *
@@ -2599,52 +3099,509 @@ export interface SignUpWithEmailRequestDto {
 /**
  *
  * @export
- * @interface UpdateBankTransactionRequestDto
+ * @interface SyncBankAccountTransactionsPageBeginRequestDto
  */
-export interface UpdateBankTransactionRequestDto {
+export interface SyncBankAccountTransactionsPageBeginRequestDto {
     /**
      *
      * @type {string}
-     * @memberof UpdateBankTransactionRequestDto
+     * @memberof SyncBankAccountTransactionsPageBeginRequestDto
      */
-    'description'?: string;
+    'syncItemId': string;
     /**
      *
-     * @type {string}
-     * @memberof UpdateBankTransactionRequestDto
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageBeginRequestDto
      */
-    'categoryId'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof UpdateBankTransactionRequestDto
-     */
-    'competencyDate'?: string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof UpdateBankTransactionRequestDto
-     */
-    'ignore'?: boolean;
-    /**
-     *
-     * @type {boolean}
-     * @memberof UpdateBankTransactionRequestDto
-     */
-    'confirm'?: boolean;
-    /**
-     *
-     * @type {Array<string>}
-     * @memberof UpdateBankTransactionRequestDto
-     */
-    'tagIds'?: Array<string>;
-    /**
-     *
-     * @type {string}
-     * @memberof UpdateBankTransactionRequestDto
-     */
-    'legalNature'?: string;
+    'pageNumber': number;
 }
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDto
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDto
+     */
+    'syncItemId': string;
+    /**
+     *
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDto
+     */
+    'pageNumber': number;
+    /**
+     *
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDto
+     */
+    'bankProviderTransactionsPage': SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage;
+    /**
+     *
+     * @type {Array<SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner>}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDto
+     */
+    'legalNatureAssignRequests': Array<SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner>;
+    /**
+     *
+     * @type {Array<SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner>}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDto
+     */
+    'categoryAssignRequests': Array<SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner>;
+}
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage {
+    /**
+     *
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+     */
+    'pageNumber': number;
+    /**
+     *
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+     */
+    'pageSize': number;
+    /**
+     *
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+     */
+    'totalPages': number;
+    /**
+     *
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+     */
+    'totalResults': number;
+    /**
+     *
+     * @type {Array<SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner>}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+     */
+    'transactions': Array<SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner>;
+}
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner {
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'description': string;
+    /**
+     *
+     * @type {any}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'postedDate': any;
+    /**
+     *
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'amount': number;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'directionNature': SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'status': SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'categoryId'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'categoryName'?: string | null;
+    /**
+     *
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'paymentData'?: SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData | null;
+    /**
+     *
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'creditCardMetadata'?: SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata | null;
+}
+export declare const SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum: {
+    readonly Credit: "CREDIT";
+    readonly Debit: "DEBIT";
+    readonly Undefined: "UNDEFINED";
+};
+export type SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum = typeof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum[keyof typeof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum];
+export declare const SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum: {
+    readonly Pending: "PENDING";
+    readonly Posted: "POSTED";
+};
+export type SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum = typeof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum[keyof typeof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum];
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata {
+    /**
+     *
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'installmentNumber'?: number | null;
+    /**
+     *
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'totalInstallments'?: number | null;
+    /**
+     *
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'totalAmount'?: number | null;
+    /**
+     *
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'payeeMCC'?: number | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'cardNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'billId'?: string | null;
+}
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData {
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerName'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerBranchNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerAccountNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerRoutingNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerRoutingNumberISPB'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerDocumentNumberType'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerDocumentNumberValue'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'reason'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverName'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverBranchNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverAccountNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverRoutingNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverRoutingNumberISPB'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverDocumentNumberType'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverDocumentNumberValue'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'paymentMethod'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'referenceNumber'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverReferenceId'?: string | null;
+}
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner {
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner
+     */
+    'bankProviderTransactionId': string;
+    /**
+     *
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner
+     */
+    'category': SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory;
+}
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory {
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory
+     */
+    'origin': SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory
+     */
+    'id'?: string;
+    /**
+     *
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryPredictionResponse}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory
+     */
+    'predictionResponse'?: SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryPredictionResponse;
+}
+export declare const SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum: {
+    readonly Undefined: "UNDEFINED";
+    readonly Prediction: "PREDICTION";
+};
+export type SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum = typeof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum[keyof typeof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum];
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryPredictionResponse
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryPredictionResponse {
+    /**
+     *
+     * @type {Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner>}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryPredictionResponse
+     */
+    'sortedCategoryGuesses': Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner>;
+}
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner {
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner
+     */
+    'bankProviderTransactionId': string;
+    /**
+     *
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner
+     */
+    'legalNature': SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature;
+}
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature {
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature
+     */
+    'origin': SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature
+     */
+    'value': SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum;
+    /**
+     *
+     * @type {CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature
+     */
+    'predictionResponse'?: CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner;
+}
+export declare const SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum: {
+    readonly Automatic: "AUTOMATIC";
+    readonly Prediction: "PREDICTION";
+};
+export type SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum = typeof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum[keyof typeof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum];
+export declare const SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum: {
+    readonly Personal: "PERSONAL";
+    readonly Business: "BUSINESS";
+    readonly Undefined: "UNDEFINED";
+};
+export type SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum = typeof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum[keyof typeof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum];
+/**
+ *
+ * @export
+ * @interface SyncBankAccountTransactionsRequestDto
+ */
+export interface SyncBankAccountTransactionsRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsRequestDto
+     */
+    'accountId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsRequestDto
+     */
+    'provider': SyncBankAccountTransactionsRequestDtoProviderEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsRequestDto
+     */
+    'providerAccountId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsRequestDto
+     */
+    'providerItemId': string;
+}
+export declare const SyncBankAccountTransactionsRequestDtoProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type SyncBankAccountTransactionsRequestDtoProviderEnum = typeof SyncBankAccountTransactionsRequestDtoProviderEnum[keyof typeof SyncBankAccountTransactionsRequestDtoProviderEnum];
+/**
+ *
+ * @export
+ * @interface SyncBankItemRequestDto
+ */
+export interface SyncBankItemRequestDto {
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankItemRequestDto
+     */
+    'providerItemId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncBankItemRequestDto
+     */
+    'provider': SyncBankItemRequestDtoProviderEnum;
+}
+export declare const SyncBankItemRequestDtoProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type SyncBankItemRequestDtoProviderEnum = typeof SyncBankItemRequestDtoProviderEnum[keyof typeof SyncBankItemRequestDtoProviderEnum];
 /**
  *
  * @export
@@ -2828,6 +3785,30 @@ export interface UserEntityWorkspacesInnerPersonalSettings {
 /**
  *
  * @export
+ * @interface UserRelatedWorkspaceEntity
+ */
+export interface UserRelatedWorkspaceEntity {
+    /**
+     *
+     * @type {UserEntityWorkspacesInner}
+     * @memberof UserRelatedWorkspaceEntity
+     */
+    'workspace': UserEntityWorkspacesInner;
+    /**
+     *
+     * @type {string}
+     * @memberof UserRelatedWorkspaceEntity
+     */
+    'relationType': UserRelatedWorkspaceEntityRelationTypeEnum;
+}
+export declare const UserRelatedWorkspaceEntityRelationTypeEnum: {
+    readonly Approved: "APPROVED";
+    readonly WaitingApproval: "WAITING_APPROVAL";
+};
+export type UserRelatedWorkspaceEntityRelationTypeEnum = typeof UserRelatedWorkspaceEntityRelationTypeEnum[keyof typeof UserRelatedWorkspaceEntityRelationTypeEnum];
+/**
+ *
+ * @export
  * @interface VerifyEmailVerificationCodeRequestDto
  */
 export interface VerifyEmailVerificationCodeRequestDto {
@@ -2965,1036 +3946,10 @@ export declare const WorkspaceEntityTypeEnum: {
 };
 export type WorkspaceEntityTypeEnum = typeof WorkspaceEntityTypeEnum[keyof typeof WorkspaceEntityTypeEnum];
 /**
- * BankAccountsApi - axios parameter creator
+ * AuthApi - axios parameter creator
  * @export
  */
-export declare const BankAccountsApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerActivateBankAccount: (bankAccountId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerCreateOrUpdateBankAccount: (workspaceId: string, createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport: (workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerDisableBankAccount: (bankAccountId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} bankConnectionId
-     * @param {boolean} enabled
-     * @param {string} types
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerFetchConnectionBankAccounts: (workspaceId: string, bankConnectionId: string, enabled: boolean, types: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerFetchWorkspaceBankAccounts: (workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerGetBankAccountDetails: (bankAccountId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * BankAccountsApi - functional programming interface
- * @export
- */
-export declare const BankAccountsApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerActivateBankAccount(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerCreateOrUpdateBankAccount(workspaceId: string, createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountsBalanceReportEntity>>;
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerDisableBankAccount(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} bankConnectionId
-     * @param {boolean} enabled
-     * @param {string} types
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerFetchConnectionBankAccounts(workspaceId: string, bankConnectionId: string, enabled: boolean, types: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankAccountEntity>>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerFetchWorkspaceBankAccounts(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankAccountEntity>>>;
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerGetBankAccountDetails(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>>;
-};
-/**
- * BankAccountsApi - factory interface
- * @export
- */
-export declare const BankAccountsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerActivateBankAccount(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerCreateOrUpdateBankAccount(workspaceId: string, createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: any): AxiosPromise<BankAccountEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: any): AxiosPromise<BankAccountsBalanceReportEntity>;
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerDisableBankAccount(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} bankConnectionId
-     * @param {boolean} enabled
-     * @param {string} types
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerFetchConnectionBankAccounts(workspaceId: string, bankConnectionId: string, enabled: boolean, types: string, options?: any): AxiosPromise<Array<BankAccountEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerFetchWorkspaceBankAccounts(workspaceId: string, enabled?: boolean, types?: string, options?: any): AxiosPromise<Array<BankAccountEntity>>;
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankAccountsControllerGetBankAccountDetails(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity>;
-};
-/**
- * BankAccountsApi - object-oriented interface
- * @export
- * @class BankAccountsApi
- * @extends {BaseAPI}
- */
-export declare class BankAccountsApi extends BaseAPI {
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    bankAccountsControllerActivateBankAccount(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    bankAccountsControllerCreateOrUpdateBankAccount(workspaceId: string, createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountsBalanceReportEntity, any>>;
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    bankAccountsControllerDisableBankAccount(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} bankConnectionId
-     * @param {boolean} enabled
-     * @param {string} types
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    bankAccountsControllerFetchConnectionBankAccounts(workspaceId: string, bankConnectionId: string, enabled: boolean, types: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity[], any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    bankAccountsControllerFetchWorkspaceBankAccounts(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity[], any>>;
-    /**
-     *
-     * @param {string} bankAccountId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    bankAccountsControllerGetBankAccountDetails(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity, any>>;
-}
-/**
- * BankConnectionsApi - axios parameter creator
- * @export
- */
-export declare const BankConnectionsApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerActivateBankConnection: (bankConnectionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerCreateOrUpdateBankConnection: (workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerDisableBankConnection: (bankConnectionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerFetchUserBankConnections: (workspaceId: string, enabled?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerGetBankConnectionDetails: (bankConnectionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * BankConnectionsApi - functional programming interface
- * @export
- */
-export declare const BankConnectionsApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerActivateBankConnection(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerCreateOrUpdateBankConnection(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>>;
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerDisableBankConnection(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerFetchUserBankConnections(workspaceId: string, enabled?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankConnectionWithAccountsEntity>>>;
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerGetBankConnectionDetails(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionWithAccountsEntity>>;
-};
-/**
- * BankConnectionsApi - factory interface
- * @export
- */
-export declare const BankConnectionsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerActivateBankConnection(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerCreateOrUpdateBankConnection(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: any): AxiosPromise<BankConnectionEntity>;
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerDisableBankConnection(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerFetchUserBankConnections(workspaceId: string, enabled?: boolean, options?: any): AxiosPromise<Array<BankConnectionWithAccountsEntity>>;
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankConnectionsControllerGetBankConnectionDetails(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionWithAccountsEntity>;
-};
-/**
- * BankConnectionsApi - object-oriented interface
- * @export
- * @class BankConnectionsApi
- * @extends {BaseAPI}
- */
-export declare class BankConnectionsApi extends BaseAPI {
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankConnectionsApi
-     */
-    bankConnectionsControllerActivateBankConnection(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankConnectionsApi
-     */
-    bankConnectionsControllerCreateOrUpdateBankConnection(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionEntity, any>>;
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankConnectionsApi
-     */
-    bankConnectionsControllerDisableBankConnection(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [enabled]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankConnectionsApi
-     */
-    bankConnectionsControllerFetchUserBankConnections(workspaceId: string, enabled?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionWithAccountsEntity[], any>>;
-    /**
-     *
-     * @param {string} bankConnectionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankConnectionsApi
-     */
-    bankConnectionsControllerGetBankConnectionDetails(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionWithAccountsEntity, any>>;
-}
-/**
- * BankTransactionCategoriesApi - axios parameter creator
- * @export
- */
-export declare const BankTransactionCategoriesApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [onlyLeafs]
-     * @param {string} [transactionNatures]
-     * @param {string} [legalNatures]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionCategoriesControllerGetBankTransactionCategories: (workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * BankTransactionCategoriesApi - functional programming interface
- * @export
- */
-export declare const BankTransactionCategoriesApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [onlyLeafs]
-     * @param {string} [transactionNatures]
-     * @param {string} [legalNatures]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCategoryEntity>>>;
-};
-/**
- * BankTransactionCategoriesApi - factory interface
- * @export
- */
-export declare const BankTransactionCategoriesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [onlyLeafs]
-     * @param {string} [transactionNatures]
-     * @param {string} [legalNatures]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: any): AxiosPromise<Array<BankTransactionCategoryEntity>>;
-};
-/**
- * BankTransactionCategoriesApi - object-oriented interface
- * @export
- * @class BankTransactionCategoriesApi
- * @extends {BaseAPI}
- */
-export declare class BankTransactionCategoriesApi extends BaseAPI {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {boolean} [onlyLeafs]
-     * @param {string} [transactionNatures]
-     * @param {string} [legalNatures]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionCategoriesApi
-     */
-    bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCategoryEntity[], any>>;
-}
-/**
- * BankTransactionTagsApi - axios parameter creator
- * @export
- */
-export declare const BankTransactionTagsApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionTagsControllerCreateTag: (workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionTagsControllerListTags: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * BankTransactionTagsApi - functional programming interface
- * @export
- */
-export declare const BankTransactionTagsApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionTagEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionTagsControllerListTags(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionTagEntity>>>;
-};
-/**
- * BankTransactionTagsApi - factory interface
- * @export
- */
-export declare const BankTransactionTagsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: any): AxiosPromise<BankTransactionTagEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionTagsControllerListTags(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionTagEntity>>;
-};
-/**
- * BankTransactionTagsApi - object-oriented interface
- * @export
- * @class BankTransactionTagsApi
- * @extends {BaseAPI}
- */
-export declare class BankTransactionTagsApi extends BaseAPI {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionTagsApi
-     */
-    bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionTagEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionTagsApi
-     */
-    bankTransactionTagsControllerListTags(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionTagEntity[], any>>;
-}
-/**
- * BankTransactionsApi - axios parameter creator
- * @export
- */
-export declare const BankTransactionsApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk: (createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} provider
-     * @param {string} providerTransactionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionByProvider: (workspaceId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {string} [accountIds]
-     * @param {string} [categoryIds]
-     * @param {string} [tagIds]
-     * @param {string} [legalNatures]
-     * @param {string} [types]
-     * @param {string} [minPostedDate]
-     * @param {string} [maxPostedDate]
-     * @param {string} [minCompetencyDate]
-     * @param {string} [maxCompetencyDate]
-     * @param {boolean} [showIgnored]
-     * @param {boolean} [ignoreAutomaticApplicationRelated]
-     * @param {boolean} [ignoreInternalTransfers]
-     * @param {boolean} [ignoreInvoiceRelated]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactions: (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe: (workspaceId: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {boolean} [considerIgnored]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionsNotConfirmed: (workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} [accountIds]
-     * @param {string} [categoryIds]
-     * @param {string} [tagIds]
-     * @param {string} [legalNatures]
-     * @param {string} [minPostedDate]
-     * @param {string} [maxPostedDate]
-     * @param {string} [minCompetencyDate]
-     * @param {string} [maxCompetencyDate]
-     * @param {boolean} [showIgnored]
-     * @param {boolean} [ignoreAutomaticApplicationRelated]
-     * @param {boolean} [ignoreInternalTransfers]
-     * @param {boolean} [ignoreInvoiceRelated]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionsTotals: (workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetRecent: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} bankTransactionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetTransactionDetails: (bankTransactionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} bankTransactionId
-     * @param {UpdateBankTransactionRequestDto} updateBankTransactionRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerUpdateTransaction: (bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * BankTransactionsApi - functional programming interface
- * @export
- */
-export declare const BankTransactionsApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionEntity>>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} provider
-     * @param {string} providerTransactionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {string} [accountIds]
-     * @param {string} [categoryIds]
-     * @param {string} [tagIds]
-     * @param {string} [legalNatures]
-     * @param {string} [types]
-     * @param {string} [minPostedDate]
-     * @param {string} [maxPostedDate]
-     * @param {string} [minCompetencyDate]
-     * @param {string} [maxCompetencyDate]
-     * @param {boolean} [showIgnored]
-     * @param {boolean} [ignoreAutomaticApplicationRelated]
-     * @param {boolean} [ignoreInternalTransfers]
-     * @param {boolean} [ignoreInvoiceRelated]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {boolean} [considerIgnored]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} [accountIds]
-     * @param {string} [categoryIds]
-     * @param {string} [tagIds]
-     * @param {string} [legalNatures]
-     * @param {string} [minPostedDate]
-     * @param {string} [maxPostedDate]
-     * @param {string} [minCompetencyDate]
-     * @param {string} [maxCompetencyDate]
-     * @param {boolean} [showIgnored]
-     * @param {boolean} [ignoreAutomaticApplicationRelated]
-     * @param {boolean} [ignoreInternalTransfers]
-     * @param {boolean} [ignoreInvoiceRelated]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsTotalsEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetRecent(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionEntity>>>;
-    /**
-     *
-     * @param {string} bankTransactionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetTransactionDetails(bankTransactionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>>;
-    /**
-     *
-     * @param {string} bankTransactionId
-     * @param {UpdateBankTransactionRequestDto} updateBankTransactionRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerUpdateTransaction(bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>>;
-};
-/**
- * BankTransactionsApi - factory interface
- * @export
- */
-export declare const BankTransactionsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: any): AxiosPromise<Array<BankTransactionEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} provider
-     * @param {string} providerTransactionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: any): AxiosPromise<BankTransactionEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {string} [accountIds]
-     * @param {string} [categoryIds]
-     * @param {string} [tagIds]
-     * @param {string} [legalNatures]
-     * @param {string} [types]
-     * @param {string} [minPostedDate]
-     * @param {string} [maxPostedDate]
-     * @param {string} [minCompetencyDate]
-     * @param {string} [maxCompetencyDate]
-     * @param {boolean} [showIgnored]
-     * @param {boolean} [ignoreAutomaticApplicationRelated]
-     * @param {boolean} [ignoreInternalTransfers]
-     * @param {boolean} [ignoreInvoiceRelated]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId: string, pageIndex?: number, pageSize?: number, options?: any): AxiosPromise<BankTransactionsPageEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {boolean} [considerIgnored]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} [accountIds]
-     * @param {string} [categoryIds]
-     * @param {string} [tagIds]
-     * @param {string} [legalNatures]
-     * @param {string} [minPostedDate]
-     * @param {string} [maxPostedDate]
-     * @param {string} [minCompetencyDate]
-     * @param {string} [maxCompetencyDate]
-     * @param {boolean} [showIgnored]
-     * @param {boolean} [ignoreAutomaticApplicationRelated]
-     * @param {boolean} [ignoreInternalTransfers]
-     * @param {boolean} [ignoreInvoiceRelated]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: any): AxiosPromise<BankTransactionsTotalsEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetRecent(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionEntity>>;
-    /**
-     *
-     * @param {string} bankTransactionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerGetTransactionDetails(bankTransactionId: string, options?: any): AxiosPromise<BankTransactionEntity>;
-    /**
-     *
-     * @param {string} bankTransactionId
-     * @param {UpdateBankTransactionRequestDto} updateBankTransactionRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    bankTransactionsControllerUpdateTransaction(bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: any): AxiosPromise<BankTransactionEntity>;
-};
-/**
- * BankTransactionsApi - object-oriented interface
- * @export
- * @class BankTransactionsApi
- * @extends {BaseAPI}
- */
-export declare class BankTransactionsApi extends BaseAPI {
-    /**
-     *
-     * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity[], any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} provider
-     * @param {string} providerTransactionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {string} [accountIds]
-     * @param {string} [categoryIds]
-     * @param {string} [tagIds]
-     * @param {string} [legalNatures]
-     * @param {string} [types]
-     * @param {string} [minPostedDate]
-     * @param {string} [maxPostedDate]
-     * @param {string} [minCompetencyDate]
-     * @param {string} [maxCompetencyDate]
-     * @param {boolean} [showIgnored]
-     * @param {boolean} [ignoreAutomaticApplicationRelated]
-     * @param {boolean} [ignoreInternalTransfers]
-     * @param {boolean} [ignoreInvoiceRelated]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {number} [pageIndex]
-     * @param {number} [pageSize]
-     * @param {boolean} [considerIgnored]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {string} [accountIds]
-     * @param {string} [categoryIds]
-     * @param {string} [tagIds]
-     * @param {string} [legalNatures]
-     * @param {string} [minPostedDate]
-     * @param {string} [maxPostedDate]
-     * @param {string} [minCompetencyDate]
-     * @param {string} [maxCompetencyDate]
-     * @param {boolean} [showIgnored]
-     * @param {boolean} [ignoreAutomaticApplicationRelated]
-     * @param {boolean} [ignoreInternalTransfers]
-     * @param {boolean} [ignoreInvoiceRelated]
-     * @param {string} [types]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsTotalsEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    bankTransactionsControllerGetRecent(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity[], any>>;
-    /**
-     *
-     * @param {string} bankTransactionId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    bankTransactionsControllerGetTransactionDetails(bankTransactionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity, any>>;
-    /**
-     *
-     * @param {string} bankTransactionId
-     * @param {UpdateBankTransactionRequestDto} updateBankTransactionRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    bankTransactionsControllerUpdateTransaction(bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity, any>>;
-}
-/**
- * IamAuthApi - axios parameter creator
- * @export
- */
-export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration) => {
+export declare const AuthApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
      *
      * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
@@ -4028,7 +3983,7 @@ export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authControllerMe: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    authControllerGetMe: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {RefreshRequestDto} refreshRequestDto
@@ -4066,10 +4021,10 @@ export declare const IamAuthApiAxiosParamCreator: (configuration?: Configuration
     authControllerVerifyPhoneVerificationCode: (verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
- * IamAuthApi - functional programming interface
+ * AuthApi - functional programming interface
  * @export
  */
-export declare const IamAuthApiFp: (configuration?: Configuration) => {
+export declare const AuthApiFp: (configuration?: Configuration) => {
     /**
      *
      * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
@@ -4103,7 +4058,7 @@ export declare const IamAuthApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authControllerMe(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>>;
+    authControllerGetMe(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>>;
     /**
      *
      * @param {RefreshRequestDto} refreshRequestDto
@@ -4141,10 +4096,10 @@ export declare const IamAuthApiFp: (configuration?: Configuration) => {
     authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
 };
 /**
- * IamAuthApi - factory interface
+ * AuthApi - factory interface
  * @export
  */
-export declare const IamAuthApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+export declare const AuthApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
      *
      * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
@@ -4178,7 +4133,7 @@ export declare const IamAuthApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    authControllerMe(options?: any): AxiosPromise<UserEntity>;
+    authControllerGetMe(options?: any): AxiosPromise<UserEntity>;
     /**
      *
      * @param {RefreshRequestDto} refreshRequestDto
@@ -4216,18 +4171,18 @@ export declare const IamAuthApiFactory: (configuration?: Configuration, basePath
     authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: any): AxiosPromise<void>;
 };
 /**
- * IamAuthApi - object-oriented interface
+ * AuthApi - object-oriented interface
  * @export
- * @class IamAuthApi
+ * @class AuthApi
  * @extends {BaseAPI}
  */
-export declare class IamAuthApi extends BaseAPI {
+export declare class AuthApi extends BaseAPI {
     /**
      *
      * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     authControllerGenerateAndSendEmailVerificationCode(generateAndSendEmailVerificationCodeRequestDto: GenerateAndSendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
@@ -4235,7 +4190,7 @@ export declare class IamAuthApi extends BaseAPI {
      * @param {GenerateAndSendPhoneVerificationCodeRequestDto} generateAndSendPhoneVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
@@ -4243,7 +4198,7 @@ export declare class IamAuthApi extends BaseAPI {
      * @param {GenerateEmailInUseReportRequestDto} generateEmailInUseReportRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<EmailInUseReportEntity, any>>;
     /**
@@ -4251,22 +4206,22 @@ export declare class IamAuthApi extends BaseAPI {
      * @param {GeneratePhoneInUseReportRequestDto} generatePhoneInUseReportRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<EmailInUseReportEntity, any>>;
     /**
      *
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
-    authControllerMe(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserEntity, any>>;
+    authControllerGetMe(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserEntity, any>>;
     /**
      *
      * @param {RefreshRequestDto} refreshRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CredentialsEntity, any>>;
     /**
@@ -4274,7 +4229,7 @@ export declare class IamAuthApi extends BaseAPI {
      * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     authControllerSignInWithEmail(signInWithEmailRequestDto: SignInWithEmailRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CredentialsEntity, any>>;
     /**
@@ -4282,7 +4237,7 @@ export declare class IamAuthApi extends BaseAPI {
      * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     authControllerSignUpWithEmail(signUpWithEmailRequestDto: SignUpWithEmailRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserEntity, any>>;
     /**
@@ -4290,7 +4245,7 @@ export declare class IamAuthApi extends BaseAPI {
      * @param {VerifyEmailVerificationCodeRequestDto} verifyEmailVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
@@ -4298,15 +4253,1424 @@ export declare class IamAuthApi extends BaseAPI {
      * @param {VerifyPhoneVerificationCodeRequestDto} verifyPhoneVerificationCodeRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
- * IamProfilesApi - axios parameter creator
+ * BankAccountsApi - axios parameter creator
  * @export
  */
-export declare const IamProfilesApiAxiosParamCreator: (configuration?: Configuration) => {
+export declare const BankAccountsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerActivate: (bankAccountId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerCreateOrUpdate: (createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerDisable: (bankAccountId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerGetById: (bankAccountId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerListByBankConnectionId: (bankConnectionId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerListByWorkspaceId: (workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BankAccountsApi - functional programming interface
+ * @export
+ */
+export declare const BankAccountsApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerActivate(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>>;
+    /**
+     *
+     * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>>;
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerDisable(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>>;
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerGetById(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerListByBankConnectionId(bankConnectionId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankAccountEntity>>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerListByWorkspaceId(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankAccountEntity>>>;
+};
+/**
+ * BankAccountsApi - factory interface
+ * @export
+ */
+export declare const BankAccountsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerActivate(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity>;
+    /**
+     *
+     * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: any): AxiosPromise<BankAccountEntity>;
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerDisable(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity>;
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerGetById(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerListByBankConnectionId(bankConnectionId: string, enabled?: boolean, types?: string, options?: any): AxiosPromise<Array<BankAccountEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerListByWorkspaceId(workspaceId: string, enabled?: boolean, types?: string, options?: any): AxiosPromise<Array<BankAccountEntity>>;
+};
+/**
+ * BankAccountsApi - object-oriented interface
+ * @export
+ * @class BankAccountsApi
+ * @extends {BaseAPI}
+ */
+export declare class BankAccountsApi extends BaseAPI {
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    bankAccountsControllerActivate(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity, any>>;
+    /**
+     *
+     * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity, any>>;
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    bankAccountsControllerDisable(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity, any>>;
+    /**
+     *
+     * @param {string} bankAccountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    bankAccountsControllerGetById(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity, any>>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    bankAccountsControllerListByBankConnectionId(bankConnectionId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity[], any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    bankAccountsControllerListByWorkspaceId(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity[], any>>;
+}
+/**
+ * BankConnectionsApi - axios parameter creator
+ * @export
+ */
+export declare const BankConnectionsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerActivate: (bankConnectionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerCreateOrUpdate: (workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerDisable: (bankConnectionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerGetById: (bankConnectionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerList: (workspaceId: string, enabled?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BankConnectionsApi - functional programming interface
+ * @export
+ */
+export declare const BankConnectionsApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerActivate(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerCreateOrUpdate(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerDisable(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerGetById(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerList(workspaceId: string, enabled?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankConnectionEntity>>>;
+};
+/**
+ * BankConnectionsApi - factory interface
+ * @export
+ */
+export declare const BankConnectionsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerActivate(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerCreateOrUpdate(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: any): AxiosPromise<BankConnectionEntity>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerDisable(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionEntity>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerGetById(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankConnectionsControllerList(workspaceId: string, enabled?: boolean, options?: any): AxiosPromise<Array<BankConnectionEntity>>;
+};
+/**
+ * BankConnectionsApi - object-oriented interface
+ * @export
+ * @class BankConnectionsApi
+ * @extends {BaseAPI}
+ */
+export declare class BankConnectionsApi extends BaseAPI {
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankConnectionsApi
+     */
+    bankConnectionsControllerActivate(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankConnectionsApi
+     */
+    bankConnectionsControllerCreateOrUpdate(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionEntity, any>>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankConnectionsApi
+     */
+    bankConnectionsControllerDisable(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionEntity, any>>;
+    /**
+     *
+     * @param {string} bankConnectionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankConnectionsApi
+     */
+    bankConnectionsControllerGetById(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankConnectionsApi
+     */
+    bankConnectionsControllerList(workspaceId: string, enabled?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankConnectionEntity[], any>>;
+}
+/**
+ * BankSyncApi - axios parameter creator
+ * @export
+ */
+export declare const BankSyncApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {SyncBankAccountTransactionsRequestDto} syncBankAccountTransactionsRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncAccountTransactions: (syncBankAccountTransactionsRequestDto: SyncBankAccountTransactionsRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {SyncBankItemRequestDto} syncBankItemRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncItem: (syncBankItemRequestDto: SyncBankItemRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {SyncBankAccountTransactionsPageBeginRequestDto} syncBankAccountTransactionsPageBeginRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncTransactionsPageBegin: (syncBankAccountTransactionsPageBeginRequestDto: SyncBankAccountTransactionsPageBeginRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {SyncBankAccountTransactionsPageEndRequestDto} syncBankAccountTransactionsPageEndRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncTransactionsPageEnd: (syncBankAccountTransactionsPageEndRequestDto: SyncBankAccountTransactionsPageEndRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BankSyncApi - functional programming interface
+ * @export
+ */
+export declare const BankSyncApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {SyncBankAccountTransactionsRequestDto} syncBankAccountTransactionsRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncAccountTransactions(syncBankAccountTransactionsRequestDto: SyncBankAccountTransactionsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @param {SyncBankItemRequestDto} syncBankItemRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncItem(syncBankItemRequestDto: SyncBankItemRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @param {SyncBankAccountTransactionsPageBeginRequestDto} syncBankAccountTransactionsPageBeginRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncTransactionsPageBegin(syncBankAccountTransactionsPageBeginRequestDto: SyncBankAccountTransactionsPageBeginRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @param {SyncBankAccountTransactionsPageEndRequestDto} syncBankAccountTransactionsPageEndRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncTransactionsPageEnd(syncBankAccountTransactionsPageEndRequestDto: SyncBankAccountTransactionsPageEndRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * BankSyncApi - factory interface
+ * @export
+ */
+export declare const BankSyncApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {SyncBankAccountTransactionsRequestDto} syncBankAccountTransactionsRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncAccountTransactions(syncBankAccountTransactionsRequestDto: SyncBankAccountTransactionsRequestDto, options?: any): AxiosPromise<void>;
+    /**
+     *
+     * @param {SyncBankItemRequestDto} syncBankItemRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncItem(syncBankItemRequestDto: SyncBankItemRequestDto, options?: any): AxiosPromise<void>;
+    /**
+     *
+     * @param {SyncBankAccountTransactionsPageBeginRequestDto} syncBankAccountTransactionsPageBeginRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncTransactionsPageBegin(syncBankAccountTransactionsPageBeginRequestDto: SyncBankAccountTransactionsPageBeginRequestDto, options?: any): AxiosPromise<void>;
+    /**
+     *
+     * @param {SyncBankAccountTransactionsPageEndRequestDto} syncBankAccountTransactionsPageEndRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankSyncControllerSyncTransactionsPageEnd(syncBankAccountTransactionsPageEndRequestDto: SyncBankAccountTransactionsPageEndRequestDto, options?: any): AxiosPromise<void>;
+};
+/**
+ * BankSyncApi - object-oriented interface
+ * @export
+ * @class BankSyncApi
+ * @extends {BaseAPI}
+ */
+export declare class BankSyncApi extends BaseAPI {
+    /**
+     *
+     * @param {SyncBankAccountTransactionsRequestDto} syncBankAccountTransactionsRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankSyncApi
+     */
+    bankSyncControllerSyncAccountTransactions(syncBankAccountTransactionsRequestDto: SyncBankAccountTransactionsRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @param {SyncBankItemRequestDto} syncBankItemRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankSyncApi
+     */
+    bankSyncControllerSyncItem(syncBankItemRequestDto: SyncBankItemRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @param {SyncBankAccountTransactionsPageBeginRequestDto} syncBankAccountTransactionsPageBeginRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankSyncApi
+     */
+    bankSyncControllerSyncTransactionsPageBegin(syncBankAccountTransactionsPageBeginRequestDto: SyncBankAccountTransactionsPageBeginRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @param {SyncBankAccountTransactionsPageEndRequestDto} syncBankAccountTransactionsPageEndRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankSyncApi
+     */
+    bankSyncControllerSyncTransactionsPageEnd(syncBankAccountTransactionsPageEndRequestDto: SyncBankAccountTransactionsPageEndRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+}
+/**
+ * BankTransactionCategoriesApi - axios parameter creator
+ * @export
+ */
+export declare const BankTransactionCategoriesApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [onlyLeafs]
+     * @param {string} [directionNatures]
+     * @param {string} [legalNatures]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCategoriesControllerList: (workspaceId: string, onlyLeafs?: boolean, directionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BankTransactionCategoriesApi - functional programming interface
+ * @export
+ */
+export declare const BankTransactionCategoriesApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [onlyLeafs]
+     * @param {string} [directionNatures]
+     * @param {string} [legalNatures]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCategoriesControllerList(workspaceId: string, onlyLeafs?: boolean, directionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCategoryEntity>>>;
+};
+/**
+ * BankTransactionCategoriesApi - factory interface
+ * @export
+ */
+export declare const BankTransactionCategoriesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [onlyLeafs]
+     * @param {string} [directionNatures]
+     * @param {string} [legalNatures]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionCategoriesControllerList(workspaceId: string, onlyLeafs?: boolean, directionNatures?: string, legalNatures?: string, options?: any): AxiosPromise<Array<BankTransactionCategoryEntity>>;
+};
+/**
+ * BankTransactionCategoriesApi - object-oriented interface
+ * @export
+ * @class BankTransactionCategoriesApi
+ * @extends {BaseAPI}
+ */
+export declare class BankTransactionCategoriesApi extends BaseAPI {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [onlyLeafs]
+     * @param {string} [directionNatures]
+     * @param {string} [legalNatures]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionCategoriesApi
+     */
+    bankTransactionCategoriesControllerList(workspaceId: string, onlyLeafs?: boolean, directionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionCategoryEntity[], any>>;
+}
+/**
+ * BankTransactionTagsApi - axios parameter creator
+ * @export
+ */
+export declare const BankTransactionTagsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionTagsControllerCreate: (workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionTagsControllerList: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BankTransactionTagsApi - functional programming interface
+ * @export
+ */
+export declare const BankTransactionTagsApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionTagsControllerCreate(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionTagEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionTagsControllerList(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionTagEntity>>>;
+};
+/**
+ * BankTransactionTagsApi - factory interface
+ * @export
+ */
+export declare const BankTransactionTagsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionTagsControllerCreate(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: any): AxiosPromise<BankTransactionTagEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionTagsControllerList(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionTagEntity>>;
+};
+/**
+ * BankTransactionTagsApi - object-oriented interface
+ * @export
+ * @class BankTransactionTagsApi
+ * @extends {BaseAPI}
+ */
+export declare class BankTransactionTagsApi extends BaseAPI {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionTagsApi
+     */
+    bankTransactionTagsControllerCreate(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionTagEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionTagsApi
+     */
+    bankTransactionTagsControllerList(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionTagEntity[], any>>;
+}
+/**
+ * BankTransactionsApi - axios parameter creator
+ * @export
+ */
+export declare const BankTransactionsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerCreateOrUpdateInBulk: (createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} bankTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetById: (bankTransactionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} accountId
+     * @param {string} provider
+     * @param {string} providerTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetByProvider: (accountId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [directionNatures]
+     * @param {string} [minPostedDatetime]
+     * @param {string} [maxPostedDatetime]
+     * @param {string} [minCompetencyDatetime]
+     * @param {string} [maxCompetencyDatetime]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [considerAutomaticApplicationRelated]
+     * @param {boolean} [considerInternalTransfers]
+     * @param {string} [considerInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetTotals: (workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [directionNatures]
+     * @param {string} [minPostedDatetime]
+     * @param {string} [maxPostedDatetime]
+     * @param {string} [minCompetencyDatetime]
+     * @param {string} [maxCompetencyDatetime]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [considerAutomaticApplicationRelated]
+     * @param {boolean} [considerInternalTransfers]
+     * @param {string} [considerInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerList: (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerListMostRecent: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {boolean} [considerIgnored]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerListNotVerified: (workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} fromDatetime
+     * @param {string} toDatetime
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerListVerifiedByMe: (workspaceId: string, fromDatetime: string, toDatetime: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} bankTransactionId
+     * @param {PartialUpdateBankTransactionRequestDto} partialUpdateBankTransactionRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerPartialUpdate: (bankTransactionId: string, partialUpdateBankTransactionRequestDto: PartialUpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BankTransactionsApi - functional programming interface
+ * @export
+ */
+export declare const BankTransactionsApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerCreateOrUpdateInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionEntity>>>;
+    /**
+     *
+     * @param {string} bankTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetById(bankTransactionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>>;
+    /**
+     *
+     * @param {string} accountId
+     * @param {string} provider
+     * @param {string} providerTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetByProvider(accountId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [directionNatures]
+     * @param {string} [minPostedDatetime]
+     * @param {string} [maxPostedDatetime]
+     * @param {string} [minCompetencyDatetime]
+     * @param {string} [maxCompetencyDatetime]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [considerAutomaticApplicationRelated]
+     * @param {boolean} [considerInternalTransfers]
+     * @param {string} [considerInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [directionNatures]
+     * @param {string} [minPostedDatetime]
+     * @param {string} [maxPostedDatetime]
+     * @param {string} [minCompetencyDatetime]
+     * @param {string} [maxCompetencyDatetime]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [considerAutomaticApplicationRelated]
+     * @param {boolean} [considerInternalTransfers]
+     * @param {string} [considerInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerList(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerListMostRecent(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionEntity>>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {boolean} [considerIgnored]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerListNotVerified(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} fromDatetime
+     * @param {string} toDatetime
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerListVerifiedByMe(workspaceId: string, fromDatetime: string, toDatetime: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>>;
+    /**
+     *
+     * @param {string} bankTransactionId
+     * @param {PartialUpdateBankTransactionRequestDto} partialUpdateBankTransactionRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerPartialUpdate(bankTransactionId: string, partialUpdateBankTransactionRequestDto: PartialUpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>>;
+};
+/**
+ * BankTransactionsApi - factory interface
+ * @export
+ */
+export declare const BankTransactionsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerCreateOrUpdateInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: any): AxiosPromise<Array<BankTransactionEntity>>;
+    /**
+     *
+     * @param {string} bankTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetById(bankTransactionId: string, options?: any): AxiosPromise<BankTransactionEntity>;
+    /**
+     *
+     * @param {string} accountId
+     * @param {string} provider
+     * @param {string} providerTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetByProvider(accountId: string, provider: string, providerTransactionId: string, options?: any): AxiosPromise<BankTransactionEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [directionNatures]
+     * @param {string} [minPostedDatetime]
+     * @param {string} [maxPostedDatetime]
+     * @param {string} [minCompetencyDatetime]
+     * @param {string} [maxCompetencyDatetime]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [considerAutomaticApplicationRelated]
+     * @param {boolean} [considerInternalTransfers]
+     * @param {string} [considerInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerGetTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: any): AxiosPromise<BankTransactionsPageEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [directionNatures]
+     * @param {string} [minPostedDatetime]
+     * @param {string} [maxPostedDatetime]
+     * @param {string} [minCompetencyDatetime]
+     * @param {string} [maxCompetencyDatetime]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [considerAutomaticApplicationRelated]
+     * @param {boolean} [considerInternalTransfers]
+     * @param {string} [considerInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerList(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: any): AxiosPromise<BankTransactionsPageEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerListMostRecent(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {boolean} [considerIgnored]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerListNotVerified(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} fromDatetime
+     * @param {string} toDatetime
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerListVerifiedByMe(workspaceId: string, fromDatetime: string, toDatetime: string, pageIndex?: number, pageSize?: number, options?: any): AxiosPromise<BankTransactionsPageEntity>;
+    /**
+     *
+     * @param {string} bankTransactionId
+     * @param {PartialUpdateBankTransactionRequestDto} partialUpdateBankTransactionRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsControllerPartialUpdate(bankTransactionId: string, partialUpdateBankTransactionRequestDto: PartialUpdateBankTransactionRequestDto, options?: any): AxiosPromise<BankTransactionEntity>;
+};
+/**
+ * BankTransactionsApi - object-oriented interface
+ * @export
+ * @class BankTransactionsApi
+ * @extends {BaseAPI}
+ */
+export declare class BankTransactionsApi extends BaseAPI {
+    /**
+     *
+     * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerCreateOrUpdateInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity[], any>>;
+    /**
+     *
+     * @param {string} bankTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerGetById(bankTransactionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity, any>>;
+    /**
+     *
+     * @param {string} accountId
+     * @param {string} provider
+     * @param {string} providerTransactionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerGetByProvider(accountId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [directionNatures]
+     * @param {string} [minPostedDatetime]
+     * @param {string} [maxPostedDatetime]
+     * @param {string} [minCompetencyDatetime]
+     * @param {string} [maxCompetencyDatetime]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [considerAutomaticApplicationRelated]
+     * @param {boolean} [considerInternalTransfers]
+     * @param {string} [considerInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerGetTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {string} [accountIds]
+     * @param {string} [categoryIds]
+     * @param {string} [tagIds]
+     * @param {string} [legalNatures]
+     * @param {string} [directionNatures]
+     * @param {string} [minPostedDatetime]
+     * @param {string} [maxPostedDatetime]
+     * @param {string} [minCompetencyDatetime]
+     * @param {string} [maxCompetencyDatetime]
+     * @param {boolean} [considerIgnored]
+     * @param {boolean} [considerAutomaticApplicationRelated]
+     * @param {boolean} [considerInternalTransfers]
+     * @param {string} [considerInvoiceRelated]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerList(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerListMostRecent(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity[], any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {boolean} [considerIgnored]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerListNotVerified(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {string} fromDatetime
+     * @param {string} toDatetime
+     * @param {number} [pageIndex]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerListVerifiedByMe(workspaceId: string, fromDatetime: string, toDatetime: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionsPageEntity, any>>;
+    /**
+     *
+     * @param {string} bankTransactionId
+     * @param {PartialUpdateBankTransactionRequestDto} partialUpdateBankTransactionRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    bankTransactionsControllerPartialUpdate(bankTransactionId: string, partialUpdateBankTransactionRequestDto: PartialUpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankTransactionEntity, any>>;
+}
+/**
+ * BankTransactionsPageCategoryAssignerApi - axios parameter creator
+ * @export
+ */
+export declare const BankTransactionsPageCategoryAssignerApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {AssignCategoryForBankTransactionsPageRequestDto} assignCategoryForBankTransactionsPageRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsPageCategoryAssignerControllerAssign: (assignCategoryForBankTransactionsPageRequestDto: AssignCategoryForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BankTransactionsPageCategoryAssignerApi - functional programming interface
+ * @export
+ */
+export declare const BankTransactionsPageCategoryAssignerApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {AssignCategoryForBankTransactionsPageRequestDto} assignCategoryForBankTransactionsPageRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsPageCategoryAssignerControllerAssign(assignCategoryForBankTransactionsPageRequestDto: AssignCategoryForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * BankTransactionsPageCategoryAssignerApi - factory interface
+ * @export
+ */
+export declare const BankTransactionsPageCategoryAssignerApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {AssignCategoryForBankTransactionsPageRequestDto} assignCategoryForBankTransactionsPageRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsPageCategoryAssignerControllerAssign(assignCategoryForBankTransactionsPageRequestDto: AssignCategoryForBankTransactionsPageRequestDto, options?: any): AxiosPromise<void>;
+};
+/**
+ * BankTransactionsPageCategoryAssignerApi - object-oriented interface
+ * @export
+ * @class BankTransactionsPageCategoryAssignerApi
+ * @extends {BaseAPI}
+ */
+export declare class BankTransactionsPageCategoryAssignerApi extends BaseAPI {
+    /**
+     *
+     * @param {AssignCategoryForBankTransactionsPageRequestDto} assignCategoryForBankTransactionsPageRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsPageCategoryAssignerApi
+     */
+    bankTransactionsPageCategoryAssignerControllerAssign(assignCategoryForBankTransactionsPageRequestDto: AssignCategoryForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+}
+/**
+ * BankTransactionsPageLegalNatureAssignerApi - axios parameter creator
+ * @export
+ */
+export declare const BankTransactionsPageLegalNatureAssignerApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {AssignLegalNatureForBankTransactionsPageRequestDto} assignLegalNatureForBankTransactionsPageRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsPageLegalNatureAssignerControllerAssign: (assignLegalNatureForBankTransactionsPageRequestDto: AssignLegalNatureForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BankTransactionsPageLegalNatureAssignerApi - functional programming interface
+ * @export
+ */
+export declare const BankTransactionsPageLegalNatureAssignerApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {AssignLegalNatureForBankTransactionsPageRequestDto} assignLegalNatureForBankTransactionsPageRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsPageLegalNatureAssignerControllerAssign(assignLegalNatureForBankTransactionsPageRequestDto: AssignLegalNatureForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * BankTransactionsPageLegalNatureAssignerApi - factory interface
+ * @export
+ */
+export declare const BankTransactionsPageLegalNatureAssignerApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {AssignLegalNatureForBankTransactionsPageRequestDto} assignLegalNatureForBankTransactionsPageRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankTransactionsPageLegalNatureAssignerControllerAssign(assignLegalNatureForBankTransactionsPageRequestDto: AssignLegalNatureForBankTransactionsPageRequestDto, options?: any): AxiosPromise<void>;
+};
+/**
+ * BankTransactionsPageLegalNatureAssignerApi - object-oriented interface
+ * @export
+ * @class BankTransactionsPageLegalNatureAssignerApi
+ * @extends {BaseAPI}
+ */
+export declare class BankTransactionsPageLegalNatureAssignerApi extends BaseAPI {
+    /**
+     *
+     * @param {AssignLegalNatureForBankTransactionsPageRequestDto} assignLegalNatureForBankTransactionsPageRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsPageLegalNatureAssignerApi
+     */
+    bankTransactionsPageLegalNatureAssignerControllerAssign(assignLegalNatureForBankTransactionsPageRequestDto: AssignLegalNatureForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+}
+/**
+ * MessageTokensApi - axios parameter creator
+ * @export
+ */
+export declare const MessageTokensApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerCreateOrUpdate: (workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerListByWorkspaceId: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * MessageTokensApi - functional programming interface
+ * @export
+ */
+export declare const MessageTokensApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerCreateOrUpdate(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageTokenEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerListByWorkspaceId(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MessageTokenEntity>>>;
+};
+/**
+ * MessageTokensApi - factory interface
+ * @export
+ */
+export declare const MessageTokensApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerCreateOrUpdate(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: any): AxiosPromise<MessageTokenEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    messageTokensControllerListByWorkspaceId(workspaceId: string, options?: any): AxiosPromise<Array<MessageTokenEntity>>;
+};
+/**
+ * MessageTokensApi - object-oriented interface
+ * @export
+ * @class MessageTokensApi
+ * @extends {BaseAPI}
+ */
+export declare class MessageTokensApi extends BaseAPI {
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessageTokensApi
+     */
+    messageTokensControllerCreateOrUpdate(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<MessageTokenEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessageTokensApi
+     */
+    messageTokensControllerListByWorkspaceId(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<MessageTokenEntity[], any>>;
+}
+/**
+ * PluggyApi - axios parameter creator
+ * @export
+ */
+export declare const PluggyApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pluggyControllerCreateConnectToken: (createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pluggyControllerWebhook: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * PluggyApi - functional programming interface
+ * @export
+ */
+export declare const PluggyApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pluggyControllerCreateConnectToken(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PluggyConnectTokenEntity>>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pluggyControllerWebhook(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * PluggyApi - factory interface
+ * @export
+ */
+export declare const PluggyApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pluggyControllerCreateConnectToken(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: any): AxiosPromise<PluggyConnectTokenEntity>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pluggyControllerWebhook(options?: any): AxiosPromise<void>;
+};
+/**
+ * PluggyApi - object-oriented interface
+ * @export
+ * @class PluggyApi
+ * @extends {BaseAPI}
+ */
+export declare class PluggyApi extends BaseAPI {
+    /**
+     *
+     * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PluggyApi
+     */
+    pluggyControllerCreateConnectToken(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PluggyConnectTokenEntity, any>>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PluggyApi
+     */
+    pluggyControllerWebhook(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+}
+/**
+ * ProfilesApi - axios parameter creator
+ * @export
+ */
+export declare const ProfilesApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
      *
      * @param {CreateProfileRequestDto} createProfileRequestDto
@@ -4329,10 +5693,10 @@ export declare const IamProfilesApiAxiosParamCreator: (configuration?: Configura
     profilesControllerPartialUpdate: (partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
- * IamProfilesApi - functional programming interface
+ * ProfilesApi - functional programming interface
  * @export
  */
-export declare const IamProfilesApiFp: (configuration?: Configuration) => {
+export declare const ProfilesApiFp: (configuration?: Configuration) => {
     /**
      *
      * @param {CreateProfileRequestDto} createProfileRequestDto
@@ -4355,10 +5719,10 @@ export declare const IamProfilesApiFp: (configuration?: Configuration) => {
     profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>>;
 };
 /**
- * IamProfilesApi - factory interface
+ * ProfilesApi - factory interface
  * @export
  */
-export declare const IamProfilesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+export declare const ProfilesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
      *
      * @param {CreateProfileRequestDto} createProfileRequestDto
@@ -4381,25 +5745,25 @@ export declare const IamProfilesApiFactory: (configuration?: Configuration, base
     profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: any): AxiosPromise<ProfileEntity>;
 };
 /**
- * IamProfilesApi - object-oriented interface
+ * ProfilesApi - object-oriented interface
  * @export
- * @class IamProfilesApi
+ * @class ProfilesApi
  * @extends {BaseAPI}
  */
-export declare class IamProfilesApi extends BaseAPI {
+export declare class ProfilesApi extends BaseAPI {
     /**
      *
      * @param {CreateProfileRequestDto} createProfileRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamProfilesApi
+     * @memberof ProfilesApi
      */
     profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
     /**
      *
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamProfilesApi
+     * @memberof ProfilesApi
      */
     profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
     /**
@@ -4407,265 +5771,9 @@ export declare class IamProfilesApi extends BaseAPI {
      * @param {PartialUpdateProfileRequestDto} partialUpdateProfileRequestDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamProfilesApi
+     * @memberof ProfilesApi
      */
     profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ProfileEntity, any>>;
-}
-/**
- * IamWorkspacesApi - axios parameter creator
- * @export
- */
-export declare const IamWorkspacesApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    workspacesControllerCreate: (createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    workspacesControllerParcialUpdate: (workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * IamWorkspacesApi - functional programming interface
- * @export
- */
-export declare const IamWorkspacesApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>>;
-};
-/**
- * IamWorkspacesApi - factory interface
- * @export
- */
-export declare const IamWorkspacesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity>;
-};
-/**
- * IamWorkspacesApi - object-oriented interface
- * @export
- * @class IamWorkspacesApi
- * @extends {BaseAPI}
- */
-export declare class IamWorkspacesApi extends BaseAPI {
-    /**
-     *
-     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof IamWorkspacesApi
-     */
-    workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<WorkspaceEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof IamWorkspacesApi
-     */
-    workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<WorkspaceEntity, any>>;
-}
-/**
- * MessageTokensApi - axios parameter creator
- * @export
- */
-export declare const MessageTokensApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    messageTokensControllerCreateOrUpdateMessageToken: (workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    messageTokensControllerGetWorkspaceMessageTokens: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * MessageTokensApi - functional programming interface
- * @export
- */
-export declare const MessageTokensApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageTokenEntity>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MessageTokenEntity>>>;
-};
-/**
- * MessageTokensApi - factory interface
- * @export
- */
-export declare const MessageTokensApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: any): AxiosPromise<MessageTokenEntity>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: any): AxiosPromise<Array<MessageTokenEntity>>;
-};
-/**
- * MessageTokensApi - object-oriented interface
- * @export
- * @class MessageTokensApi
- * @extends {BaseAPI}
- */
-export declare class MessageTokensApi extends BaseAPI {
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MessageTokensApi
-     */
-    messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<MessageTokenEntity, any>>;
-    /**
-     *
-     * @param {string} workspaceId
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MessageTokensApi
-     */
-    messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<MessageTokenEntity[], any>>;
-}
-/**
- * PluggyApi - axios parameter creator
- * @export
- */
-export declare const PluggyApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    pluggyControllerCreate: (createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    pluggyControllerWebhook: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * PluggyApi - functional programming interface
- * @export
- */
-export declare const PluggyApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PluggyConnectTokenEntity>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    pluggyControllerWebhook(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
-};
-/**
- * PluggyApi - factory interface
- * @export
- */
-export declare const PluggyApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: any): AxiosPromise<PluggyConnectTokenEntity>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    pluggyControllerWebhook(options?: any): AxiosPromise<void>;
-};
-/**
- * PluggyApi - object-oriented interface
- * @export
- * @class PluggyApi
- * @extends {BaseAPI}
- */
-export declare class PluggyApi extends BaseAPI {
-    /**
-     *
-     * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PluggyApi
-     */
-    pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PluggyConnectTokenEntity, any>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PluggyApi
-     */
-    pluggyControllerWebhook(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
  * ReportsApi - axios parameter creator
@@ -5123,4 +6231,146 @@ export declare class ReportsApi extends BaseAPI {
      * @memberof ReportsApi
      */
     reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<FinancialStatementReport, any>>;
+}
+/**
+ * WorkspacesApi - axios parameter creator
+ * @export
+ */
+export declare const WorkspacesApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerCreate: (createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerGetById: (workspaceId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerListMy: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {PartialUpdateWorkspaceRequestDto} partialUpdateWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerPartialUpdate: (workspaceId: string, partialUpdateWorkspaceRequestDto: PartialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * WorkspacesApi - functional programming interface
+ * @export
+ */
+export declare const WorkspacesApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerGetById(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerListMy(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserRelatedWorkspaceEntity>>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {PartialUpdateWorkspaceRequestDto} partialUpdateWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerPartialUpdate(workspaceId: string, partialUpdateWorkspaceRequestDto: PartialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>>;
+};
+/**
+ * WorkspacesApi - factory interface
+ * @export
+ */
+export declare const WorkspacesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerGetById(workspaceId: string, options?: any): AxiosPromise<WorkspaceEntity>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerListMy(options?: any): AxiosPromise<Array<UserRelatedWorkspaceEntity>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {PartialUpdateWorkspaceRequestDto} partialUpdateWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    workspacesControllerPartialUpdate(workspaceId: string, partialUpdateWorkspaceRequestDto: PartialUpdateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity>;
+};
+/**
+ * WorkspacesApi - object-oriented interface
+ * @export
+ * @class WorkspacesApi
+ * @extends {BaseAPI}
+ */
+export declare class WorkspacesApi extends BaseAPI {
+    /**
+     *
+     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<WorkspaceEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    workspacesControllerGetById(workspaceId: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<WorkspaceEntity, any>>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    workspacesControllerListMy(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserRelatedWorkspaceEntity[], any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {PartialUpdateWorkspaceRequestDto} partialUpdateWorkspaceRequestDto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    workspacesControllerPartialUpdate(workspaceId: string, partialUpdateWorkspaceRequestDto: PartialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<WorkspaceEntity, any>>;
 }

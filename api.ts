@@ -26,6 +26,62 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 /**
  * 
  * @export
+ * @interface AssignCategoryForBankTransactionsPageRequestDto
+ */
+export interface AssignCategoryForBankTransactionsPageRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AssignCategoryForBankTransactionsPageRequestDto
+     */
+    'syncItemId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AssignCategoryForBankTransactionsPageRequestDto
+     */
+    'pageNumber': number;
+    /**
+     * 
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage}
+     * @memberof AssignCategoryForBankTransactionsPageRequestDto
+     */
+    'bankProviderTransactionsPage': SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage;
+    /**
+     * 
+     * @type {Array<SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner>}
+     * @memberof AssignCategoryForBankTransactionsPageRequestDto
+     */
+    'legalNatureAssignRequests': Array<SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface AssignLegalNatureForBankTransactionsPageRequestDto
+ */
+export interface AssignLegalNatureForBankTransactionsPageRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AssignLegalNatureForBankTransactionsPageRequestDto
+     */
+    'syncItemId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AssignLegalNatureForBankTransactionsPageRequestDto
+     */
+    'pageNumber': number;
+    /**
+     * 
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage}
+     * @memberof AssignLegalNatureForBankTransactionsPageRequestDto
+     */
+    'bankProviderTransactionsPage': SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage;
+}
+/**
+ * 
+ * @export
  * @interface BalancePointResultEntity
  */
 export interface BalancePointResultEntity {
@@ -56,16 +112,10 @@ export interface BankAccountEntity {
     'bankConnectionId': string;
     /**
      * 
-     * @type {BankConnectionEntity}
-     * @memberof BankAccountEntity
-     */
-    'bankConnection': BankConnectionEntity;
-    /**
-     * 
      * @type {string}
      * @memberof BankAccountEntity
      */
-    'provider': string;
+    'provider': BankAccountEntityProviderEnum;
     /**
      * 
      * @type {string}
@@ -77,7 +127,7 @@ export interface BankAccountEntity {
      * @type {string}
      * @memberof BankAccountEntity
      */
-    'type': string;
+    'type': BankAccountEntityTypeEnum;
     /**
      * 
      * @type {boolean}
@@ -110,55 +160,32 @@ export interface BankAccountEntity {
     'name': string;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof BankAccountEntity
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof BankAccountEntity
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
-/**
- * 
- * @export
- * @interface BankAccountsBalanceReportEntity
- */
-export interface BankAccountsBalanceReportEntity {
-    /**
-     * 
-     * @type {Array<BankAccountsBalanceReportItemEntity>}
-     * @memberof BankAccountsBalanceReportEntity
-     */
-    'items': Array<BankAccountsBalanceReportItemEntity>;
-    /**
-     * 
-     * @type {Array<BankAccountEntity>}
-     * @memberof BankAccountsBalanceReportEntity
-     */
-    'bankAccounts': Array<BankAccountEntity>;
-}
-/**
- * 
- * @export
- * @interface BankAccountsBalanceReportItemEntity
- */
-export interface BankAccountsBalanceReportItemEntity {
-    /**
-     * 
-     * @type {number}
-     * @memberof BankAccountsBalanceReportItemEntity
-     */
-    'totalBalance': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankAccountsBalanceReportItemEntity
-     */
-    'currencyCode': string;
-}
+
+export const BankAccountEntityProviderEnum = {
+    Pluggy: 'PLUGGY',
+    Sofia: 'SOFIA'
+} as const;
+
+export type BankAccountEntityProviderEnum = typeof BankAccountEntityProviderEnum[keyof typeof BankAccountEntityProviderEnum];
+export const BankAccountEntityTypeEnum = {
+    Checking: 'CHECKING',
+    Savings: 'SAVINGS',
+    CreditCard: 'CREDIT_CARD'
+} as const;
+
+export type BankAccountEntityTypeEnum = typeof BankAccountEntityTypeEnum[keyof typeof BankAccountEntityTypeEnum];
+
 /**
  * 
  * @export
@@ -185,6 +212,12 @@ export interface BankConnectionEntity {
     'workspaceId': string;
     /**
      * 
+     * @type {Array<BankConnectionEntityAccountsInner>}
+     * @memberof BankConnectionEntity
+     */
+    'accounts'?: Array<BankConnectionEntityAccountsInner> | null;
+    /**
+     * 
      * @type {boolean}
      * @memberof BankConnectionEntity
      */
@@ -194,7 +227,7 @@ export interface BankConnectionEntity {
      * @type {string}
      * @memberof BankConnectionEntity
      */
-    'provider': string;
+    'provider': BankConnectionEntityProviderEnum;
     /**
      * 
      * @type {string}
@@ -206,7 +239,7 @@ export interface BankConnectionEntity {
      * @type {string}
      * @memberof BankConnectionEntity
      */
-    'historyRange': string;
+    'historyRange': BankConnectionEntityHistoryRangeEnum;
     /**
      * 
      * @type {string}
@@ -215,169 +248,220 @@ export interface BankConnectionEntity {
     'connectorId': string;
     /**
      * 
-     * @type {BankConnectorEntity}
+     * @type {BankConnectionEntityConnector}
      * @memberof BankConnectionEntity
      */
-    'connector': BankConnectorEntity;
+    'connector'?: BankConnectionEntityConnector | null;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof BankConnectionEntity
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof BankConnectionEntity
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
+
+export const BankConnectionEntityProviderEnum = {
+    Pluggy: 'PLUGGY',
+    Sofia: 'SOFIA'
+} as const;
+
+export type BankConnectionEntityProviderEnum = typeof BankConnectionEntityProviderEnum[keyof typeof BankConnectionEntityProviderEnum];
+export const BankConnectionEntityHistoryRangeEnum = {
+    OneDay: 'ONE_DAY',
+    OneWeek: 'ONE_WEEK',
+    OneMonth: 'ONE_MONTH',
+    TwoMonths: 'TWO_MONTHS',
+    ThreeMonths: 'THREE_MONTHS',
+    SixMonths: 'SIX_MONTHS',
+    OneYear: 'ONE_YEAR'
+} as const;
+
+export type BankConnectionEntityHistoryRangeEnum = typeof BankConnectionEntityHistoryRangeEnum[keyof typeof BankConnectionEntityHistoryRangeEnum];
+
 /**
  * 
  * @export
- * @interface BankConnectionWithAccountsEntity
+ * @interface BankConnectionEntityAccountsInner
  */
-export interface BankConnectionWithAccountsEntity {
+export interface BankConnectionEntityAccountsInner {
     /**
      * 
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
     'id': string;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'createdByUserId': string;
+    'bankConnectionId': string;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'workspaceId': string;
+    'provider': BankConnectionEntityAccountsInnerProviderEnum;
     /**
      * 
-     * @type {Array<PlainBankAccountEntity>}
-     * @memberof BankConnectionWithAccountsEntity
+     * @type {string}
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'accounts': Array<PlainBankAccountEntity>;
+    'providerAccountId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankConnectionEntityAccountsInner
+     */
+    'type': BankConnectionEntityAccountsInnerTypeEnum;
     /**
      * 
      * @type {boolean}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
     'enabled': boolean;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'provider': string;
+    'number': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof BankConnectionEntityAccountsInner
+     */
+    'balance': number;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'providerItemId': string;
+    'currencyCode': string;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'historyRange': string;
+    'name': string;
     /**
      * 
-     * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
+     * @type {any}
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'connectorId': string;
+    'createdAt': any;
     /**
      * 
-     * @type {BankConnectorEntity}
-     * @memberof BankConnectionWithAccountsEntity
+     * @type {any}
+     * @memberof BankConnectionEntityAccountsInner
      */
-    'connector': BankConnectorEntity;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankConnectionWithAccountsEntity
-     */
-    'updatedAt': string;
+    'updatedAt': any;
 }
+
+export const BankConnectionEntityAccountsInnerProviderEnum = {
+    Pluggy: 'PLUGGY',
+    Sofia: 'SOFIA'
+} as const;
+
+export type BankConnectionEntityAccountsInnerProviderEnum = typeof BankConnectionEntityAccountsInnerProviderEnum[keyof typeof BankConnectionEntityAccountsInnerProviderEnum];
+export const BankConnectionEntityAccountsInnerTypeEnum = {
+    Checking: 'CHECKING',
+    Savings: 'SAVINGS',
+    CreditCard: 'CREDIT_CARD'
+} as const;
+
+export type BankConnectionEntityAccountsInnerTypeEnum = typeof BankConnectionEntityAccountsInnerTypeEnum[keyof typeof BankConnectionEntityAccountsInnerTypeEnum];
+
 /**
  * 
  * @export
- * @interface BankConnectorEntity
+ * @interface BankConnectionEntityConnector
  */
-export interface BankConnectorEntity {
+export interface BankConnectionEntityConnector {
     /**
      * 
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'id': string;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
-    'provider': string;
+    'provider': BankConnectionEntityConnectorProviderEnum;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'name': string;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'institutionUrl': string;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'imageUrl': string;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'primaryColor': string;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
-    'type': string;
+    'type': BankConnectionEntityConnectorTypeEnum;
     /**
      * 
      * @type {string}
-     * @memberof BankConnectorEntity
+     * @memberof BankConnectionEntityConnector
      */
     'country': string;
     /**
      * 
-     * @type {string}
-     * @memberof BankConnectorEntity
+     * @type {any}
+     * @memberof BankConnectionEntityConnector
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      * 
-     * @type {string}
-     * @memberof BankConnectorEntity
+     * @type {any}
+     * @memberof BankConnectionEntityConnector
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
+
+export const BankConnectionEntityConnectorProviderEnum = {
+    Pluggy: 'PLUGGY',
+    Sofia: 'SOFIA'
+} as const;
+
+export type BankConnectionEntityConnectorProviderEnum = typeof BankConnectionEntityConnectorProviderEnum[keyof typeof BankConnectionEntityConnectorProviderEnum];
+export const BankConnectionEntityConnectorTypeEnum = {
+    PersonalBank: 'PERSONAL_BANK',
+    BusinessBank: 'BUSINESS_BANK',
+    Investment: 'INVESTMENT',
+    DigitalEconomy: 'DIGITAL_ECONOMY',
+    Other: 'OTHER'
+} as const;
+
+export type BankConnectionEntityConnectorTypeEnum = typeof BankConnectionEntityConnectorTypeEnum[keyof typeof BankConnectionEntityConnectorTypeEnum];
+
 /**
  * 
  * @export
@@ -401,124 +485,69 @@ export interface BankTransactionCategoryEntity {
      * @type {string}
      * @memberof BankTransactionCategoryEntity
      */
-    'nature': string;
+    'directionNature': BankTransactionCategoryEntityDirectionNatureEnum;
     /**
      * 
      * @type {string}
      * @memberof BankTransactionCategoryEntity
      */
-    'parentId'?: string;
+    'parentId'?: string | null;
     /**
      * 
-     * @type {Array<BankTransactionCategoryPlainEntity>}
+     * @type {Array<BankTransactionCategoryEntityChildrenInner>}
      * @memberof BankTransactionCategoryEntity
      */
-    'path': Array<BankTransactionCategoryPlainEntity>;
-    /**
-     * 
-     * @type {Array<BankTransactionCategoryPlainEntity>}
-     * @memberof BankTransactionCategoryEntity
-     */
-    'children': Array<BankTransactionCategoryPlainEntity>;
+    'children': Array<BankTransactionCategoryEntityChildrenInner>;
 }
+
+export const BankTransactionCategoryEntityDirectionNatureEnum = {
+    Credit: 'CREDIT',
+    Debit: 'DEBIT',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type BankTransactionCategoryEntityDirectionNatureEnum = typeof BankTransactionCategoryEntityDirectionNatureEnum[keyof typeof BankTransactionCategoryEntityDirectionNatureEnum];
+
 /**
  * 
  * @export
- * @interface BankTransactionCategoryPlainEntity
+ * @interface BankTransactionCategoryEntityChildrenInner
  */
-export interface BankTransactionCategoryPlainEntity {
+export interface BankTransactionCategoryEntityChildrenInner {
     /**
      * 
      * @type {string}
-     * @memberof BankTransactionCategoryPlainEntity
+     * @memberof BankTransactionCategoryEntityChildrenInner
      */
     'id': string;
     /**
      * 
      * @type {string}
-     * @memberof BankTransactionCategoryPlainEntity
+     * @memberof BankTransactionCategoryEntityChildrenInner
      */
     'name': string;
     /**
      * 
      * @type {string}
-     * @memberof BankTransactionCategoryPlainEntity
+     * @memberof BankTransactionCategoryEntityChildrenInner
      */
-    'nature': string;
+    'directionNature': BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum;
     /**
      * 
      * @type {string}
-     * @memberof BankTransactionCategoryPlainEntity
+     * @memberof BankTransactionCategoryEntityChildrenInner
      */
-    'parentId'?: string;
+    'parentId'?: string | null;
 }
-/**
- * 
- * @export
- * @interface BankTransactionCreditCardMetadataEntity
- */
-export interface BankTransactionCreditCardMetadataEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'transactionId': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'installmentNumber'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'totalInstallments'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'totalAmount'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'payeeMCC'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'cardNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'billId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionCreditCardMetadataEntity
-     */
-    'updatedAt': string;
-}
+
+export const BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum = {
+    Credit: 'CREDIT',
+    Debit: 'DEBIT',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum = typeof BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum[keyof typeof BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum];
+
 /**
  * 
  * @export
@@ -539,10 +568,10 @@ export interface BankTransactionEntity {
     'accountId': string;
     /**
      * 
-     * @type {BankAccountEntity}
+     * @type {BankConnectionEntityAccountsInner}
      * @memberof BankTransactionEntity
      */
-    'account': BankAccountEntity;
+    'account': BankConnectionEntityAccountsInner;
     /**
      * 
      * @type {string}
@@ -575,16 +604,16 @@ export interface BankTransactionEntity {
     'description': string;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionEntity
      */
-    'postedDate': string;
+    'postedDate': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionEntity
      */
-    'competencyDate': string;
+    'competencyDate': any;
     /**
      * 
      * @type {number}
@@ -596,7 +625,7 @@ export interface BankTransactionEntity {
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'type': BankTransactionEntityTypeEnum;
+    'directionNature': BankTransactionEntityDirectionNatureEnum;
     /**
      * 
      * @type {string}
@@ -614,91 +643,79 @@ export interface BankTransactionEntity {
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'providerCategoryId'?: string;
+    'providerCategoryId'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'providerCategoryName'?: string;
+    'providerCategoryName'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'categoryId'?: string;
+    'categoryId'?: string | null;
     /**
      * 
-     * @type {BankTransactionCategoryPlainEntity}
+     * @type {BankTransactionEntityCategory}
      * @memberof BankTransactionEntity
      */
-    'category'?: BankTransactionCategoryPlainEntity;
+    'category'?: BankTransactionEntityCategory | null;
     /**
      * 
-     * @type {Array<BankTransactionTagEntity>}
+     * @type {Array<BankTransactionEntityTagsInner>}
      * @memberof BankTransactionEntity
      */
-    'tags': Array<BankTransactionTagEntity>;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionEntity
-     */
-    'paymentDataId'?: string;
-    /**
-     * 
-     * @type {BankTransactionPaymentDataEntity}
-     * @memberof BankTransactionEntity
-     */
-    'paymentData'?: BankTransactionPaymentDataEntity;
+    'tags': Array<BankTransactionEntityTagsInner>;
     /**
      * 
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'creditCardMetadataId'?: string;
+    'paymentDataId'?: string | null;
     /**
      * 
-     * @type {BankTransactionCreditCardMetadataEntity}
+     * @type {BankTransactionEntityPaymentData}
      * @memberof BankTransactionEntity
      */
-    'creditCardMetadata'?: BankTransactionCreditCardMetadataEntity;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionEntity
-     */
-    'bestGuessCategoryId'?: string;
-    /**
-     * 
-     * @type {BankTransactionCategoryPlainEntity}
-     * @memberof BankTransactionEntity
-     */
-    'bestGuessCategory'?: BankTransactionCategoryPlainEntity;
+    'paymentData'?: BankTransactionEntityPaymentData | null;
     /**
      * 
      * @type {string}
      * @memberof BankTransactionEntity
      */
-    'ignoredAt'?: string;
+    'creditCardMetadataId'?: string | null;
     /**
      * 
-     * @type {string}
+     * @type {BankTransactionEntityCreditCardMetadata}
      * @memberof BankTransactionEntity
      */
-    'confirmedAt'?: string;
+    'creditCardMetadata'?: BankTransactionEntityCreditCardMetadata | null;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionEntity
      */
-    'createdAt': string;
+    'ignoredAt'?: any | null;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionEntity
      */
-    'updatedAt': string;
+    'verifiedAt'?: any | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionEntity
+     */
+    'createdAt': any;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionEntity
+     */
+    'updatedAt': any;
 }
 
 export const BankTransactionEntityProviderEnum = {
@@ -707,13 +724,13 @@ export const BankTransactionEntityProviderEnum = {
 } as const;
 
 export type BankTransactionEntityProviderEnum = typeof BankTransactionEntityProviderEnum[keyof typeof BankTransactionEntityProviderEnum];
-export const BankTransactionEntityTypeEnum = {
-    Debit: 'DEBIT',
+export const BankTransactionEntityDirectionNatureEnum = {
     Credit: 'CREDIT',
+    Debit: 'DEBIT',
     Undefined: 'UNDEFINED'
 } as const;
 
-export type BankTransactionEntityTypeEnum = typeof BankTransactionEntityTypeEnum[keyof typeof BankTransactionEntityTypeEnum];
+export type BankTransactionEntityDirectionNatureEnum = typeof BankTransactionEntityDirectionNatureEnum[keyof typeof BankTransactionEntityDirectionNatureEnum];
 export const BankTransactionEntityStatusEnum = {
     Pending: 'PENDING',
     Posted: 'POSTED'
@@ -722,11 +739,289 @@ export const BankTransactionEntityStatusEnum = {
 export type BankTransactionEntityStatusEnum = typeof BankTransactionEntityStatusEnum[keyof typeof BankTransactionEntityStatusEnum];
 export const BankTransactionEntityLegalNatureEnum = {
     Personal: 'PERSONAL',
-    Business: 'BUSINESS'
+    Business: 'BUSINESS',
+    Undefined: 'UNDEFINED'
 } as const;
 
 export type BankTransactionEntityLegalNatureEnum = typeof BankTransactionEntityLegalNatureEnum[keyof typeof BankTransactionEntityLegalNatureEnum];
 
+/**
+ * 
+ * @export
+ * @interface BankTransactionEntityCategory
+ */
+export interface BankTransactionEntityCategory {
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityCategory
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityCategory
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityCategory
+     */
+    'directionNature': BankTransactionEntityCategoryDirectionNatureEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityCategory
+     */
+    'parentId'?: string | null;
+}
+
+export const BankTransactionEntityCategoryDirectionNatureEnum = {
+    Credit: 'CREDIT',
+    Debit: 'DEBIT',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type BankTransactionEntityCategoryDirectionNatureEnum = typeof BankTransactionEntityCategoryDirectionNatureEnum[keyof typeof BankTransactionEntityCategoryDirectionNatureEnum];
+
+/**
+ * 
+ * @export
+ * @interface BankTransactionEntityCreditCardMetadata
+ */
+export interface BankTransactionEntityCreditCardMetadata {
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'transactionId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'installmentNumber'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'totalInstallments'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'totalAmount'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'payeeMCC'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'cardNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'billId'?: string | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'createdAt': any;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionEntityCreditCardMetadata
+     */
+    'updatedAt': any;
+}
+/**
+ * 
+ * @export
+ * @interface BankTransactionEntityPaymentData
+ */
+export interface BankTransactionEntityPaymentData {
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'transactionId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerName'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerBranchNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerAccountNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerRoutingNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerRoutingNumberISPB'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerDocumentNumberType'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'payerDocumentNumberValue'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'reason'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverName'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverBranchNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverAccountNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverRoutingNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverRoutingNumberISPB'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverDocumentNumberType'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverDocumentNumberValue'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'paymentMethod'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'referenceNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'receiverReferenceId'?: string | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'createdAt': any;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionEntityPaymentData
+     */
+    'updatedAt': any;
+}
+/**
+ * 
+ * @export
+ * @interface BankTransactionEntityTagsInner
+ */
+export interface BankTransactionEntityTagsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityTagsInner
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionEntityTagsInner
+     */
+    'name': string;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionEntityTagsInner
+     */
+    'createdAt': any;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionEntityTagsInner
+     */
+    'updatedAt': any;
+}
 /**
  * 
  * @export
@@ -797,145 +1092,6 @@ export interface BankTransactionIndicatorEntity {
 /**
  * 
  * @export
- * @interface BankTransactionPaymentDataEntity
- */
-export interface BankTransactionPaymentDataEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'transactionId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payeerName'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerBranchNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerAccountNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerRoutingNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerRoutingNumberISPB'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerDocumentNumberType'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'payerDocumentNumberValue'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'reason'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverName'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverBranchNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverAccountNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverRoutingNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverRoutingNumberISPB'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverDocumentNumberType'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverDocumentNumberValue'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'paymentMethod'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'referenceNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'receiverReferenceId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankTransactionPaymentDataEntity
-     */
-    'updatedAt': string;
-}
-/**
- * 
- * @export
  * @interface BankTransactionTagEntity
  */
 export interface BankTransactionTagEntity {
@@ -953,16 +1109,16 @@ export interface BankTransactionTagEntity {
     'name': string;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionTagEntity
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof BankTransactionTagEntity
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
 /**
  * 
@@ -996,36 +1152,208 @@ export interface BankTransactionsPageEntity {
     'totalPages': number;
     /**
      * 
-     * @type {Array<BankTransactionEntity>}
+     * @type {Array<BankTransactionsPageEntityItemsInner>}
      * @memberof BankTransactionsPageEntity
      */
-    'items': Array<BankTransactionEntity>;
+    'items': Array<BankTransactionsPageEntityItemsInner>;
 }
 /**
  * 
  * @export
- * @interface BankTransactionsTotalsEntity
+ * @interface BankTransactionsPageEntityItemsInner
  */
-export interface BankTransactionsTotalsEntity {
+export interface BankTransactionsPageEntityItemsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'accountId': string;
+    /**
+     * 
+     * @type {BankConnectionEntityAccountsInner}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'account': BankConnectionEntityAccountsInner;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'workspaceId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'provider': BankTransactionsPageEntityItemsInnerProviderEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'providerTransactionId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'originalDescription': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'description': string;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'postedDate': any;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'competencyDate': any;
     /**
      * 
      * @type {number}
-     * @memberof BankTransactionsTotalsEntity
+     * @memberof BankTransactionsPageEntityItemsInner
      */
-    'entriesInCents'?: number;
+    'amount': number;
     /**
      * 
-     * @type {number}
-     * @memberof BankTransactionsTotalsEntity
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
      */
-    'outflowsInCents'?: number;
+    'directionNature': BankTransactionsPageEntityItemsInnerDirectionNatureEnum;
     /**
      * 
-     * @type {number}
-     * @memberof BankTransactionsTotalsEntity
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
      */
-    'outcomeInCents'?: number;
+    'status': BankTransactionsPageEntityItemsInnerStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'legalNature': BankTransactionsPageEntityItemsInnerLegalNatureEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'providerCategoryId'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'providerCategoryName'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'categoryId'?: string | null;
+    /**
+     * 
+     * @type {BankTransactionEntityCategory}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'category'?: BankTransactionEntityCategory | null;
+    /**
+     * 
+     * @type {Array<BankTransactionEntityTagsInner>}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'tags': Array<BankTransactionEntityTagsInner>;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'paymentDataId'?: string | null;
+    /**
+     * 
+     * @type {BankTransactionEntityPaymentData}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'paymentData'?: BankTransactionEntityPaymentData | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'creditCardMetadataId'?: string | null;
+    /**
+     * 
+     * @type {BankTransactionEntityCreditCardMetadata}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'creditCardMetadata'?: BankTransactionEntityCreditCardMetadata | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'ignoredAt'?: any | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'verifiedAt'?: any | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'createdAt': any;
+    /**
+     * 
+     * @type {any}
+     * @memberof BankTransactionsPageEntityItemsInner
+     */
+    'updatedAt': any;
 }
+
+export const BankTransactionsPageEntityItemsInnerProviderEnum = {
+    Pluggy: 'PLUGGY',
+    Sofia: 'SOFIA'
+} as const;
+
+export type BankTransactionsPageEntityItemsInnerProviderEnum = typeof BankTransactionsPageEntityItemsInnerProviderEnum[keyof typeof BankTransactionsPageEntityItemsInnerProviderEnum];
+export const BankTransactionsPageEntityItemsInnerDirectionNatureEnum = {
+    Credit: 'CREDIT',
+    Debit: 'DEBIT',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type BankTransactionsPageEntityItemsInnerDirectionNatureEnum = typeof BankTransactionsPageEntityItemsInnerDirectionNatureEnum[keyof typeof BankTransactionsPageEntityItemsInnerDirectionNatureEnum];
+export const BankTransactionsPageEntityItemsInnerStatusEnum = {
+    Pending: 'PENDING',
+    Posted: 'POSTED'
+} as const;
+
+export type BankTransactionsPageEntityItemsInnerStatusEnum = typeof BankTransactionsPageEntityItemsInnerStatusEnum[keyof typeof BankTransactionsPageEntityItemsInnerStatusEnum];
+export const BankTransactionsPageEntityItemsInnerLegalNatureEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type BankTransactionsPageEntityItemsInnerLegalNatureEnum = typeof BankTransactionsPageEntityItemsInnerLegalNatureEnum[keyof typeof BankTransactionsPageEntityItemsInnerLegalNatureEnum];
+
 /**
  * 
  * @export
@@ -1317,37 +1645,6 @@ export interface CashFlowReportWeeklyItemEntity {
 /**
  * 
  * @export
- * @interface CategoryGuessDto
- */
-export interface CategoryGuessDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CategoryGuessDto
-     */
-    'categoryId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CategoryGuessDto
-     */
-    'name': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CategoryGuessDto
-     */
-    'score': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CategoryGuessDto
-     */
-    'origin': string;
-}
-/**
- * 
- * @export
  * @interface CreateBankTransactionTagRequestDto
  */
 export interface CreateBankTransactionTagRequestDto {
@@ -1375,7 +1672,7 @@ export interface CreateOrUpdateBankAccountRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateBankAccountRequestDto
      */
-    'provider': string;
+    'provider': CreateOrUpdateBankAccountRequestDtoProviderEnum;
     /**
      * 
      * @type {string}
@@ -1387,7 +1684,7 @@ export interface CreateOrUpdateBankAccountRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateBankAccountRequestDto
      */
-    'type': string;
+    'type': CreateOrUpdateBankAccountRequestDtoTypeEnum;
     /**
      * 
      * @type {string}
@@ -1413,6 +1710,21 @@ export interface CreateOrUpdateBankAccountRequestDto {
      */
     'name': string;
 }
+
+export const CreateOrUpdateBankAccountRequestDtoProviderEnum = {
+    Pluggy: 'PLUGGY',
+    Sofia: 'SOFIA'
+} as const;
+
+export type CreateOrUpdateBankAccountRequestDtoProviderEnum = typeof CreateOrUpdateBankAccountRequestDtoProviderEnum[keyof typeof CreateOrUpdateBankAccountRequestDtoProviderEnum];
+export const CreateOrUpdateBankAccountRequestDtoTypeEnum = {
+    Checking: 'CHECKING',
+    Savings: 'SAVINGS',
+    CreditCard: 'CREDIT_CARD'
+} as const;
+
+export type CreateOrUpdateBankAccountRequestDtoTypeEnum = typeof CreateOrUpdateBankAccountRequestDtoTypeEnum[keyof typeof CreateOrUpdateBankAccountRequestDtoTypeEnum];
+
 /**
  * 
  * @export
@@ -1430,7 +1742,7 @@ export interface CreateOrUpdateBankConnectionRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateBankConnectionRequestDto
      */
-    'provider': string;
+    'provider': CreateOrUpdateBankConnectionRequestDtoProviderEnum;
     /**
      * 
      * @type {string}
@@ -1448,123 +1760,27 @@ export interface CreateOrUpdateBankConnectionRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateBankConnectionRequestDto
      */
-    'historyRange': string;
+    'historyRange': CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum;
 }
-/**
- * 
- * @export
- * @interface CreateOrUpdateBankTransactionsInBulkItemDto
- */
-export interface CreateOrUpdateBankTransactionsInBulkItemDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'accountId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'provider': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'workspaceId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'providerTransactionId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'description': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'postedDate': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'competencyDate': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'amount': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'type': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'status': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'legalNature': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'providerCategoryId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'providerCategoryName'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'categoryId': string;
-    /**
-     * 
-     * @type {PaymentDataDto}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'paymentData': PaymentDataDto;
-    /**
-     * 
-     * @type {CreditCardMetadataDto}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'creditCardMetadata': CreditCardMetadataDto;
-    /**
-     * 
-     * @type {Array<CategoryGuessDto>}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'categoryGuesses'?: Array<CategoryGuessDto>;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrUpdateBankTransactionsInBulkItemDto
-     */
-    'bestGuessCategoryId': string;
-}
+
+export const CreateOrUpdateBankConnectionRequestDtoProviderEnum = {
+    Pluggy: 'PLUGGY',
+    Sofia: 'SOFIA'
+} as const;
+
+export type CreateOrUpdateBankConnectionRequestDtoProviderEnum = typeof CreateOrUpdateBankConnectionRequestDtoProviderEnum[keyof typeof CreateOrUpdateBankConnectionRequestDtoProviderEnum];
+export const CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum = {
+    OneDay: 'ONE_DAY',
+    OneWeek: 'ONE_WEEK',
+    OneMonth: 'ONE_MONTH',
+    TwoMonths: 'TWO_MONTHS',
+    ThreeMonths: 'THREE_MONTHS',
+    SixMonths: 'SIX_MONTHS',
+    OneYear: 'ONE_YEAR'
+} as const;
+
+export type CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum = typeof CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum[keyof typeof CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum];
+
 /**
  * 
  * @export
@@ -1573,10 +1789,370 @@ export interface CreateOrUpdateBankTransactionsInBulkItemDto {
 export interface CreateOrUpdateBankTransactionsInBulkRequestDto {
     /**
      * 
-     * @type {Array<CreateOrUpdateBankTransactionsInBulkItemDto>}
+     * @type {Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner>}
      * @memberof CreateOrUpdateBankTransactionsInBulkRequestDto
      */
-    'items': Array<CreateOrUpdateBankTransactionsInBulkItemDto>;
+    'items': Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+ */
+export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'accountId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'provider': CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'workspaceId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'providerTransactionId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'description': string;
+    /**
+     * 
+     * @type {any}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'postedDate': any;
+    /**
+     * 
+     * @type {any}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'competencyDate': any;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'directionNature': CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'status': CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'legalNature': CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'providerCategoryId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'providerCategoryName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'categoryId'?: string;
+    /**
+     * 
+     * @type {CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'paymentData'?: CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData;
+    /**
+     * 
+     * @type {CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'creditCardMetadata'?: CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata;
+    /**
+     * 
+     * @type {Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner>}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'categoryGuesses'?: Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner>;
+    /**
+     * 
+     * @type {Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner>}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
+     */
+    'legalNatureGuesses'?: Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner>;
+}
+
+export const CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum = {
+    Pluggy: 'PLUGGY',
+    Sofia: 'SOFIA'
+} as const;
+
+export type CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum = typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum[keyof typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum];
+export const CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum = {
+    Credit: 'CREDIT',
+    Debit: 'DEBIT',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum = typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum[keyof typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum];
+export const CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum = {
+    Pending: 'PENDING',
+    Posted: 'POSTED'
+} as const;
+
+export type CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum = typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum[keyof typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum];
+export const CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum = typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum[keyof typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner
+ */
+export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner
+     */
+    'categoryId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner
+     */
+    'confidenceScore': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner
+     */
+    'guesserModelId': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+ */
+export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'installmentNumber'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'totalInstallments'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'totalAmount'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'payeeMCC'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'cardNumber'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCreditCardMetadata
+     */
+    'billId'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner
+ */
+export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner
+     */
+    'legalNature': CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner
+     */
+    'confidenceScore': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner
+     */
+    'guesserModelId': string;
+}
+
+export const CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum = typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum[keyof typeof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+ */
+export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerBranchNumber'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerAccountNumber'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerRoutingNumber'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerRoutingNumberISPB'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerDocumentNumberType'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'payerDocumentNumberValue'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'reason'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverBranchNumber'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverAccountNumber'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverRoutingNumber'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverRoutingNumberISPB'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverDocumentNumberType'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverDocumentNumberValue'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'paymentMethod'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'referenceNumber'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerPaymentData
+     */
+    'receiverReferenceId'?: string;
 }
 /**
  * 
@@ -1589,7 +2165,13 @@ export interface CreateOrUpdateMessageTokenRequestDto {
      * @type {string}
      * @memberof CreateOrUpdateMessageTokenRequestDto
      */
-    'platform': string;
+    'platform': CreateOrUpdateMessageTokenRequestDtoPlatformEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrUpdateMessageTokenRequestDto
+     */
+    'provider': CreateOrUpdateMessageTokenRequestDtoProviderEnum;
     /**
      * 
      * @type {string}
@@ -1603,6 +2185,20 @@ export interface CreateOrUpdateMessageTokenRequestDto {
      */
     'token': string;
 }
+
+export const CreateOrUpdateMessageTokenRequestDtoPlatformEnum = {
+    Web: 'WEB',
+    Android: 'ANDROID',
+    Ios: 'IOS'
+} as const;
+
+export type CreateOrUpdateMessageTokenRequestDtoPlatformEnum = typeof CreateOrUpdateMessageTokenRequestDtoPlatformEnum[keyof typeof CreateOrUpdateMessageTokenRequestDtoPlatformEnum];
+export const CreateOrUpdateMessageTokenRequestDtoProviderEnum = {
+    FirebaseMessaging: 'FIREBASE_MESSAGING'
+} as const;
+
+export type CreateOrUpdateMessageTokenRequestDtoProviderEnum = typeof CreateOrUpdateMessageTokenRequestDtoProviderEnum[keyof typeof CreateOrUpdateMessageTokenRequestDtoProviderEnum];
+
 /**
  * 
  * @export
@@ -1614,7 +2210,7 @@ export interface CreatePluggyConnectTokenRequestDto {
      * @type {string}
      * @memberof CreatePluggyConnectTokenRequestDto
      */
-    'itemId'?: string;
+    'itemId'?: string | null;
     /**
      * 
      * @type {string}
@@ -1626,8 +2222,21 @@ export interface CreatePluggyConnectTokenRequestDto {
      * @type {string}
      * @memberof CreatePluggyConnectTokenRequestDto
      */
-    'historyRange': string;
+    'historyRange': CreatePluggyConnectTokenRequestDtoHistoryRangeEnum;
 }
+
+export const CreatePluggyConnectTokenRequestDtoHistoryRangeEnum = {
+    OneDay: 'ONE_DAY',
+    OneWeek: 'ONE_WEEK',
+    OneMonth: 'ONE_MONTH',
+    TwoMonths: 'TWO_MONTHS',
+    ThreeMonths: 'THREE_MONTHS',
+    SixMonths: 'SIX_MONTHS',
+    OneYear: 'ONE_YEAR'
+} as const;
+
+export type CreatePluggyConnectTokenRequestDtoHistoryRangeEnum = typeof CreatePluggyConnectTokenRequestDtoHistoryRangeEnum[keyof typeof CreatePluggyConnectTokenRequestDtoHistoryRangeEnum];
+
 /**
  * 
  * @export
@@ -1738,49 +2347,6 @@ export interface CredentialsEntity {
      * @memberof CredentialsEntity
      */
     'refreshToken': string;
-}
-/**
- * 
- * @export
- * @interface CreditCardMetadataDto
- */
-export interface CreditCardMetadataDto {
-    /**
-     * 
-     * @type {number}
-     * @memberof CreditCardMetadataDto
-     */
-    'installmentNumber'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreditCardMetadataDto
-     */
-    'totalInstallments'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreditCardMetadataDto
-     */
-    'totalAmount'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreditCardMetadataDto
-     */
-    'payeeMCC'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreditCardMetadataDto
-     */
-    'cardNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreditCardMetadataDto
-     */
-    'billId'?: string;
 }
 /**
  * 
@@ -2189,10 +2755,10 @@ export interface MessageTokenEntity {
     'workspaceId': string;
     /**
      * 
-     * @type {WorkspaceEntity}
+     * @type {MessageTokenEntityWorksapce}
      * @memberof MessageTokenEntity
      */
-    'workspace': WorkspaceEntity;
+    'worksapce'?: MessageTokenEntityWorksapce | null;
     /**
      * 
      * @type {string}
@@ -2201,10 +2767,10 @@ export interface MessageTokenEntity {
     'userId': string;
     /**
      * 
-     * @type {UserEntity}
+     * @type {MessageTokenEntityUser}
      * @memberof MessageTokenEntity
      */
-    'user': UserEntity;
+    'user'?: MessageTokenEntityUser | null;
     /**
      * 
      * @type {string}
@@ -2231,16 +2797,16 @@ export interface MessageTokenEntity {
     'token': string;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof MessageTokenEntity
      */
-    'createdAt': string;
+    'createdAt': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof MessageTokenEntity
      */
-    'updatedAt': string;
+    'updatedAt': any;
 }
 
 export const MessageTokenEntityProviderEnum = {
@@ -2259,16 +2825,192 @@ export type MessageTokenEntityPlatformEnum = typeof MessageTokenEntityPlatformEn
 /**
  * 
  * @export
- * @interface ParcialUpdateWorkspaceRequestDto
+ * @interface MessageTokenEntityUser
  */
-export interface ParcialUpdateWorkspaceRequestDto {
+export interface MessageTokenEntityUser {
     /**
      * 
      * @type {string}
-     * @memberof ParcialUpdateWorkspaceRequestDto
+     * @memberof MessageTokenEntityUser
      */
-    'name'?: string | null;
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntityUser
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntityUser
+     */
+    'phone': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntityUser
+     */
+    'passwordHash'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MessageTokenEntityUser
+     */
+    'isRoot': boolean;
+    /**
+     * 
+     * @type {Array<UserEntityWorkspacesInner>}
+     * @memberof MessageTokenEntityUser
+     */
+    'workspaces'?: Array<UserEntityWorkspacesInner> | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof MessageTokenEntityUser
+     */
+    'createdAt': any;
 }
+/**
+ * 
+ * @export
+ * @interface MessageTokenEntityWorksapce
+ */
+export interface MessageTokenEntityWorksapce {
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'prettyId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'type': MessageTokenEntityWorksapceTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'creatorUserId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'selectedPersonalCategoryTreeId'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'selectedBusinessCategoryTreeId'?: string | null;
+    /**
+     * 
+     * @type {UserEntityWorkspacesInnerHybridSettings}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'hybridSettings'?: UserEntityWorkspacesInnerHybridSettings | null;
+    /**
+     * 
+     * @type {UserEntityWorkspacesInnerHybridSettings}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'businessSettings'?: UserEntityWorkspacesInnerHybridSettings | null;
+    /**
+     * 
+     * @type {UserEntityWorkspacesInnerPersonalSettings}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'personalSettings'?: UserEntityWorkspacesInnerPersonalSettings | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof MessageTokenEntityWorksapce
+     */
+    'createdAt': any;
+}
+
+export const MessageTokenEntityWorksapceTypeEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Hybrid: 'HYBRID'
+} as const;
+
+export type MessageTokenEntityWorksapceTypeEnum = typeof MessageTokenEntityWorksapceTypeEnum[keyof typeof MessageTokenEntityWorksapceTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface PartialUpdateBankTransactionRequestDto
+ */
+export interface PartialUpdateBankTransactionRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'categoryId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'competencyDate'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'ignore'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'verify'?: boolean;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'tagIds'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof PartialUpdateBankTransactionRequestDto
+     */
+    'legalNature'?: PartialUpdateBankTransactionRequestDtoLegalNatureEnum;
+}
+
+export const PartialUpdateBankTransactionRequestDtoLegalNatureEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type PartialUpdateBankTransactionRequestDtoLegalNatureEnum = typeof PartialUpdateBankTransactionRequestDtoLegalNatureEnum[keyof typeof PartialUpdateBankTransactionRequestDtoLegalNatureEnum];
+
 /**
  * 
  * @export
@@ -2291,196 +3033,15 @@ export interface PartialUpdateProfileRequestDto {
 /**
  * 
  * @export
- * @interface PaymentDataDto
+ * @interface PartialUpdateWorkspaceRequestDto
  */
-export interface PaymentDataDto {
+export interface PartialUpdateWorkspaceRequestDto {
     /**
      * 
      * @type {string}
-     * @memberof PaymentDataDto
+     * @memberof PartialUpdateWorkspaceRequestDto
      */
-    'payerName'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerBranchNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerAccountNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerRoutingNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerRoutingNumberISPB'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerDocumentNumberType'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'payerDocumentNumberValue'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'reason'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverName'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverBranchNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverAccountNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverRoutingNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverRoutingNumberISPB'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverDocumentNumberType'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverDocumentNumberValue'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'paymentMethod'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'referenceNumber'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentDataDto
-     */
-    'receiverReferenceId'?: string;
-}
-/**
- * 
- * @export
- * @interface PlainBankAccountEntity
- */
-export interface PlainBankAccountEntity {
-    /**
-     * 
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'bankConnectionId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'provider': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'providerAccountId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'type': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PlainBankAccountEntity
-     */
-    'enabled': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'number': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlainBankAccountEntity
-     */
-    'balance': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'currencyCode': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlainBankAccountEntity
-     */
-    'updatedAt': string;
+    'name'?: string | null;
 }
 /**
  * 
@@ -2629,52 +3190,526 @@ export interface SignUpWithEmailRequestDto {
 /**
  * 
  * @export
- * @interface UpdateBankTransactionRequestDto
+ * @interface SyncBankAccountTransactionsPageBeginRequestDto
  */
-export interface UpdateBankTransactionRequestDto {
+export interface SyncBankAccountTransactionsPageBeginRequestDto {
     /**
      * 
      * @type {string}
-     * @memberof UpdateBankTransactionRequestDto
+     * @memberof SyncBankAccountTransactionsPageBeginRequestDto
      */
-    'description'?: string;
+    'syncItemId': string;
     /**
      * 
-     * @type {string}
-     * @memberof UpdateBankTransactionRequestDto
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageBeginRequestDto
      */
-    'categoryId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateBankTransactionRequestDto
-     */
-    'competencyDate'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateBankTransactionRequestDto
-     */
-    'ignore'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateBankTransactionRequestDto
-     */
-    'confirm'?: boolean;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof UpdateBankTransactionRequestDto
-     */
-    'tagIds'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateBankTransactionRequestDto
-     */
-    'legalNature'?: string;
+    'pageNumber': number;
 }
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDto
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDto
+     */
+    'syncItemId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDto
+     */
+    'pageNumber': number;
+    /**
+     * 
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDto
+     */
+    'bankProviderTransactionsPage': SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage;
+    /**
+     * 
+     * @type {Array<SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner>}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDto
+     */
+    'legalNatureAssignRequests': Array<SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner>;
+    /**
+     * 
+     * @type {Array<SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner>}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDto
+     */
+    'categoryAssignRequests': Array<SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage {
+    /**
+     * 
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+     */
+    'pageNumber': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+     */
+    'pageSize': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+     */
+    'totalPages': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+     */
+    'totalResults': number;
+    /**
+     * 
+     * @type {Array<SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner>}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPage
+     */
+    'transactions': Array<SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'description': string;
+    /**
+     * 
+     * @type {any}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'postedDate': any;
+    /**
+     * 
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'directionNature': SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'status': SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'categoryId'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'categoryName'?: string | null;
+    /**
+     * 
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'paymentData'?: SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData | null;
+    /**
+     * 
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
+     */
+    'creditCardMetadata'?: SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata | null;
+}
+
+export const SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum = {
+    Credit: 'CREDIT',
+    Debit: 'DEBIT',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum = typeof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum[keyof typeof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum];
+export const SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum = {
+    Pending: 'PENDING',
+    Posted: 'POSTED'
+} as const;
+
+export type SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum = typeof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum[keyof typeof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata {
+    /**
+     * 
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'installmentNumber'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'totalInstallments'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'totalAmount'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'payeeMCC'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'cardNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerCreditCardMetadata
+     */
+    'billId'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData {
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerName'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerBranchNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerAccountNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerRoutingNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerRoutingNumberISPB'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerDocumentNumberType'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'payerDocumentNumberValue'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'reason'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverName'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverBranchNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverAccountNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverRoutingNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverRoutingNumberISPB'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverDocumentNumberType'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverDocumentNumberValue'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'paymentMethod'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'referenceNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerPaymentData
+     */
+    'receiverReferenceId'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner
+     */
+    'bankProviderTransactionId': string;
+    /**
+     * 
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInner
+     */
+    'category': SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory;
+}
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory {
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory
+     */
+    'origin': SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryPredictionResponse}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategory
+     */
+    'predictionResponse'?: SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryPredictionResponse;
+}
+
+export const SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum = {
+    Undefined: 'UNDEFINED',
+    Prediction: 'PREDICTION'
+} as const;
+
+export type SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum = typeof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum[keyof typeof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum];
+
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryPredictionResponse
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryPredictionResponse {
+    /**
+     * 
+     * @type {Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner>}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryPredictionResponse
+     */
+    'sortedCategoryGuesses': Array<CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerCategoryGuessesInner>;
+}
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner
+     */
+    'bankProviderTransactionId': string;
+    /**
+     * 
+     * @type {SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInner
+     */
+    'legalNature': SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature;
+}
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature
+ */
+export interface SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature {
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature
+     */
+    'origin': SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature
+     */
+    'value': SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum;
+    /**
+     * 
+     * @type {CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner}
+     * @memberof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNature
+     */
+    'predictionResponse'?: CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInner;
+}
+
+export const SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum = {
+    Automatic: 'AUTOMATIC',
+    Prediction: 'PREDICTION'
+} as const;
+
+export type SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum = typeof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum[keyof typeof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum];
+export const SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum = {
+    Personal: 'PERSONAL',
+    Business: 'BUSINESS',
+    Undefined: 'UNDEFINED'
+} as const;
+
+export type SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum = typeof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum[keyof typeof SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum];
+
+/**
+ * 
+ * @export
+ * @interface SyncBankAccountTransactionsRequestDto
+ */
+export interface SyncBankAccountTransactionsRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsRequestDto
+     */
+    'accountId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsRequestDto
+     */
+    'provider': SyncBankAccountTransactionsRequestDtoProviderEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsRequestDto
+     */
+    'providerAccountId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankAccountTransactionsRequestDto
+     */
+    'providerItemId': string;
+}
+
+export const SyncBankAccountTransactionsRequestDtoProviderEnum = {
+    Pluggy: 'PLUGGY',
+    Sofia: 'SOFIA'
+} as const;
+
+export type SyncBankAccountTransactionsRequestDtoProviderEnum = typeof SyncBankAccountTransactionsRequestDtoProviderEnum[keyof typeof SyncBankAccountTransactionsRequestDtoProviderEnum];
+
+/**
+ * 
+ * @export
+ * @interface SyncBankItemRequestDto
+ */
+export interface SyncBankItemRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankItemRequestDto
+     */
+    'providerItemId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SyncBankItemRequestDto
+     */
+    'provider': SyncBankItemRequestDtoProviderEnum;
+}
+
+export const SyncBankItemRequestDtoProviderEnum = {
+    Pluggy: 'PLUGGY',
+    Sofia: 'SOFIA'
+} as const;
+
+export type SyncBankItemRequestDtoProviderEnum = typeof SyncBankItemRequestDtoProviderEnum[keyof typeof SyncBankItemRequestDtoProviderEnum];
+
 /**
  * 
  * @export
@@ -2864,6 +3899,33 @@ export interface UserEntityWorkspacesInnerPersonalSettings {
 /**
  * 
  * @export
+ * @interface UserRelatedWorkspaceEntity
+ */
+export interface UserRelatedWorkspaceEntity {
+    /**
+     * 
+     * @type {UserEntityWorkspacesInner}
+     * @memberof UserRelatedWorkspaceEntity
+     */
+    'workspace': UserEntityWorkspacesInner;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserRelatedWorkspaceEntity
+     */
+    'relationType': UserRelatedWorkspaceEntityRelationTypeEnum;
+}
+
+export const UserRelatedWorkspaceEntityRelationTypeEnum = {
+    Approved: 'APPROVED',
+    WaitingApproval: 'WAITING_APPROVAL'
+} as const;
+
+export type UserRelatedWorkspaceEntityRelationTypeEnum = typeof UserRelatedWorkspaceEntityRelationTypeEnum[keyof typeof UserRelatedWorkspaceEntityRelationTypeEnum];
+
+/**
+ * 
+ * @export
  * @interface VerifyEmailVerificationCodeRequestDto
  */
 export interface VerifyEmailVerificationCodeRequestDto {
@@ -3011,2178 +4073,10 @@ export type WorkspaceEntityTypeEnum = typeof WorkspaceEntityTypeEnum[keyof typeo
 
 
 /**
- * BankAccountsApi - axios parameter creator
+ * AuthApi - axios parameter creator
  * @export
  */
-export const BankAccountsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {string} bankAccountId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerActivateBankAccount: async (bankAccountId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankAccountId' is not null or undefined
-            assertParamExists('bankAccountsControllerActivateBankAccount', 'bankAccountId', bankAccountId)
-            const localVarPath = `/bank/accounts/{bankAccountId}/activate`
-                .replace(`{${"bankAccountId"}}`, encodeURIComponent(String(bankAccountId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerCreateOrUpdateBankAccount: async (workspaceId: string, createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankAccountsControllerCreateOrUpdateBankAccount', 'workspaceId', workspaceId)
-            // verify required parameter 'createOrUpdateBankAccountRequestDto' is not null or undefined
-            assertParamExists('bankAccountsControllerCreateOrUpdateBankAccount', 'createOrUpdateBankAccountRequestDto', createOrUpdateBankAccountRequestDto)
-            const localVarPath = `/workspaces/{workspaceId}/bank/accounts`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createOrUpdateBankAccountRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [enabled] 
-         * @param {string} [types] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport: async (workspaceId: string, enabled?: boolean, types?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/accounts/balance-report`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (enabled !== undefined) {
-                localVarQueryParameter['enabled'] = enabled;
-            }
-
-            if (types !== undefined) {
-                localVarQueryParameter['types'] = types;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} bankAccountId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerDisableBankAccount: async (bankAccountId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankAccountId' is not null or undefined
-            assertParamExists('bankAccountsControllerDisableBankAccount', 'bankAccountId', bankAccountId)
-            const localVarPath = `/bank/accounts/{bankAccountId}/disable`
-                .replace(`{${"bankAccountId"}}`, encodeURIComponent(String(bankAccountId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {string} bankConnectionId 
-         * @param {boolean} enabled 
-         * @param {string} types 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerFetchConnectionBankAccounts: async (workspaceId: string, bankConnectionId: string, enabled: boolean, types: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankAccountsControllerFetchConnectionBankAccounts', 'workspaceId', workspaceId)
-            // verify required parameter 'bankConnectionId' is not null or undefined
-            assertParamExists('bankAccountsControllerFetchConnectionBankAccounts', 'bankConnectionId', bankConnectionId)
-            // verify required parameter 'enabled' is not null or undefined
-            assertParamExists('bankAccountsControllerFetchConnectionBankAccounts', 'enabled', enabled)
-            // verify required parameter 'types' is not null or undefined
-            assertParamExists('bankAccountsControllerFetchConnectionBankAccounts', 'types', types)
-            const localVarPath = `/workspaces/{workspaceId}/bank/connections/{bankConnectionId}/accounts`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"bankConnectionId"}}`, encodeURIComponent(String(bankConnectionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (enabled !== undefined) {
-                localVarQueryParameter['enabled'] = enabled;
-            }
-
-            if (types !== undefined) {
-                localVarQueryParameter['types'] = types;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [enabled] 
-         * @param {string} [types] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerFetchWorkspaceBankAccounts: async (workspaceId: string, enabled?: boolean, types?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankAccountsControllerFetchWorkspaceBankAccounts', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/accounts`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (enabled !== undefined) {
-                localVarQueryParameter['enabled'] = enabled;
-            }
-
-            if (types !== undefined) {
-                localVarQueryParameter['types'] = types;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} bankAccountId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerGetBankAccountDetails: async (bankAccountId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankAccountId' is not null or undefined
-            assertParamExists('bankAccountsControllerGetBankAccountDetails', 'bankAccountId', bankAccountId)
-            const localVarPath = `/bank/accounts/{bankAccountId}`
-                .replace(`{${"bankAccountId"}}`, encodeURIComponent(String(bankAccountId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * BankAccountsApi - functional programming interface
- * @export
- */
-export const BankAccountsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BankAccountsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {string} bankAccountId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountsControllerActivateBankAccount(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerActivateBankAccount(bankAccountId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerActivateBankAccount']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountsControllerCreateOrUpdateBankAccount(workspaceId: string, createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerCreateOrUpdateBankAccount(workspaceId, createOrUpdateBankAccountRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerCreateOrUpdateBankAccount']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [enabled] 
-         * @param {string} [types] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountsBalanceReportEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport(workspaceId, enabled, types, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} bankAccountId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountsControllerDisableBankAccount(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerDisableBankAccount(bankAccountId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerDisableBankAccount']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {string} bankConnectionId 
-         * @param {boolean} enabled 
-         * @param {string} types 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountsControllerFetchConnectionBankAccounts(workspaceId: string, bankConnectionId: string, enabled: boolean, types: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankAccountEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerFetchConnectionBankAccounts(workspaceId, bankConnectionId, enabled, types, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerFetchConnectionBankAccounts']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [enabled] 
-         * @param {string} [types] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountsControllerFetchWorkspaceBankAccounts(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankAccountEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerFetchWorkspaceBankAccounts(workspaceId, enabled, types, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerFetchWorkspaceBankAccounts']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} bankAccountId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankAccountsControllerGetBankAccountDetails(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerGetBankAccountDetails(bankAccountId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerGetBankAccountDetails']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * BankAccountsApi - factory interface
- * @export
- */
-export const BankAccountsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BankAccountsApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {string} bankAccountId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerActivateBankAccount(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity> {
-            return localVarFp.bankAccountsControllerActivateBankAccount(bankAccountId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerCreateOrUpdateBankAccount(workspaceId: string, createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: any): AxiosPromise<BankAccountEntity> {
-            return localVarFp.bankAccountsControllerCreateOrUpdateBankAccount(workspaceId, createOrUpdateBankAccountRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [enabled] 
-         * @param {string} [types] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: any): AxiosPromise<BankAccountsBalanceReportEntity> {
-            return localVarFp.bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport(workspaceId, enabled, types, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} bankAccountId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerDisableBankAccount(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity> {
-            return localVarFp.bankAccountsControllerDisableBankAccount(bankAccountId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {string} bankConnectionId 
-         * @param {boolean} enabled 
-         * @param {string} types 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerFetchConnectionBankAccounts(workspaceId: string, bankConnectionId: string, enabled: boolean, types: string, options?: any): AxiosPromise<Array<BankAccountEntity>> {
-            return localVarFp.bankAccountsControllerFetchConnectionBankAccounts(workspaceId, bankConnectionId, enabled, types, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [enabled] 
-         * @param {string} [types] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerFetchWorkspaceBankAccounts(workspaceId: string, enabled?: boolean, types?: string, options?: any): AxiosPromise<Array<BankAccountEntity>> {
-            return localVarFp.bankAccountsControllerFetchWorkspaceBankAccounts(workspaceId, enabled, types, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} bankAccountId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankAccountsControllerGetBankAccountDetails(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity> {
-            return localVarFp.bankAccountsControllerGetBankAccountDetails(bankAccountId, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * BankAccountsApi - object-oriented interface
- * @export
- * @class BankAccountsApi
- * @extends {BaseAPI}
- */
-export class BankAccountsApi extends BaseAPI {
-    /**
-     * 
-     * @param {string} bankAccountId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public bankAccountsControllerActivateBankAccount(bankAccountId: string, options?: RawAxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountsControllerActivateBankAccount(bankAccountId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public bankAccountsControllerCreateOrUpdateBankAccount(workspaceId: string, createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountsControllerCreateOrUpdateBankAccount(workspaceId, createOrUpdateBankAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {boolean} [enabled] 
-     * @param {string} [types] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountsControllerCreateWorkspaceBankAccountsBalanceReport(workspaceId, enabled, types, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} bankAccountId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public bankAccountsControllerDisableBankAccount(bankAccountId: string, options?: RawAxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountsControllerDisableBankAccount(bankAccountId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {string} bankConnectionId 
-     * @param {boolean} enabled 
-     * @param {string} types 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public bankAccountsControllerFetchConnectionBankAccounts(workspaceId: string, bankConnectionId: string, enabled: boolean, types: string, options?: RawAxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountsControllerFetchConnectionBankAccounts(workspaceId, bankConnectionId, enabled, types, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {boolean} [enabled] 
-     * @param {string} [types] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public bankAccountsControllerFetchWorkspaceBankAccounts(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountsControllerFetchWorkspaceBankAccounts(workspaceId, enabled, types, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} bankAccountId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankAccountsApi
-     */
-    public bankAccountsControllerGetBankAccountDetails(bankAccountId: string, options?: RawAxiosRequestConfig) {
-        return BankAccountsApiFp(this.configuration).bankAccountsControllerGetBankAccountDetails(bankAccountId, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * BankConnectionsApi - axios parameter creator
- * @export
- */
-export const BankConnectionsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {string} bankConnectionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankConnectionsControllerActivateBankConnection: async (bankConnectionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankConnectionId' is not null or undefined
-            assertParamExists('bankConnectionsControllerActivateBankConnection', 'bankConnectionId', bankConnectionId)
-            const localVarPath = `/bank/connections/{bankConnectionId}/activate`
-                .replace(`{${"bankConnectionId"}}`, encodeURIComponent(String(bankConnectionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankConnectionsControllerCreateOrUpdateBankConnection: async (workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankConnectionsControllerCreateOrUpdateBankConnection', 'workspaceId', workspaceId)
-            // verify required parameter 'createOrUpdateBankConnectionRequestDto' is not null or undefined
-            assertParamExists('bankConnectionsControllerCreateOrUpdateBankConnection', 'createOrUpdateBankConnectionRequestDto', createOrUpdateBankConnectionRequestDto)
-            const localVarPath = `/workspaces/{workspaceId}/bank/connections`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createOrUpdateBankConnectionRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} bankConnectionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankConnectionsControllerDisableBankConnection: async (bankConnectionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankConnectionId' is not null or undefined
-            assertParamExists('bankConnectionsControllerDisableBankConnection', 'bankConnectionId', bankConnectionId)
-            const localVarPath = `/bank/connections/{bankConnectionId}/disable`
-                .replace(`{${"bankConnectionId"}}`, encodeURIComponent(String(bankConnectionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [enabled] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankConnectionsControllerFetchUserBankConnections: async (workspaceId: string, enabled?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankConnectionsControllerFetchUserBankConnections', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/connections`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (enabled !== undefined) {
-                localVarQueryParameter['enabled'] = enabled;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} bankConnectionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankConnectionsControllerGetBankConnectionDetails: async (bankConnectionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankConnectionId' is not null or undefined
-            assertParamExists('bankConnectionsControllerGetBankConnectionDetails', 'bankConnectionId', bankConnectionId)
-            const localVarPath = `/bank/connections/{bankConnectionId}`
-                .replace(`{${"bankConnectionId"}}`, encodeURIComponent(String(bankConnectionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * BankConnectionsApi - functional programming interface
- * @export
- */
-export const BankConnectionsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BankConnectionsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {string} bankConnectionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankConnectionsControllerActivateBankConnection(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankConnectionsControllerActivateBankConnection(bankConnectionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankConnectionsApi.bankConnectionsControllerActivateBankConnection']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankConnectionsControllerCreateOrUpdateBankConnection(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankConnectionsControllerCreateOrUpdateBankConnection(workspaceId, createOrUpdateBankConnectionRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankConnectionsApi.bankConnectionsControllerCreateOrUpdateBankConnection']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} bankConnectionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankConnectionsControllerDisableBankConnection(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankConnectionsControllerDisableBankConnection(bankConnectionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankConnectionsApi.bankConnectionsControllerDisableBankConnection']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [enabled] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankConnectionsControllerFetchUserBankConnections(workspaceId: string, enabled?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankConnectionWithAccountsEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankConnectionsControllerFetchUserBankConnections(workspaceId, enabled, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankConnectionsApi.bankConnectionsControllerFetchUserBankConnections']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} bankConnectionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankConnectionsControllerGetBankConnectionDetails(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionWithAccountsEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankConnectionsControllerGetBankConnectionDetails(bankConnectionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankConnectionsApi.bankConnectionsControllerGetBankConnectionDetails']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * BankConnectionsApi - factory interface
- * @export
- */
-export const BankConnectionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BankConnectionsApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {string} bankConnectionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankConnectionsControllerActivateBankConnection(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionEntity> {
-            return localVarFp.bankConnectionsControllerActivateBankConnection(bankConnectionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankConnectionsControllerCreateOrUpdateBankConnection(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: any): AxiosPromise<BankConnectionEntity> {
-            return localVarFp.bankConnectionsControllerCreateOrUpdateBankConnection(workspaceId, createOrUpdateBankConnectionRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} bankConnectionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankConnectionsControllerDisableBankConnection(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionEntity> {
-            return localVarFp.bankConnectionsControllerDisableBankConnection(bankConnectionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [enabled] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankConnectionsControllerFetchUserBankConnections(workspaceId: string, enabled?: boolean, options?: any): AxiosPromise<Array<BankConnectionWithAccountsEntity>> {
-            return localVarFp.bankConnectionsControllerFetchUserBankConnections(workspaceId, enabled, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} bankConnectionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankConnectionsControllerGetBankConnectionDetails(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionWithAccountsEntity> {
-            return localVarFp.bankConnectionsControllerGetBankConnectionDetails(bankConnectionId, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * BankConnectionsApi - object-oriented interface
- * @export
- * @class BankConnectionsApi
- * @extends {BaseAPI}
- */
-export class BankConnectionsApi extends BaseAPI {
-    /**
-     * 
-     * @param {string} bankConnectionId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankConnectionsApi
-     */
-    public bankConnectionsControllerActivateBankConnection(bankConnectionId: string, options?: RawAxiosRequestConfig) {
-        return BankConnectionsApiFp(this.configuration).bankConnectionsControllerActivateBankConnection(bankConnectionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankConnectionsApi
-     */
-    public bankConnectionsControllerCreateOrUpdateBankConnection(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: RawAxiosRequestConfig) {
-        return BankConnectionsApiFp(this.configuration).bankConnectionsControllerCreateOrUpdateBankConnection(workspaceId, createOrUpdateBankConnectionRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} bankConnectionId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankConnectionsApi
-     */
-    public bankConnectionsControllerDisableBankConnection(bankConnectionId: string, options?: RawAxiosRequestConfig) {
-        return BankConnectionsApiFp(this.configuration).bankConnectionsControllerDisableBankConnection(bankConnectionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {boolean} [enabled] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankConnectionsApi
-     */
-    public bankConnectionsControllerFetchUserBankConnections(workspaceId: string, enabled?: boolean, options?: RawAxiosRequestConfig) {
-        return BankConnectionsApiFp(this.configuration).bankConnectionsControllerFetchUserBankConnections(workspaceId, enabled, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} bankConnectionId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankConnectionsApi
-     */
-    public bankConnectionsControllerGetBankConnectionDetails(bankConnectionId: string, options?: RawAxiosRequestConfig) {
-        return BankConnectionsApiFp(this.configuration).bankConnectionsControllerGetBankConnectionDetails(bankConnectionId, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * BankTransactionCategoriesApi - axios parameter creator
- * @export
- */
-export const BankTransactionCategoriesApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [onlyLeafs] 
-         * @param {string} [transactionNatures] 
-         * @param {string} [legalNatures] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionCategoriesControllerGetBankTransactionCategories: async (workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionCategoriesControllerGetBankTransactionCategories', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/categories`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (onlyLeafs !== undefined) {
-                localVarQueryParameter['onlyLeafs'] = onlyLeafs;
-            }
-
-            if (transactionNatures !== undefined) {
-                localVarQueryParameter['transactionNatures'] = transactionNatures;
-            }
-
-            if (legalNatures !== undefined) {
-                localVarQueryParameter['legalNatures'] = legalNatures;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * BankTransactionCategoriesApi - functional programming interface
- * @export
- */
-export const BankTransactionCategoriesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BankTransactionCategoriesApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [onlyLeafs] 
-         * @param {string} [transactionNatures] 
-         * @param {string} [legalNatures] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCategoryEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, transactionNatures, legalNatures, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionCategoriesApi.bankTransactionCategoriesControllerGetBankTransactionCategories']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * BankTransactionCategoriesApi - factory interface
- * @export
- */
-export const BankTransactionCategoriesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BankTransactionCategoriesApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {boolean} [onlyLeafs] 
-         * @param {string} [transactionNatures] 
-         * @param {string} [legalNatures] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: any): AxiosPromise<Array<BankTransactionCategoryEntity>> {
-            return localVarFp.bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, transactionNatures, legalNatures, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * BankTransactionCategoriesApi - object-oriented interface
- * @export
- * @class BankTransactionCategoriesApi
- * @extends {BaseAPI}
- */
-export class BankTransactionCategoriesApi extends BaseAPI {
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {boolean} [onlyLeafs] 
-     * @param {string} [transactionNatures] 
-     * @param {string} [legalNatures] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionCategoriesApi
-     */
-    public bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId: string, onlyLeafs?: boolean, transactionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig) {
-        return BankTransactionCategoriesApiFp(this.configuration).bankTransactionCategoriesControllerGetBankTransactionCategories(workspaceId, onlyLeafs, transactionNatures, legalNatures, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * BankTransactionTagsApi - axios parameter creator
- * @export
- */
-export const BankTransactionTagsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionTagsControllerCreateTag: async (workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionTagsControllerCreateTag', 'workspaceId', workspaceId)
-            // verify required parameter 'createBankTransactionTagRequestDto' is not null or undefined
-            assertParamExists('bankTransactionTagsControllerCreateTag', 'createBankTransactionTagRequestDto', createBankTransactionTagRequestDto)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/tags`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createBankTransactionTagRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionTagsControllerListTags: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionTagsControllerListTags', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/tags`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * BankTransactionTagsApi - functional programming interface
- * @export
- */
-export const BankTransactionTagsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BankTransactionTagsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionTagEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionTagsControllerCreateTag(workspaceId, createBankTransactionTagRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionTagsApi.bankTransactionTagsControllerCreateTag']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionTagsControllerListTags(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionTagEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionTagsControllerListTags(workspaceId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionTagsApi.bankTransactionTagsControllerListTags']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * BankTransactionTagsApi - factory interface
- * @export
- */
-export const BankTransactionTagsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BankTransactionTagsApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: any): AxiosPromise<BankTransactionTagEntity> {
-            return localVarFp.bankTransactionTagsControllerCreateTag(workspaceId, createBankTransactionTagRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionTagsControllerListTags(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionTagEntity>> {
-            return localVarFp.bankTransactionTagsControllerListTags(workspaceId, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * BankTransactionTagsApi - object-oriented interface
- * @export
- * @class BankTransactionTagsApi
- * @extends {BaseAPI}
- */
-export class BankTransactionTagsApi extends BaseAPI {
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionTagsApi
-     */
-    public bankTransactionTagsControllerCreateTag(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig) {
-        return BankTransactionTagsApiFp(this.configuration).bankTransactionTagsControllerCreateTag(workspaceId, createBankTransactionTagRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionTagsApi
-     */
-    public bankTransactionTagsControllerListTags(workspaceId: string, options?: RawAxiosRequestConfig) {
-        return BankTransactionTagsApiFp(this.configuration).bankTransactionTagsControllerListTags(workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * BankTransactionsApi - axios parameter creator
- * @export
- */
-export const BankTransactionsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk: async (createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createOrUpdateBankTransactionsInBulkRequestDto' is not null or undefined
-            assertParamExists('bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk', 'createOrUpdateBankTransactionsInBulkRequestDto', createOrUpdateBankTransactionsInBulkRequestDto)
-            const localVarPath = `/bank/transactions/bulk`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createOrUpdateBankTransactionsInBulkRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {string} provider 
-         * @param {string} providerTransactionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetBankTransactionByProvider: async (workspaceId: string, provider: string, providerTransactionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionsControllerGetBankTransactionByProvider', 'workspaceId', workspaceId)
-            // verify required parameter 'provider' is not null or undefined
-            assertParamExists('bankTransactionsControllerGetBankTransactionByProvider', 'provider', provider)
-            // verify required parameter 'providerTransactionId' is not null or undefined
-            assertParamExists('bankTransactionsControllerGetBankTransactionByProvider', 'providerTransactionId', providerTransactionId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/by-provider`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (provider !== undefined) {
-                localVarQueryParameter['provider'] = provider;
-            }
-
-            if (providerTransactionId !== undefined) {
-                localVarQueryParameter['providerTransactionId'] = providerTransactionId;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {string} [accountIds] 
-         * @param {string} [categoryIds] 
-         * @param {string} [tagIds] 
-         * @param {string} [legalNatures] 
-         * @param {string} [types] 
-         * @param {string} [minPostedDate] 
-         * @param {string} [maxPostedDate] 
-         * @param {string} [minCompetencyDate] 
-         * @param {string} [maxCompetencyDate] 
-         * @param {boolean} [showIgnored] 
-         * @param {boolean} [ignoreAutomaticApplicationRelated] 
-         * @param {boolean} [ignoreInternalTransfers] 
-         * @param {boolean} [ignoreInvoiceRelated] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetBankTransactions: async (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionsControllerGetBankTransactions', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (pageIndex !== undefined) {
-                localVarQueryParameter['pageIndex'] = pageIndex;
-            }
-
-            if (pageSize !== undefined) {
-                localVarQueryParameter['pageSize'] = pageSize;
-            }
-
-            if (accountIds !== undefined) {
-                localVarQueryParameter['accountIds'] = accountIds;
-            }
-
-            if (categoryIds !== undefined) {
-                localVarQueryParameter['categoryIds'] = categoryIds;
-            }
-
-            if (tagIds !== undefined) {
-                localVarQueryParameter['tagIds'] = tagIds;
-            }
-
-            if (legalNatures !== undefined) {
-                localVarQueryParameter['legalNatures'] = legalNatures;
-            }
-
-            if (types !== undefined) {
-                localVarQueryParameter['types'] = types;
-            }
-
-            if (minPostedDate !== undefined) {
-                localVarQueryParameter['minPostedDate'] = minPostedDate;
-            }
-
-            if (maxPostedDate !== undefined) {
-                localVarQueryParameter['maxPostedDate'] = maxPostedDate;
-            }
-
-            if (minCompetencyDate !== undefined) {
-                localVarQueryParameter['minCompetencyDate'] = minCompetencyDate;
-            }
-
-            if (maxCompetencyDate !== undefined) {
-                localVarQueryParameter['maxCompetencyDate'] = maxCompetencyDate;
-            }
-
-            if (showIgnored !== undefined) {
-                localVarQueryParameter['showIgnored'] = showIgnored;
-            }
-
-            if (ignoreAutomaticApplicationRelated !== undefined) {
-                localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
-            }
-
-            if (ignoreInternalTransfers !== undefined) {
-                localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
-            }
-
-            if (ignoreInvoiceRelated !== undefined) {
-                localVarQueryParameter['ignoreInvoiceRelated'] = ignoreInvoiceRelated;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe: async (workspaceId: string, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/confirmed-today-by-me`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (pageIndex !== undefined) {
-                localVarQueryParameter['pageIndex'] = pageIndex;
-            }
-
-            if (pageSize !== undefined) {
-                localVarQueryParameter['pageSize'] = pageSize;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {boolean} [considerIgnored] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetBankTransactionsNotConfirmed: async (workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionsControllerGetBankTransactionsNotConfirmed', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/not-confirmed`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (pageIndex !== undefined) {
-                localVarQueryParameter['pageIndex'] = pageIndex;
-            }
-
-            if (pageSize !== undefined) {
-                localVarQueryParameter['pageSize'] = pageSize;
-            }
-
-            if (considerIgnored !== undefined) {
-                localVarQueryParameter['considerIgnored'] = considerIgnored;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {string} [accountIds] 
-         * @param {string} [categoryIds] 
-         * @param {string} [tagIds] 
-         * @param {string} [legalNatures] 
-         * @param {string} [minPostedDate] 
-         * @param {string} [maxPostedDate] 
-         * @param {string} [minCompetencyDate] 
-         * @param {string} [maxCompetencyDate] 
-         * @param {boolean} [showIgnored] 
-         * @param {boolean} [ignoreAutomaticApplicationRelated] 
-         * @param {boolean} [ignoreInternalTransfers] 
-         * @param {boolean} [ignoreInvoiceRelated] 
-         * @param {string} [types] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetBankTransactionsTotals: async (workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionsControllerGetBankTransactionsTotals', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/totals`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (accountIds !== undefined) {
-                localVarQueryParameter['accountIds'] = accountIds;
-            }
-
-            if (categoryIds !== undefined) {
-                localVarQueryParameter['categoryIds'] = categoryIds;
-            }
-
-            if (tagIds !== undefined) {
-                localVarQueryParameter['tagIds'] = tagIds;
-            }
-
-            if (legalNatures !== undefined) {
-                localVarQueryParameter['legalNatures'] = legalNatures;
-            }
-
-            if (minPostedDate !== undefined) {
-                localVarQueryParameter['minPostedDate'] = minPostedDate;
-            }
-
-            if (maxPostedDate !== undefined) {
-                localVarQueryParameter['maxPostedDate'] = maxPostedDate;
-            }
-
-            if (minCompetencyDate !== undefined) {
-                localVarQueryParameter['minCompetencyDate'] = minCompetencyDate;
-            }
-
-            if (maxCompetencyDate !== undefined) {
-                localVarQueryParameter['maxCompetencyDate'] = maxCompetencyDate;
-            }
-
-            if (showIgnored !== undefined) {
-                localVarQueryParameter['showIgnored'] = showIgnored;
-            }
-
-            if (ignoreAutomaticApplicationRelated !== undefined) {
-                localVarQueryParameter['ignoreAutomaticApplicationRelated'] = ignoreAutomaticApplicationRelated;
-            }
-
-            if (ignoreInternalTransfers !== undefined) {
-                localVarQueryParameter['ignoreInternalTransfers'] = ignoreInternalTransfers;
-            }
-
-            if (ignoreInvoiceRelated !== undefined) {
-                localVarQueryParameter['ignoreInvoiceRelated'] = ignoreInvoiceRelated;
-            }
-
-            if (types !== undefined) {
-                localVarQueryParameter['types'] = types;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetRecent: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('bankTransactionsControllerGetRecent', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/bank/transactions/most-recent`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} bankTransactionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetTransactionDetails: async (bankTransactionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankTransactionId' is not null or undefined
-            assertParamExists('bankTransactionsControllerGetTransactionDetails', 'bankTransactionId', bankTransactionId)
-            const localVarPath = `/bank/transactions/{bankTransactionId}`
-                .replace(`{${"bankTransactionId"}}`, encodeURIComponent(String(bankTransactionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} bankTransactionId 
-         * @param {UpdateBankTransactionRequestDto} updateBankTransactionRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerUpdateTransaction: async (bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'bankTransactionId' is not null or undefined
-            assertParamExists('bankTransactionsControllerUpdateTransaction', 'bankTransactionId', bankTransactionId)
-            // verify required parameter 'updateBankTransactionRequestDto' is not null or undefined
-            assertParamExists('bankTransactionsControllerUpdateTransaction', 'updateBankTransactionRequestDto', updateBankTransactionRequestDto)
-            const localVarPath = `/bank/transactions/{bankTransactionId}`
-                .replace(`{${"bankTransactionId"}}`, encodeURIComponent(String(bankTransactionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateBankTransactionRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * BankTransactionsApi - functional programming interface
- * @export
- */
-export const BankTransactionsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BankTransactionsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {string} provider 
-         * @param {string} providerTransactionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionByProvider(workspaceId, provider, providerTransactionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionByProvider']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {string} [accountIds] 
-         * @param {string} [categoryIds] 
-         * @param {string} [tagIds] 
-         * @param {string} [legalNatures] 
-         * @param {string} [types] 
-         * @param {string} [minPostedDate] 
-         * @param {string} [maxPostedDate] 
-         * @param {string} [minCompetencyDate] 
-         * @param {string} [maxCompetencyDate] 
-         * @param {boolean} [showIgnored] 
-         * @param {boolean} [ignoreAutomaticApplicationRelated] 
-         * @param {boolean} [ignoreInternalTransfers] 
-         * @param {boolean} [ignoreInvoiceRelated] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactions']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId, pageIndex, pageSize, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {boolean} [considerIgnored] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, considerIgnored, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionsNotConfirmed']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {string} [accountIds] 
-         * @param {string} [categoryIds] 
-         * @param {string} [tagIds] 
-         * @param {string} [legalNatures] 
-         * @param {string} [minPostedDate] 
-         * @param {string} [maxPostedDate] 
-         * @param {string} [minCompetencyDate] 
-         * @param {string} [maxCompetencyDate] 
-         * @param {boolean} [showIgnored] 
-         * @param {boolean} [ignoreAutomaticApplicationRelated] 
-         * @param {boolean} [ignoreInternalTransfers] 
-         * @param {boolean} [ignoreInvoiceRelated] 
-         * @param {string} [types] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsTotalsEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, types, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetBankTransactionsTotals']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionsControllerGetRecent(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetRecent(workspaceId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetRecent']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} bankTransactionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionsControllerGetTransactionDetails(bankTransactionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetTransactionDetails(bankTransactionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetTransactionDetails']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} bankTransactionId 
-         * @param {UpdateBankTransactionRequestDto} updateBankTransactionRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async bankTransactionsControllerUpdateTransaction(bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerUpdateTransaction(bankTransactionId, updateBankTransactionRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerUpdateTransaction']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * BankTransactionsApi - factory interface
- * @export
- */
-export const BankTransactionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BankTransactionsApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: any): AxiosPromise<Array<BankTransactionEntity>> {
-            return localVarFp.bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {string} provider 
-         * @param {string} providerTransactionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: any): AxiosPromise<BankTransactionEntity> {
-            return localVarFp.bankTransactionsControllerGetBankTransactionByProvider(workspaceId, provider, providerTransactionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {string} [accountIds] 
-         * @param {string} [categoryIds] 
-         * @param {string} [tagIds] 
-         * @param {string} [legalNatures] 
-         * @param {string} [types] 
-         * @param {string} [minPostedDate] 
-         * @param {string} [maxPostedDate] 
-         * @param {string} [minCompetencyDate] 
-         * @param {string} [maxCompetencyDate] 
-         * @param {boolean} [showIgnored] 
-         * @param {boolean} [ignoreAutomaticApplicationRelated] 
-         * @param {boolean} [ignoreInternalTransfers] 
-         * @param {boolean} [ignoreInvoiceRelated] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
-            return localVarFp.bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId: string, pageIndex?: number, pageSize?: number, options?: any): AxiosPromise<BankTransactionsPageEntity> {
-            return localVarFp.bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId, pageIndex, pageSize, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {boolean} [considerIgnored] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
-            return localVarFp.bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, considerIgnored, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {string} [accountIds] 
-         * @param {string} [categoryIds] 
-         * @param {string} [tagIds] 
-         * @param {string} [legalNatures] 
-         * @param {string} [minPostedDate] 
-         * @param {string} [maxPostedDate] 
-         * @param {string} [minCompetencyDate] 
-         * @param {string} [maxCompetencyDate] 
-         * @param {boolean} [showIgnored] 
-         * @param {boolean} [ignoreAutomaticApplicationRelated] 
-         * @param {boolean} [ignoreInternalTransfers] 
-         * @param {boolean} [ignoreInvoiceRelated] 
-         * @param {string} [types] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: any): AxiosPromise<BankTransactionsTotalsEntity> {
-            return localVarFp.bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, types, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetRecent(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionEntity>> {
-            return localVarFp.bankTransactionsControllerGetRecent(workspaceId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} bankTransactionId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerGetTransactionDetails(bankTransactionId: string, options?: any): AxiosPromise<BankTransactionEntity> {
-            return localVarFp.bankTransactionsControllerGetTransactionDetails(bankTransactionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} bankTransactionId 
-         * @param {UpdateBankTransactionRequestDto} updateBankTransactionRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        bankTransactionsControllerUpdateTransaction(bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: any): AxiosPromise<BankTransactionEntity> {
-            return localVarFp.bankTransactionsControllerUpdateTransaction(bankTransactionId, updateBankTransactionRequestDto, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * BankTransactionsApi - object-oriented interface
- * @export
- * @class BankTransactionsApi
- * @extends {BaseAPI}
- */
-export class BankTransactionsApi extends BaseAPI {
-    /**
-     * 
-     * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    public bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerCreateOrUpdateBankTransactionsInBulk(createOrUpdateBankTransactionsInBulkRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {string} provider 
-     * @param {string} providerTransactionId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    public bankTransactionsControllerGetBankTransactionByProvider(workspaceId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactionByProvider(workspaceId, provider, providerTransactionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {number} [pageIndex] 
-     * @param {number} [pageSize] 
-     * @param {string} [accountIds] 
-     * @param {string} [categoryIds] 
-     * @param {string} [tagIds] 
-     * @param {string} [legalNatures] 
-     * @param {string} [types] 
-     * @param {string} [minPostedDate] 
-     * @param {string} [maxPostedDate] 
-     * @param {string} [minCompetencyDate] 
-     * @param {string} [maxCompetencyDate] 
-     * @param {boolean} [showIgnored] 
-     * @param {boolean} [ignoreAutomaticApplicationRelated] 
-     * @param {boolean} [ignoreInternalTransfers] 
-     * @param {boolean} [ignoreInvoiceRelated] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    public bankTransactionsControllerGetBankTransactions(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, types?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactions(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, types, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {number} [pageIndex] 
-     * @param {number} [pageSize] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    public bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactionsConfirmedTodayByMe(workspaceId, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {number} [pageIndex] 
-     * @param {number} [pageSize] 
-     * @param {boolean} [considerIgnored] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    public bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactionsNotConfirmed(workspaceId, pageIndex, pageSize, considerIgnored, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {string} [accountIds] 
-     * @param {string} [categoryIds] 
-     * @param {string} [tagIds] 
-     * @param {string} [legalNatures] 
-     * @param {string} [minPostedDate] 
-     * @param {string} [maxPostedDate] 
-     * @param {string} [minCompetencyDate] 
-     * @param {string} [maxCompetencyDate] 
-     * @param {boolean} [showIgnored] 
-     * @param {boolean} [ignoreAutomaticApplicationRelated] 
-     * @param {boolean} [ignoreInternalTransfers] 
-     * @param {boolean} [ignoreInvoiceRelated] 
-     * @param {string} [types] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    public bankTransactionsControllerGetBankTransactionsTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, showIgnored?: boolean, ignoreAutomaticApplicationRelated?: boolean, ignoreInternalTransfers?: boolean, ignoreInvoiceRelated?: boolean, types?: string, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetBankTransactionsTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, showIgnored, ignoreAutomaticApplicationRelated, ignoreInternalTransfers, ignoreInvoiceRelated, types, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    public bankTransactionsControllerGetRecent(workspaceId: string, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetRecent(workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} bankTransactionId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    public bankTransactionsControllerGetTransactionDetails(bankTransactionId: string, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetTransactionDetails(bankTransactionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} bankTransactionId 
-     * @param {UpdateBankTransactionRequestDto} updateBankTransactionRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof BankTransactionsApi
-     */
-    public bankTransactionsControllerUpdateTransaction(bankTransactionId: string, updateBankTransactionRequestDto: UpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig) {
-        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerUpdateTransaction(bankTransactionId, updateBankTransactionRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * IamAuthApi - axios parameter creator
- * @export
- */
-export const IamAuthApiAxiosParamCreator = function (configuration?: Configuration) {
+export const AuthApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
@@ -5329,7 +4223,7 @@ export const IamAuthApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerMe: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        authControllerGetMe: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/iam/auth/me`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5532,11 +4426,11 @@ export const IamAuthApiAxiosParamCreator = function (configuration?: Configurati
 };
 
 /**
- * IamAuthApi - functional programming interface
+ * AuthApi - functional programming interface
  * @export
  */
-export const IamAuthApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = IamAuthApiAxiosParamCreator(configuration)
+export const AuthApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AuthApiAxiosParamCreator(configuration)
     return {
         /**
          * 
@@ -5547,7 +4441,7 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         async authControllerGenerateAndSendEmailVerificationCode(generateAndSendEmailVerificationCodeRequestDto: GenerateAndSendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGenerateAndSendEmailVerificationCode(generateAndSendEmailVerificationCodeRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerGenerateAndSendEmailVerificationCode']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerGenerateAndSendEmailVerificationCode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5559,7 +4453,7 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         async authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerGenerateAndSendPhoneVerificationCode']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerGenerateAndSendPhoneVerificationCode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5571,7 +4465,7 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         async authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailInUseReportEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerGenerateEmailInUseReport']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerGenerateEmailInUseReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5583,7 +4477,7 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         async authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailInUseReportEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerGeneratePhoneInUseReport']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerGeneratePhoneInUseReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5591,10 +4485,10 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerMe(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerMe(options);
+        async authControllerGetMe(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGetMe(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerMe']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerGetMe']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5606,7 +4500,7 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         async authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerRefresh(refreshRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerRefresh']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerRefresh']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5618,7 +4512,7 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         async authControllerSignInWithEmail(signInWithEmailRequestDto: SignInWithEmailRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CredentialsEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerSignInWithEmail(signInWithEmailRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerSignInWithEmail']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerSignInWithEmail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5630,7 +4524,7 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         async authControllerSignUpWithEmail(signUpWithEmailRequestDto: SignUpWithEmailRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerSignUpWithEmail(signUpWithEmailRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerSignUpWithEmail']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerSignUpWithEmail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5642,7 +4536,7 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         async authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerVerifyEmailVerificationCode']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerVerifyEmailVerificationCode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5654,18 +4548,18 @@ export const IamAuthApiFp = function(configuration?: Configuration) {
         async authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamAuthApi.authControllerVerifyPhoneVerificationCode']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerVerifyPhoneVerificationCode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * IamAuthApi - factory interface
+ * AuthApi - factory interface
  * @export
  */
-export const IamAuthApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = IamAuthApiFp(configuration)
+export const AuthApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AuthApiFp(configuration)
     return {
         /**
          * 
@@ -5708,8 +4602,8 @@ export const IamAuthApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerMe(options?: any): AxiosPromise<UserEntity> {
-            return localVarFp.authControllerMe(options).then((request) => request(axios, basePath));
+        authControllerGetMe(options?: any): AxiosPromise<UserEntity> {
+            return localVarFp.authControllerGetMe(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5760,21 +4654,21 @@ export const IamAuthApiFactory = function (configuration?: Configuration, basePa
 };
 
 /**
- * IamAuthApi - object-oriented interface
+ * AuthApi - object-oriented interface
  * @export
- * @class IamAuthApi
+ * @class AuthApi
  * @extends {BaseAPI}
  */
-export class IamAuthApi extends BaseAPI {
+export class AuthApi extends BaseAPI {
     /**
      * 
      * @param {GenerateAndSendEmailVerificationCodeRequestDto} generateAndSendEmailVerificationCodeRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     public authControllerGenerateAndSendEmailVerificationCode(generateAndSendEmailVerificationCodeRequestDto: GenerateAndSendEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerGenerateAndSendEmailVerificationCode(generateAndSendEmailVerificationCodeRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return AuthApiFp(this.configuration).authControllerGenerateAndSendEmailVerificationCode(generateAndSendEmailVerificationCodeRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5782,10 +4676,10 @@ export class IamAuthApi extends BaseAPI {
      * @param {GenerateAndSendPhoneVerificationCodeRequestDto} generateAndSendPhoneVerificationCodeRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     public authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto: GenerateAndSendPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return AuthApiFp(this.configuration).authControllerGenerateAndSendPhoneVerificationCode(generateAndSendPhoneVerificationCodeRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5793,10 +4687,10 @@ export class IamAuthApi extends BaseAPI {
      * @param {GenerateEmailInUseReportRequestDto} generateEmailInUseReportRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     public authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto: GenerateEmailInUseReportRequestDto, options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return AuthApiFp(this.configuration).authControllerGenerateEmailInUseReport(generateEmailInUseReportRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5804,20 +4698,20 @@ export class IamAuthApi extends BaseAPI {
      * @param {GeneratePhoneInUseReportRequestDto} generatePhoneInUseReportRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     public authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto: GeneratePhoneInUseReportRequestDto, options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return AuthApiFp(this.configuration).authControllerGeneratePhoneInUseReport(generatePhoneInUseReportRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
-    public authControllerMe(options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerMe(options).then((request) => request(this.axios, this.basePath));
+    public authControllerGetMe(options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authControllerGetMe(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5825,10 +4719,10 @@ export class IamAuthApi extends BaseAPI {
      * @param {RefreshRequestDto} refreshRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     public authControllerRefresh(refreshRequestDto: RefreshRequestDto, options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerRefresh(refreshRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return AuthApiFp(this.configuration).authControllerRefresh(refreshRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5836,10 +4730,10 @@ export class IamAuthApi extends BaseAPI {
      * @param {SignInWithEmailRequestDto} signInWithEmailRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     public authControllerSignInWithEmail(signInWithEmailRequestDto: SignInWithEmailRequestDto, options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerSignInWithEmail(signInWithEmailRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return AuthApiFp(this.configuration).authControllerSignInWithEmail(signInWithEmailRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5847,10 +4741,10 @@ export class IamAuthApi extends BaseAPI {
      * @param {SignUpWithEmailRequestDto} signUpWithEmailRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     public authControllerSignUpWithEmail(signUpWithEmailRequestDto: SignUpWithEmailRequestDto, options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerSignUpWithEmail(signUpWithEmailRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return AuthApiFp(this.configuration).authControllerSignUpWithEmail(signUpWithEmailRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5858,10 +4752,10 @@ export class IamAuthApi extends BaseAPI {
      * @param {VerifyEmailVerificationCodeRequestDto} verifyEmailVerificationCodeRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     public authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto: VerifyEmailVerificationCodeRequestDto, options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return AuthApiFp(this.configuration).authControllerVerifyEmailVerificationCode(verifyEmailVerificationCodeRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5869,20 +4763,2970 @@ export class IamAuthApi extends BaseAPI {
      * @param {VerifyPhoneVerificationCodeRequestDto} verifyPhoneVerificationCodeRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamAuthApi
+     * @memberof AuthApi
      */
     public authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto: VerifyPhoneVerificationCodeRequestDto, options?: RawAxiosRequestConfig) {
-        return IamAuthApiFp(this.configuration).authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return AuthApiFp(this.configuration).authControllerVerifyPhoneVerificationCode(verifyPhoneVerificationCodeRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
 
 
 /**
- * IamProfilesApi - axios parameter creator
+ * BankAccountsApi - axios parameter creator
  * @export
  */
-export const IamProfilesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const BankAccountsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} bankAccountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerActivate: async (bankAccountId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bankAccountId' is not null or undefined
+            assertParamExists('bankAccountsControllerActivate', 'bankAccountId', bankAccountId)
+            const localVarPath = `/bank/accounts/{bankAccountId}/activate`
+                .replace(`{${"bankAccountId"}}`, encodeURIComponent(String(bankAccountId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerCreateOrUpdate: async (createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createOrUpdateBankAccountRequestDto' is not null or undefined
+            assertParamExists('bankAccountsControllerCreateOrUpdate', 'createOrUpdateBankAccountRequestDto', createOrUpdateBankAccountRequestDto)
+            const localVarPath = `/bank/accounts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createOrUpdateBankAccountRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} bankAccountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerDisable: async (bankAccountId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bankAccountId' is not null or undefined
+            assertParamExists('bankAccountsControllerDisable', 'bankAccountId', bankAccountId)
+            const localVarPath = `/bank/accounts/{bankAccountId}/disable`
+                .replace(`{${"bankAccountId"}}`, encodeURIComponent(String(bankAccountId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} bankAccountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerGetById: async (bankAccountId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bankAccountId' is not null or undefined
+            assertParamExists('bankAccountsControllerGetById', 'bankAccountId', bankAccountId)
+            const localVarPath = `/bank/accounts/{bankAccountId}`
+                .replace(`{${"bankAccountId"}}`, encodeURIComponent(String(bankAccountId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {boolean} [enabled] 
+         * @param {string} [types] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerListByBankConnectionId: async (bankConnectionId: string, enabled?: boolean, types?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bankConnectionId' is not null or undefined
+            assertParamExists('bankAccountsControllerListByBankConnectionId', 'bankConnectionId', bankConnectionId)
+            const localVarPath = `/bank/connections/{bankConnectionId}/accounts`
+                .replace(`{${"bankConnectionId"}}`, encodeURIComponent(String(bankConnectionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (enabled !== undefined) {
+                localVarQueryParameter['enabled'] = enabled;
+            }
+
+            if (types !== undefined) {
+                localVarQueryParameter['types'] = types;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {boolean} [enabled] 
+         * @param {string} [types] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerListByWorkspaceId: async (workspaceId: string, enabled?: boolean, types?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankAccountsControllerListByWorkspaceId', 'workspaceId', workspaceId)
+            const localVarPath = `/bank/workspaces/{workspaceId}/accounts`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (enabled !== undefined) {
+                localVarQueryParameter['enabled'] = enabled;
+            }
+
+            if (types !== undefined) {
+                localVarQueryParameter['types'] = types;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BankAccountsApi - functional programming interface
+ * @export
+ */
+export const BankAccountsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BankAccountsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} bankAccountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankAccountsControllerActivate(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerActivate(bankAccountId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerActivate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerCreateOrUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} bankAccountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankAccountsControllerDisable(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerDisable(bankAccountId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerDisable']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} bankAccountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankAccountsControllerGetById(bankAccountId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerGetById(bankAccountId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerGetById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {boolean} [enabled] 
+         * @param {string} [types] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankAccountsControllerListByBankConnectionId(bankConnectionId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankAccountEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerListByBankConnectionId(bankConnectionId, enabled, types, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerListByBankConnectionId']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {boolean} [enabled] 
+         * @param {string} [types] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankAccountsControllerListByWorkspaceId(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankAccountEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerListByWorkspaceId(workspaceId, enabled, types, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerListByWorkspaceId']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * BankAccountsApi - factory interface
+ * @export
+ */
+export const BankAccountsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BankAccountsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} bankAccountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerActivate(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity> {
+            return localVarFp.bankAccountsControllerActivate(bankAccountId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: any): AxiosPromise<BankAccountEntity> {
+            return localVarFp.bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} bankAccountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerDisable(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity> {
+            return localVarFp.bankAccountsControllerDisable(bankAccountId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} bankAccountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerGetById(bankAccountId: string, options?: any): AxiosPromise<BankAccountEntity> {
+            return localVarFp.bankAccountsControllerGetById(bankAccountId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {boolean} [enabled] 
+         * @param {string} [types] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerListByBankConnectionId(bankConnectionId: string, enabled?: boolean, types?: string, options?: any): AxiosPromise<Array<BankAccountEntity>> {
+            return localVarFp.bankAccountsControllerListByBankConnectionId(bankConnectionId, enabled, types, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {boolean} [enabled] 
+         * @param {string} [types] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerListByWorkspaceId(workspaceId: string, enabled?: boolean, types?: string, options?: any): AxiosPromise<Array<BankAccountEntity>> {
+            return localVarFp.bankAccountsControllerListByWorkspaceId(workspaceId, enabled, types, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BankAccountsApi - object-oriented interface
+ * @export
+ * @class BankAccountsApi
+ * @extends {BaseAPI}
+ */
+export class BankAccountsApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} bankAccountId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    public bankAccountsControllerActivate(bankAccountId: string, options?: RawAxiosRequestConfig) {
+        return BankAccountsApiFp(this.configuration).bankAccountsControllerActivate(bankAccountId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateOrUpdateBankAccountRequestDto} createOrUpdateBankAccountRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    public bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig) {
+        return BankAccountsApiFp(this.configuration).bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} bankAccountId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    public bankAccountsControllerDisable(bankAccountId: string, options?: RawAxiosRequestConfig) {
+        return BankAccountsApiFp(this.configuration).bankAccountsControllerDisable(bankAccountId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} bankAccountId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    public bankAccountsControllerGetById(bankAccountId: string, options?: RawAxiosRequestConfig) {
+        return BankAccountsApiFp(this.configuration).bankAccountsControllerGetById(bankAccountId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} bankConnectionId 
+     * @param {boolean} [enabled] 
+     * @param {string} [types] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    public bankAccountsControllerListByBankConnectionId(bankConnectionId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig) {
+        return BankAccountsApiFp(this.configuration).bankAccountsControllerListByBankConnectionId(bankConnectionId, enabled, types, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {boolean} [enabled] 
+     * @param {string} [types] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    public bankAccountsControllerListByWorkspaceId(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig) {
+        return BankAccountsApiFp(this.configuration).bankAccountsControllerListByWorkspaceId(workspaceId, enabled, types, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * BankConnectionsApi - axios parameter creator
+ * @export
+ */
+export const BankConnectionsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankConnectionsControllerActivate: async (bankConnectionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bankConnectionId' is not null or undefined
+            assertParamExists('bankConnectionsControllerActivate', 'bankConnectionId', bankConnectionId)
+            const localVarPath = `/bank/connections/{bankConnectionId}/activate`
+                .replace(`{${"bankConnectionId"}}`, encodeURIComponent(String(bankConnectionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankConnectionsControllerCreateOrUpdate: async (workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankConnectionsControllerCreateOrUpdate', 'workspaceId', workspaceId)
+            // verify required parameter 'createOrUpdateBankConnectionRequestDto' is not null or undefined
+            assertParamExists('bankConnectionsControllerCreateOrUpdate', 'createOrUpdateBankConnectionRequestDto', createOrUpdateBankConnectionRequestDto)
+            const localVarPath = `/bank/workspaces/{workspaceId}/connections`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createOrUpdateBankConnectionRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankConnectionsControllerDisable: async (bankConnectionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bankConnectionId' is not null or undefined
+            assertParamExists('bankConnectionsControllerDisable', 'bankConnectionId', bankConnectionId)
+            const localVarPath = `/bank/connections/{bankConnectionId}/disable`
+                .replace(`{${"bankConnectionId"}}`, encodeURIComponent(String(bankConnectionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankConnectionsControllerGetById: async (bankConnectionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bankConnectionId' is not null or undefined
+            assertParamExists('bankConnectionsControllerGetById', 'bankConnectionId', bankConnectionId)
+            const localVarPath = `/bank/connections/{bankConnectionId}`
+                .replace(`{${"bankConnectionId"}}`, encodeURIComponent(String(bankConnectionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {boolean} [enabled] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankConnectionsControllerList: async (workspaceId: string, enabled?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankConnectionsControllerList', 'workspaceId', workspaceId)
+            const localVarPath = `/bank/workspaces/{workspaceId}/connections`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (enabled !== undefined) {
+                localVarQueryParameter['enabled'] = enabled;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BankConnectionsApi - functional programming interface
+ * @export
+ */
+export const BankConnectionsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BankConnectionsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankConnectionsControllerActivate(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankConnectionsControllerActivate(bankConnectionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankConnectionsApi.bankConnectionsControllerActivate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankConnectionsControllerCreateOrUpdate(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankConnectionsControllerCreateOrUpdate(workspaceId, createOrUpdateBankConnectionRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankConnectionsApi.bankConnectionsControllerCreateOrUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankConnectionsControllerDisable(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankConnectionsControllerDisable(bankConnectionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankConnectionsApi.bankConnectionsControllerDisable']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankConnectionsControllerGetById(bankConnectionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankConnectionEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankConnectionsControllerGetById(bankConnectionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankConnectionsApi.bankConnectionsControllerGetById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {boolean} [enabled] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankConnectionsControllerList(workspaceId: string, enabled?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankConnectionEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankConnectionsControllerList(workspaceId, enabled, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankConnectionsApi.bankConnectionsControllerList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * BankConnectionsApi - factory interface
+ * @export
+ */
+export const BankConnectionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BankConnectionsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankConnectionsControllerActivate(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionEntity> {
+            return localVarFp.bankConnectionsControllerActivate(bankConnectionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankConnectionsControllerCreateOrUpdate(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: any): AxiosPromise<BankConnectionEntity> {
+            return localVarFp.bankConnectionsControllerCreateOrUpdate(workspaceId, createOrUpdateBankConnectionRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankConnectionsControllerDisable(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionEntity> {
+            return localVarFp.bankConnectionsControllerDisable(bankConnectionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} bankConnectionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankConnectionsControllerGetById(bankConnectionId: string, options?: any): AxiosPromise<BankConnectionEntity> {
+            return localVarFp.bankConnectionsControllerGetById(bankConnectionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {boolean} [enabled] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankConnectionsControllerList(workspaceId: string, enabled?: boolean, options?: any): AxiosPromise<Array<BankConnectionEntity>> {
+            return localVarFp.bankConnectionsControllerList(workspaceId, enabled, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BankConnectionsApi - object-oriented interface
+ * @export
+ * @class BankConnectionsApi
+ * @extends {BaseAPI}
+ */
+export class BankConnectionsApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} bankConnectionId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankConnectionsApi
+     */
+    public bankConnectionsControllerActivate(bankConnectionId: string, options?: RawAxiosRequestConfig) {
+        return BankConnectionsApiFp(this.configuration).bankConnectionsControllerActivate(bankConnectionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {CreateOrUpdateBankConnectionRequestDto} createOrUpdateBankConnectionRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankConnectionsApi
+     */
+    public bankConnectionsControllerCreateOrUpdate(workspaceId: string, createOrUpdateBankConnectionRequestDto: CreateOrUpdateBankConnectionRequestDto, options?: RawAxiosRequestConfig) {
+        return BankConnectionsApiFp(this.configuration).bankConnectionsControllerCreateOrUpdate(workspaceId, createOrUpdateBankConnectionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} bankConnectionId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankConnectionsApi
+     */
+    public bankConnectionsControllerDisable(bankConnectionId: string, options?: RawAxiosRequestConfig) {
+        return BankConnectionsApiFp(this.configuration).bankConnectionsControllerDisable(bankConnectionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} bankConnectionId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankConnectionsApi
+     */
+    public bankConnectionsControllerGetById(bankConnectionId: string, options?: RawAxiosRequestConfig) {
+        return BankConnectionsApiFp(this.configuration).bankConnectionsControllerGetById(bankConnectionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {boolean} [enabled] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankConnectionsApi
+     */
+    public bankConnectionsControllerList(workspaceId: string, enabled?: boolean, options?: RawAxiosRequestConfig) {
+        return BankConnectionsApiFp(this.configuration).bankConnectionsControllerList(workspaceId, enabled, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * BankSyncApi - axios parameter creator
+ * @export
+ */
+export const BankSyncApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {SyncBankAccountTransactionsRequestDto} syncBankAccountTransactionsRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankSyncControllerSyncAccountTransactions: async (syncBankAccountTransactionsRequestDto: SyncBankAccountTransactionsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'syncBankAccountTransactionsRequestDto' is not null or undefined
+            assertParamExists('bankSyncControllerSyncAccountTransactions', 'syncBankAccountTransactionsRequestDto', syncBankAccountTransactionsRequestDto)
+            const localVarPath = `/bank/sync/transactions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(syncBankAccountTransactionsRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SyncBankItemRequestDto} syncBankItemRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankSyncControllerSyncItem: async (syncBankItemRequestDto: SyncBankItemRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'syncBankItemRequestDto' is not null or undefined
+            assertParamExists('bankSyncControllerSyncItem', 'syncBankItemRequestDto', syncBankItemRequestDto)
+            const localVarPath = `/bank/sync/items`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(syncBankItemRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SyncBankAccountTransactionsPageBeginRequestDto} syncBankAccountTransactionsPageBeginRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankSyncControllerSyncTransactionsPageBegin: async (syncBankAccountTransactionsPageBeginRequestDto: SyncBankAccountTransactionsPageBeginRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'syncBankAccountTransactionsPageBeginRequestDto' is not null or undefined
+            assertParamExists('bankSyncControllerSyncTransactionsPageBegin', 'syncBankAccountTransactionsPageBeginRequestDto', syncBankAccountTransactionsPageBeginRequestDto)
+            const localVarPath = `/bank/sync/transactions/page/begin`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(syncBankAccountTransactionsPageBeginRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SyncBankAccountTransactionsPageEndRequestDto} syncBankAccountTransactionsPageEndRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankSyncControllerSyncTransactionsPageEnd: async (syncBankAccountTransactionsPageEndRequestDto: SyncBankAccountTransactionsPageEndRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'syncBankAccountTransactionsPageEndRequestDto' is not null or undefined
+            assertParamExists('bankSyncControllerSyncTransactionsPageEnd', 'syncBankAccountTransactionsPageEndRequestDto', syncBankAccountTransactionsPageEndRequestDto)
+            const localVarPath = `/bank/sync/transactions/page/end`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(syncBankAccountTransactionsPageEndRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BankSyncApi - functional programming interface
+ * @export
+ */
+export const BankSyncApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BankSyncApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {SyncBankAccountTransactionsRequestDto} syncBankAccountTransactionsRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankSyncControllerSyncAccountTransactions(syncBankAccountTransactionsRequestDto: SyncBankAccountTransactionsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankSyncControllerSyncAccountTransactions(syncBankAccountTransactionsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankSyncApi.bankSyncControllerSyncAccountTransactions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {SyncBankItemRequestDto} syncBankItemRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankSyncControllerSyncItem(syncBankItemRequestDto: SyncBankItemRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankSyncControllerSyncItem(syncBankItemRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankSyncApi.bankSyncControllerSyncItem']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {SyncBankAccountTransactionsPageBeginRequestDto} syncBankAccountTransactionsPageBeginRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankSyncControllerSyncTransactionsPageBegin(syncBankAccountTransactionsPageBeginRequestDto: SyncBankAccountTransactionsPageBeginRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankSyncControllerSyncTransactionsPageBegin(syncBankAccountTransactionsPageBeginRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankSyncApi.bankSyncControllerSyncTransactionsPageBegin']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {SyncBankAccountTransactionsPageEndRequestDto} syncBankAccountTransactionsPageEndRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankSyncControllerSyncTransactionsPageEnd(syncBankAccountTransactionsPageEndRequestDto: SyncBankAccountTransactionsPageEndRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankSyncControllerSyncTransactionsPageEnd(syncBankAccountTransactionsPageEndRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankSyncApi.bankSyncControllerSyncTransactionsPageEnd']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * BankSyncApi - factory interface
+ * @export
+ */
+export const BankSyncApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BankSyncApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {SyncBankAccountTransactionsRequestDto} syncBankAccountTransactionsRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankSyncControllerSyncAccountTransactions(syncBankAccountTransactionsRequestDto: SyncBankAccountTransactionsRequestDto, options?: any): AxiosPromise<void> {
+            return localVarFp.bankSyncControllerSyncAccountTransactions(syncBankAccountTransactionsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SyncBankItemRequestDto} syncBankItemRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankSyncControllerSyncItem(syncBankItemRequestDto: SyncBankItemRequestDto, options?: any): AxiosPromise<void> {
+            return localVarFp.bankSyncControllerSyncItem(syncBankItemRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SyncBankAccountTransactionsPageBeginRequestDto} syncBankAccountTransactionsPageBeginRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankSyncControllerSyncTransactionsPageBegin(syncBankAccountTransactionsPageBeginRequestDto: SyncBankAccountTransactionsPageBeginRequestDto, options?: any): AxiosPromise<void> {
+            return localVarFp.bankSyncControllerSyncTransactionsPageBegin(syncBankAccountTransactionsPageBeginRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SyncBankAccountTransactionsPageEndRequestDto} syncBankAccountTransactionsPageEndRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankSyncControllerSyncTransactionsPageEnd(syncBankAccountTransactionsPageEndRequestDto: SyncBankAccountTransactionsPageEndRequestDto, options?: any): AxiosPromise<void> {
+            return localVarFp.bankSyncControllerSyncTransactionsPageEnd(syncBankAccountTransactionsPageEndRequestDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BankSyncApi - object-oriented interface
+ * @export
+ * @class BankSyncApi
+ * @extends {BaseAPI}
+ */
+export class BankSyncApi extends BaseAPI {
+    /**
+     * 
+     * @param {SyncBankAccountTransactionsRequestDto} syncBankAccountTransactionsRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankSyncApi
+     */
+    public bankSyncControllerSyncAccountTransactions(syncBankAccountTransactionsRequestDto: SyncBankAccountTransactionsRequestDto, options?: RawAxiosRequestConfig) {
+        return BankSyncApiFp(this.configuration).bankSyncControllerSyncAccountTransactions(syncBankAccountTransactionsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SyncBankItemRequestDto} syncBankItemRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankSyncApi
+     */
+    public bankSyncControllerSyncItem(syncBankItemRequestDto: SyncBankItemRequestDto, options?: RawAxiosRequestConfig) {
+        return BankSyncApiFp(this.configuration).bankSyncControllerSyncItem(syncBankItemRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SyncBankAccountTransactionsPageBeginRequestDto} syncBankAccountTransactionsPageBeginRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankSyncApi
+     */
+    public bankSyncControllerSyncTransactionsPageBegin(syncBankAccountTransactionsPageBeginRequestDto: SyncBankAccountTransactionsPageBeginRequestDto, options?: RawAxiosRequestConfig) {
+        return BankSyncApiFp(this.configuration).bankSyncControllerSyncTransactionsPageBegin(syncBankAccountTransactionsPageBeginRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SyncBankAccountTransactionsPageEndRequestDto} syncBankAccountTransactionsPageEndRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankSyncApi
+     */
+    public bankSyncControllerSyncTransactionsPageEnd(syncBankAccountTransactionsPageEndRequestDto: SyncBankAccountTransactionsPageEndRequestDto, options?: RawAxiosRequestConfig) {
+        return BankSyncApiFp(this.configuration).bankSyncControllerSyncTransactionsPageEnd(syncBankAccountTransactionsPageEndRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * BankTransactionCategoriesApi - axios parameter creator
+ * @export
+ */
+export const BankTransactionCategoriesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {boolean} [onlyLeafs] 
+         * @param {string} [directionNatures] 
+         * @param {string} [legalNatures] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionCategoriesControllerList: async (workspaceId: string, onlyLeafs?: boolean, directionNatures?: string, legalNatures?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankTransactionCategoriesControllerList', 'workspaceId', workspaceId)
+            const localVarPath = `/bank/workspaces/{workspaceId}/transaction-categories`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (onlyLeafs !== undefined) {
+                localVarQueryParameter['onlyLeafs'] = onlyLeafs;
+            }
+
+            if (directionNatures !== undefined) {
+                localVarQueryParameter['directionNatures'] = directionNatures;
+            }
+
+            if (legalNatures !== undefined) {
+                localVarQueryParameter['legalNatures'] = legalNatures;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BankTransactionCategoriesApi - functional programming interface
+ * @export
+ */
+export const BankTransactionCategoriesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BankTransactionCategoriesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {boolean} [onlyLeafs] 
+         * @param {string} [directionNatures] 
+         * @param {string} [legalNatures] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionCategoriesControllerList(workspaceId: string, onlyLeafs?: boolean, directionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionCategoryEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionCategoriesControllerList(workspaceId, onlyLeafs, directionNatures, legalNatures, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionCategoriesApi.bankTransactionCategoriesControllerList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * BankTransactionCategoriesApi - factory interface
+ * @export
+ */
+export const BankTransactionCategoriesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BankTransactionCategoriesApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {boolean} [onlyLeafs] 
+         * @param {string} [directionNatures] 
+         * @param {string} [legalNatures] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionCategoriesControllerList(workspaceId: string, onlyLeafs?: boolean, directionNatures?: string, legalNatures?: string, options?: any): AxiosPromise<Array<BankTransactionCategoryEntity>> {
+            return localVarFp.bankTransactionCategoriesControllerList(workspaceId, onlyLeafs, directionNatures, legalNatures, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BankTransactionCategoriesApi - object-oriented interface
+ * @export
+ * @class BankTransactionCategoriesApi
+ * @extends {BaseAPI}
+ */
+export class BankTransactionCategoriesApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {boolean} [onlyLeafs] 
+     * @param {string} [directionNatures] 
+     * @param {string} [legalNatures] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionCategoriesApi
+     */
+    public bankTransactionCategoriesControllerList(workspaceId: string, onlyLeafs?: boolean, directionNatures?: string, legalNatures?: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionCategoriesApiFp(this.configuration).bankTransactionCategoriesControllerList(workspaceId, onlyLeafs, directionNatures, legalNatures, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * BankTransactionTagsApi - axios parameter creator
+ * @export
+ */
+export const BankTransactionTagsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionTagsControllerCreate: async (workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankTransactionTagsControllerCreate', 'workspaceId', workspaceId)
+            // verify required parameter 'createBankTransactionTagRequestDto' is not null or undefined
+            assertParamExists('bankTransactionTagsControllerCreate', 'createBankTransactionTagRequestDto', createBankTransactionTagRequestDto)
+            const localVarPath = `/bank/workspaces/{workspaceId}/transaction-tags`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createBankTransactionTagRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionTagsControllerList: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankTransactionTagsControllerList', 'workspaceId', workspaceId)
+            const localVarPath = `/bank/workspaces/{workspaceId}/transaction-tags`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BankTransactionTagsApi - functional programming interface
+ * @export
+ */
+export const BankTransactionTagsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BankTransactionTagsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionTagsControllerCreate(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionTagEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionTagsControllerCreate(workspaceId, createBankTransactionTagRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionTagsApi.bankTransactionTagsControllerCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionTagsControllerList(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionTagEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionTagsControllerList(workspaceId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionTagsApi.bankTransactionTagsControllerList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * BankTransactionTagsApi - factory interface
+ * @export
+ */
+export const BankTransactionTagsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BankTransactionTagsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionTagsControllerCreate(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: any): AxiosPromise<BankTransactionTagEntity> {
+            return localVarFp.bankTransactionTagsControllerCreate(workspaceId, createBankTransactionTagRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionTagsControllerList(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionTagEntity>> {
+            return localVarFp.bankTransactionTagsControllerList(workspaceId, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BankTransactionTagsApi - object-oriented interface
+ * @export
+ * @class BankTransactionTagsApi
+ * @extends {BaseAPI}
+ */
+export class BankTransactionTagsApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {CreateBankTransactionTagRequestDto} createBankTransactionTagRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionTagsApi
+     */
+    public bankTransactionTagsControllerCreate(workspaceId: string, createBankTransactionTagRequestDto: CreateBankTransactionTagRequestDto, options?: RawAxiosRequestConfig) {
+        return BankTransactionTagsApiFp(this.configuration).bankTransactionTagsControllerCreate(workspaceId, createBankTransactionTagRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionTagsApi
+     */
+    public bankTransactionTagsControllerList(workspaceId: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionTagsApiFp(this.configuration).bankTransactionTagsControllerList(workspaceId, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * BankTransactionsApi - axios parameter creator
+ * @export
+ */
+export const BankTransactionsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerCreateOrUpdateInBulk: async (createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createOrUpdateBankTransactionsInBulkRequestDto' is not null or undefined
+            assertParamExists('bankTransactionsControllerCreateOrUpdateInBulk', 'createOrUpdateBankTransactionsInBulkRequestDto', createOrUpdateBankTransactionsInBulkRequestDto)
+            const localVarPath = `/bank/transactions/bulk`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createOrUpdateBankTransactionsInBulkRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} bankTransactionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetById: async (bankTransactionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bankTransactionId' is not null or undefined
+            assertParamExists('bankTransactionsControllerGetById', 'bankTransactionId', bankTransactionId)
+            const localVarPath = `/bank/transactions/{bankTransactionId}`
+                .replace(`{${"bankTransactionId"}}`, encodeURIComponent(String(bankTransactionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} accountId 
+         * @param {string} provider 
+         * @param {string} providerTransactionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetByProvider: async (accountId: string, provider: string, providerTransactionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('bankTransactionsControllerGetByProvider', 'accountId', accountId)
+            // verify required parameter 'provider' is not null or undefined
+            assertParamExists('bankTransactionsControllerGetByProvider', 'provider', provider)
+            // verify required parameter 'providerTransactionId' is not null or undefined
+            assertParamExists('bankTransactionsControllerGetByProvider', 'providerTransactionId', providerTransactionId)
+            const localVarPath = `/bank/accounts/{accountId}/transactions/by-provider`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (provider !== undefined) {
+                localVarQueryParameter['provider'] = provider;
+            }
+
+            if (providerTransactionId !== undefined) {
+                localVarQueryParameter['providerTransactionId'] = providerTransactionId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
+         * @param {string} [categoryIds] 
+         * @param {string} [tagIds] 
+         * @param {string} [legalNatures] 
+         * @param {string} [directionNatures] 
+         * @param {string} [minPostedDatetime] 
+         * @param {string} [maxPostedDatetime] 
+         * @param {string} [minCompetencyDatetime] 
+         * @param {string} [maxCompetencyDatetime] 
+         * @param {boolean} [considerIgnored] 
+         * @param {boolean} [considerAutomaticApplicationRelated] 
+         * @param {boolean} [considerInternalTransfers] 
+         * @param {string} [considerInvoiceRelated] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetTotals: async (workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankTransactionsControllerGetTotals', 'workspaceId', workspaceId)
+            const localVarPath = `/bank/workspaces/{workspaceId}/transactions/totals`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (accountIds !== undefined) {
+                localVarQueryParameter['accountIds'] = accountIds;
+            }
+
+            if (categoryIds !== undefined) {
+                localVarQueryParameter['categoryIds'] = categoryIds;
+            }
+
+            if (tagIds !== undefined) {
+                localVarQueryParameter['tagIds'] = tagIds;
+            }
+
+            if (legalNatures !== undefined) {
+                localVarQueryParameter['legalNatures'] = legalNatures;
+            }
+
+            if (directionNatures !== undefined) {
+                localVarQueryParameter['directionNatures'] = directionNatures;
+            }
+
+            if (minPostedDatetime !== undefined) {
+                localVarQueryParameter['minPostedDatetime'] = minPostedDatetime;
+            }
+
+            if (maxPostedDatetime !== undefined) {
+                localVarQueryParameter['maxPostedDatetime'] = maxPostedDatetime;
+            }
+
+            if (minCompetencyDatetime !== undefined) {
+                localVarQueryParameter['minCompetencyDatetime'] = minCompetencyDatetime;
+            }
+
+            if (maxCompetencyDatetime !== undefined) {
+                localVarQueryParameter['maxCompetencyDatetime'] = maxCompetencyDatetime;
+            }
+
+            if (considerIgnored !== undefined) {
+                localVarQueryParameter['considerIgnored'] = considerIgnored;
+            }
+
+            if (considerAutomaticApplicationRelated !== undefined) {
+                localVarQueryParameter['considerAutomaticApplicationRelated'] = considerAutomaticApplicationRelated;
+            }
+
+            if (considerInternalTransfers !== undefined) {
+                localVarQueryParameter['considerInternalTransfers'] = considerInternalTransfers;
+            }
+
+            if (considerInvoiceRelated !== undefined) {
+                localVarQueryParameter['considerInvoiceRelated'] = considerInvoiceRelated;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {string} [accountIds] 
+         * @param {string} [categoryIds] 
+         * @param {string} [tagIds] 
+         * @param {string} [legalNatures] 
+         * @param {string} [directionNatures] 
+         * @param {string} [minPostedDatetime] 
+         * @param {string} [maxPostedDatetime] 
+         * @param {string} [minCompetencyDatetime] 
+         * @param {string} [maxCompetencyDatetime] 
+         * @param {boolean} [considerIgnored] 
+         * @param {boolean} [considerAutomaticApplicationRelated] 
+         * @param {boolean} [considerInternalTransfers] 
+         * @param {string} [considerInvoiceRelated] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerList: async (workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankTransactionsControllerList', 'workspaceId', workspaceId)
+            const localVarPath = `/bank/workspaces/{workspaceId}/transactions`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['pageIndex'] = pageIndex;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['pageSize'] = pageSize;
+            }
+
+            if (accountIds !== undefined) {
+                localVarQueryParameter['accountIds'] = accountIds;
+            }
+
+            if (categoryIds !== undefined) {
+                localVarQueryParameter['categoryIds'] = categoryIds;
+            }
+
+            if (tagIds !== undefined) {
+                localVarQueryParameter['tagIds'] = tagIds;
+            }
+
+            if (legalNatures !== undefined) {
+                localVarQueryParameter['legalNatures'] = legalNatures;
+            }
+
+            if (directionNatures !== undefined) {
+                localVarQueryParameter['directionNatures'] = directionNatures;
+            }
+
+            if (minPostedDatetime !== undefined) {
+                localVarQueryParameter['minPostedDatetime'] = minPostedDatetime;
+            }
+
+            if (maxPostedDatetime !== undefined) {
+                localVarQueryParameter['maxPostedDatetime'] = maxPostedDatetime;
+            }
+
+            if (minCompetencyDatetime !== undefined) {
+                localVarQueryParameter['minCompetencyDatetime'] = minCompetencyDatetime;
+            }
+
+            if (maxCompetencyDatetime !== undefined) {
+                localVarQueryParameter['maxCompetencyDatetime'] = maxCompetencyDatetime;
+            }
+
+            if (considerIgnored !== undefined) {
+                localVarQueryParameter['considerIgnored'] = considerIgnored;
+            }
+
+            if (considerAutomaticApplicationRelated !== undefined) {
+                localVarQueryParameter['considerAutomaticApplicationRelated'] = considerAutomaticApplicationRelated;
+            }
+
+            if (considerInternalTransfers !== undefined) {
+                localVarQueryParameter['considerInternalTransfers'] = considerInternalTransfers;
+            }
+
+            if (considerInvoiceRelated !== undefined) {
+                localVarQueryParameter['considerInvoiceRelated'] = considerInvoiceRelated;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerListMostRecent: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankTransactionsControllerListMostRecent', 'workspaceId', workspaceId)
+            const localVarPath = `/bank/workspaces/{workspaceId}/transactions/most-recent`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {boolean} [considerIgnored] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerListNotVerified: async (workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankTransactionsControllerListNotVerified', 'workspaceId', workspaceId)
+            const localVarPath = `/bank/workspaces/{workspaceId}/transactions/not-verified`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['pageIndex'] = pageIndex;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['pageSize'] = pageSize;
+            }
+
+            if (considerIgnored !== undefined) {
+                localVarQueryParameter['considerIgnored'] = considerIgnored;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} fromDatetime 
+         * @param {string} toDatetime 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerListVerifiedByMe: async (workspaceId: string, fromDatetime: string, toDatetime: string, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankTransactionsControllerListVerifiedByMe', 'workspaceId', workspaceId)
+            // verify required parameter 'fromDatetime' is not null or undefined
+            assertParamExists('bankTransactionsControllerListVerifiedByMe', 'fromDatetime', fromDatetime)
+            // verify required parameter 'toDatetime' is not null or undefined
+            assertParamExists('bankTransactionsControllerListVerifiedByMe', 'toDatetime', toDatetime)
+            const localVarPath = `/bank/workspaces/{workspaceId}/transactions/verified-by-me`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (fromDatetime !== undefined) {
+                localVarQueryParameter['fromDatetime'] = fromDatetime;
+            }
+
+            if (toDatetime !== undefined) {
+                localVarQueryParameter['toDatetime'] = toDatetime;
+            }
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['pageIndex'] = pageIndex;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['pageSize'] = pageSize;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} bankTransactionId 
+         * @param {PartialUpdateBankTransactionRequestDto} partialUpdateBankTransactionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerPartialUpdate: async (bankTransactionId: string, partialUpdateBankTransactionRequestDto: PartialUpdateBankTransactionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bankTransactionId' is not null or undefined
+            assertParamExists('bankTransactionsControllerPartialUpdate', 'bankTransactionId', bankTransactionId)
+            // verify required parameter 'partialUpdateBankTransactionRequestDto' is not null or undefined
+            assertParamExists('bankTransactionsControllerPartialUpdate', 'partialUpdateBankTransactionRequestDto', partialUpdateBankTransactionRequestDto)
+            const localVarPath = `/bank/transactions/{bankTransactionId}`
+                .replace(`{${"bankTransactionId"}}`, encodeURIComponent(String(bankTransactionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(partialUpdateBankTransactionRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BankTransactionsApi - functional programming interface
+ * @export
+ */
+export const BankTransactionsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BankTransactionsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsControllerCreateOrUpdateInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerCreateOrUpdateInBulk(createOrUpdateBankTransactionsInBulkRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerCreateOrUpdateInBulk']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} bankTransactionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsControllerGetById(bankTransactionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetById(bankTransactionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} accountId 
+         * @param {string} provider 
+         * @param {string} providerTransactionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsControllerGetByProvider(accountId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetByProvider(accountId, provider, providerTransactionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetByProvider']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
+         * @param {string} [categoryIds] 
+         * @param {string} [tagIds] 
+         * @param {string} [legalNatures] 
+         * @param {string} [directionNatures] 
+         * @param {string} [minPostedDatetime] 
+         * @param {string} [maxPostedDatetime] 
+         * @param {string} [minCompetencyDatetime] 
+         * @param {string} [maxCompetencyDatetime] 
+         * @param {boolean} [considerIgnored] 
+         * @param {boolean} [considerAutomaticApplicationRelated] 
+         * @param {boolean} [considerInternalTransfers] 
+         * @param {string} [considerInvoiceRelated] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsControllerGetTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerGetTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, directionNatures, minPostedDatetime, maxPostedDatetime, minCompetencyDatetime, maxCompetencyDatetime, considerIgnored, considerAutomaticApplicationRelated, considerInternalTransfers, considerInvoiceRelated, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerGetTotals']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {string} [accountIds] 
+         * @param {string} [categoryIds] 
+         * @param {string} [tagIds] 
+         * @param {string} [legalNatures] 
+         * @param {string} [directionNatures] 
+         * @param {string} [minPostedDatetime] 
+         * @param {string} [maxPostedDatetime] 
+         * @param {string} [minCompetencyDatetime] 
+         * @param {string} [maxCompetencyDatetime] 
+         * @param {boolean} [considerIgnored] 
+         * @param {boolean} [considerAutomaticApplicationRelated] 
+         * @param {boolean} [considerInternalTransfers] 
+         * @param {string} [considerInvoiceRelated] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsControllerList(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerList(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, directionNatures, minPostedDatetime, maxPostedDatetime, minCompetencyDatetime, maxCompetencyDatetime, considerIgnored, considerAutomaticApplicationRelated, considerInternalTransfers, considerInvoiceRelated, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsControllerListMostRecent(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BankTransactionEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerListMostRecent(workspaceId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerListMostRecent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {boolean} [considerIgnored] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsControllerListNotVerified(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerListNotVerified(workspaceId, pageIndex, pageSize, considerIgnored, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerListNotVerified']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} fromDatetime 
+         * @param {string} toDatetime 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsControllerListVerifiedByMe(workspaceId: string, fromDatetime: string, toDatetime: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionsPageEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerListVerifiedByMe(workspaceId, fromDatetime, toDatetime, pageIndex, pageSize, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerListVerifiedByMe']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} bankTransactionId 
+         * @param {PartialUpdateBankTransactionRequestDto} partialUpdateBankTransactionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsControllerPartialUpdate(bankTransactionId: string, partialUpdateBankTransactionRequestDto: PartialUpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankTransactionEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsControllerPartialUpdate(bankTransactionId, partialUpdateBankTransactionRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsApi.bankTransactionsControllerPartialUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * BankTransactionsApi - factory interface
+ * @export
+ */
+export const BankTransactionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BankTransactionsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerCreateOrUpdateInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: any): AxiosPromise<Array<BankTransactionEntity>> {
+            return localVarFp.bankTransactionsControllerCreateOrUpdateInBulk(createOrUpdateBankTransactionsInBulkRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} bankTransactionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetById(bankTransactionId: string, options?: any): AxiosPromise<BankTransactionEntity> {
+            return localVarFp.bankTransactionsControllerGetById(bankTransactionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} accountId 
+         * @param {string} provider 
+         * @param {string} providerTransactionId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetByProvider(accountId: string, provider: string, providerTransactionId: string, options?: any): AxiosPromise<BankTransactionEntity> {
+            return localVarFp.bankTransactionsControllerGetByProvider(accountId, provider, providerTransactionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} [accountIds] 
+         * @param {string} [categoryIds] 
+         * @param {string} [tagIds] 
+         * @param {string} [legalNatures] 
+         * @param {string} [directionNatures] 
+         * @param {string} [minPostedDatetime] 
+         * @param {string} [maxPostedDatetime] 
+         * @param {string} [minCompetencyDatetime] 
+         * @param {string} [maxCompetencyDatetime] 
+         * @param {boolean} [considerIgnored] 
+         * @param {boolean} [considerAutomaticApplicationRelated] 
+         * @param {boolean} [considerInternalTransfers] 
+         * @param {string} [considerInvoiceRelated] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerGetTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: any): AxiosPromise<BankTransactionsPageEntity> {
+            return localVarFp.bankTransactionsControllerGetTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, directionNatures, minPostedDatetime, maxPostedDatetime, minCompetencyDatetime, maxCompetencyDatetime, considerIgnored, considerAutomaticApplicationRelated, considerInternalTransfers, considerInvoiceRelated, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {string} [accountIds] 
+         * @param {string} [categoryIds] 
+         * @param {string} [tagIds] 
+         * @param {string} [legalNatures] 
+         * @param {string} [directionNatures] 
+         * @param {string} [minPostedDatetime] 
+         * @param {string} [maxPostedDatetime] 
+         * @param {string} [minCompetencyDatetime] 
+         * @param {string} [maxCompetencyDatetime] 
+         * @param {boolean} [considerIgnored] 
+         * @param {boolean} [considerAutomaticApplicationRelated] 
+         * @param {boolean} [considerInternalTransfers] 
+         * @param {string} [considerInvoiceRelated] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerList(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: any): AxiosPromise<BankTransactionsPageEntity> {
+            return localVarFp.bankTransactionsControllerList(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, directionNatures, minPostedDatetime, maxPostedDatetime, minCompetencyDatetime, maxCompetencyDatetime, considerIgnored, considerAutomaticApplicationRelated, considerInternalTransfers, considerInvoiceRelated, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerListMostRecent(workspaceId: string, options?: any): AxiosPromise<Array<BankTransactionEntity>> {
+            return localVarFp.bankTransactionsControllerListMostRecent(workspaceId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {boolean} [considerIgnored] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerListNotVerified(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: any): AxiosPromise<BankTransactionsPageEntity> {
+            return localVarFp.bankTransactionsControllerListNotVerified(workspaceId, pageIndex, pageSize, considerIgnored, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {string} fromDatetime 
+         * @param {string} toDatetime 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerListVerifiedByMe(workspaceId: string, fromDatetime: string, toDatetime: string, pageIndex?: number, pageSize?: number, options?: any): AxiosPromise<BankTransactionsPageEntity> {
+            return localVarFp.bankTransactionsControllerListVerifiedByMe(workspaceId, fromDatetime, toDatetime, pageIndex, pageSize, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} bankTransactionId 
+         * @param {PartialUpdateBankTransactionRequestDto} partialUpdateBankTransactionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsControllerPartialUpdate(bankTransactionId: string, partialUpdateBankTransactionRequestDto: PartialUpdateBankTransactionRequestDto, options?: any): AxiosPromise<BankTransactionEntity> {
+            return localVarFp.bankTransactionsControllerPartialUpdate(bankTransactionId, partialUpdateBankTransactionRequestDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BankTransactionsApi - object-oriented interface
+ * @export
+ * @class BankTransactionsApi
+ * @extends {BaseAPI}
+ */
+export class BankTransactionsApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateOrUpdateBankTransactionsInBulkRequestDto} createOrUpdateBankTransactionsInBulkRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    public bankTransactionsControllerCreateOrUpdateInBulk(createOrUpdateBankTransactionsInBulkRequestDto: CreateOrUpdateBankTransactionsInBulkRequestDto, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerCreateOrUpdateInBulk(createOrUpdateBankTransactionsInBulkRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} bankTransactionId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    public bankTransactionsControllerGetById(bankTransactionId: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetById(bankTransactionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} accountId 
+     * @param {string} provider 
+     * @param {string} providerTransactionId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    public bankTransactionsControllerGetByProvider(accountId: string, provider: string, providerTransactionId: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetByProvider(accountId, provider, providerTransactionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {string} [accountIds] 
+     * @param {string} [categoryIds] 
+     * @param {string} [tagIds] 
+     * @param {string} [legalNatures] 
+     * @param {string} [directionNatures] 
+     * @param {string} [minPostedDatetime] 
+     * @param {string} [maxPostedDatetime] 
+     * @param {string} [minCompetencyDatetime] 
+     * @param {string} [maxCompetencyDatetime] 
+     * @param {boolean} [considerIgnored] 
+     * @param {boolean} [considerAutomaticApplicationRelated] 
+     * @param {boolean} [considerInternalTransfers] 
+     * @param {string} [considerInvoiceRelated] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    public bankTransactionsControllerGetTotals(workspaceId: string, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerGetTotals(workspaceId, accountIds, categoryIds, tagIds, legalNatures, directionNatures, minPostedDatetime, maxPostedDatetime, minCompetencyDatetime, maxCompetencyDatetime, considerIgnored, considerAutomaticApplicationRelated, considerInternalTransfers, considerInvoiceRelated, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
+     * @param {string} [accountIds] 
+     * @param {string} [categoryIds] 
+     * @param {string} [tagIds] 
+     * @param {string} [legalNatures] 
+     * @param {string} [directionNatures] 
+     * @param {string} [minPostedDatetime] 
+     * @param {string} [maxPostedDatetime] 
+     * @param {string} [minCompetencyDatetime] 
+     * @param {string} [maxCompetencyDatetime] 
+     * @param {boolean} [considerIgnored] 
+     * @param {boolean} [considerAutomaticApplicationRelated] 
+     * @param {boolean} [considerInternalTransfers] 
+     * @param {string} [considerInvoiceRelated] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    public bankTransactionsControllerList(workspaceId: string, pageIndex?: number, pageSize?: number, accountIds?: string, categoryIds?: string, tagIds?: string, legalNatures?: string, directionNatures?: string, minPostedDatetime?: string, maxPostedDatetime?: string, minCompetencyDatetime?: string, maxCompetencyDatetime?: string, considerIgnored?: boolean, considerAutomaticApplicationRelated?: boolean, considerInternalTransfers?: boolean, considerInvoiceRelated?: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerList(workspaceId, pageIndex, pageSize, accountIds, categoryIds, tagIds, legalNatures, directionNatures, minPostedDatetime, maxPostedDatetime, minCompetencyDatetime, maxCompetencyDatetime, considerIgnored, considerAutomaticApplicationRelated, considerInternalTransfers, considerInvoiceRelated, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    public bankTransactionsControllerListMostRecent(workspaceId: string, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerListMostRecent(workspaceId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
+     * @param {boolean} [considerIgnored] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    public bankTransactionsControllerListNotVerified(workspaceId: string, pageIndex?: number, pageSize?: number, considerIgnored?: boolean, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerListNotVerified(workspaceId, pageIndex, pageSize, considerIgnored, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {string} fromDatetime 
+     * @param {string} toDatetime 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    public bankTransactionsControllerListVerifiedByMe(workspaceId: string, fromDatetime: string, toDatetime: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerListVerifiedByMe(workspaceId, fromDatetime, toDatetime, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} bankTransactionId 
+     * @param {PartialUpdateBankTransactionRequestDto} partialUpdateBankTransactionRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsApi
+     */
+    public bankTransactionsControllerPartialUpdate(bankTransactionId: string, partialUpdateBankTransactionRequestDto: PartialUpdateBankTransactionRequestDto, options?: RawAxiosRequestConfig) {
+        return BankTransactionsApiFp(this.configuration).bankTransactionsControllerPartialUpdate(bankTransactionId, partialUpdateBankTransactionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * BankTransactionsPageCategoryAssignerApi - axios parameter creator
+ * @export
+ */
+export const BankTransactionsPageCategoryAssignerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {AssignCategoryForBankTransactionsPageRequestDto} assignCategoryForBankTransactionsPageRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsPageCategoryAssignerControllerAssign: async (assignCategoryForBankTransactionsPageRequestDto: AssignCategoryForBankTransactionsPageRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assignCategoryForBankTransactionsPageRequestDto' is not null or undefined
+            assertParamExists('bankTransactionsPageCategoryAssignerControllerAssign', 'assignCategoryForBankTransactionsPageRequestDto', assignCategoryForBankTransactionsPageRequestDto)
+            const localVarPath = `/bank/transactions/page/category/assign`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(assignCategoryForBankTransactionsPageRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BankTransactionsPageCategoryAssignerApi - functional programming interface
+ * @export
+ */
+export const BankTransactionsPageCategoryAssignerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BankTransactionsPageCategoryAssignerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {AssignCategoryForBankTransactionsPageRequestDto} assignCategoryForBankTransactionsPageRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsPageCategoryAssignerControllerAssign(assignCategoryForBankTransactionsPageRequestDto: AssignCategoryForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsPageCategoryAssignerControllerAssign(assignCategoryForBankTransactionsPageRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsPageCategoryAssignerApi.bankTransactionsPageCategoryAssignerControllerAssign']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * BankTransactionsPageCategoryAssignerApi - factory interface
+ * @export
+ */
+export const BankTransactionsPageCategoryAssignerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BankTransactionsPageCategoryAssignerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {AssignCategoryForBankTransactionsPageRequestDto} assignCategoryForBankTransactionsPageRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsPageCategoryAssignerControllerAssign(assignCategoryForBankTransactionsPageRequestDto: AssignCategoryForBankTransactionsPageRequestDto, options?: any): AxiosPromise<void> {
+            return localVarFp.bankTransactionsPageCategoryAssignerControllerAssign(assignCategoryForBankTransactionsPageRequestDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BankTransactionsPageCategoryAssignerApi - object-oriented interface
+ * @export
+ * @class BankTransactionsPageCategoryAssignerApi
+ * @extends {BaseAPI}
+ */
+export class BankTransactionsPageCategoryAssignerApi extends BaseAPI {
+    /**
+     * 
+     * @param {AssignCategoryForBankTransactionsPageRequestDto} assignCategoryForBankTransactionsPageRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsPageCategoryAssignerApi
+     */
+    public bankTransactionsPageCategoryAssignerControllerAssign(assignCategoryForBankTransactionsPageRequestDto: AssignCategoryForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig) {
+        return BankTransactionsPageCategoryAssignerApiFp(this.configuration).bankTransactionsPageCategoryAssignerControllerAssign(assignCategoryForBankTransactionsPageRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * BankTransactionsPageLegalNatureAssignerApi - axios parameter creator
+ * @export
+ */
+export const BankTransactionsPageLegalNatureAssignerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {AssignLegalNatureForBankTransactionsPageRequestDto} assignLegalNatureForBankTransactionsPageRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsPageLegalNatureAssignerControllerAssign: async (assignLegalNatureForBankTransactionsPageRequestDto: AssignLegalNatureForBankTransactionsPageRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assignLegalNatureForBankTransactionsPageRequestDto' is not null or undefined
+            assertParamExists('bankTransactionsPageLegalNatureAssignerControllerAssign', 'assignLegalNatureForBankTransactionsPageRequestDto', assignLegalNatureForBankTransactionsPageRequestDto)
+            const localVarPath = `/bank/transactions/page/legal-nature/assign`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(assignLegalNatureForBankTransactionsPageRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BankTransactionsPageLegalNatureAssignerApi - functional programming interface
+ * @export
+ */
+export const BankTransactionsPageLegalNatureAssignerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BankTransactionsPageLegalNatureAssignerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {AssignLegalNatureForBankTransactionsPageRequestDto} assignLegalNatureForBankTransactionsPageRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankTransactionsPageLegalNatureAssignerControllerAssign(assignLegalNatureForBankTransactionsPageRequestDto: AssignLegalNatureForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankTransactionsPageLegalNatureAssignerControllerAssign(assignLegalNatureForBankTransactionsPageRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankTransactionsPageLegalNatureAssignerApi.bankTransactionsPageLegalNatureAssignerControllerAssign']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * BankTransactionsPageLegalNatureAssignerApi - factory interface
+ * @export
+ */
+export const BankTransactionsPageLegalNatureAssignerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BankTransactionsPageLegalNatureAssignerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {AssignLegalNatureForBankTransactionsPageRequestDto} assignLegalNatureForBankTransactionsPageRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankTransactionsPageLegalNatureAssignerControllerAssign(assignLegalNatureForBankTransactionsPageRequestDto: AssignLegalNatureForBankTransactionsPageRequestDto, options?: any): AxiosPromise<void> {
+            return localVarFp.bankTransactionsPageLegalNatureAssignerControllerAssign(assignLegalNatureForBankTransactionsPageRequestDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BankTransactionsPageLegalNatureAssignerApi - object-oriented interface
+ * @export
+ * @class BankTransactionsPageLegalNatureAssignerApi
+ * @extends {BaseAPI}
+ */
+export class BankTransactionsPageLegalNatureAssignerApi extends BaseAPI {
+    /**
+     * 
+     * @param {AssignLegalNatureForBankTransactionsPageRequestDto} assignLegalNatureForBankTransactionsPageRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankTransactionsPageLegalNatureAssignerApi
+     */
+    public bankTransactionsPageLegalNatureAssignerControllerAssign(assignLegalNatureForBankTransactionsPageRequestDto: AssignLegalNatureForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig) {
+        return BankTransactionsPageLegalNatureAssignerApiFp(this.configuration).bankTransactionsPageLegalNatureAssignerControllerAssign(assignLegalNatureForBankTransactionsPageRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * MessageTokensApi - axios parameter creator
+ * @export
+ */
+export const MessageTokensApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        messageTokensControllerCreateOrUpdate: async (workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('messageTokensControllerCreateOrUpdate', 'workspaceId', workspaceId)
+            // verify required parameter 'createOrUpdateMessageTokenRequestDto' is not null or undefined
+            assertParamExists('messageTokensControllerCreateOrUpdate', 'createOrUpdateMessageTokenRequestDto', createOrUpdateMessageTokenRequestDto)
+            const localVarPath = `/communication/workspaces/{workspaceId}/message-tokens`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createOrUpdateMessageTokenRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        messageTokensControllerListByWorkspaceId: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('messageTokensControllerListByWorkspaceId', 'workspaceId', workspaceId)
+            const localVarPath = `/communication/workspaces/{workspaceId}/message-tokens`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * MessageTokensApi - functional programming interface
+ * @export
+ */
+export const MessageTokensApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MessageTokensApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async messageTokensControllerCreateOrUpdate(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageTokenEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.messageTokensControllerCreateOrUpdate(workspaceId, createOrUpdateMessageTokenRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MessageTokensApi.messageTokensControllerCreateOrUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async messageTokensControllerListByWorkspaceId(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MessageTokenEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.messageTokensControllerListByWorkspaceId(workspaceId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MessageTokensApi.messageTokensControllerListByWorkspaceId']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * MessageTokensApi - factory interface
+ * @export
+ */
+export const MessageTokensApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MessageTokensApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        messageTokensControllerCreateOrUpdate(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: any): AxiosPromise<MessageTokenEntity> {
+            return localVarFp.messageTokensControllerCreateOrUpdate(workspaceId, createOrUpdateMessageTokenRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        messageTokensControllerListByWorkspaceId(workspaceId: string, options?: any): AxiosPromise<Array<MessageTokenEntity>> {
+            return localVarFp.messageTokensControllerListByWorkspaceId(workspaceId, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * MessageTokensApi - object-oriented interface
+ * @export
+ * @class MessageTokensApi
+ * @extends {BaseAPI}
+ */
+export class MessageTokensApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessageTokensApi
+     */
+    public messageTokensControllerCreateOrUpdate(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig) {
+        return MessageTokensApiFp(this.configuration).messageTokensControllerCreateOrUpdate(workspaceId, createOrUpdateMessageTokenRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessageTokensApi
+     */
+    public messageTokensControllerListByWorkspaceId(workspaceId: string, options?: RawAxiosRequestConfig) {
+        return MessageTokensApiFp(this.configuration).messageTokensControllerListByWorkspaceId(workspaceId, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * PluggyApi - axios parameter creator
+ * @export
+ */
+export const PluggyApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluggyControllerCreateConnectToken: async (createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createPluggyConnectTokenRequestDto' is not null or undefined
+            assertParamExists('pluggyControllerCreateConnectToken', 'createPluggyConnectTokenRequestDto', createPluggyConnectTokenRequestDto)
+            const localVarPath = `/pluggy/connect-tokens`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createPluggyConnectTokenRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluggyControllerWebhook: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/pluggy/webhook`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PluggyApi - functional programming interface
+ * @export
+ */
+export const PluggyApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PluggyApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluggyControllerCreateConnectToken(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PluggyConnectTokenEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluggyControllerCreateConnectToken(createPluggyConnectTokenRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluggyApi.pluggyControllerCreateConnectToken']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluggyControllerWebhook(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluggyControllerWebhook(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluggyApi.pluggyControllerWebhook']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * PluggyApi - factory interface
+ * @export
+ */
+export const PluggyApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PluggyApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluggyControllerCreateConnectToken(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: any): AxiosPromise<PluggyConnectTokenEntity> {
+            return localVarFp.pluggyControllerCreateConnectToken(createPluggyConnectTokenRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluggyControllerWebhook(options?: any): AxiosPromise<void> {
+            return localVarFp.pluggyControllerWebhook(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PluggyApi - object-oriented interface
+ * @export
+ * @class PluggyApi
+ * @extends {BaseAPI}
+ */
+export class PluggyApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PluggyApi
+     */
+    public pluggyControllerCreateConnectToken(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig) {
+        return PluggyApiFp(this.configuration).pluggyControllerCreateConnectToken(createPluggyConnectTokenRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PluggyApi
+     */
+    public pluggyControllerWebhook(options?: RawAxiosRequestConfig) {
+        return PluggyApiFp(this.configuration).pluggyControllerWebhook(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * ProfilesApi - axios parameter creator
+ * @export
+ */
+export const ProfilesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
@@ -5987,11 +7831,11 @@ export const IamProfilesApiAxiosParamCreator = function (configuration?: Configu
 };
 
 /**
- * IamProfilesApi - functional programming interface
+ * ProfilesApi - functional programming interface
  * @export
  */
-export const IamProfilesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = IamProfilesApiAxiosParamCreator(configuration)
+export const ProfilesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProfilesApiAxiosParamCreator(configuration)
     return {
         /**
          * 
@@ -6002,7 +7846,7 @@ export const IamProfilesApiFp = function(configuration?: Configuration) {
         async profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.profilesControllerCreate(createProfileRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamProfilesApi.profilesControllerCreate']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.profilesControllerCreate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6013,7 +7857,7 @@ export const IamProfilesApiFp = function(configuration?: Configuration) {
         async profilesControllerGetMy(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.profilesControllerGetMy(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamProfilesApi.profilesControllerGetMy']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.profilesControllerGetMy']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6025,18 +7869,18 @@ export const IamProfilesApiFp = function(configuration?: Configuration) {
         async profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileEntity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.profilesControllerPartialUpdate(partialUpdateProfileRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamProfilesApi.profilesControllerPartialUpdate']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ProfilesApi.profilesControllerPartialUpdate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * IamProfilesApi - factory interface
+ * ProfilesApi - factory interface
  * @export
  */
-export const IamProfilesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = IamProfilesApiFp(configuration)
+export const ProfilesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProfilesApiFp(configuration)
     return {
         /**
          * 
@@ -6068,31 +7912,31 @@ export const IamProfilesApiFactory = function (configuration?: Configuration, ba
 };
 
 /**
- * IamProfilesApi - object-oriented interface
+ * ProfilesApi - object-oriented interface
  * @export
- * @class IamProfilesApi
+ * @class ProfilesApi
  * @extends {BaseAPI}
  */
-export class IamProfilesApi extends BaseAPI {
+export class ProfilesApi extends BaseAPI {
     /**
      * 
      * @param {CreateProfileRequestDto} createProfileRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamProfilesApi
+     * @memberof ProfilesApi
      */
     public profilesControllerCreate(createProfileRequestDto: CreateProfileRequestDto, options?: RawAxiosRequestConfig) {
-        return IamProfilesApiFp(this.configuration).profilesControllerCreate(createProfileRequestDto, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).profilesControllerCreate(createProfileRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamProfilesApi
+     * @memberof ProfilesApi
      */
     public profilesControllerGetMy(options?: RawAxiosRequestConfig) {
-        return IamProfilesApiFp(this.configuration).profilesControllerGetMy(options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).profilesControllerGetMy(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6100,532 +7944,10 @@ export class IamProfilesApi extends BaseAPI {
      * @param {PartialUpdateProfileRequestDto} partialUpdateProfileRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof IamProfilesApi
+     * @memberof ProfilesApi
      */
     public profilesControllerPartialUpdate(partialUpdateProfileRequestDto: PartialUpdateProfileRequestDto, options?: RawAxiosRequestConfig) {
-        return IamProfilesApiFp(this.configuration).profilesControllerPartialUpdate(partialUpdateProfileRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * IamWorkspacesApi - axios parameter creator
- * @export
- */
-export const IamWorkspacesApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerCreate: async (createWorkspaceRequestDto: CreateWorkspaceRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createWorkspaceRequestDto' is not null or undefined
-            assertParamExists('workspacesControllerCreate', 'createWorkspaceRequestDto', createWorkspaceRequestDto)
-            const localVarPath = `/iam/workspaces`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createWorkspaceRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerParcialUpdate: async (workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('workspacesControllerParcialUpdate', 'workspaceId', workspaceId)
-            // verify required parameter 'parcialUpdateWorkspaceRequestDto' is not null or undefined
-            assertParamExists('workspacesControllerParcialUpdate', 'parcialUpdateWorkspaceRequestDto', parcialUpdateWorkspaceRequestDto)
-            const localVarPath = `/iam/workspaces/{workspaceId}`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(parcialUpdateWorkspaceRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * IamWorkspacesApi - functional programming interface
- * @export
- */
-export const IamWorkspacesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = IamWorkspacesApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerCreate(createWorkspaceRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamWorkspacesApi.workspacesControllerCreate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['IamWorkspacesApi.workspacesControllerParcialUpdate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * IamWorkspacesApi - factory interface
- * @export
- */
-export const IamWorkspacesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = IamWorkspacesApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity> {
-            return localVarFp.workspacesControllerCreate(createWorkspaceRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity> {
-            return localVarFp.workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * IamWorkspacesApi - object-oriented interface
- * @export
- * @class IamWorkspacesApi
- * @extends {BaseAPI}
- */
-export class IamWorkspacesApi extends BaseAPI {
-    /**
-     * 
-     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof IamWorkspacesApi
-     */
-    public workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig) {
-        return IamWorkspacesApiFp(this.configuration).workspacesControllerCreate(createWorkspaceRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {ParcialUpdateWorkspaceRequestDto} parcialUpdateWorkspaceRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof IamWorkspacesApi
-     */
-    public workspacesControllerParcialUpdate(workspaceId: string, parcialUpdateWorkspaceRequestDto: ParcialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig) {
-        return IamWorkspacesApiFp(this.configuration).workspacesControllerParcialUpdate(workspaceId, parcialUpdateWorkspaceRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * MessageTokensApi - axios parameter creator
- * @export
- */
-export const MessageTokensApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        messageTokensControllerCreateOrUpdateMessageToken: async (workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('messageTokensControllerCreateOrUpdateMessageToken', 'workspaceId', workspaceId)
-            // verify required parameter 'createOrUpdateMessageTokenRequestDto' is not null or undefined
-            assertParamExists('messageTokensControllerCreateOrUpdateMessageToken', 'createOrUpdateMessageTokenRequestDto', createOrUpdateMessageTokenRequestDto)
-            const localVarPath = `/workspaces/{workspaceId}/message-tokens`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createOrUpdateMessageTokenRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        messageTokensControllerGetWorkspaceMessageTokens: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('messageTokensControllerGetWorkspaceMessageTokens', 'workspaceId', workspaceId)
-            const localVarPath = `/workspaces/{workspaceId}/message-tokens`
-                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * MessageTokensApi - functional programming interface
- * @export
- */
-export const MessageTokensApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = MessageTokensApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageTokenEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.messageTokensControllerCreateOrUpdateMessageToken(workspaceId, createOrUpdateMessageTokenRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MessageTokensApi.messageTokensControllerCreateOrUpdateMessageToken']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MessageTokenEntity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.messageTokensControllerGetWorkspaceMessageTokens(workspaceId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MessageTokensApi.messageTokensControllerGetWorkspaceMessageTokens']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * MessageTokensApi - factory interface
- * @export
- */
-export const MessageTokensApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = MessageTokensApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: any): AxiosPromise<MessageTokenEntity> {
-            return localVarFp.messageTokensControllerCreateOrUpdateMessageToken(workspaceId, createOrUpdateMessageTokenRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} workspaceId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: any): AxiosPromise<Array<MessageTokenEntity>> {
-            return localVarFp.messageTokensControllerGetWorkspaceMessageTokens(workspaceId, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * MessageTokensApi - object-oriented interface
- * @export
- * @class MessageTokensApi
- * @extends {BaseAPI}
- */
-export class MessageTokensApi extends BaseAPI {
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {CreateOrUpdateMessageTokenRequestDto} createOrUpdateMessageTokenRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MessageTokensApi
-     */
-    public messageTokensControllerCreateOrUpdateMessageToken(workspaceId: string, createOrUpdateMessageTokenRequestDto: CreateOrUpdateMessageTokenRequestDto, options?: RawAxiosRequestConfig) {
-        return MessageTokensApiFp(this.configuration).messageTokensControllerCreateOrUpdateMessageToken(workspaceId, createOrUpdateMessageTokenRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} workspaceId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MessageTokensApi
-     */
-    public messageTokensControllerGetWorkspaceMessageTokens(workspaceId: string, options?: RawAxiosRequestConfig) {
-        return MessageTokensApiFp(this.configuration).messageTokensControllerGetWorkspaceMessageTokens(workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * PluggyApi - axios parameter creator
- * @export
- */
-export const PluggyApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        pluggyControllerCreate: async (createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createPluggyConnectTokenRequestDto' is not null or undefined
-            assertParamExists('pluggyControllerCreate', 'createPluggyConnectTokenRequestDto', createPluggyConnectTokenRequestDto)
-            const localVarPath = `/pluggy/connect-token`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createPluggyConnectTokenRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        pluggyControllerWebhook: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/pluggy/webhook`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * PluggyApi - functional programming interface
- * @export
- */
-export const PluggyApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PluggyApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PluggyConnectTokenEntity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.pluggyControllerCreate(createPluggyConnectTokenRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PluggyApi.pluggyControllerCreate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async pluggyControllerWebhook(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.pluggyControllerWebhook(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PluggyApi.pluggyControllerWebhook']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * PluggyApi - factory interface
- * @export
- */
-export const PluggyApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PluggyApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: any): AxiosPromise<PluggyConnectTokenEntity> {
-            return localVarFp.pluggyControllerCreate(createPluggyConnectTokenRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        pluggyControllerWebhook(options?: any): AxiosPromise<void> {
-            return localVarFp.pluggyControllerWebhook(options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * PluggyApi - object-oriented interface
- * @export
- * @class PluggyApi
- * @extends {BaseAPI}
- */
-export class PluggyApi extends BaseAPI {
-    /**
-     * 
-     * @param {CreatePluggyConnectTokenRequestDto} createPluggyConnectTokenRequestDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PluggyApi
-     */
-    public pluggyControllerCreate(createPluggyConnectTokenRequestDto: CreatePluggyConnectTokenRequestDto, options?: RawAxiosRequestConfig) {
-        return PluggyApiFp(this.configuration).pluggyControllerCreate(createPluggyConnectTokenRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PluggyApi
-     */
-    public pluggyControllerWebhook(options?: RawAxiosRequestConfig) {
-        return PluggyApiFp(this.configuration).pluggyControllerWebhook(options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).profilesControllerPartialUpdate(partialUpdateProfileRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -7576,6 +8898,309 @@ export class ReportsApi extends BaseAPI {
      */
     public reportsControllerGetFinancialStatementReport(workspaceId: string, accountIds?: string, tagIds?: string, legalNatures?: string, considerIgnored?: boolean, minPostedDate?: string, maxPostedDate?: string, minCompetencyDate?: string, maxCompetencyDate?: string, options?: RawAxiosRequestConfig) {
         return ReportsApiFp(this.configuration).reportsControllerGetFinancialStatementReport(workspaceId, accountIds, tagIds, legalNatures, considerIgnored, minPostedDate, maxPostedDate, minCompetencyDate, maxCompetencyDate, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * WorkspacesApi - axios parameter creator
+ * @export
+ */
+export const WorkspacesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerCreate: async (createWorkspaceRequestDto: CreateWorkspaceRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createWorkspaceRequestDto' is not null or undefined
+            assertParamExists('workspacesControllerCreate', 'createWorkspaceRequestDto', createWorkspaceRequestDto)
+            const localVarPath = `/iam/workspaces`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createWorkspaceRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerGetById: async (workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('workspacesControllerGetById', 'workspaceId', workspaceId)
+            const localVarPath = `/iam/workspaces/{workspaceId}`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerListMy: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/iam/workspaces/my`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {PartialUpdateWorkspaceRequestDto} partialUpdateWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerPartialUpdate: async (workspaceId: string, partialUpdateWorkspaceRequestDto: PartialUpdateWorkspaceRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('workspacesControllerPartialUpdate', 'workspaceId', workspaceId)
+            // verify required parameter 'partialUpdateWorkspaceRequestDto' is not null or undefined
+            assertParamExists('workspacesControllerPartialUpdate', 'partialUpdateWorkspaceRequestDto', partialUpdateWorkspaceRequestDto)
+            const localVarPath = `/iam/workspaces/{workspaceId}`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(partialUpdateWorkspaceRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * WorkspacesApi - functional programming interface
+ * @export
+ */
+export const WorkspacesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = WorkspacesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerCreate(createWorkspaceRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.workspacesControllerCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async workspacesControllerGetById(workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerGetById(workspaceId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.workspacesControllerGetById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async workspacesControllerListMy(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserRelatedWorkspaceEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerListMy(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.workspacesControllerListMy']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {PartialUpdateWorkspaceRequestDto} partialUpdateWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async workspacesControllerPartialUpdate(workspaceId: string, partialUpdateWorkspaceRequestDto: PartialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.workspacesControllerPartialUpdate(workspaceId, partialUpdateWorkspaceRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspacesApi.workspacesControllerPartialUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * WorkspacesApi - factory interface
+ * @export
+ */
+export const WorkspacesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = WorkspacesApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity> {
+            return localVarFp.workspacesControllerCreate(createWorkspaceRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerGetById(workspaceId: string, options?: any): AxiosPromise<WorkspaceEntity> {
+            return localVarFp.workspacesControllerGetById(workspaceId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerListMy(options?: any): AxiosPromise<Array<UserRelatedWorkspaceEntity>> {
+            return localVarFp.workspacesControllerListMy(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} workspaceId 
+         * @param {PartialUpdateWorkspaceRequestDto} partialUpdateWorkspaceRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        workspacesControllerPartialUpdate(workspaceId: string, partialUpdateWorkspaceRequestDto: PartialUpdateWorkspaceRequestDto, options?: any): AxiosPromise<WorkspaceEntity> {
+            return localVarFp.workspacesControllerPartialUpdate(workspaceId, partialUpdateWorkspaceRequestDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * WorkspacesApi - object-oriented interface
+ * @export
+ * @class WorkspacesApi
+ * @extends {BaseAPI}
+ */
+export class WorkspacesApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateWorkspaceRequestDto} createWorkspaceRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    public workspacesControllerCreate(createWorkspaceRequestDto: CreateWorkspaceRequestDto, options?: RawAxiosRequestConfig) {
+        return WorkspacesApiFp(this.configuration).workspacesControllerCreate(createWorkspaceRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    public workspacesControllerGetById(workspaceId: string, options?: RawAxiosRequestConfig) {
+        return WorkspacesApiFp(this.configuration).workspacesControllerGetById(workspaceId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    public workspacesControllerListMy(options?: RawAxiosRequestConfig) {
+        return WorkspacesApiFp(this.configuration).workspacesControllerListMy(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {PartialUpdateWorkspaceRequestDto} partialUpdateWorkspaceRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspacesApi
+     */
+    public workspacesControllerPartialUpdate(workspaceId: string, partialUpdateWorkspaceRequestDto: PartialUpdateWorkspaceRequestDto, options?: RawAxiosRequestConfig) {
+        return WorkspacesApiFp(this.configuration).workspacesControllerPartialUpdate(workspaceId, partialUpdateWorkspaceRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
