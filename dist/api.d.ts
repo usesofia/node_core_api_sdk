@@ -5499,6 +5499,57 @@ export declare class BankTransactionsPageLegalNatureAssignerApi extends BaseAPI 
     bankTransactionsPageLegalNatureAssignerControllerAssign(assignLegalNatureForBankTransactionsPageRequestDto: AssignLegalNatureForBankTransactionsPageRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
+ * HelloApi - axios parameter creator
+ * @export
+ */
+export declare const HelloApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    helloControllerHello: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * HelloApi - functional programming interface
+ * @export
+ */
+export declare const HelloApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    helloControllerHello(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * HelloApi - factory interface
+ * @export
+ */
+export declare const HelloApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    helloControllerHello(options?: any): AxiosPromise<void>;
+};
+/**
+ * HelloApi - object-oriented interface
+ * @export
+ * @class HelloApi
+ * @extends {BaseAPI}
+ */
+export declare class HelloApi extends BaseAPI {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HelloApi
+     */
+    helloControllerHello(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+}
+/**
  * MessageTokensApi - axios parameter creator
  * @export
  */

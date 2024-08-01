@@ -85,8 +85,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VerifyEmailVerificationCodeRequestDtoPurposeEnum = exports.UserRelatedWorkspaceEntityRelationTypeEnum = exports.UserEntityWorkspacesInnerHybridSettingsBusinessSegmentEnum = exports.UserEntityWorkspacesInnerTypeEnum = exports.SyncBankItemRequestDtoProviderEnum = exports.SyncBankAccountTransactionsRequestDtoProviderEnum = exports.SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureValueEnum = exports.SyncBankAccountTransactionsPageEndRequestDtoLegalNatureAssignRequestsInnerLegalNatureOriginEnum = exports.SyncBankAccountTransactionsPageEndRequestDtoCategoryAssignRequestsInnerCategoryOriginEnum = exports.SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerStatusEnum = exports.SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInnerDirectionNatureEnum = exports.PartialUpdateBankTransactionRequestDtoLegalNatureEnum = exports.MessageTokenEntityWorksapceTypeEnum = exports.MessageTokenEntityPlatformEnum = exports.MessageTokenEntityProviderEnum = exports.GenerateAndSendPhoneVerificationCodeRequestDtoPurposeEnum = exports.GenerateAndSendEmailVerificationCodeRequestDtoPurposeEnum = exports.CreateWorkspaceRequestDtoBusinessSegmentEnum = exports.CreateWorkspaceRequestDtoTypeEnum = exports.CreatePluggyConnectTokenRequestDtoHistoryRangeEnum = exports.CreateOrUpdateMessageTokenRequestDtoProviderEnum = exports.CreateOrUpdateMessageTokenRequestDtoPlatformEnum = exports.CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureGuessesInnerLegalNatureEnum = exports.CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerLegalNatureEnum = exports.CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerStatusEnum = exports.CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerDirectionNatureEnum = exports.CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInnerProviderEnum = exports.CreateOrUpdateBankConnectionRequestDtoHistoryRangeEnum = exports.CreateOrUpdateBankConnectionRequestDtoProviderEnum = exports.CreateOrUpdateBankAccountRequestDtoTypeEnum = exports.CreateOrUpdateBankAccountRequestDtoProviderEnum = exports.BankTransactionsPageEntityItemsInnerLegalNatureEnum = exports.BankTransactionsPageEntityItemsInnerStatusEnum = exports.BankTransactionsPageEntityItemsInnerDirectionNatureEnum = exports.BankTransactionsPageEntityItemsInnerProviderEnum = exports.BankTransactionEntityCategoryDirectionNatureEnum = exports.BankTransactionEntityLegalNatureEnum = exports.BankTransactionEntityStatusEnum = exports.BankTransactionEntityDirectionNatureEnum = exports.BankTransactionEntityProviderEnum = exports.BankTransactionCategoryEntityChildrenInnerDirectionNatureEnum = exports.BankTransactionCategoryEntityDirectionNatureEnum = exports.BankConnectionEntityConnectorTypeEnum = exports.BankConnectionEntityConnectorProviderEnum = exports.BankConnectionEntityAccountsInnerTypeEnum = exports.BankConnectionEntityAccountsInnerProviderEnum = exports.BankConnectionEntityHistoryRangeEnum = exports.BankConnectionEntityProviderEnum = exports.BankAccountEntityTypeEnum = exports.BankAccountEntityProviderEnum = void 0;
-exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.BankTransactionsPageLegalNatureAssignerApi = exports.BankTransactionsPageLegalNatureAssignerApiFactory = exports.BankTransactionsPageLegalNatureAssignerApiFp = exports.BankTransactionsPageLegalNatureAssignerApiAxiosParamCreator = exports.BankTransactionsPageCategoryAssignerApi = exports.BankTransactionsPageCategoryAssignerApiFactory = exports.BankTransactionsPageCategoryAssignerApiFp = exports.BankTransactionsPageCategoryAssignerApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionTagsApi = exports.BankTransactionTagsApiFactory = exports.BankTransactionTagsApiFp = exports.BankTransactionTagsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankSyncApi = exports.BankSyncApiFactory = exports.BankSyncApiFp = exports.BankSyncApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.AuthApi = exports.AuthApiFactory = exports.AuthApiFp = exports.AuthApiAxiosParamCreator = exports.WorkspaceEntityTypeEnum = exports.VerifyPhoneVerificationCodeRequestDtoPurposeEnum = void 0;
-exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = void 0;
+exports.PluggyApi = exports.PluggyApiFactory = exports.PluggyApiFp = exports.PluggyApiAxiosParamCreator = exports.MessageTokensApi = exports.MessageTokensApiFactory = exports.MessageTokensApiFp = exports.MessageTokensApiAxiosParamCreator = exports.HelloApi = exports.HelloApiFactory = exports.HelloApiFp = exports.HelloApiAxiosParamCreator = exports.BankTransactionsPageLegalNatureAssignerApi = exports.BankTransactionsPageLegalNatureAssignerApiFactory = exports.BankTransactionsPageLegalNatureAssignerApiFp = exports.BankTransactionsPageLegalNatureAssignerApiAxiosParamCreator = exports.BankTransactionsPageCategoryAssignerApi = exports.BankTransactionsPageCategoryAssignerApiFactory = exports.BankTransactionsPageCategoryAssignerApiFp = exports.BankTransactionsPageCategoryAssignerApiAxiosParamCreator = exports.BankTransactionsApi = exports.BankTransactionsApiFactory = exports.BankTransactionsApiFp = exports.BankTransactionsApiAxiosParamCreator = exports.BankTransactionTagsApi = exports.BankTransactionTagsApiFactory = exports.BankTransactionTagsApiFp = exports.BankTransactionTagsApiAxiosParamCreator = exports.BankTransactionCategoriesApi = exports.BankTransactionCategoriesApiFactory = exports.BankTransactionCategoriesApiFp = exports.BankTransactionCategoriesApiAxiosParamCreator = exports.BankSyncApi = exports.BankSyncApiFactory = exports.BankSyncApiFp = exports.BankSyncApiAxiosParamCreator = exports.BankConnectionsApi = exports.BankConnectionsApiFactory = exports.BankConnectionsApiFp = exports.BankConnectionsApiAxiosParamCreator = exports.BankAccountsApi = exports.BankAccountsApiFactory = exports.BankAccountsApiFp = exports.BankAccountsApiAxiosParamCreator = exports.AuthApi = exports.AuthApiFactory = exports.AuthApiFp = exports.AuthApiAxiosParamCreator = exports.WorkspaceEntityTypeEnum = exports.VerifyPhoneVerificationCodeRequestDtoPurposeEnum = void 0;
+exports.WorkspacesApi = exports.WorkspacesApiFactory = exports.WorkspacesApiFp = exports.WorkspacesApiAxiosParamCreator = exports.ReportsApi = exports.ReportsApiFactory = exports.ReportsApiFp = exports.ReportsApiAxiosParamCreator = exports.ProfilesApi = exports.ProfilesApiFactory = exports.ProfilesApiFp = exports.ProfilesApiAxiosParamCreator = void 0;
 var axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -4152,6 +4152,121 @@ var BankTransactionsPageLegalNatureAssignerApi = /** @class */ (function (_super
     return BankTransactionsPageLegalNatureAssignerApi;
 }(base_1.BaseAPI));
 exports.BankTransactionsPageLegalNatureAssignerApi = BankTransactionsPageLegalNatureAssignerApi;
+/**
+ * HelloApi - axios parameter creator
+ * @export
+ */
+var HelloApiAxiosParamCreator = function (configuration) {
+    var _this = this;
+    return {
+        /**
+         *
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        helloControllerHello: function () {
+            var args_1 = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args_1[_i] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([], args_1, true), void 0, function (options) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
+                return __generator(this, function (_a) {
+                    localVarPath = "/hello";
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+    };
+};
+exports.HelloApiAxiosParamCreator = HelloApiAxiosParamCreator;
+/**
+ * HelloApi - functional programming interface
+ * @export
+ */
+var HelloApiFp = function (configuration) {
+    var localVarAxiosParamCreator = (0, exports.HelloApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        helloControllerHello: function (options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.helloControllerHello(options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['HelloApi.helloControllerHello']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+    };
+};
+exports.HelloApiFp = HelloApiFp;
+/**
+ * HelloApi - factory interface
+ * @export
+ */
+var HelloApiFactory = function (configuration, basePath, axios) {
+    var localVarFp = (0, exports.HelloApiFp)(configuration);
+    return {
+        /**
+         *
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        helloControllerHello: function (options) {
+            return localVarFp.helloControllerHello(options).then(function (request) { return request(axios, basePath); });
+        },
+    };
+};
+exports.HelloApiFactory = HelloApiFactory;
+/**
+ * HelloApi - object-oriented interface
+ * @export
+ * @class HelloApi
+ * @extends {BaseAPI}
+ */
+var HelloApi = /** @class */ (function (_super) {
+    __extends(HelloApi, _super);
+    function HelloApi() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HelloApi
+     */
+    HelloApi.prototype.helloControllerHello = function (options) {
+        var _this = this;
+        return (0, exports.HelloApiFp)(this.configuration).helloControllerHello(options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    return HelloApi;
+}(base_1.BaseAPI));
+exports.HelloApi = HelloApi;
 /**
  * MessageTokensApi - axios parameter creator
  * @export
