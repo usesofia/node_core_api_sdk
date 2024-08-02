@@ -150,16 +150,16 @@ export interface BankAccountEntity {
     'name': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankAccountEntity
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankAccountEntity
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 export declare const BankAccountEntityProviderEnum: {
     readonly Pluggy: "PLUGGY";
@@ -240,16 +240,16 @@ export interface BankConnectionEntity {
     'connector'?: BankConnectionEntityConnector | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankConnectionEntity
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankConnectionEntity
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 export declare const BankConnectionEntityProviderEnum: {
     readonly Pluggy: "PLUGGY";
@@ -334,16 +334,16 @@ export interface BankConnectionEntityAccountsInner {
     'name': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankConnectionEntityAccountsInner
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankConnectionEntityAccountsInner
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 export declare const BankConnectionEntityAccountsInnerProviderEnum: {
     readonly Pluggy: "PLUGGY";
@@ -412,16 +412,16 @@ export interface BankConnectionEntityConnector {
     'country': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankConnectionEntityConnector
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankConnectionEntityConnector
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 export declare const BankConnectionEntityConnectorProviderEnum: {
     readonly Pluggy: "PLUGGY";
@@ -572,16 +572,16 @@ export interface BankTransactionEntity {
     'description': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntity
      */
-    'postedDate': any;
+    'postedDate': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntity
      */
-    'competencyDate': any;
+    'competencyDate': string;
     /**
      *
      * @type {number}
@@ -662,28 +662,28 @@ export interface BankTransactionEntity {
     'creditCardMetadata'?: BankTransactionEntityCreditCardMetadata | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntity
      */
-    'ignoredAt'?: any | null;
+    'ignoredAt'?: string | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntity
      */
-    'verifiedAt'?: any | null;
+    'verifiedAt'?: string | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntity
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntity
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 export declare const BankTransactionEntityProviderEnum: {
     readonly Pluggy: "PLUGGY";
@@ -800,16 +800,16 @@ export interface BankTransactionEntityCreditCardMetadata {
     'billId'?: string | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntityCreditCardMetadata
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntityCreditCardMetadata
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 /**
  *
@@ -939,16 +939,16 @@ export interface BankTransactionEntityPaymentData {
     'receiverReferenceId'?: string | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntityPaymentData
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntityPaymentData
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 /**
  *
@@ -970,16 +970,16 @@ export interface BankTransactionEntityTagsInner {
     'name': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntityTagsInner
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionEntityTagsInner
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 /**
  *
@@ -1068,16 +1068,16 @@ export interface BankTransactionTagEntity {
     'name': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionTagEntity
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionTagEntity
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 /**
  *
@@ -1172,16 +1172,16 @@ export interface BankTransactionsPageEntityItemsInner {
     'description': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionsPageEntityItemsInner
      */
-    'postedDate': any;
+    'postedDate': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionsPageEntityItemsInner
      */
-    'competencyDate': any;
+    'competencyDate': string;
     /**
      *
      * @type {number}
@@ -1262,28 +1262,28 @@ export interface BankTransactionsPageEntityItemsInner {
     'creditCardMetadata'?: BankTransactionEntityCreditCardMetadata | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionsPageEntityItemsInner
      */
-    'ignoredAt'?: any | null;
+    'ignoredAt'?: string | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionsPageEntityItemsInner
      */
-    'verifiedAt'?: any | null;
+    'verifiedAt'?: string | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionsPageEntityItemsInner
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof BankTransactionsPageEntityItemsInner
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 export declare const BankTransactionsPageEntityItemsInnerProviderEnum: {
     readonly Pluggy: "PLUGGY";
@@ -1777,16 +1777,16 @@ export interface CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner {
     'description': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
      */
-    'postedDate': any;
+    'postedDate': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof CreateOrUpdateBankTransactionsInBulkRequestDtoItemsInner
      */
-    'competencyDate': any;
+    'competencyDate': string;
     /**
      *
      * @type {number}
@@ -2716,16 +2716,16 @@ export interface MessageTokenEntity {
     'token': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof MessageTokenEntity
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof MessageTokenEntity
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 export declare const MessageTokenEntityProviderEnum: {
     readonly FirebaseMessaging: "FIREBASE_MESSAGING";
@@ -2781,10 +2781,10 @@ export interface MessageTokenEntityUser {
     'workspaces'?: Array<UserEntityWorkspacesInner> | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof MessageTokenEntityUser
      */
-    'createdAt': any;
+    'createdAt': string;
 }
 /**
  *
@@ -2854,10 +2854,10 @@ export interface MessageTokenEntityWorksapce {
     'personalSettings'?: UserEntityWorkspacesInnerPersonalSettings | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof MessageTokenEntityWorksapce
      */
-    'createdAt': any;
+    'createdAt': string;
 }
 export declare const MessageTokenEntityWorksapceTypeEnum: {
     readonly Personal: "PERSONAL";
@@ -2997,16 +2997,16 @@ export interface ProfileEntity {
     'birthDate': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof ProfileEntity
      */
-    'createdAt': any;
+    'createdAt': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof ProfileEntity
      */
-    'updatedAt': any;
+    'updatedAt': string;
 }
 /**
  *
@@ -3209,10 +3209,10 @@ export interface SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransac
     'description': string;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof SyncBankAccountTransactionsPageEndRequestDtoBankProviderTransactionsPageTransactionsInner
      */
-    'postedDate': any;
+    'postedDate': string;
     /**
      *
      * @type {number}
@@ -3646,10 +3646,10 @@ export interface UserEntity {
     'workspaces'?: Array<UserEntityWorkspacesInner> | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof UserEntity
      */
-    'createdAt': any;
+    'createdAt': string;
 }
 /**
  *
@@ -3719,10 +3719,10 @@ export interface UserEntityWorkspacesInner {
     'personalSettings'?: UserEntityWorkspacesInnerPersonalSettings | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof UserEntityWorkspacesInner
      */
-    'createdAt': any;
+    'createdAt': string;
 }
 export declare const UserEntityWorkspacesInnerTypeEnum: {
     readonly Personal: "PERSONAL";
@@ -3934,10 +3934,10 @@ export interface WorkspaceEntity {
     'personalSettings'?: UserEntityWorkspacesInnerPersonalSettings | null;
     /**
      *
-     * @type {any}
+     * @type {string}
      * @memberof WorkspaceEntity
      */
-    'createdAt': any;
+    'createdAt': string;
 }
 export declare const WorkspaceEntityTypeEnum: {
     readonly Personal: "PERSONAL";
