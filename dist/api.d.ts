@@ -175,6 +175,44 @@ export type BankAccountEntityTypeEnum = typeof BankAccountEntityTypeEnum[keyof t
 /**
  *
  * @export
+ * @interface BankAccountsBalanceReportEntity
+ */
+export interface BankAccountsBalanceReportEntity {
+    /**
+     *
+     * @type {Array<BankAccountsBalanceReportEntityItemsInner>}
+     * @memberof BankAccountsBalanceReportEntity
+     */
+    'items': Array<BankAccountsBalanceReportEntityItemsInner>;
+    /**
+     *
+     * @type {Array<BankConnectionEntityAccountsInner>}
+     * @memberof BankAccountsBalanceReportEntity
+     */
+    'bankAccounts': Array<BankConnectionEntityAccountsInner>;
+}
+/**
+ *
+ * @export
+ * @interface BankAccountsBalanceReportEntityItemsInner
+ */
+export interface BankAccountsBalanceReportEntityItemsInner {
+    /**
+     *
+     * @type {number}
+     * @memberof BankAccountsBalanceReportEntityItemsInner
+     */
+    'totalBalance': number;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityItemsInner
+     */
+    'currencyCode': string;
+}
+/**
+ *
+ * @export
  * @interface BankConnectionEntity
  */
 export interface BankConnectionEntity {
@@ -4278,6 +4316,15 @@ export declare const BankAccountsApiAxiosParamCreator: (configuration?: Configur
     bankAccountsControllerCreateOrUpdate: (createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerCreateWorkspaceBalanceReport: (workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
      * @param {string} bankAccountId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4330,6 +4377,15 @@ export declare const BankAccountsApiFp: (configuration?: Configuration) => {
     bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountEntity>>;
     /**
      *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountsBalanceReportEntity>>;
+    /**
+     *
      * @param {string} bankAccountId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4380,6 +4436,15 @@ export declare const BankAccountsApiFactory: (configuration?: Configuration, bas
      * @throws {RequiredError}
      */
     bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: any): AxiosPromise<BankAccountEntity>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: any): AxiosPromise<BankAccountsBalanceReportEntity>;
     /**
      *
      * @param {string} bankAccountId
@@ -4436,6 +4501,16 @@ export declare class BankAccountsApi extends BaseAPI {
      * @memberof BankAccountsApi
      */
     bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountEntity, any>>;
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BankAccountsBalanceReportEntity, any>>;
     /**
      *
      * @param {string} bankAccountId

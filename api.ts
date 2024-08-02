@@ -189,6 +189,44 @@ export type BankAccountEntityTypeEnum = typeof BankAccountEntityTypeEnum[keyof t
 /**
  * 
  * @export
+ * @interface BankAccountsBalanceReportEntity
+ */
+export interface BankAccountsBalanceReportEntity {
+    /**
+     * 
+     * @type {Array<BankAccountsBalanceReportEntityItemsInner>}
+     * @memberof BankAccountsBalanceReportEntity
+     */
+    'items': Array<BankAccountsBalanceReportEntityItemsInner>;
+    /**
+     * 
+     * @type {Array<BankConnectionEntityAccountsInner>}
+     * @memberof BankAccountsBalanceReportEntity
+     */
+    'bankAccounts': Array<BankConnectionEntityAccountsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface BankAccountsBalanceReportEntityItemsInner
+ */
+export interface BankAccountsBalanceReportEntityItemsInner {
+    /**
+     * 
+     * @type {number}
+     * @memberof BankAccountsBalanceReportEntityItemsInner
+     */
+    'totalBalance': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityItemsInner
+     */
+    'currencyCode': string;
+}
+/**
+ * 
+ * @export
  * @interface BankConnectionEntity
  */
 export interface BankConnectionEntity {
@@ -4848,6 +4886,49 @@ export const BankAccountsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
+         * @param {string} workspaceId 
+         * @param {boolean} [enabled] 
+         * @param {string} [types] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerCreateWorkspaceBalanceReport: async (workspaceId: string, enabled?: boolean, types?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('bankAccountsControllerCreateWorkspaceBalanceReport', 'workspaceId', workspaceId)
+            const localVarPath = `/bank/workspaces/{workspaceId}/accounts/balance-report`
+                .replace(`{${"workspaceId"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (enabled !== undefined) {
+                localVarQueryParameter['enabled'] = enabled;
+            }
+
+            if (types !== undefined) {
+                localVarQueryParameter['types'] = types;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} bankAccountId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5034,6 +5115,20 @@ export const BankAccountsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} workspaceId 
+         * @param {boolean} [enabled] 
+         * @param {string} [types] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountsBalanceReportEntity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId, enabled, types, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BankAccountsApi.bankAccountsControllerCreateWorkspaceBalanceReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {string} bankAccountId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5114,6 +5209,17 @@ export const BankAccountsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
+         * @param {string} workspaceId 
+         * @param {boolean} [enabled] 
+         * @param {string} [types] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: any): AxiosPromise<BankAccountsBalanceReportEntity> {
+            return localVarFp.bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId, enabled, types, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {string} bankAccountId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5182,6 +5288,19 @@ export class BankAccountsApi extends BaseAPI {
      */
     public bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto: CreateOrUpdateBankAccountRequestDto, options?: RawAxiosRequestConfig) {
         return BankAccountsApiFp(this.configuration).bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} workspaceId 
+     * @param {boolean} [enabled] 
+     * @param {string} [types] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    public bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId: string, enabled?: boolean, types?: string, options?: RawAxiosRequestConfig) {
+        return BankAccountsApiFp(this.configuration).bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId, enabled, types, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

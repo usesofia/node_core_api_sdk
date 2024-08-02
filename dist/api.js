@@ -1265,6 +1265,50 @@ var BankAccountsApiAxiosParamCreator = function (configuration) {
         },
         /**
          *
+         * @param {string} workspaceId
+         * @param {boolean} [enabled]
+         * @param {string} [types]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerCreateWorkspaceBalanceReport: function (workspaceId_1, enabled_1, types_1) {
+            var args_1 = [];
+            for (var _i = 3; _i < arguments.length; _i++) {
+                args_1[_i - 3] = arguments[_i];
+            }
+            return __awaiter(_this, __spreadArray([workspaceId_1, enabled_1, types_1], args_1, true), void 0, function (workspaceId, enabled, types, options) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, headersFromBaseOptions;
+                if (options === void 0) { options = {}; }
+                return __generator(this, function (_a) {
+                    // verify required parameter 'workspaceId' is not null or undefined
+                    (0, common_1.assertParamExists)('bankAccountsControllerCreateWorkspaceBalanceReport', 'workspaceId', workspaceId);
+                    localVarPath = "/bank/workspaces/{workspaceId}/accounts/balance-report"
+                        .replace("{".concat("workspaceId", "}"), encodeURIComponent(String(workspaceId)));
+                    localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    if (enabled !== undefined) {
+                        localVarQueryParameter['enabled'] = enabled;
+                    }
+                    if (types !== undefined) {
+                        localVarQueryParameter['types'] = types;
+                    }
+                    (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: (0, common_1.toPathString)(localVarUrlObj),
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+        /**
+         *
          * @param {string} bankAccountId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1479,6 +1523,30 @@ var BankAccountsApiFp = function (configuration) {
         },
         /**
          *
+         * @param {string} workspaceId
+         * @param {boolean} [enabled]
+         * @param {string} [types]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerCreateWorkspaceBalanceReport: function (workspaceId, enabled, types, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs, localVarOperationServerIndex, localVarOperationServerBasePath;
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, localVarAxiosParamCreator.bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId, enabled, types, options)];
+                        case 1:
+                            localVarAxiosArgs = _d.sent();
+                            localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                            localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['BankAccountsApi.bankAccountsControllerCreateWorkspaceBalanceReport']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                            return [2 /*return*/, function (axios, basePath) { return (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath); }];
+                    }
+                });
+            });
+        },
+        /**
+         *
          * @param {string} bankAccountId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1599,6 +1667,17 @@ var BankAccountsApiFactory = function (configuration, basePath, axios) {
         },
         /**
          *
+         * @param {string} workspaceId
+         * @param {boolean} [enabled]
+         * @param {string} [types]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bankAccountsControllerCreateWorkspaceBalanceReport: function (workspaceId, enabled, types, options) {
+            return localVarFp.bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId, enabled, types, options).then(function (request) { return request(axios, basePath); });
+        },
+        /**
+         *
          * @param {string} bankAccountId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1672,6 +1751,19 @@ var BankAccountsApi = /** @class */ (function (_super) {
     BankAccountsApi.prototype.bankAccountsControllerCreateOrUpdate = function (createOrUpdateBankAccountRequestDto, options) {
         var _this = this;
         return (0, exports.BankAccountsApiFp)(this.configuration).bankAccountsControllerCreateOrUpdate(createOrUpdateBankAccountRequestDto, options).then(function (request) { return request(_this.axios, _this.basePath); });
+    };
+    /**
+     *
+     * @param {string} workspaceId
+     * @param {boolean} [enabled]
+     * @param {string} [types]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BankAccountsApi
+     */
+    BankAccountsApi.prototype.bankAccountsControllerCreateWorkspaceBalanceReport = function (workspaceId, enabled, types, options) {
+        var _this = this;
+        return (0, exports.BankAccountsApiFp)(this.configuration).bankAccountsControllerCreateWorkspaceBalanceReport(workspaceId, enabled, types, options).then(function (request) { return request(_this.axios, _this.basePath); });
     };
     /**
      *
