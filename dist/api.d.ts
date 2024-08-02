@@ -102,6 +102,12 @@ export interface BankAccountEntity {
     'bankConnectionId': string;
     /**
      *
+     * @type {BankAccountEntityBankConnection}
+     * @memberof BankAccountEntity
+     */
+    'bankConnection': BankAccountEntityBankConnection;
+    /**
+     *
      * @type {string}
      * @memberof BankAccountEntity
      */
@@ -175,6 +181,94 @@ export type BankAccountEntityTypeEnum = typeof BankAccountEntityTypeEnum[keyof t
 /**
  *
  * @export
+ * @interface BankAccountEntityBankConnection
+ */
+export interface BankAccountEntityBankConnection {
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'createdByUserId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'workspaceId': string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'enabled': boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'provider': BankAccountEntityBankConnectionProviderEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'providerItemId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'historyRange': BankAccountEntityBankConnectionHistoryRangeEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'connectorId': string;
+    /**
+     *
+     * @type {BankConnectionEntityConnector}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'connector'?: BankConnectionEntityConnector | null;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'createdAt': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountEntityBankConnection
+     */
+    'updatedAt': string;
+}
+export declare const BankAccountEntityBankConnectionProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type BankAccountEntityBankConnectionProviderEnum = typeof BankAccountEntityBankConnectionProviderEnum[keyof typeof BankAccountEntityBankConnectionProviderEnum];
+export declare const BankAccountEntityBankConnectionHistoryRangeEnum: {
+    readonly OneDay: "ONE_DAY";
+    readonly OneWeek: "ONE_WEEK";
+    readonly OneMonth: "ONE_MONTH";
+    readonly TwoMonths: "TWO_MONTHS";
+    readonly ThreeMonths: "THREE_MONTHS";
+    readonly SixMonths: "SIX_MONTHS";
+    readonly OneYear: "ONE_YEAR";
+};
+export type BankAccountEntityBankConnectionHistoryRangeEnum = typeof BankAccountEntityBankConnectionHistoryRangeEnum[keyof typeof BankAccountEntityBankConnectionHistoryRangeEnum];
+/**
+ *
+ * @export
  * @interface BankAccountsBalanceReportEntity
  */
 export interface BankAccountsBalanceReportEntity {
@@ -186,11 +280,107 @@ export interface BankAccountsBalanceReportEntity {
     'items': Array<BankAccountsBalanceReportEntityItemsInner>;
     /**
      *
-     * @type {Array<BankConnectionEntityAccountsInner>}
+     * @type {Array<BankAccountsBalanceReportEntityBankAccountsInner>}
      * @memberof BankAccountsBalanceReportEntity
      */
-    'bankAccounts': Array<BankConnectionEntityAccountsInner>;
+    'bankAccounts': Array<BankAccountsBalanceReportEntityBankAccountsInner>;
 }
+/**
+ *
+ * @export
+ * @interface BankAccountsBalanceReportEntityBankAccountsInner
+ */
+export interface BankAccountsBalanceReportEntityBankAccountsInner {
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'id': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'bankConnectionId': string;
+    /**
+     *
+     * @type {BankAccountEntityBankConnection}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'bankConnection': BankAccountEntityBankConnection;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'provider': BankAccountsBalanceReportEntityBankAccountsInnerProviderEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'providerAccountId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'type': BankAccountsBalanceReportEntityBankAccountsInnerTypeEnum;
+    /**
+     *
+     * @type {boolean}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'enabled': boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'number': string;
+    /**
+     *
+     * @type {number}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'balance': number;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'currencyCode': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'name': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'createdAt': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BankAccountsBalanceReportEntityBankAccountsInner
+     */
+    'updatedAt': string;
+}
+export declare const BankAccountsBalanceReportEntityBankAccountsInnerProviderEnum: {
+    readonly Pluggy: "PLUGGY";
+    readonly Sofia: "SOFIA";
+};
+export type BankAccountsBalanceReportEntityBankAccountsInnerProviderEnum = typeof BankAccountsBalanceReportEntityBankAccountsInnerProviderEnum[keyof typeof BankAccountsBalanceReportEntityBankAccountsInnerProviderEnum];
+export declare const BankAccountsBalanceReportEntityBankAccountsInnerTypeEnum: {
+    readonly Checking: "CHECKING";
+    readonly Savings: "SAVINGS";
+    readonly CreditCard: "CREDIT_CARD";
+};
+export type BankAccountsBalanceReportEntityBankAccountsInnerTypeEnum = typeof BankAccountsBalanceReportEntityBankAccountsInnerTypeEnum[keyof typeof BankAccountsBalanceReportEntityBankAccountsInnerTypeEnum];
 /**
  *
  * @export
