@@ -699,7 +699,7 @@ var AuthApiAxiosParamCreator = function (configuration) {
                     if (configuration) {
                         baseOptions = configuration.baseOptions;
                     }
-                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
                     localVarHeaderParameter = {};
                     localVarQueryParameter = {};
                     localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -736,7 +736,7 @@ var AuthApiAxiosParamCreator = function (configuration) {
                     if (configuration) {
                         baseOptions = configuration.baseOptions;
                     }
-                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
                     localVarHeaderParameter = {};
                     localVarQueryParameter = {};
                     localVarHeaderParameter['Content-Type'] = 'application/json';
