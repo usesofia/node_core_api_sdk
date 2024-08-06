@@ -3141,7 +3141,7 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {boolean} [considerIgnored]
          * @param {boolean} [considerAutomaticApplicationRelated]
          * @param {boolean} [considerInternalTransfers]
-         * @param {string} [considerInvoiceRelated]
+         * @param {boolean} [considerInvoiceRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3231,7 +3231,7 @@ var BankTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {boolean} [considerIgnored]
          * @param {boolean} [considerAutomaticApplicationRelated]
          * @param {boolean} [considerInternalTransfers]
-         * @param {string} [considerInvoiceRelated]
+         * @param {boolean} [considerInvoiceRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3584,7 +3584,7 @@ var BankTransactionsApiFp = function (configuration) {
          * @param {boolean} [considerIgnored]
          * @param {boolean} [considerAutomaticApplicationRelated]
          * @param {boolean} [considerInternalTransfers]
-         * @param {string} [considerInvoiceRelated]
+         * @param {boolean} [considerInvoiceRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3621,7 +3621,7 @@ var BankTransactionsApiFp = function (configuration) {
          * @param {boolean} [considerIgnored]
          * @param {boolean} [considerAutomaticApplicationRelated]
          * @param {boolean} [considerInternalTransfers]
-         * @param {string} [considerInvoiceRelated]
+         * @param {boolean} [considerInvoiceRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3791,7 +3791,7 @@ var BankTransactionsApiFactory = function (configuration, basePath, axios) {
          * @param {boolean} [considerIgnored]
          * @param {boolean} [considerAutomaticApplicationRelated]
          * @param {boolean} [considerInternalTransfers]
-         * @param {string} [considerInvoiceRelated]
+         * @param {boolean} [considerInvoiceRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3815,7 +3815,7 @@ var BankTransactionsApiFactory = function (configuration, basePath, axios) {
          * @param {boolean} [considerIgnored]
          * @param {boolean} [considerAutomaticApplicationRelated]
          * @param {boolean} [considerInternalTransfers]
-         * @param {string} [considerInvoiceRelated]
+         * @param {boolean} [considerInvoiceRelated]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3930,7 +3930,7 @@ var BankTransactionsApi = /** @class */ (function (_super) {
      * @param {boolean} [considerIgnored]
      * @param {boolean} [considerAutomaticApplicationRelated]
      * @param {boolean} [considerInternalTransfers]
-     * @param {string} [considerInvoiceRelated]
+     * @param {boolean} [considerInvoiceRelated]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
@@ -3956,7 +3956,7 @@ var BankTransactionsApi = /** @class */ (function (_super) {
      * @param {boolean} [considerIgnored]
      * @param {boolean} [considerAutomaticApplicationRelated]
      * @param {boolean} [considerInternalTransfers]
-     * @param {string} [considerInvoiceRelated]
+     * @param {boolean} [considerInvoiceRelated]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BankTransactionsApi
